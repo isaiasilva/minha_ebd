@@ -18,7 +18,7 @@ class Turma extends Model
         'name',
     ];
 
-    protected $timetamps = false;
+   // protected $timetamps = false;
 
     public function usuarios()
     {

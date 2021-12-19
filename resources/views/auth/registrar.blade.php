@@ -48,7 +48,7 @@
             <select class="form-select" name="turma_id" aria-label="Default select example" required>
                 <option selected value="">Selecione</option>
                 @foreach($turmas as $key => $turma)
-                    <option value="{{ $key  }}">{{ $turma->nome_turma  }}</option>
+                    <option value="{{ $turma->id  }}">{{ $turma->nome_turma  }}</option>
                 @endforeach
             </select>
         </div>

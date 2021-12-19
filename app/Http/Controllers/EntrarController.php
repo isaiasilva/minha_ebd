@@ -19,14 +19,8 @@ class EntrarController extends Controller
         if (!Auth::attempt($request->only(['email', 'password']))){
             return redirect()
                 ->back()
-                ->withErrors('Erro ao tentar se logar');
+                ->withErrors('Usuário ou senha inválido');
         }
-
-
-        $turma = Turma::find(Auth::user()->turma_id);
-
-
-
-        return view('user.home', ['turma'=> $turma]);
+        return redirect('/user/home');
     }
 }
