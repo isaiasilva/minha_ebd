@@ -17,10 +17,15 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('perfil');
+            $table->string('estado_civil');
+            $table->date('data_nascimento');
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('turma_id');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('turma_id')->references('id')->on('turmas');
         });
     }
 
