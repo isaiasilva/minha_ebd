@@ -15,7 +15,15 @@ class CreateChamadasTable extends Migration
     {
         Schema::create('chamadas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->date('data');
+            $table->integer('professor_id');
+            $table->integer('turma_id');
+            $table->integer('aluno_id');
+
+            $table->foreign('professor_id')->references('id')->on('users');
+            $table->foreign('turma_id')->references('id')->on('turmas');
+            $table->foreign('aluno_id')->references('id')->on('users');
+
         });
     }
 
