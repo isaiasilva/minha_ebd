@@ -16,9 +16,9 @@
                             <h2 class="display-5">Login</h2>
                             @include('components.errors')
                             <p class="lead mb-4">Faça o login para continuar</p>
-                            <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email" name="email" />
+                            <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email" name="email" required/>
                             <br />
-                            <input class="input border-0 border-bottom p-2" placeholder="Senha" type="password" name="password" />
+                            <input class="input border-0 border-bottom p-2" placeholder="Senha" type="password" name="password" required />
                             <br />
                             <div class="mt-4 d-flex justify-content-between align-items-center">
                                 <button class="btn btn-primary">Logar</button>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-12 full-height img-cover d-none d-md-block">
-                    <img src="{{ asset('img/fundo.jpg') }}" alt="login">
+                    <img src="{{ asset('img/ESCOLA BIBLICA.png') }}" class="img-fluid" alt="login">
                 </div>
             </div>
         </div>

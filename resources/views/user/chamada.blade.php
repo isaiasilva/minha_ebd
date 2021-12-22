@@ -1,10 +1,11 @@
 @extends('layouts.template')
 
 @section('cabecalho')
-    Chamada
+            Chamada {{ date('d/m/Y') }}
 @endsection
 @section('conteudo')
     @include('components.errors')
+    @include('components.flash-message')
   <div class="table-responsive">
     <table class="table">
         <thead>

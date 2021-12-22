@@ -34,7 +34,7 @@ class ChamadaController extends Controller
            'aluno_id' => (int)$request->aluno
        ]);
 
-        return redirect('user/chamada');
+        return redirect('user/chamada')->with('success', 'Presença registrada com sucesso!');;
     }
 
     public function destroy(Request $request)
@@ -46,7 +46,7 @@ class ChamadaController extends Controller
 
         $presenca->first()->delete();
 
-        return redirect('user/chamada');
+        return redirect('user/chamada')->with('success', 'Presença apagada com sucesso!');
     }
 
     static function verificaPresenca($aluno)
