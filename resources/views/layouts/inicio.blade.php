@@ -10,17 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
-    <div class="container">
-        <a class="navbar navbar-expand-lg" href="#">Home</a>
-        @auth
-            <a href="/sair" class="text-danger">Sair</a>
-        @endauth
-        @guest
-            <a href="/entrar" class="text-primary">Entrar</a>
-        @endguest
-    </div>
-</nav>
+
 <div class="container">
     <div class="jumbotron">
         <h1>@yield('cabecalho')</h1>

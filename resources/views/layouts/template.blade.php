@@ -34,7 +34,7 @@
                     <i class="fas fa-user"></i> Usuário
                 </a>
                 <ul id="submenu1" class="list-unstyled collapse">
-                    <li><a href="listar.html"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a href="{{route('usuarios')}}"><i class="fas fa-users"></i> Usuários</a></li>
                     <li><a href="#"><i class="fas fa-key"></i> Nível de Acesso</a></li>
                 </ul>
             </li>

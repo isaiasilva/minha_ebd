@@ -15,9 +15,7 @@ class ChamadaController extends Controller
     {
         $turma = Turma::find(Auth::user()->turma_id);
         $alunos = User::where(['turma_id' => Auth::user()->turma_id, 'perfil' => 'ALUNO'])->get();
-
         return view('user.chamada', ['turma'=>$turma, 'alunos' => $alunos]);
-
     }
 
     public function create(Request $request)
@@ -37,7 +35,18 @@ class ChamadaController extends Controller
        ]);
 
         return redirect('user/chamada');
+    }
 
+    public function destroy(Request $request)
+    {
+        $data = date('Y-m-d');
+
+        $presenca = Chamada::where(['aluno_id' => $request->aluno , 'data' => $data])->get();
+
+
+        $presenca->first()->delete();
+
+        return redirect('user/chamada');
     }
 
     static function verificaPresenca($aluno)

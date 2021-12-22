@@ -3,7 +3,6 @@
 @section('cabecalho')
     Chamada
 @endsection
-
 @section('conteudo')
     @include('components.errors')
     <table class="table">
@@ -29,35 +28,42 @@
                             <div class="form-check">
                                 @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->id) === true)
                                     <input class="form-check-input" checked  name="{{ 'presenca' . $i }}"  type="checkbox"  id="flexCheckChecked" disabled>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Presença
+                                    </label>
                                 @else
                                     <input class="form-check-input" name="{{ 'presenca' . $i }}"  type="checkbox"  id="flexCheckChecked">
-                                @endif
                                     <label class="form-check-label" for="flexCheckChecked">
-                                    Presença
-                                </label>
+                                        Pendente
+                                    </label>
+                                @endif
                             </div>
                         </td>
                         <td>
-                            @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->id) === true)
-                                <button class="btn-primary"  alt="Presença" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></button>
-                                <button class="btn-warning" alt="Atraso" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></button>
-                                <button class="btn-danger" alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i></button>
-                            @else
-                                <button class="btn-primary"  alt="Presença"><i class="fa fa-check-circle" aria-hidden="true"></i></button>
-                                <button class="btn-warning" alt="Atraso"><i class="fa fa-check-circle" aria-hidden="true"></i></button>
-                                <button class="btn-danger" alt="Excluir" disabled><i class="fa fa-eraser" aria-hidden="true"></i></button>
-                            @endif
+                            <span class="d-flex justify-content-around">
+                                @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->id) === true)
+                                    <button class="btn-primary"  alt="Presença" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                                    </form>
+                                    <form>
+                                        <button class="btn-warning" alt="Atraso" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                                    </form>
+                                    <form action="/user/excluir-presenca" METHOD="POST">
+                                        @csrf
+                                        <input type="hidden" name="aluno" value="{{ $aluno->id }}">
+                                        <button class="btn-danger" alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                    </form>
+                             </span>
+                                @else
+                                    <button class="btn-primary"  alt="Presença"><i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                                    <button class="btn-warning" alt="Atraso"><i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                                    <button class="btn-danger" alt="Excluir" disabled><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                    </form>
+                                @endif
                         </td>
                     </tr>
-                </form>
             @endforeach
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary mt-3">
-        Registrar presença
-    </button>
-
-
 @endsection
 
 
