@@ -14,7 +14,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card bg-success text-white">
                     <div class="card-body">
-                        <i class="fas fa-users fa-3x"></i>
+                        <i class="fas fa-user fa-3x"></i>
                         <h6 class="card-title">Usuário</h6>
                         <h2 class="lead">{{ Auth::user()->name }}</h2>
                     </div>
@@ -23,7 +23,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card bg-danger text-white">
                     <div class="card-body">
-                        <i class="fas fa-file fa-3x"></i>
+                        <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
                         <h6 class="card-title">Perfil</h6>
                         <h2 class="lead">{{ Auth::user()->perfil }}</h2>
                     </div>
@@ -32,7 +32,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card bg-warning text-white">
                     <div class="card-body">
-                        <i class="fas fa-eye fa-3x"></i>
+                        <i class="fa fa-users fa-3x"></i>
                         <h6 class="card-title">Turma</h6>
                         <h2 class="lead">{{ $turma->nome_turma }}</h2>
                     </div>
@@ -41,7 +41,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card bg-info text-white">
                     <div class="card-body">
-                        <i class="fas fa-comments fa-3x"></i>
+                        <i class="fa fa-list-alt fa-3x"></i>
                         <h6 class="card-title">Presenças</h6>
                         <h2 class="lead">17</h2>
                     </div>
