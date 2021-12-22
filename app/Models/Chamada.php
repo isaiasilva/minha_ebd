@@ -10,16 +10,16 @@ class Chamada extends Model
     use HasFactory;
     protected $fillable = [
         'data',
-        'turma',
-        'professor',
-        'aluno',
+        'professor_id',
+        'turma_id',
+        'aluno_id',
     ];
 
     public $timestamps = false;
 
     public function aluno()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function turmas()

@@ -5,57 +5,49 @@
 @endsection
 
 @section('conteudo')
+    <div class="content p-1">
+    <p>Hoje é {{ date('d/m/Y') }}</p>
+    </div>
 
-Usuário:
-{{ Auth::user()->name }}
-<br>
-Perfil:
-{{ Auth::user()->perfil }}
-<br>
-Turma:
-{{ $turma->nome_turma }}
-<br>
-
-Logout:
-<a href="/sair">Sair</a>
-<br>
-
-<h2>Alunos</h2>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Matricula</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Presença</th>
-    </tr>
-    </thead>
-    <tbody>
-    <form method="POST">
-        @csrf
-    @foreach($alunos as $aluno)
-        <tr>
-            <th scope="row">{{ $aluno->id }}</th>
-            <td>{{ $aluno->name }}</td>
-            <td>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Presença
-                    </label>
+<div class="content p-1">
+        <div class="row mb-3">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-3x"></i>
+                        <h6 class="card-title">Usuário</h6>
+                        <h2 class="lead">{{ Auth::user()->name }}</h2>
+                    </div>
                 </div>
-            </td>
-        </tr>
-    @endforeach
-
-
-    </tbody>
-</table>
-
-<button type="submit" class="btn btn-primary mt-3">
-    Registrar presença
-</button>
-</form>
-
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-danger text-white">
+                    <div class="card-body">
+                        <i class="fas fa-file fa-3x"></i>
+                        <h6 class="card-title">Perfil</h6>
+                        <h2 class="lead">{{ Auth::user()->perfil }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <i class="fas fa-eye fa-3x"></i>
+                        <h6 class="card-title">Turma</h6>
+                        <h2 class="lead">{{ $turma->nome_turma }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <i class="fas fa-comments fa-3x"></i>
+                        <h6 class="card-title">Presenças</h6>
+                        <h2 class="lead">17</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 

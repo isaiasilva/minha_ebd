@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\EntrarController;
 use App\Http\Controllers\PrincipalController;
@@ -34,6 +35,9 @@ Route::get('/entrar', [EntrarController::class,'index']);
 Route::post('/entrar', [EntrarController::class,'login']);
 
 Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['auth'])->name('principal');
+Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
+Route::get('/user/chamada', [\App\Http\Controllers\ChamadaController::class, 'index'])->middleware(['auth'])->name('chamada');
+Route::post('/user/chamada', [\App\Http\Controllers\ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
 
 Route::get('/sair', function () {
     Auth::logout();
