@@ -11,7 +11,7 @@
 
 <div class="content p-1">
         <div class="row mb-3">
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 mb-3">
                 <div class="card bg-success text-white">
                     <div class="card-body">
                         <i class="fas fa-user fa-3x"></i>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 mb-3">
                 <div class="card bg-danger text-white">
                     <div class="card-body">
                         <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 mb-3">
                 <div class="card bg-warning text-white">
                     <div class="card-body">
                         <i class="fa fa-users fa-3x"></i>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 mb-3">
                 <div class="card bg-info text-white">
                     <div class="card-body">
                         <i class="fa fa-list-alt fa-3x"></i>

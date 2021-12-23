@@ -35,11 +35,20 @@
                 </a>
                 <ul id="submenu1" class="list-unstyled collapse" id="collapseUsuarios">
                     <li><a href="{{route('usuarios')}}"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Registrar</a></li>
                     <li><a href="#"><i class="fas fa-key"></i> Nível de Acesso</a></li>
                 </ul>
             </li>
             <li><a href="{{ route('alunos') }}"><i class="fa fa-users" aria-hidden="true"></i> Alunos</a></li>
-            <li><a href="{{ route('chamada') }}"><i class="bi bi-card-checklist"></i> Chamada</a></li>
+            <li>
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" aria-controls="collapseUsuarios">
+                    <i class="bi bi-card-checklist"></i> Chamadas
+                </a>
+                <ul id="submenu2" class="list-unstyled collapse" id="collapseUsuarios">
+                    <li><a href="{{ route('chamada') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a></li>
+                    <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
+                </ul>
+            </li>
             <li><a href="/sair"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
         </ul>
     </nav>
