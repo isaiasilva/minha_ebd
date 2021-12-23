@@ -1,10 +1,6 @@
 @extends('layouts.inicio')
 
-
-
 @section('conteudo')
-
-
 
     <form method="post">
         @csrf
@@ -14,7 +10,7 @@
                     <div class="row full-height justify-content-center">
                         <div class="col-8 col-xxl-5 align-self-center">
                             <h2 class="display-5">Login</h2>
-                            @include('components.errors')
+                            @include('components.flash-message')
                             <p class="lead mb-4">Faça o login para continuar</p>
                             <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email" name="email" required/>
                             <br />

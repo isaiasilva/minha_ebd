@@ -4,13 +4,11 @@
             Chamada {{ date('d/m/Y') }}
 @endsection
 @section('conteudo')
-    @include('components.errors')
     @include('components.flash-message')
   <div class="table-responsive">
     <table class="table">
         <thead>
-        <tr>
-            <th scope="col">Matricula</th>
+        <tr class="text-center">
             <th scope="col">Nome</th>
             <th scope="col">Presença</th>
             <th scope="col">Ações</th>
@@ -24,7 +22,6 @@
                     <input type="hidden" name="professor" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="aluno" value="{{ $aluno->id }}">
                     <tr>
-                        <th scope="row">{{ $aluno->id }}</th>
                         <td>{{ $aluno->name }}</td>
                         <td>
                             <div class="form-check">
