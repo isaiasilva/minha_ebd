@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Perfil;
 use App\Models\Turma;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -14,6 +15,15 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
+    private $turma;
+    private $perfil;
+
+    public function __construct(Turma $turma, Perfil $perfil)
+    {
+        $this->turma = $turma;
+        $this->perfil = $perfil;
+    }
+
     /**
      * Display the registration view.
      *
@@ -21,9 +31,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        //return view('auth.register');
-        $turmas = Turma::all();
-        return view('auth.registrar', ['turmas' => $turmas]);
+        $turmas = $this->turma::all();
+        $perfis = $this->perfil::all();
+
+        return view('auth.registrar', ['turmas' => $turmas, 'perfis' => $perfis]);
     }
 
     /**
@@ -50,7 +61,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'perfil' => ['required', 'string'],
+            'perfil' => ['required'],
             'estado_civil' => ['required', 'string'],
             'data_nascimento' => ['required', 'date'],
             'turma_id' => ['required'],

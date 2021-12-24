@@ -13,7 +13,7 @@ class CreatePerfilsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perfis', function (Blueprint $table) {
+        Schema::create('perfils', function (Blueprint $table) {
             $table->id();
             $table->string('perfil');
         });
@@ -26,6 +26,6 @@ class CreatePerfilsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfis');
+        Schema::dropIfExists('perfils');
     }
 }

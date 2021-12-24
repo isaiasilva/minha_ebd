@@ -32,9 +32,10 @@
                     <label for="perfil">Perfil</label>
                     <select class="form-control" name="perfil" aria-label="Default select example" required>
                         <option selected value="">Selecione</option>
-                        <option value="ADMINISTRADOR">Administrador(a)</option>
-                        <option value="ALUNO">Aluno</option>
-                        <option value="PROFESSOR">Professor</option>
+                        @foreach($perfis as $perfil)
+                            <option value="{{ $perfil->id  }}">{{ $perfil->perfil  }}</option>
+                        @endforeach
+
                     </select>
                 </div>
             </div>
