@@ -31,7 +31,7 @@
                                         Presença
                                     </label>
                                 @else
-                                    <input class="form-check-input" name="{{ 'presenca' . $i }}"  type="checkbox"  id="flexCheckChecked">
+                                    <input class="form-check-input" name="{{ 'presenca' . $i }}"  type="checkbox"  id="flexCheckChecked" required>
                                     <label class="form-check-label" for="flexCheckChecked">
                                         Pendente
                                     </label>

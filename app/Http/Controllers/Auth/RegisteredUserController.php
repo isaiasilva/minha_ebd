@@ -22,10 +22,19 @@ class RegisteredUserController extends Controller
     public function create()
     {
         //return view('auth.register');
-
         $turmas = Turma::all();
-
         return view('auth.registrar', ['turmas' => $turmas]);
+    }
+
+    /**
+     * Display the registration view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function registrarAluno()
+    {
+        $turma = Turma::find(Auth::user()->turma_id);
+        return view('auth.registrar-aluno', ['turma' => $turma]);
     }
 
     /**
@@ -57,11 +66,13 @@ class RegisteredUserController extends Controller
             'turma_id' => $request->turma_id,
             'password' => Hash::make($request->password),
         ]);
-
+        /*
         event(new Registered($user));
+        Auth::login($user); */
 
-        Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+            return redirect()
+                ->back()
+                ->with('success', 'Usuário inserido com sucesso');
     }
 }

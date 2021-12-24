@@ -14,8 +14,22 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->middleware('guest')
                 ->name('register');
 
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware('auth')
+    ->name('register');
+
+Route::get('/registrar-aluno', [RegisteredUserController::class, 'registrarAluno'])
+    ->middleware('auth')
+    ->name('registrar-aluno');
+
 Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest');
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware('auth');
+
+Route::post('/registrar-aluno', [RegisteredUserController::class, 'store'])
+    ->middleware('auth')->name('registrar-aluno');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')

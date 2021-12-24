@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
                         <h6 class="card-title">Perfil</h6>
-                        <h2 class="lead">{{ Auth::user()->perfil }}</h2>
+                        <h2 class="lead">{{ ucfirst(strtolower(Auth::user()->perfil)) }}</h2>
                     </div>
                 </div>
             </div>
