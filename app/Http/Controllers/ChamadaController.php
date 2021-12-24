@@ -39,12 +39,18 @@ class ChamadaController extends Controller
                ->withErrors('Aluno já marcado como presente');
        }
 
+
        $chamada =  $this->chamada->create([
            'data' => $data,
            'professor_id' => (int)$request->professor,
            'turma_id' => (int)$request->turma,
-           'aluno_id' => (int)$request->aluno
+           'aluno_id' => (int)$request->aluno,
+           'atraso' => $request->atraso
        ]);
+
+       if($request->atraso === "true"){
+           return redirect('user/chamada')->with('warning', 'Atraso registrado com sucesso!');;
+       }
 
         return redirect('user/chamada')->with('success', 'Presença registrada com sucesso!');;
     }
@@ -66,15 +72,15 @@ class ChamadaController extends Controller
         $data = date('Y-m-d');
         $presenca = Chamada::where( ['aluno_id' => $aluno, 'data' => $data] )->get();
 
-        $retorno = false;
+        $retorno = "Pendente";
         foreach ($presenca as $chamada){
-            if($chamada->id){
-                $retorno = true;
+            if($chamada->id && $chamada->atraso == "true"){
+                $retorno = "Atraso";
+            }else if($chamada->id && $chamada->atraso == "false"){
+                $retorno = "Presença";
             }
         }
-        if($retorno === true){
-            return true;
-        }
+
         return $retorno;
     }
 }

@@ -42,6 +42,7 @@ Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware([
 Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
 Route::get('/user/chamada', [ChamadaController::class, 'index'])->middleware(['auth'])->name('chamada');
 Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
+Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['auth'])->name('atraso');
 Route::POST('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 
 Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
