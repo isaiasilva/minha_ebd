@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChamadaController;
 use App\Http\Controllers\EntrarController;
 use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,11 @@ Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['aut
 Route::get('/user/chamada', [ChamadaController::class, 'index'])->middleware(['auth'])->name('chamada');
 Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
 Route::POST('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
+
+Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
+
+Route::get('/user/turma', [TurmaController::class, 'store'])->middleware(['auth'])->name('turma');
+Route::post('/user/turma', [TurmaController::class, 'create'])->middleware(['auth']);
 
 Route::get('/sair', function () {
     Auth::logout();

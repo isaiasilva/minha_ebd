@@ -15,10 +15,10 @@ class Turma extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nome_turma',
     ];
 
-   // protected $timetamps = false;
+   // protected $timestamps = false;
 
     public function usuarios()
     {

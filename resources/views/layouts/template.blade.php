@@ -6,7 +6,9 @@
   <div class="container-fluid">
     <a class="sidebar-toggle text-light mr-3">
         <span class="navbar-toggler-icon"> </span>
-        <a class="navbar-brand" href="#"> Chamada EBD</a>
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('img/missao-png.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+            Chamada EBD</a>
     </a>
     <div class="collapse navbar-collapse d-flex flex-row-reverse ">
         <ul class="navbar-nav ml-auto">
@@ -29,8 +31,9 @@
     <nav class="sidebar">
         <ul class="list-unstyled">
             <li><a href="{{ route('principal') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
             <li>
-                <a href="#submenu1" class="acor" data-toggle="collapse" aria-expanded="false" aria-controls="collapseUsuarios">
+                <a href="#submenu1" class="" data-toggle="collapse" aria-expanded="false" aria-controls="collapseUsuarios">
                     <i class="fas fa-user"></i> Usuário
                 </a>
                 <ul id="submenu1" class="list-unstyled collapse" id="collapseUsuarios">
@@ -40,6 +43,7 @@
                     @endif
                 </ul>
             </li>
+
             <li>
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" aria-controls="collapseUsuarios">
                     <i class="fas fa-user-graduate"></i> Alunos
@@ -49,6 +53,7 @@
                     <li><a href="{{ route('alunos') }}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
                 </ul>
             </li>
+
             <li>
                 <a href="#submenu3" data-toggle="collapse" aria-expanded="false" aria-controls="collapseUsuarios">
                     <i class="bi bi-card-checklist"></i> Chamadas
@@ -58,6 +63,19 @@
                     <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#submenu4" class="" data-toggle="collapse" aria-expanded="false" aria-controls="collapseUsuarios">
+                    <i class="fas fa-graduation-cap"></i> Turmas
+                </a>
+                <ul id="submenu4" class="list-unstyled collapse" id="collapseUsuarios">
+                    @if(Auth::user()->perfil === "ADMINISTRADOR")
+                        <li><a href="{{ route('turma') }}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a></li>
+                    @endif
+                        <li><a href="{{route('turmas')}}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
+                </ul>
+            </li>
+
             <li><a href="/sair"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
         </ul>
     </nav>
