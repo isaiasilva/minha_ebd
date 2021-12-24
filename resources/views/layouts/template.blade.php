@@ -38,7 +38,7 @@
                 </a>
                 <ul id="submenu1" class="list-unstyled collapse" id="collapseUsuarios">
                     <li><a href="{{route('usuarios')}}"><i class="fas fa-users"></i> Usuários</a></li>
-                    @if(Auth::user()->perfil === "ADMINISTRADOR")
+                    @if(Auth::user()->perfil_id === "1")
                         <li><a href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a></li>
                     @endif
                 </ul>
@@ -49,8 +49,10 @@
                     <i class="fas fa-user-graduate"></i> Alunos
                 </a>
                 <ul id="submenu2" class="list-unstyled collapse" id="collapseUsuarios">
-                    <li><a href="{{ route('registrar-aluno') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a></li>
-                    <li><a href="{{ route('alunos') }}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
+                    @if(Auth::user()->perfil_id === "3")
+                        <li><a href="{{ route('registrar-aluno') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a></li>
+                    @endif
+                        <li><a href="{{ route('alunos') }}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
                 </ul>
             </li>
 
@@ -59,8 +61,10 @@
                     <i class="bi bi-card-checklist"></i> Chamadas
                 </a>
                 <ul id="submenu3" class="list-unstyled collapse" id="collapseUsuarios">
-                    <li><a href="{{ route('chamada') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a></li>
-                    <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
+                    @if(Auth::user()->perfil_id !== "2")
+                        <li><a href="{{ route('chamada') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a></li>
+                    @endif
+                        <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
                 </ul>
             </li>
 
@@ -69,7 +73,7 @@
                     <i class="fas fa-graduation-cap"></i> Turmas
                 </a>
                 <ul id="submenu4" class="list-unstyled collapse" id="collapseUsuarios">
-                    @if(Auth::user()->perfil === "ADMINISTRADOR")
+                    @if(Auth::user()->perfil_id === "1")
                         <li><a href="{{ route('turma') }}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a></li>
                     @endif
                         <li><a href="{{route('turmas')}}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>

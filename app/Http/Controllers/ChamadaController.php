@@ -26,7 +26,7 @@ class ChamadaController extends Controller
         $user = $this->user;
         $turma = $this->turma->find(Auth::user()->turma_id);
 
-        $alunos = $user->where(['turma_id' => Auth::user()->turma_id, 'perfil' => "ALUNO"])->get();
+        $alunos = $user->where(['turma_id' => Auth::user()->turma_id, 'perfil_id' => 2])->get();
         return view('user.chamada', ['turma'=>$turma, 'alunos' => $alunos]);
     }
 

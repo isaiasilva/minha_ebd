@@ -18,10 +18,6 @@ class Turma extends Model
         'nome_turma',
     ];
 
-   // protected $timestamps = false;
+    public $timestamps = false;
 
-    public function usuarios()
-    {
-        return $this->hasMany(User::class);
-    }
 }

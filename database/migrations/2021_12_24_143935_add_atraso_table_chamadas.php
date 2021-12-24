@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTurmasTable extends Migration
+class AddAtrasoTableChamadas extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +13,10 @@ class CreateTurmasTable extends Migration
      */
     public function up()
     {
-        Schema::create('turmas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome_turma');
+        Schema::table('chamadas', function (Blueprint $table) {
+            $table->boolean('atraso')
+                ->nullable() // Preenchimento não obrigatório
+                ->after('data');
         });
     }
 
@@ -27,8 +27,8 @@ class CreateTurmasTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('turmas');
-
+        Schema::table('chamadas', function (Blueprint $table) {
+            $table->dropColumn('atraso');
+        });
     }
 }

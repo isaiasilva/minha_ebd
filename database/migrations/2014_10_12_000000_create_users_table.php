@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('perfil_id')->references('id')->on('perfis');
+            $table->foreign('perfil_id')->references('id')->on('perfils');
             $table->foreign('turma_id')->references('id')->on('turmas');
         });
     }

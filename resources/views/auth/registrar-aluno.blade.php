@@ -7,7 +7,7 @@
     @include('components.flash-message')
     <form method="post">
         @csrf
-        <input type="hidden" name="perfil" value="ALUNO">
+        <input type="hidden" name="perfil_id" value="2">
         <input type="hidden" name="turma_id" value="{{ $turma->id  }}">
  <div class="container">
      <div class="row">

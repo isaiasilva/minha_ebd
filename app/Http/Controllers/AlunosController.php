@@ -13,7 +13,7 @@ class AlunosController extends Controller
     {
         $turma = Turma::find(Auth::user()->turma_id);
 
-        $alunos = User::where(['turma_id' => Auth::user()->turma_id, 'PERFIL' => 'ALUNO'])->get();
+        $alunos = User::where(['turma_id' => Auth::user()->turma_id, 'perfil_id' => 2])->get();
 
         return view('user.alunos', ['turma'=>$turma, 'alunos' => $alunos]);
 

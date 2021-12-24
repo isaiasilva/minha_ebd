@@ -30,7 +30,7 @@
                 <!-- VER A POSSIBILIDADE DE CRIAR UMA CLASSE DE PERFIL -->
                 <div class="form-group">
                     <label for="perfil">Perfil</label>
-                    <select class="form-control" name="perfil" aria-label="Default select example" required>
+                    <select class="form-control" name="perfil_id" aria-label="Default select example" required>
                         <option selected value="">Selecione</option>
                         @foreach($perfis as $perfil)
                             <option value="{{ $perfil->id  }}">{{ $perfil->perfil  }}</option>
