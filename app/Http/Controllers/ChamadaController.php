@@ -11,10 +11,22 @@ use Nette\Utils\DateTime;
 
 class ChamadaController extends Controller
 {
+    private $user;
+    private $turma;
+    private $chamada;
+    public function __construct(User $user, Turma $turma, Chamada $chamada)
+    {
+        $this->user = $user;
+        $this->turma = $turma;
+        $this->chamada = $chamada;
+    }
+
     public function index()
     {
-        $turma = Turma::find(Auth::user()->turma_id);
-        $alunos = User::where(['turma_id' => Auth::user()->turma_id, 'perfil' => 'ALUNO'])->get();
+        $user = $this->user;
+        $turma = $this->turma->find(Auth::user()->turma_id);
+
+        $alunos = $user->where(['turma_id' => Auth::user()->turma_id, 'perfil' => "ALUNO"])->get();
         return view('user.chamada', ['turma'=>$turma, 'alunos' => $alunos]);
     }
 
@@ -27,7 +39,7 @@ class ChamadaController extends Controller
                ->withErrors('Aluno já marcado como presente');
        }
 
-       $chamada =  Chamada::create([
+       $chamada =  $this->chamada->create([
            'data' => $data,
            'professor_id' => (int)$request->professor,
            'turma_id' => (int)$request->turma,
@@ -41,7 +53,7 @@ class ChamadaController extends Controller
     {
         $data = date('Y-m-d');
 
-        $presenca = Chamada::where(['aluno_id' => $request->aluno , 'data' => $data])->get();
+        $presenca = $this->chamada->where(['aluno_id' => $request->aluno , 'data' => $data])->get();
 
 
         $presenca->first()->delete();
