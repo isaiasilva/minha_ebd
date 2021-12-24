@@ -1,21 +1,9 @@
-.full-height {
-    min-height: 100vh;
+body{
+    background-color: aliceblue;
 }
-.img-cover {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
 .input {
     width: 100%;
     margin-bottom: 10px;
     outline: none;
 }
-.icons>.btn {
-    color: white;
-    width: 40px;
-    height: 40px;
-    padding: 0px;
-    line-height: 0.8rem;
-}
+
