@@ -18,14 +18,10 @@
                     <span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    @if(Auth::user()->perfil_id === "3")
-                       <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Alterar Turma</a>
-                    @endif
                     <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Perfil</a>
                     <a class="dropdown-item" href="/sair"><i class="fas fa-sign-out-alt"></i> Sair</a>
                 </div>
             </li>
-
         </ul>
     </div>
   </div>
@@ -80,6 +76,7 @@
                 </a>
                 <ul id="submenu4" class="list-unstyled collapse" id="collapseUsuarios">
                     @if(Auth::user()->perfil_id === "1")
+                        <li><a href="{{ route('associar-professor') }}"><i class="fa fa-plus" aria-hidden="true"></i> Associar Professor</a></li>
                         <li><a href="{{ route('turma') }}"><i class="fas fa-chalkboard"></i> Nova turma</a></li>
                     @endif
                         <li><a href="{{route('professorPorTurma')}}"><i class="fas fa-chalkboard-teacher"></i> Professor por Turma</a></li>
