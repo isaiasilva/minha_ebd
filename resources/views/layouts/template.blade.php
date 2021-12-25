@@ -87,6 +87,7 @@
                 </ul>
             </li>
 
+            <li><a href=""><i class="fas fa-gamepad"></i> Gameficação</a></li>
             <li><a href="/sair"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
         </ul>
     </nav>

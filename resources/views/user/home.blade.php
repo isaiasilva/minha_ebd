@@ -12,7 +12,7 @@
             @if(Auth::user()->perfil_id === "1")
                 <div class="dropdown-menu">
                     @foreach($turma->all() as $todas_turmas)
-                        <a class="dropdown-item" href="/user/atualiza-turma/{{$todas_turmas->turma_id}}">{{ $todas_turmas->nome_turma}}</a>
+                        <a class="dropdown-item" href="/user/atualiza-turma/{{$todas_turmas->id}}">{{ $todas_turmas->nome_turma}}</a>
                     @endforeach
                 </div>
             @else
