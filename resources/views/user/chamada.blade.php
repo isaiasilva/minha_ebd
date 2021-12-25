@@ -39,7 +39,7 @@
                                     <button class="btn-primary"  alt="Presença" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></button>
                                     <button class="btn-warning" alt="Atraso" disabled><i class="fa fa-check-circle" aria-hidden="true"></i></button>
 
-                                    <form action="/user/excluir-presenca" METHOD="POST">
+                                    <form action="/user/excluir-presenca" METHOD="POST" onsubmit="return confirm('Tem certeza?')">
                                         @csrf
                                         <input type="hidden" name="aluno" value="{{ $aluno->id }}">
                                         <button class="btn-danger" alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i></button>
