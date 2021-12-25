@@ -16,16 +16,17 @@
             </thead>
             <tbody>
             @foreach($turmas as $turma)
-                <form method="POST">
-                    @csrf
-                    <input type="hidden" name="turma" value="{{ $turma->id }}">
                     <tr>
                         <td>{{ $turma->id }}</td>
                         <td>{{ $turma->nome_turma }}</td>
                         <td>
                             <span class="d-flex justify-content-around">
                                 <button class="btn-primary"  alt="Editar"><i class="fas fa-edit"></i></button>
-                                <button class="btn-danger" alt="Excluir" disabled><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                <form action="{{route('excluir-turma')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="turma_id" value="{{ $turma->id }}">
+                                    <button class="btn-danger" alt="Excluir" ><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                </form>
                             </span>
                         </td>
                     </tr>

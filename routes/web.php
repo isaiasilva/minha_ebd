@@ -49,6 +49,7 @@ Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth
 
 Route::get('/user/turma', [TurmaController::class, 'store'])->middleware(['auth'])->name('turma');
 Route::post('/user/turma', [TurmaController::class, 'create'])->middleware(['auth']);
+Route::POST('/user/excluir-turma', [TurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-turma');
 
 Route::get('/sair', function () {
     Auth::logout();

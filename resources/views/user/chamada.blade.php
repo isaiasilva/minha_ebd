@@ -16,7 +16,6 @@
         </thead>
         <tbody>
             @foreach($alunos as $i => $aluno)
-
                     <tr>
                         <td>{{ $aluno->name }}</td>
                         <td>
