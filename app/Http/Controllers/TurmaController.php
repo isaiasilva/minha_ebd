@@ -25,12 +25,12 @@ class TurmaController extends Controller
         return view('user.turmas', ['turmas'=>$turmas]);
     }
 
-    public function store()
+    public function create()
     {
        return view('user.turma');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $turma = $this->turma;
         $turma->create([

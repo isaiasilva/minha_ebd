@@ -8,9 +8,8 @@
             <div class="row full-height">
                 <div class="col-md-6 col-12">
                     <div class="row full-height justify-content-center">
-                        <div class="col-8 col-xxl-5 align-self-center">
+                        <div class="col-12 col-md-8 col-xxl-5 align-self-center">
                             <img src="{{ asset('img/logo_sem_fundo.png') }}" class="img-fluid pt-5" alt="login">
-                            <!-- <h2 class="display-5">Login</h2> -->
                             @include('components.flash-message')
                             <p class="lead mb-4">Faça o login para continuar</p>
                             <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email" name="email" required/>
@@ -25,15 +24,8 @@
                           </div>
                     </div>
                 </div>
-                <!--
-                <div class="col-md-6 col-12 full-height img-cover d-none d-md-block">
-                    <img src="{{ asset('img/logo_sem_fundo.png') }}" class="img-fluid" alt="login">
-                </div>
-                -->
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
-
     </form>
 @endsection

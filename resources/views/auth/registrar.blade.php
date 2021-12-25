@@ -93,7 +93,7 @@
         <div class="row">
             <div class="col-md">
                 <button type="submit" class="btn btn-primary mt-3">
-                    Registrar-se
+                    Registrar
                 </button>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Perfil;
+use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -77,6 +78,13 @@ class RegisteredUserController extends Controller
             'turma_id' => $request->turma_id,
             'password' => Hash::make($request->password),
         ]);
+
+        if($request->perfil_id === "3"){
+            ProfessorPorTurma::create([
+                'professor_id' => $user->id,
+                'turma_id' => $user->turma_id
+            ]);
+        }
         /*
         event(new Registered($user));
         Auth::login($user); */

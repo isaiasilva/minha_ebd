@@ -61,7 +61,6 @@ class ChamadaController extends Controller
 
         $presenca = $this->chamada->where(['aluno_id' => $request->aluno , 'data' => $data])->get();
 
-
         $presenca->first()->delete();
 
         return redirect('user/chamada')->with('success', 'Presença apagada com sucesso!');

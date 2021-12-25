@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChamadaController;
 use App\Http\Controllers\EntrarController;
 use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\ProfessorPorTurmaController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Auth;
@@ -47,9 +48,14 @@ Route::POST('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->mi
 
 Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
 
-Route::get('/user/turma', [TurmaController::class, 'store'])->middleware(['auth'])->name('turma');
-Route::post('/user/turma', [TurmaController::class, 'create'])->middleware(['auth']);
+Route::get('/user/turma', [TurmaController::class, 'create'])->middleware(['auth'])->name('turma');
+Route::post('/user/turma', [TurmaController::class, 'store'])->middleware(['auth']);
 Route::POST('/user/excluir-turma', [TurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-turma');
+
+Route::get('/user/professor-por-turma', [ProfessorPorTurmaController::class, 'index'])->middleware(['auth'])->name('professorPorTurma');
+Route::get('/user/associar-professor', [ProfessorPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-professor');
+Route::post('/user/associar-professor', [ProfessorPorTurmaController::class, 'store'])->middleware(['auth']);
+
 
 Route::get('/sair', function () {
     Auth::logout();

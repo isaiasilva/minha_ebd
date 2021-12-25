@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <i class="fa fa-list-alt fa-3x"></i>
                         <h6 class="card-title">Presenças</h6>
-                        <h2 class="lead">17</h2>
+                        <h2 class="lead">{{$presencas}}</h2>
                     </div>
                 </div>
             </div>
