@@ -3,8 +3,31 @@
 @section('cabecalho')
     Página Inicial
 @endsection
+@if(Auth::user()->perfil_id !== "2")
+    @section('botao')
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Alterar turma
+            </button>
+            @if(Auth::user()->perfil_id === "1")
+                <div class="dropdown-menu">
+                    @foreach($turma->all() as $todas_turmas)
+                        <a class="dropdown-item" href="/user/atualiza-turma/{{$todas_turmas->turma_id}}">{{ $todas_turmas->nome_turma}}</a>
+                    @endforeach
+                </div>
+            @else
+                <div class="dropdown-menu">
+                    @foreach($turmas as $professorTurma)
+                        <a class="dropdown-item" href="/user/atualiza-turma/{{$professorTurma->turma_id}}">{{ $turma->find($professorTurma->turma_id)->nome_turma}}</a>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    @endsection
+@endif
 
 @section('conteudo')
+    @include('components.flash-message')
     <div class="content p-1">
     <p>Hoje é {{ date('d/m/Y') }}</p>
     </div>
@@ -34,7 +57,7 @@
                     <div class="card-body">
                         <i class="fa fa-users fa-3x"></i>
                         <h6 class="card-title">Turma</h6>
-                        <h2 class="lead">{{ $turma->nome_turma }}</h2>
+                        <h2 class="lead">{{ $turmaAtual->nome_turma }}</h2>
                     </div>
                 </div>
             </div>

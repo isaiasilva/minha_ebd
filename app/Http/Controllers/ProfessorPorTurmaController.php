@@ -6,6 +6,7 @@ use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfessorPorTurmaController extends Controller
 {
@@ -63,6 +64,16 @@ class ProfessorPorTurmaController extends Controller
         ]);
 
         return redirect()->back()->with('success','Professor associado com sucesso!');
+    }
 
+    public function atualizaTurma(Request $request)
+    {
+        $usuario = $this->user->find(Auth::user()->id);
+
+        $usuario->update([
+            'turma_id' => $request->id
+        ]);
+
+        return redirect('user/home')->with('success', 'Turma atualizada com sucesso!');
     }
 }

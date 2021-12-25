@@ -55,6 +55,7 @@ Route::POST('/user/excluir-turma', [TurmaController::class, 'destroy'])->middlew
 Route::get('/user/professor-por-turma', [ProfessorPorTurmaController::class, 'index'])->middleware(['auth'])->name('professorPorTurma');
 Route::get('/user/associar-professor', [ProfessorPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-professor');
 Route::post('/user/associar-professor', [ProfessorPorTurmaController::class, 'store'])->middleware(['auth']);
+Route::get('/user/atualiza-turma/{id}', [ProfessorPorTurmaController::class, 'atualizaTurma'])->middleware(['auth']);
 
 
 Route::get('/sair', function () {
