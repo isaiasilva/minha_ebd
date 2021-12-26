@@ -39,7 +39,10 @@ Route::get('/entrar', [EntrarController::class,'index']);
 Route::post('/entrar', [EntrarController::class,'login']);
 
 Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['auth'])->name('principal');
+
 Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware(['auth'])->name('usuarios');
+Route::get('/user/usuario/{id}', [UsuariosController::class, 'destroy'])->middleware(['auth']);
+
 Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
 Route::get('/user/chamada', [ChamadaController::class, 'index'])->middleware(['auth'])->name('chamada');
 Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');

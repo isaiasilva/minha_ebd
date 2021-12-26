@@ -4,6 +4,7 @@
     Usuários
 @endsection
 @section('conteudo')
+    @include('components.flash-message')
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -28,7 +29,7 @@
                  <td>
                     <span class="d-flex justify-content-around">
                         <button class="btn btn-primary"  alt="Editar"><i class="fas fa-edit"></i></button>
-                           <form action="{{route('excluir-turma')}}" method="post" onsubmit="return confirm('Tem certeza?')" >
+                           <form action="/user/usuario/{{$usuario->id }}" method="get" onsubmit="return confirm('Tem certeza? Todos os registros serão apagados e não poderão ser recuperados.')" >
                                @csrf
                                  <input type="hidden" name="turma_id" value="{{ $turma->id }}">
                                  <button class="btn btn-danger" alt="Excluir"  ><i class="fa fa-eraser" aria-hidden="true"></i></button>
