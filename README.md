@@ -1,6 +1,5 @@
 <p align="center">
-<img src="public/img/fundo.jpg" />
-![](public/img/fundo.jpg)
+<img src="public/img/logo_sem_fundo.png" />
 </p>
 
 
@@ -19,46 +18,28 @@ Algumas funcionalidades
 - Opção de chamada por atraso
 - Contagem dos pontos por presença - sistema de gameficação.
 
-## Learning Laravel
+Tecnologias utilizadas:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel, Bootstrap, javascript, HTML5, CSS3.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Telas do Chamada EBD
 
-## Laravel Sponsors
+Login
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<img src="public/img/telas/login.png" />
 
-### Premium Partners
+Tela inicial
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+<img src="public/img/telas/pagina%20inicial.png" />
 
-## Contributing
+Tela inicial mobile
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<img src="public/img/telas/pagina%20inicial%20mobile.png" />
 
-## Code of Conduct
+Chamada
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<img src="public/img/telas/chamada.png" />
 
-## Security Vulnerabilities
+Chamada mobile
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<img src="public/img/telas/chamada%20mobile.png" />
