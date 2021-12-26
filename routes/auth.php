@@ -54,6 +54,14 @@ Route::post('/reset-password', [NewPasswordController::class, 'store'])
                 ->middleware('guest')
                 ->name('password.update');
 
+Route::get('/reset-password', [NewPasswordController::class, 'store'])
+    ->middleware('auth')
+    ->name('password.update');
+
+Route::post('/reset-password', [NewPasswordController::class, 'store'])
+    ->middleware('auth')
+    ->name('reset-password');
+
 Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->middleware('auth')
                 ->name('verification.notice');
