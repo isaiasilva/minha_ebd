@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('cabecalho')
-    Atualizar Senha
+    Alterar Senha
 @endsection
 
 @section('conteudo')
