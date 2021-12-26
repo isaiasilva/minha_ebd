@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chamada;
 use App\Models\Perfil;
+use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,13 +28,23 @@ class UsuariosController extends Controller
      * @var Chamada
      */
     private $chamada;
+    /**
+     * @var ProfessorPorTurma
+     */
+    private $professorPorTurma;
 
-    public function __construct(Turma $turma, User $user, Perfil $perfil, Chamada $chamada)
+    public function __construct(
+        Turma $turma,
+        User $user,
+        Perfil $perfil,
+        Chamada $chamada,
+        ProfessorPorTurma $professorPorTurma)
     {
         $this->turma = $turma;
         $this->user = $user;
         $this->perfil = $perfil;
         $this->chamada = $chamada;
+        $this->professorPorTurma = $professorPorTurma;
     }
 
     public function index()
@@ -48,15 +59,38 @@ class UsuariosController extends Controller
     {
         $usuario = $this->user->find($id);
 
+        // se for professor
+        if($usuario->perfil_id === "3"){
+            $colecaoProfessor = $this->professorPorTurma->where('professor_id',$usuario->id )->get();
+            $this->excluirProfessorPorTurma($colecaoProfessor);
+        }
+
         $chamadas = $this->chamada->where('aluno_id',$usuario->id)->get();
 
-        // ecluindo presenças registradas
-        foreach ($chamadas as $chamada){
-            $chamada->delete();
-        }
+        $this->excluirChamada($chamadas);
 
         $usuario->delete();
         return redirect()->back()->with('success', 'Usuário excluido com sucesso.');
-
     }
+
+    /**
+     * @param $ColecaoProfessor
+     */
+    protected function excluirProfessorPorTurma($ColecaoProfessor): void
+    {
+        foreach ($ColecaoProfessor as $professor) {
+            $professor->delete();
+        }
+    }
+
+    /**
+     * @param $chamadas
+     */
+    protected function excluirChamada($chamadas): void
+    {
+        foreach ($chamadas as $chamada) {
+            $chamada->delete();
+        }
+    }
+
 }
