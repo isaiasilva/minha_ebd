@@ -22,7 +22,7 @@ Tecnologias utilizadas:
 
 Laravel, Bootstrap, javascript, HTML5, CSS3.
 
-## Telas do Chamada EBD
+## Algumas telas do Chamada EBD
 
 Login
 

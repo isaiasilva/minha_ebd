@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlterarSenhaController;
 use App\Http\Controllers\AlunosController;
+use App\Http\Controllers\AlunosPorTurmaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChamadaController;
 use App\Http\Controllers\EntrarController;
@@ -60,6 +61,10 @@ Route::get('/user/professor-por-turma', [ProfessorPorTurmaController::class, 'in
 Route::get('/user/associar-professor', [ProfessorPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-professor');
 Route::post('/user/associar-professor', [ProfessorPorTurmaController::class, 'store'])->middleware(['auth']);
 Route::get('/user/atualiza-turma/{id}', [ProfessorPorTurmaController::class, 'atualizaTurma'])->middleware(['auth']);
+
+Route::get('/user/aluno-por-turma', [AlunosPorTurmaController::class, 'index'])->middleware(['auth'])->name('alunoPorTurma');
+Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-aluno');
+Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);
 
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
 Route::post('/user/alterar-senha', [AlterarSenhaController::class, 'store'])->name('alterar-senha');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AlunoPorTurma;
 use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
@@ -18,11 +19,16 @@ class RegisteredUserController extends Controller
 {
     private $turma;
     private $perfil;
+    /**
+     * @var AlunoPorTurma
+     */
+    private $alunoPorTurma;
 
-    public function __construct(Turma $turma, Perfil $perfil)
+    public function __construct(Turma $turma, Perfil $perfil, AlunoPorTurma $alunoPorTurma)
     {
         $this->turma = $turma;
         $this->perfil = $perfil;
+        $this->alunoPorTurma = $alunoPorTurma;
     }
 
     /**
@@ -79,6 +85,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+         //Associando primera turma do aluno
+         $this->alunoPorTurma->create([
+             'aluno_id' => $user->id,
+             'turma_id' => $user->turma_id
+         ]);
+
+        /*
         if($request->perfil_id === "3"){
             ProfessorPorTurma::create([
                 'professor_id' => $user->id,
