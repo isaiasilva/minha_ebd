@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlunoPorTurma;
 use App\Models\Chamada;
 use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
@@ -32,19 +33,26 @@ class UsuariosController extends Controller
      * @var ProfessorPorTurma
      */
     private $professorPorTurma;
+    /**
+     * @var AlunoPorTurma
+     */
+    private $alunoPorTurma;
 
     public function __construct(
         Turma $turma,
         User $user,
         Perfil $perfil,
         Chamada $chamada,
-        ProfessorPorTurma $professorPorTurma)
+        ProfessorPorTurma $professorPorTurma,
+        AlunoPorTurma $alunoPorTurma
+    )
     {
         $this->turma = $turma;
         $this->user = $user;
         $this->perfil = $perfil;
         $this->chamada = $chamada;
         $this->professorPorTurma = $professorPorTurma;
+        $this->alunoPorTurma = $alunoPorTurma;
     }
 
     public function index()
@@ -64,6 +72,10 @@ class UsuariosController extends Controller
             $colecaoProfessor = $this->professorPorTurma->where('professor_id',$usuario->id )->get();
             $this->excluirProfessorPorTurma($colecaoProfessor);
         }
+
+        $alunosPorTurma = $this->alunoPorTurma->where('aluno_id',$usuario->id)->get();
+
+        $this->delataAlunoPorTurma($alunosPorTurma);
 
         $chamadas = $this->chamada->where('aluno_id',$usuario->id)->get();
 
@@ -92,5 +104,16 @@ class UsuariosController extends Controller
             $chamada->delete();
         }
     }
+
+    /**
+     * @param $alunosPorTurma
+     */
+    protected function delataAlunoPorTurma($alunosPorTurma): void
+    {
+        foreach ($alunosPorTurma as $alunoPorTurma) {
+            $alunoPorTurma->delete();
+        }
+    }
+
 
 }
