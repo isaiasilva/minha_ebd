@@ -34,7 +34,7 @@ class ChamadaController extends Controller
         $turmas = $this->turma;
         $minhasTurmas = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
 
-        $turmaAtual = $this->verificaTurmaAtual()->first();
+        $turmaAtual = $this->verificaTurmaAtual();
 
         if(isset($request->id)){
             $turmaAtual = $request->id;
@@ -72,7 +72,7 @@ class ChamadaController extends Controller
        ]);
 
        if($request->atraso === "true"){
-           return redirect('user/chamada')->with('warning', 'Atraso registrado com sucesso!');;
+           return redirect()->back()->with('warning', 'Atraso registrado com sucesso!');;
        }
 
         return redirect()->back()->with('success', 'Presença registrada com sucesso!');;
@@ -117,9 +117,11 @@ class ChamadaController extends Controller
         }
 
         if (Auth::user()->perfil_id == "3"){
-            $turmaAtual = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
+            $turmaAtual = $this->professorPorTurma
+                ->where(['professor_id' => Auth::user()->id])
+                ->get()
+                ->first()->turma_id;
         }
-
         return $turmaAtual;
     }
 }
