@@ -64,4 +64,16 @@ class AlunosPorTurmaController extends Controller
 
         return redirect()->back()->with('success','Aluno associado com sucesso!');
     }
+
+    public function destroy(Request $request)
+    {
+         $turma = $request->turma_id;
+         $aluno = $request->aluno_id;
+
+        $alunoPorTurma = $this->alunoPorTurma->where(['aluno_id' => $aluno, 'turma_id' => $turma])->get()->first();
+
+        $alunoPorTurma->delete();
+
+        return redirect()->back()->with('success', 'Aluno desassociado com sucesso!');
+    }
 }

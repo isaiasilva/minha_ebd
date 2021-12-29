@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => "Cláudio Oliveira" . rand(1,100),
+            'name' => "Cláudio Oliveira" ,
             'email' => 'claudio@professor',
             'perfil_id' => 3,
             'estado_civil' => 'SOLTEIRO',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -78,7 +78,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -88,7 +88,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -98,7 +98,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -108,7 +108,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -118,7 +118,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -128,7 +128,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -138,7 +138,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),
@@ -148,7 +148,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => "Fulando de Tal" . rand(1,100),
-            'email' => 'name'. rand(1,99) . '@gmail.com',
+            'email' => 'name'. rand(1,1000) . '@gmail.com',
             'perfil_id' => 2,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => new \DateTime('08/04/1994'),

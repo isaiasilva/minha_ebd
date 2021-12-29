@@ -69,6 +69,8 @@ Route::post('/user/excluir-professor', [ProfessorPorTurmaController::class, 'des
 Route::get('/user/aluno-por-turma', [AlunosPorTurmaController::class, 'index'])->middleware(['auth'])->name('alunoPorTurma');
 Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-aluno');
 Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);
+Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-aluno');
+
 
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
 Route::post('/user/alterar-senha', [AlterarSenhaController::class, 'store'])->name('alterar-senha');
