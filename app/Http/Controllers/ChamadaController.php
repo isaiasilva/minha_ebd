@@ -46,15 +46,20 @@ class ChamadaController extends Controller
         $turmas = $this->turma;
         $minhasTurmas = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
 
-        $turmaAtual = $this->verificaTurmaAtual();
+       $turmaAtual = $this->verificaTurmaAtual();
+
+        if (is_null($turmaAtual)){
+            return redirect('/user/home')->with('warning','Professor não foi associado em nenhuma turma');
+        }
+
+        $nomeTurma = $this->turma->find($turmaAtual->turma_id)->nome_turma;
 
         if(isset($request->id)){
             $turmaAtual = $request->id;
+            $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
         }
 
-        $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
 
-        //$alunos = $user->where(['turma_id' => $turmaAtual, 'perfil_id' => 2])->get();
         $alunos = $user->where(['turma_id' => $turmaAtual])->get();
 
         return view('user.chamada', [
@@ -134,8 +139,14 @@ class ChamadaController extends Controller
             $turmaAtual = $this->professorPorTurma
                 ->where(['professor_id' => Auth::user()->id])
                 ->get()
-                ->first()->turma_id;
+                ->first();
+
         }
+       /*
+        if (is_null($turmaAtual)){
+            return redirect('/user/home')->with('warning','Professor não foi associado em nenhuma turma');
+        } */
+
         return $turmaAtual;
     }
 }
