@@ -76,4 +76,19 @@ class ProfessorPorTurmaController extends Controller
 
         return redirect('user/home')->with('success', 'Turma atualizada com sucesso!');
     }
+
+    public function destroy(Request $request)
+    {
+
+        $turma = $request->turma_id;
+        $professor = $request->professor_id;
+
+        $professorPorTurma = $this->professorPorTurma->where(['professor_id' => $professor, 'turma_id' => $turma])->get()->first();
+
+
+        $professorPorTurma->delete();
+
+        return redirect()->back()->with('success', 'Professor desassociado com sucesso!');
+    }
+
 }

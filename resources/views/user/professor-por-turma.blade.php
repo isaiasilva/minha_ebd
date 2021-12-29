@@ -23,14 +23,12 @@
                     <td>{{ $turma->find($professor->turma_id)->nome_turma }}</td>
                     @if(Auth::user()->perfil_id === "1")
                         <td>
-                                <span class="d-flex justify-content-around">
-                                    <button class="btn btn-primary"  alt="Editar"><i class="fas fa-edit"></i></button>
-                                    <form action="{{route('excluir-turma')}}" method="post" onsubmit="return confirm('Tem certeza?')" >
+                                    <form action="{{route('excluir-professor')}}" method="post" onsubmit="return confirm('Tem certeza?')" >
                                         @csrf
-                                        <input type="hidden" name="turma_id" value="{{ $turma->id }}">
+                                        <input type="hidden" name="turma_id" value="{{ $professor->turma_id }}">
+                                        <input type="hidden" name="professor_id" value="{{ $professor->professor_id}}">
                                         <button class="btn btn-danger" alt="Excluir"  ><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                     </form>
-                                </span>
                         </td>
                     @endif
                 </tr>
