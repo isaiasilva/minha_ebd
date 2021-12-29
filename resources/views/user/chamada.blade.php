@@ -42,13 +42,13 @@
         <tbody>
             @foreach($alunos as $i => $aluno)
                     <tr>
-                        <td>{{ $aluno->name }}</td>
+                        <td>{{ $users->find($aluno->aluno_id)->name }}</td>
                         <td>
                             <div class="form-check">
-                                @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->id) !== "Pendente")
+                                @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->aluno_id, $turmaAtual) !== "Pendente")
                                     <input class="form-check-input" checked  name="{{ 'presenca' . $i }}"  type="checkbox"  id="flexCheckChecked" disabled>
                                     <label class="form-check-label" for="flexCheckChecked">
-                                        {{\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->id) }}
+                                        {{\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->aluno_id, $turmaAtual) }}
                                     </label>
                                 @else
                                     <input class="form-check-input" name="{{ 'presenca' . $i }}"  type="checkbox"  id="flexCheckChecked" required>
@@ -60,13 +60,13 @@
                         </td>
                         <td>
                             <span class="d-flex justify-content-around">
-                                @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->id) !== "Pendente")
+                                @if(\App\Http\Controllers\ChamadaController::verificaPresenca($aluno->aluno_id, $turmaAtual) !== "Pendente")
                                     <button class="btn btn-primary"  alt="Presença" disabled><i class="fas fa-stopwatch"></i></button>
                                     <button class="btn btn-warning" alt="Atraso" disabled><i class="fas fa-user-clock"></i></button>
 
                                     <form action="/user/excluir-presenca" METHOD="POST" onsubmit="return confirm('Tem certeza que quer apagar a presença?')">
                                         @csrf
-                                        <input type="hidden" name="aluno" value="{{ $aluno->id }}">
+                                        <input type="hidden" name="aluno" value="{{ $aluno->aluno_id }}">
                                         <button class="btn btn-danger" alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                     </form>
                              </span>
@@ -75,7 +75,7 @@
                                     @csrf
                                     <input type="hidden" name="turma" value="{{ $turmaAtual }}">
                                     <input type="hidden" name="professor" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" name="aluno" value="{{ $aluno->id }}">
+                                    <input type="hidden" name="aluno" value="{{ $aluno->aluno_id }}">
                                     <input type="hidden" name="atraso" value="false">
                                     <button type="submit" class="btn btn-primary"  alt="Presença" ><i class="fas fa-stopwatch"></i></button>
                                 </form>
@@ -84,7 +84,7 @@
                                     @csrf
                                     <input type="hidden" name="turma" value="{{ $turmaAtual }}">
                                     <input type="hidden" name="professor" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" name="aluno" value="{{ $aluno->id }}">
+                                    <input type="hidden" name="aluno" value="{{ $aluno->aluno_id}}">
                                     <input type="hidden" name="atraso" value="true">
                                     <button type="submit"  class="btn btn-warning" alt="Atraso" ><i class="fas fa-user-clock"></i></button>
                                 </form>

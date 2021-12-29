@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlunoPorTurma;
 use App\Models\Chamada;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
@@ -19,18 +20,29 @@ class ChamadaController extends Controller
      * @var ProfessorPorTurma
      */
     private $professorPorTurma;
+    /**
+     * @var AlunoPorTurma
+     */
+    private $alunoPorTurma;
 
-    public function __construct(User $user, Turma $turma, Chamada $chamada, ProfessorPorTurma $professorPorTurma)
+    public function __construct(
+        User $user, Turma $turma,
+        Chamada $chamada,
+        ProfessorPorTurma $professorPorTurma,
+        AlunoPorTurma $alunoPorTurma
+    )
     {
         $this->user = $user;
         $this->turma = $turma;
         $this->chamada = $chamada;
         $this->professorPorTurma = $professorPorTurma;
+        $this->alunoPorTurma = $alunoPorTurma;
     }
 
     public function index(Request $request)
     {
-        $user = $this->user;
+        $users = $this->user;
+        $user = $this->alunoPorTurma;
         $turmas = $this->turma;
         $minhasTurmas = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
 
@@ -42,21 +54,23 @@ class ChamadaController extends Controller
 
         $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
 
-        $alunos = $user->where(['turma_id' => $turmaAtual, 'perfil_id' => 2])->get();
+        //$alunos = $user->where(['turma_id' => $turmaAtual, 'perfil_id' => 2])->get();
+        $alunos = $user->where(['turma_id' => $turmaAtual])->get();
 
         return view('user.chamada', [
             'minhasTurmas'=> $minhasTurmas,
             'turmaAtual'=>$turmaAtual,
             'turmas'=>$turmas,
             'alunos' => $alunos,
-            'nomeTurma' => $nomeTurma
+            'nomeTurma' => $nomeTurma,
+            'users' => $users
         ]);
     }
 
     public function create(Request $request)
     {
        $data = date('Y-m-d') ;
-       if(self::verificaPresenca($request->aluno) === true){
+       if(self::verificaPresenca($request->aluno, $request->turma) === true){
            return redirect()
                ->back()
                ->withErrors('Aluno já marcado como presente');
@@ -89,10 +103,10 @@ class ChamadaController extends Controller
         return redirect()->back()->with('success', 'Presença apagada com sucesso!');
     }
 
-    static function verificaPresenca($aluno)
+    static function verificaPresenca($aluno, $turma)
     {
         $data = date('Y-m-d');
-        $presenca = Chamada::where( ['aluno_id' => $aluno, 'data' => $data] )->get();
+        $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
 
         $retorno = "Pendente";
         foreach ($presenca as $chamada){
