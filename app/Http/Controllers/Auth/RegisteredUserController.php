@@ -23,12 +23,17 @@ class RegisteredUserController extends Controller
      * @var AlunoPorTurma
      */
     private $alunoPorTurma;
+    /**
+     * @var ProfessorPorTurma
+     */
+    private $professorPorTurma;
 
-    public function __construct(Turma $turma, Perfil $perfil, AlunoPorTurma $alunoPorTurma)
+    public function __construct(Turma $turma, Perfil $perfil, AlunoPorTurma $alunoPorTurma, ProfessorPorTurma $professorPorTurma)
     {
         $this->turma = $turma;
         $this->perfil = $perfil;
         $this->alunoPorTurma = $alunoPorTurma;
+        $this->professorPorTurma = $professorPorTurma;
     }
 
     /**
@@ -51,8 +56,10 @@ class RegisteredUserController extends Controller
      */
     public function registrarAluno()
     {
-        $turma = Turma::find(Auth::user()->turma_id);
-        return view('auth.registrar-aluno', ['turma' => $turma]);
+        $repositorioTurmas = $this->turma;
+         $turmas = $this->professorPorTurma->where('professor_id',Auth::user()->id )->get();
+
+        return view('auth.registrar-aluno', ['turmas' => $turmas, 'repositorioTurmas' => $repositorioTurmas]);
     }
 
     /**
@@ -91,16 +98,6 @@ class RegisteredUserController extends Controller
              'turma_id' => $user->turma_id
          ]);
 
-        /*
-        if($request->perfil_id === "3"){
-            ProfessorPorTurma::create([
-                'professor_id' => $user->id,
-                'turma_id' => $user->turma_id
-            ]);
-        }
-        /*
-        event(new Registered($user));
-        Auth::login($user); */
 
 
             return redirect()

@@ -8,7 +8,6 @@
     <form method="post">
         @csrf
         <input type="hidden" name="perfil_id" value="2">
-        <input type="hidden" name="turma_id" value="{{ $turma->id  }}">
  <div class="container">
      <div class="row">
          <div class="col-md-6">
@@ -26,7 +25,7 @@
      </div>
 
      <div class="row">
-         <div class="col-md-6">
+         <div class="col-md">
              <div class="form-group">
                  <label for="estado_civil">Estado Civil</label>
                  <select class="form-control" name="estado_civil" aria-label="Default select example" required>
@@ -37,7 +36,20 @@
                  </select>
              </div>
          </div>
-         <div class="col-md-6">
+
+         <div class="col-md">
+             <div class="form-group">
+                 <label for="estado_civil">Turma</label>
+                 <select class="form-control" name="turma_id" aria-label="Default select example" required>
+                     <option selected value="">Selecione</option>
+                     @foreach($turmas as $turma)
+                     <option value="{{ $turma->turma_id }}">{{$repositorioTurmas->find($turma->turma_id)->nome_turma}}</option>
+                     @endforeach
+                 </select>
+             </div>
+         </div>
+
+         <div class="col-md">
              <div class="form-group">
                  <label for="data_nascimento">Data de Nascimento</label>
                  <input type="date" name="data_nascimento" id="data_nascimento" required class="form-control">
