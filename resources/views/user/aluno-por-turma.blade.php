@@ -9,7 +9,7 @@
         <table class="table">
             <thead>
             <tr class="">
-                <th scope="col">Professor</th>
+                <th scope="col">Aluno</th>
                 <th scope="col">Turma</th>
                 @if(Auth::user()->perfil_id === "1" )
                     <th scope="col">Ações</th>

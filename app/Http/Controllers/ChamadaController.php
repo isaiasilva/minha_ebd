@@ -53,14 +53,14 @@ class ChamadaController extends Controller
         }
 
         $nomeTurma = $this->turma->find($turmaAtual->turma_id)->nome_turma;
+        $alunos = $user->where(['turma_id' => $turmaAtual->turma_id])->get();
 
         if(isset($request->id)){
             $turmaAtual = $request->id;
             $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
+            $alunos = $user->where(['turma_id' => $turmaAtual])->get();
         }
 
-
-        $alunos = $user->where(['turma_id' => $turmaAtual])->get();
 
         return view('user.chamada', [
             'minhasTurmas'=> $minhasTurmas,
@@ -132,7 +132,7 @@ class ChamadaController extends Controller
     protected function verificaTurmaAtual()
     {
         if (Auth::user()->perfil_id == "1") {
-            $turmaAtual = $this->user->find(Auth::user()->id)->turma_id;
+            $turmaAtual = $this->user->find(Auth::user()->id);
         }
 
         if (Auth::user()->perfil_id == "3"){

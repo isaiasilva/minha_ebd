@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="aluno">Professor</label>
+                        <label for="aluno">Aluno</label>
                         <select class="form-control" name="aluno" aria-label="Default select example" required>
                             <option selected value="">Selecione</option>
                             @foreach($alunos as $aluno)
