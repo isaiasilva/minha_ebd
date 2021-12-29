@@ -46,14 +46,14 @@ class ChamadaController extends Controller
         $turmas = $this->turma;
         $minhasTurmas = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
 
-       $turmaAtual = $this->verificaTurmaAtual();
+        $verificaTurma = $this->verificaTurmaAtual();
 
-        if (is_null($turmaAtual)){
+        if (is_null($verificaTurma)){
             return redirect('/user/home')->with('warning','Professor não foi associado em nenhuma turma');
         }
-
-        $nomeTurma = $this->turma->find($turmaAtual->turma_id)->nome_turma;
-        $alunos = $user->where(['turma_id' => $turmaAtual->turma_id])->get();
+        $turmaAtual = $verificaTurma->turma_id;
+        $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
+        $alunos = $user->where(['turma_id' => $turmaAtual])->get();
 
         if(isset($request->id)){
             $turmaAtual = $request->id;
@@ -75,6 +75,7 @@ class ChamadaController extends Controller
     public function create(Request $request)
     {
        $data = date('Y-m-d') ;
+
        if(self::verificaPresenca($request->aluno, $request->turma) === true){
            return redirect()
                ->back()
