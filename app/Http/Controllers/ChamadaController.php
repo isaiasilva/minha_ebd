@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chamada;
+use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,20 +15,42 @@ class ChamadaController extends Controller
     private $user;
     private $turma;
     private $chamada;
-    public function __construct(User $user, Turma $turma, Chamada $chamada)
+    /**
+     * @var ProfessorPorTurma
+     */
+    private $professorPorTurma;
+
+    public function __construct(User $user, Turma $turma, Chamada $chamada, ProfessorPorTurma $professorPorTurma)
     {
         $this->user = $user;
         $this->turma = $turma;
         $this->chamada = $chamada;
+        $this->professorPorTurma = $professorPorTurma;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = $this->user;
-        $turma = $this->turma->find(Auth::user()->turma_id);
+        $turmas = $this->turma;
+        $minhasTurmas = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
 
-        $alunos = $user->where(['turma_id' => Auth::user()->turma_id, 'perfil_id' => 2])->get();
-        return view('user.chamada', ['turma'=>$turma, 'alunos' => $alunos]);
+        $turmaAtual = $this->verificaTurmaAtual()->first();
+
+        if(isset($request->id)){
+            $turmaAtual = $request->id;
+        }
+
+        $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
+
+        $alunos = $user->where(['turma_id' => $turmaAtual, 'perfil_id' => 2])->get();
+
+        return view('user.chamada', [
+            'minhasTurmas'=> $minhasTurmas,
+            'turmaAtual'=>$turmaAtual,
+            'turmas'=>$turmas,
+            'alunos' => $alunos,
+            'nomeTurma' => $nomeTurma
+        ]);
     }
 
     public function create(Request $request)
@@ -52,7 +75,7 @@ class ChamadaController extends Controller
            return redirect('user/chamada')->with('warning', 'Atraso registrado com sucesso!');;
        }
 
-        return redirect('user/chamada')->with('success', 'Presença registrada com sucesso!');;
+        return redirect()->back()->with('success', 'Presença registrada com sucesso!');;
     }
 
     public function destroy(Request $request)
@@ -63,7 +86,7 @@ class ChamadaController extends Controller
 
         $presenca->first()->delete();
 
-        return redirect('user/chamada')->with('success', 'Presença apagada com sucesso!');
+        return redirect()->back()->with('success', 'Presença apagada com sucesso!');
     }
 
     static function verificaPresenca($aluno)
@@ -81,5 +104,22 @@ class ChamadaController extends Controller
         }
 
         return $retorno;
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    protected function verificaTurmaAtual()
+    {
+        if (Auth::user()->perfil_id == "1") {
+            $turmaAtual = $this->user->find(Auth::user()->id)->turma_id;
+        }
+
+        if (Auth::user()->perfil_id == "3"){
+            $turmaAtual = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
+        }
+
+        return $turmaAtual;
     }
 }

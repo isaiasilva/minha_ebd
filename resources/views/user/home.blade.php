@@ -3,28 +3,7 @@
 @section('cabecalho')
     Página Inicial
 @endsection
-@if(Auth::user()->perfil_id !== "2")
-    @section('botao')
-        <div class="btn-group">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                Alterar turma
-            </button>
-            @if(Auth::user()->perfil_id === "1")
-                <div class="dropdown-menu">
-                    @foreach($turma->all() as $todas_turmas)
-                        <a class="dropdown-item" href="/user/atualiza-turma/{{$todas_turmas->id}}">{{ $todas_turmas->nome_turma}}</a>
-                    @endforeach
-                </div>
-            @else
-                <div class="dropdown-menu">
-                    @foreach($turmas as $professorTurma)
-                        <a class="dropdown-item" href="/user/atualiza-turma/{{$professorTurma->turma_id}}">{{ $turma->find($professorTurma->turma_id)->nome_turma}}</a>
-                    @endforeach
-                </div>
-            @endif
-        </div>
-    @endsection
-@endif
+
 
 @section('conteudo')
     @include('components.flash-message')

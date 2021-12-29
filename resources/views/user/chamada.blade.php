@@ -1,10 +1,35 @@
 @extends('layouts.template')
 
 @section('cabecalho')
-            Chamada {{ date('d/m/Y') }}
+            Chamada - {{$nomeTurma}}
 @endsection
+
+@if(Auth::user()->perfil_id !== "2")
+@section('botao')
+    <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Alterar turma
+        </button>
+        @if(Auth::user()->perfil_id === "1")
+            <div class="dropdown-menu">
+                @foreach($turmas->all() as $turma)
+                    <a class="dropdown-item" href="/user/chamada/{{$turma->id}}">{{ $turma->nome_turma}}</a>
+                @endforeach
+            </div>
+        @else
+            <div class="dropdown-menu">
+                @foreach($minhasTurmas as $minhaTurma)
+                    <a class="dropdown-item" href="/user/chamada/{{$minhaTurma->turma_id}}">{{$turmas->find($minhaTurma->turma_id)->nome_turma}}</a>
+                @endforeach
+            </div>
+        @endif
+    </div>
+@endsection
+@endif
+
 @section('conteudo')
     @include('components.flash-message')
+
   <div class="table-responsive">
     <table class="table">
         <thead>
@@ -48,7 +73,7 @@
                                 @else
                                 <form action="{{route('chamada')}}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="turma" value="{{ $turma->id }}">
+                                    <input type="hidden" name="turma" value="{{ $turmaAtual }}">
                                     <input type="hidden" name="professor" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="aluno" value="{{ $aluno->id }}">
                                     <input type="hidden" name="atraso" value="false">
@@ -57,7 +82,7 @@
 
                                 <form action="{{route('atraso')}}" METHOD="POST">
                                     @csrf
-                                    <input type="hidden" name="turma" value="{{ $turma->id }}">
+                                    <input type="hidden" name="turma" value="{{ $turmaAtual }}">
                                     <input type="hidden" name="professor" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="aluno" value="{{ $aluno->id }}">
                                     <input type="hidden" name="atraso" value="true">
