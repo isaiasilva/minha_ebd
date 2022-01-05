@@ -48,3 +48,8 @@ body {
 .titulo{
     font-size: 2.0rem !important;
 }
+
+.altera-curso{
+    margin-top: 5px;
+    margin-right: 40px;
+}
