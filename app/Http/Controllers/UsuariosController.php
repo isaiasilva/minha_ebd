@@ -60,7 +60,7 @@ class UsuariosController extends Controller
         $turma = $this->turma->find(Auth::user()->turma_id);
         $perfil = $this->perfil;
         $usuarios = $this->user->all();
-        return view('user.usuarios', ['turma'=>$turma, 'usuarios' => $usuarios, 'perfil' => $perfil]);
+        return view('user.usuarios', ['turma'=>$turma, 'usuarios' => $usuarios, 'title' => 'Usuários', 'perfil' => $perfil]);
     }
 
     public function destroy($id)

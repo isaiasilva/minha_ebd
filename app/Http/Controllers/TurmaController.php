@@ -22,12 +22,12 @@ class TurmaController extends Controller
     {
         $turmas = $this->turma::all();
 
-        return view('user.turmas', ['turmas'=>$turmas]);
+        return view('user.turmas', ['turmas'=>$turmas, 'title' => 'Turmas']);
     }
 
     public function create()
     {
-       return view('user.turma');
+       return view('user.turma', ['title' => 'Nova Turma']);
     }
 
     public function store(Request $request)

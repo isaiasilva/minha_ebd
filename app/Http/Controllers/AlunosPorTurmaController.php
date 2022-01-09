@@ -35,7 +35,7 @@ class AlunosPorTurmaController extends Controller
         $usuario = $this->user;
         $turma = $this->turma;
 
-        return view('user.aluno-por-turma', ['turma'=>$turma, 'usuario' => $usuario, 'alunoPorTurma' => $alunoPorTurma]);
+        return view('user.aluno-por-turma', ['turma'=>$turma, 'usuario' => $usuario, 'title' => 'Alunos Por Turma', 'alunoPorTurma' => $alunoPorTurma]);
     }
 
     public function create()
@@ -43,7 +43,7 @@ class AlunosPorTurmaController extends Controller
         $turmas = $this->turma->all();
         $alunos = $this->user->all();
 
-        return view('user.novo-aluno-por-turma', ['turmas' => $turmas, 'alunos' => $alunos ]);
+        return view('user.novo-aluno-por-turma', ['turmas' => $turmas, 'alunos' => $alunos, 'title' => 'Aluno por turma' ]);
     }
 
     public function store(Request $request)

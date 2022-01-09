@@ -15,7 +15,7 @@ class AlunosController extends Controller
 
         $alunos = User::where(['turma_id' => Auth::user()->turma_id, 'perfil_id' => 2])->get();
 
-        return view('user.alunos', ['turma'=>$turma, 'alunos' => $alunos]);
+        return view('user.alunos', ['turma'=>$turma, 'alunos' => $alunos, 'title' => 'Alunos']);
 
     }
 

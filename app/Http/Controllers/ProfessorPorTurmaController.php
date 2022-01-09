@@ -36,7 +36,7 @@ class ProfessorPorTurmaController extends Controller
         $usuario = $this->user;
         $turma = $this->turma;
 
-        return view('user.professor-por-turma', ['turma'=>$turma, 'usuario' => $usuario, 'professorPorTurma' => $professorPorTurma]);
+        return view('user.professor-por-turma', ['turma'=>$turma, 'usuario' => $usuario, 'professorPorTurma' => $professorPorTurma, 'title' => 'Professor por turma']);
     }
 
     public function create()
@@ -44,7 +44,12 @@ class ProfessorPorTurmaController extends Controller
        $turmas = $this->turma->all();
        $professores = $this->user->where('perfil_id',3)->get();
 
-       return view('user.novo-professor-por-turma', ['turmas' => $turmas, 'professores' => $professores ]);
+       return view('user.novo-professor-por-turma',
+           [
+               'turmas' => $turmas,
+               'professores' => $professores,
+               'title' => 'Associar Professor'
+           ]);
     }
 
     public function store(Request $request)

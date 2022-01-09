@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
         $turmas = $this->turma::all();
         $perfis = $this->perfil::all();
 
-        return view('auth.registrar', ['turmas' => $turmas, 'perfis' => $perfis]);
+        return view('auth.registrar', ['turmas' => $turmas, 'perfis' => $perfis, 'title' => 'Novo usuário']);
     }
 
     /**

@@ -24,7 +24,7 @@ class AlterarSenhaController extends Controller
 
     public function create()
     {
-        return view('user.alterar-senha');
+        return view('user.alterar-senha', ['title' => 'Alterar senha']);
     }
 
     public function store(Request $request)

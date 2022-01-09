@@ -88,7 +88,8 @@ class ChamadaController extends Controller
             'turmas'=>$turmas,
             'alunos' => $repositorioAlunos,
             'nomeTurma' => $nomeTurma,
-            'users' => $users
+            'users' => $users,
+            'title' => 'Nova Chamada'
         ]);
     }
 

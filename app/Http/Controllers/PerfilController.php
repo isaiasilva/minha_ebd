@@ -29,6 +29,6 @@ class PerfilController extends Controller
         $turma = $this->turma->find(Auth::user()->turma_id)->nome_turma;
         $perfil = $this->perfil->find(Auth::user()->perfil_id)->perfil;
 
-        return view('user.perfil', ['turma'=> $turma, 'perfil' => $perfil]);
+        return view('user.perfil', ['turma'=> $turma, 'perfil' => $perfil, 'title' => 'Perfil']);
     }
 }

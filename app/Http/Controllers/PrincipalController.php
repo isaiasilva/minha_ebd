@@ -64,7 +64,8 @@ class PrincipalController extends Controller
             'alunos' => $alunos,
             'perfil' => $perfil,
             'presencas' => $presencas,
-            'turmas' => $turmas
+            'turmas' => $turmas,
+            'title' => 'Dashboard'
         ]);
     }
 }
