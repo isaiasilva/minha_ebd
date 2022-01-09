@@ -49,7 +49,33 @@
                     </div>
                 </div>
             </div>
+
+        </div> <!-- End row -->
+
+    <div class="row mb-3">
+
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Frequência por mês
+                </div>
+                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+            </div>
         </div>
-    </div>
+
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie me-1"></i>
+                    Alunos por sala
+                </div>
+                <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+
+    </div> <!-- End row -->
+
+    </div> <!-- End container -->
 @endsection
 

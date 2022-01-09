@@ -13,7 +13,8 @@ class Chamada extends Model
         'professor_id',
         'turma_id',
         'aluno_id',
-        'atraso'
+        'atraso',
+        'material'
     ];
 
     public $timestamps = false;

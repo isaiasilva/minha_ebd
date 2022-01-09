@@ -55,18 +55,38 @@ class ChamadaController extends Controller
         $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
         $alunos = $user->where(['turma_id' => $turmaAtual])->get();
 
+
+
         if(isset($request->id)){
             $turmaAtual = $request->id;
             $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
             $alunos = $user->where(['turma_id' => $turmaAtual])->get();
         }
 
+        $repositorioAlunos = [];
+        foreach ($alunos as $i => $aluno){
+
+            $i = [
+                'aluno_id' => $aluno->aluno_id,
+                'nome' => $users->find($aluno->aluno_id)->name,
+                'turmaAtual'=> $turmaAtual,
+                'nomeTurma' => $nomeTurma,
+                'material' =>  $this->verificaMaterial($aluno->aluno_id, $turmaAtual),
+                'presenca' =>  $this->verificaPresenca($aluno->aluno_id, $turmaAtual),
+
+                ];
+
+            array_push($repositorioAlunos, (object)$i);
+
+        }
+
+        //dd($repositorioAlunos);
 
         return view('user.chamada', [
             'minhasTurmas'=> $minhasTurmas,
             'turmaAtual'=>$turmaAtual,
             'turmas'=>$turmas,
-            'alunos' => $alunos,
+            'alunos' => $repositorioAlunos,
             'nomeTurma' => $nomeTurma,
             'users' => $users
         ]);
@@ -75,6 +95,8 @@ class ChamadaController extends Controller
     public function create(Request $request)
     {
        $data = date('Y-m-d') ;
+        $atraso = "false";
+        $material = "false";
 
        if(self::verificaPresenca($request->aluno, $request->turma) === true){
            return redirect()
@@ -82,36 +104,60 @@ class ChamadaController extends Controller
                ->withErrors('Aluno já marcado como presente');
        }
 
+       if($request->atraso){
+           $atraso = "true";
+       }
+
+        if($request->material){
+            $material = "true";
+        }
+
 
        $chamada =  $this->chamada->create([
            'data' => $data,
            'professor_id' => (int)$request->professor,
            'turma_id' => (int)$request->turma,
            'aluno_id' => (int)$request->aluno,
-           'atraso' => $request->atraso
+           'atraso' => $atraso,
+           'material' => $material,
        ]);
 
-       if($request->atraso === "true"){
-           return redirect()->back()->with('warning', 'Atraso registrado com sucesso!');;
+       if($atraso === "true"){
+           return redirect()->back()->with('warning', 'Atraso registrado com sucesso!');
        }
 
-        return redirect()->back()->with('success', 'Presença registrada com sucesso!');;
+        return redirect()->back()->with('success', 'Presença registrada com sucesso!');
     }
 
     public function destroy(Request $request)
     {
-        $data = date('Y-m-d');
+       $data = date('Y-m-d') ;
 
-        $presenca = $this->chamada->where(['aluno_id' => $request->aluno , 'data' => $data])->get();
+       $presenca = $this->chamada->where(['aluno_id' => $request->aluno  , 'turma_id' => $request->turma, 'data' => $data])->get();
 
-        $presenca->first()->delete();
+       $presenca->first()->delete();
 
         return redirect()->back()->with('success', 'Presença apagada com sucesso!');
     }
 
-    static function verificaPresenca($aluno, $turma)
+    private function verificaMaterial($aluno, $turma){
+        $data = date('Y-m-d');
+
+        $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
+        $retorno = "no-checked";
+        foreach ($presenca as $chamada){
+            if ($chamada->id && $chamada->material === "true"){
+                $retorno = "checked";
+            }
+        }
+        return $retorno;
+    }
+
+    private function verificaPresenca($aluno, $turma)
     {
         $data = date('Y-m-d');
+
+
         $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
 
         $retorno = "Pendente";

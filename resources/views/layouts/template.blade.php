@@ -19,7 +19,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{route('alterar-senha')}}"><i class="fas fa-key"></i> Alterar Senha</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Perfil</a>
+                    <a class="dropdown-item" href="{{route('perfil')}}"><i class="fas fa-user"></i> Perfil</a>
                     <a class="dropdown-item" href="/sair"><i class="fas fa-sign-out-alt"></i> Sair</a>
                 </div>
             </li>

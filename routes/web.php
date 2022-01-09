@@ -6,6 +6,7 @@ use App\Http\Controllers\AlunosPorTurmaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChamadaController;
 use App\Http\Controllers\EntrarController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ProfessorPorTurmaController;
 use App\Http\Controllers\TurmaController;
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 /*
@@ -37,7 +38,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 */
 
-Route::get('/entrar', [EntrarController::class,'index']);
+Route::get('/entrar', [EntrarController::class,'index'])->name("entrar");
 Route::post('/entrar', [EntrarController::class,'login']);
 
 Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['auth'])->name('principal');
@@ -52,7 +53,8 @@ Route::get('/user/chamada/{id}', [ChamadaController::class, 'index'])->middlewar
 
 Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
 Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['auth'])->name('atraso');
-Route::POST('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
+//Route::post('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
+Route::get('/user/excluir-presenca/{turma}/{aluno}', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 
 Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
 
@@ -70,6 +72,9 @@ Route::get('/user/aluno-por-turma', [AlunosPorTurmaController::class, 'index'])-
 Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-aluno');
 Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);
 Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-aluno');
+
+
+Route::get('/user/perfil', [PerfilController::class, 'index'])->middleware(['auth'])->name('perfil');
 
 
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
