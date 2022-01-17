@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-    <form method="post">
+    <form method="post" action="/entrar">
         @csrf
         <div class="container-fluid">
             <div class="row full-height">

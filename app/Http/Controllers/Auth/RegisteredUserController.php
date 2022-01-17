@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
         $repositorioTurmas = $this->turma;
          $turmas = $this->professorPorTurma->where('professor_id',Auth::user()->id )->get();
 
-        return view('auth.registrar-aluno', ['turmas' => $turmas, 'repositorioTurmas' => $repositorioTurmas]);
+        return view('auth.registrar-aluno', ['turmas' => $turmas, 'title' => 'Novo aluno', 'repositorioTurmas' => $repositorioTurmas]);
     }
 
     /**
