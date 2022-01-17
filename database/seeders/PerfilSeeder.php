@@ -23,7 +23,7 @@ class PerfilSeeder extends Seeder
         ]);
 
         DB::table('perfils')->insert([
-            'perfil' => 'professor'
+            'perfil' => 'Professor'
         ]);
     }
 }
