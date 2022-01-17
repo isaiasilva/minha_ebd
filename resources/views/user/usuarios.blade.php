@@ -28,7 +28,8 @@
                 @if(Auth::user()->perfil_id === "1")
                  <td>
                     <span class="d-flex justify-content-around">
-                        <button class="btn btn-primary"  alt="Editar"><i class="fas fa-edit"></i></button>
+                        <a href="/user/usuario/{{$usuario->id }}/editar" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
+
                            <form action="/user/usuario/{{$usuario->id }}" method="get" onsubmit="return confirm('Tem certeza? Todos os registros serão apagados e não poderão ser recuperados.')" >
                                @csrf
                                  <input type="hidden" name="turma_id" value="{{ $turma->id }}">

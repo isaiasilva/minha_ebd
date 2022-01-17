@@ -45,6 +45,8 @@ Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['au
 
 Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware(['auth'])->name('usuarios');
 Route::get('/user/usuario/{id}', [UsuariosController::class, 'destroy'])->middleware(['auth']);
+Route::get('/user/usuario/{id}/editar', [UsuariosController::class, 'editarUsuario'])->middleware(['auth']);
+Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->middleware(['auth']);
 
 Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
 

@@ -75,7 +75,7 @@
                                             </label>
                                         </div>
                                         <div>
-                                            <input class="form-check-input" name="material"  type="checkbox"  id="{{ 'material' . $i }}" >
+                                            <input class="form-check-input" name="material" checked type="checkbox"  id="{{ 'material' . $i }}" >
                                             <label class="form-check-label" for="{{ 'material' . $i }}">
                                                 Material Didático
                                             </label>

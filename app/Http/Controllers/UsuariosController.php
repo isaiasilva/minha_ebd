@@ -85,6 +85,53 @@ class UsuariosController extends Controller
         return redirect()->back()->with('success', 'Usuário excluido com sucesso.');
     }
 
+    public function editarUsuario($id)
+    {
+        $usuario = $this->user->find($id);
+        $perfil = $this->perfil->find($usuario->perfil_id);
+        $perfis = $this->perfil->all();
+
+        $turma = $this->turma->find($usuario->turma_id);
+        $turmas = $this->turma->all();
+
+        //dd($perfil);
+
+        return view('user.editar-usuario',[
+            'title' => 'Editar Usuários',
+            'usuario' => $usuario,
+            'perfis' => $perfis,
+            'perfilAtual' => $perfil,
+            'turmas' => $turmas,
+            'turmaAtual' => $turma
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $usuario = $this->user->find($id);
+
+        $usuario->name = filter_var($request->name, FILTER_SANITIZE_STRING);
+        $usuario->email = filter_var($request->email, FILTER_SANITIZE_EMAIL);
+        $usuario->perfil_id = filter_var($request->perfil_id, FILTER_SANITIZE_STRING);
+        $usuario->data_nascimento = filter_var($request->data_nascimento, FILTER_SANITIZE_STRING);
+        $usuario->estado_civil = filter_var($request->estado_civil, FILTER_SANITIZE_STRING);
+        $usuario->turma_id = filter_var($request->turma_id, FILTER_SANITIZE_STRING);
+
+        /*
+         * Verificar se o perfil é de professor e se existe uma turma associada para excluir
+        if($usuario->perfil_id === 3 && ){
+
+        }
+        */
+
+        $usuario->save();
+
+        return redirect()->back()->with('success','Usuário atualizado com sucesso!');
+
+    }
+
+
+
     /**
      * @param $ColecaoProfessor
      */
