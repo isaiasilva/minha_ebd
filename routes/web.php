@@ -77,6 +77,7 @@ Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])
 
 
 Route::get('/user/perfil', [PerfilController::class, 'index'])->middleware(['auth'])->name('perfil');
+Route::put('/user/perfil', [PerfilController::class, 'UPDATE'])->middleware(['auth']);
 
 
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
