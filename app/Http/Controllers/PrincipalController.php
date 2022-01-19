@@ -47,7 +47,8 @@ class PrincipalController extends Controller
         $turma = $this->turma;
         $turmaAtual = $this->turma->find(Auth::user()->turma_id);
 
-        $chamada= $this->chamada->where(['turma_id' => Auth::user()->turma_id,'data'=> date('Y-m-d')])->get();
+        //$chamada= $this->chamada->where(['turma_id' => Auth::user()->turma_id,'data'=> date('Y-m-d')])->get();
+        $chamada= $this->chamada->where(['aluno_id' => Auth::user()->turma_id])->get();
 
         $presencas = count($chamada);
 

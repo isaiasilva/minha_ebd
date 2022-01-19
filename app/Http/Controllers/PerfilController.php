@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlunoPorTurma;
 use App\Models\Perfil;
 use App\Models\Turma;
 use App\Models\User;
@@ -23,11 +24,13 @@ class PerfilController extends Controller
      */
     private $user;
 
+
     public function __construct(Turma $turma, Perfil $perfil, User $user)
     {
         $this->turma = $turma;
         $this->perfil = $perfil;
         $this->user = $user;
+
     }
 
     public function index()
@@ -55,11 +58,14 @@ class PerfilController extends Controller
         $usuario->estado_civil = filter_var($request->estado_civil, FILTER_SANITIZE_STRING);
         $usuario->data_nascimento = $request->data_nascimento;
 
+
         $usuario->save();
 
         return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
 
     }
+
+
 
 
 }

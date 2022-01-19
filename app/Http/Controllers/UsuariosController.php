@@ -117,6 +117,8 @@ class UsuariosController extends Controller
         $usuario->estado_civil = filter_var($request->estado_civil, FILTER_SANITIZE_STRING);
         $usuario->turma_id = filter_var($request->turma_id, FILTER_SANITIZE_STRING);
 
+        $this->atualizaAlunoPorTurma($usuario->id, $usuario->turma_id);
+
         /*
          * Verificar se o perfil é de professor e se existe uma turma associada para excluir
         if($usuario->perfil_id === 3 && ){
@@ -161,6 +163,29 @@ class UsuariosController extends Controller
             $alunoPorTurma->delete();
         }
     }
+
+    protected function atualizaAlunoPorTurma($usuario_id, $turma_id)
+    {
+        $alunoPorTurma = $this->alunoPorTurma;
+        if(count($alunoPorTurma->where([
+                'aluno_id' => $usuario_id,
+                'turma_id' => $turma_id
+            ])->get()) === 1)
+        {
+            // retorna nada caso o usuario já esteja associado a turma
+            return false;
+        }
+
+        $alunoPorTurma->create([
+            'aluno_id' => $usuario_id,
+            'turma_id' => $turma_id
+        ]);
+
+        return true;
+
+    }
+
+
 
 
 }
