@@ -17,11 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('perfil_id');
+            $table->unsignedBigInteger('perfil_id')->unsigned();
             $table->string('estado_civil');
             $table->date('data_nascimento');
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('turma_id');
+            $table->unsignedBigInteger('turma_id')->unsigned();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
     }
 }

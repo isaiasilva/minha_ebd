@@ -15,8 +15,8 @@ class CreateProfessorPorTurmasTable extends Migration
     {
         Schema::create('professor_por_turmas', function (Blueprint $table) {
             $table->id();
-            $table->integer('professor_id');
-            $table->integer('turma_id');
+            $table->unsignedBigInteger('professor_id')->unsigned();
+            $table->unsignedBigInteger('turma_id')->unsigned();
 
             $table->foreign('professor_id')->references('id')->on('users');
             $table->foreign('turma_id')->references('id')->on('turmas');

@@ -11,7 +11,7 @@
             <tr class="">
                 <th scope="col">#ID</th>
                 <th scope="col">Nome</th>
-                @if(Auth::user()->perfil_id === "1" )
+                @if(Auth::user()->perfil_id === 1 )
                     <th scope="col">Ações</th>
                 @endif
             </tr>
@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{ $turma->id }}</td>
                         <td>{{ $turma->nome_turma }}</td>
-                        @if(Auth::user()->perfil_id === "1")
+                        @if(Auth::user()->perfil_id === 1)
                             <td>
                                 <span class="d-flex justify-content-around">
                                     <button class="btn btn-primary"  alt="Editar"><i class="fas fa-edit"></i></button>

@@ -15,8 +15,8 @@ class CreateAlunoPorTurmasTable extends Migration
     {
         Schema::create('aluno_por_turmas', function (Blueprint $table) {
             $table->id();
-            $table->integer('aluno_id');
-            $table->integer('turma_id');
+            $table->unsignedBigInteger('aluno_id')->unsigned();
+            $table->unsignedBigInteger('turma_id')->unsigned();
             $table->foreign('aluno_id')->references('id')->on('users');
             $table->foreign('turma_id')->references('id')->on('turmas');
         });

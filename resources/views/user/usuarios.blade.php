@@ -13,7 +13,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Nascimento</th>
             <th scope="col">Perfil</th>
-            @if(Auth::user()->perfil_id === "1")
+            @if(Auth::user()->perfil_id === 1)
                 <th scope="col">Ações</th>
             @endif
         </tr>
@@ -25,7 +25,7 @@
                 <td>{{ $usuario->name }}</td>
                 <td>{{  date('d/m/Y', strtotime( $usuario->data_nascimento))  }}</td>
                 <td>{{ $perfil->find($usuario->perfil_id)->perfil }} </td>
-                @if(Auth::user()->perfil_id === "1")
+                @if(Auth::user()->perfil_id === 1)
                  <td>
                     <span class="d-flex justify-content-around">
                         <a href="/user/usuario/{{$usuario->id }}/editar" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
