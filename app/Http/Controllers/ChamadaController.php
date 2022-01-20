@@ -96,8 +96,8 @@ class ChamadaController extends Controller
     public function create(Request $request)
     {
        $data = date('Y-m-d') ;
-        $atraso = "false";
-        $material = "false";
+        $atraso = false;
+        $material = false;
 
        if(self::verificaPresenca($request->aluno, $request->turma) === true){
            return redirect()
@@ -106,11 +106,11 @@ class ChamadaController extends Controller
        }
 
        if($request->atraso){
-           $atraso = "true";
+           $atraso = true;
        }
 
         if($request->material){
-            $material = "true";
+            $material = true;
         }
 
 
@@ -123,7 +123,7 @@ class ChamadaController extends Controller
            'material' => $material,
        ]);
 
-       if($atraso === "true"){
+       if($atraso === true){
            return redirect()->back()->with('warning', 'Atraso registrado com sucesso!');
        }
 
@@ -147,7 +147,7 @@ class ChamadaController extends Controller
         $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
         $retorno = "no-checked";
         foreach ($presenca as $chamada){
-            if ($chamada->id && $chamada->material === "true"){
+            if ($chamada->id && $chamada->material === true){
                 $retorno = "checked";
             }
         }
@@ -163,9 +163,9 @@ class ChamadaController extends Controller
 
         $retorno = "Pendente";
         foreach ($presenca as $chamada){
-            if($chamada->id && $chamada->atraso == "true"){
+            if($chamada->id && $chamada->atraso == true){
                 $retorno = "Atraso";
-            }else if($chamada->id && $chamada->atraso == "false"){
+            }else if($chamada->id && $chamada->atraso == false){
                 $retorno = "Presença";
             }
         }
@@ -179,11 +179,11 @@ class ChamadaController extends Controller
      */
     protected function verificaTurmaAtual()
     {
-        if (Auth::user()->perfil_id == "1") {
+        if (Auth::user()->perfil_id == 1) {
             $turmaAtual = $this->user->find(Auth::user()->id);
         }
 
-        if (Auth::user()->perfil_id == "3"){
+        if (Auth::user()->perfil_id == 3){
             $turmaAtual = $this->professorPorTurma
                 ->where(['professor_id' => Auth::user()->id])
                 ->get()
