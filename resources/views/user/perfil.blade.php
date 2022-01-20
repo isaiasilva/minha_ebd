@@ -65,7 +65,6 @@
                 </div>
             </div>
 
-           @if(Auth::user()->perfil_id === "1")
                 <div class="row">
                     <div class="col-md">
                         <button type="submit" class="btn btn-primary mt-3">
@@ -73,7 +72,7 @@
                         </button>
                     </div>
                 </div>
-            @endif
+
 
 
         </div> <!-- Final do container -->
