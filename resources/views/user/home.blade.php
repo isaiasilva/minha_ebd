@@ -52,6 +52,7 @@
 
         </div> <!-- End row -->
 
+
     <div class="row mb-3">
 
         <div class="col-xl-6">
@@ -73,6 +74,7 @@
                 <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
             </div>
         </div>
+
 
     </div> <!-- End row -->
 
