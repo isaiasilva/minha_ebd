@@ -11,7 +11,7 @@
         <button type="button" class="btn btn-info  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-exchange-alt"></i> Alterar
         </button>
-        @if(Auth::user()->perfil_id === "1")
+        @if(Auth::user()->perfil_id === 1)
             <div class="dropdown-menu altera-curso">
                 @foreach($turmas->all() as $turma)
                     <a class="dropdown-item" href="/user/chamada/{{$turma->id}}">{{ $turma->nome_turma}}</a>
