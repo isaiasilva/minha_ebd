@@ -42,7 +42,7 @@ class ProfessorPorTurmaController extends Controller
     public function create()
     {
        $turmas = $this->turma->all();
-       $professores = $this->user->where('perfil_id',3)->get();
+       $professores = $this->user->where('perfil_id', '!=', 2)->get();
 
        return view('user.novo-professor-por-turma',
            [
