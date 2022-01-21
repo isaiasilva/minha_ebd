@@ -24,10 +24,11 @@
                         @if(Auth::user()->perfil_id === 1)
                             <td>
                                 <span class="d-flex justify-content-around">
-                                    <button class="btn btn-primary"  alt="Editar"><i class="fas fa-edit"></i></button>
-                                    <form action="{{route('excluir-turma')}}" method="post" onsubmit="return confirm('Tem certeza?')" >
+                                    <a href="/user/turma/{{$turma->id}}/editar" class="btn btn-primary"  alt="Editar"><i class="fas fa-edit"></i></a>
+                                    <form action="{{route('excluir-turma')}}" method="post" onsubmit="return confirm('Tem certeza? Os dados serão apagados permanentemente.')" >
                                         @csrf
-                                        <input type="hidden" name="turma_id" value="{{ $turma->id }}">
+                                        @method('DELETE')
+                                        <input type="hidden" name="turma_id" value="{{ $turma->id }}" >
                                         <button class="btn btn-danger" alt="Excluir"  ><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                     </form>
                                 </span>

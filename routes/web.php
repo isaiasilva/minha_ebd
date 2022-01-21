@@ -62,7 +62,9 @@ Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth
 
 Route::get('/user/turma', [TurmaController::class, 'create'])->middleware(['auth'])->name('turma');
 Route::post('/user/turma', [TurmaController::class, 'store'])->middleware(['auth']);
-Route::POST('/user/excluir-turma', [TurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-turma');
+Route::get('/user/turma/{id}/editar', [TurmaController::class, 'editar'])->middleware(['auth']);
+Route::put('/user/turma/{id}/editar', [TurmaController::class, 'update'])->middleware(['auth']);
+Route::delete('/user/excluir-turma', [TurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-turma');
 
 Route::get('/user/professor-por-turma', [ProfessorPorTurmaController::class, 'index'])->middleware(['auth'])->name('professorPorTurma');
 Route::get('/user/associar-professor', [ProfessorPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-professor');

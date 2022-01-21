@@ -54,4 +54,27 @@ class TurmaController extends Controller
 
         return redirect('user/turmas')->with('success', 'Turma apagada com sucesso!');
     }
+
+    public function editar($id)
+    {
+        $turma = $this->turma->find($id);
+
+        if(is_null($turma)){
+            return view('user.turmas')->with('danger', 'Houve algum problema, não encontrei a turma.');
+        }
+        return view('user.editar-turma', ['title' => 'Editar Turma', 'turma'=> $turma]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $turma = $this->turma->find($id);
+
+        $request->validate(['nome_turma' => 'required|string']);
+
+        $turma->nome_turma = filter_var($request->nome_turma, FILTER_SANITIZE_STRING);
+        $turma->save();
+
+        return redirect()->back()->with('success', 'Turma atualizada com sucesso!');
+
+    }
 }
