@@ -53,7 +53,7 @@
                 </a>
                 <ul id="submenu2" class="list-unstyled collapse" id="collapseUsuarios">
                     <li><a href="{{route('alunoPorTurma')}}"><i class="fas fa-chalkboard-teacher"></i> Aluno por Turma</a></li>
-                    @if(Auth::user()->perfil_id === 1)
+                    @if(Auth::user()->perfil_id !== 2)
                         <li><a href="{{ route('associar-aluno') }}"><i class="fa fa-plus" aria-hidden="true"></i> Associar Aluno</a></li>
                     @endif
 

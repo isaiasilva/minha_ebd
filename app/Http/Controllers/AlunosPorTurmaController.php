@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\AlunoPorTurma;
+use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlunosPorTurmaController extends Controller
 {
@@ -21,12 +23,17 @@ class AlunosPorTurmaController extends Controller
      * @var Turma
      */
     private $turma;
+    /**
+     * @var ProfessorPorTurma
+     */
+    private $professorPorTurma;
 
-    public function __construct(User $user, AlunoPorTurma $alunoPorTurma, Turma $turma)
+    public function __construct(User $user, AlunoPorTurma $alunoPorTurma, Turma $turma, ProfessorPorTurma $professorPorTurma)
     {
         $this->user = $user;
         $this->alunoPorTurma = $alunoPorTurma;
         $this->turma = $turma;
+        $this->professorPorTurma = $professorPorTurma;
     }
 
     public function index()
@@ -42,6 +49,20 @@ class AlunosPorTurmaController extends Controller
     {
         $turmas = $this->turma->all();
         $alunos = $this->user->all();
+
+        if(Auth::user()->perfil_id === 3){
+            $repositorioTurmas = $this->professorPorTurma->where('professor_id', Auth::user()->id )->get();
+            $turmas = [];
+
+            foreach ($repositorioTurmas as $turma){
+                $i =[
+                    'id' => $turma->turma_id,
+                    'nome_turma' => $this->turma->find($turma->turma_id)->nome_turma
+                ];
+                array_push($turmas, (object)$i);
+            }
+        }
+
 
         return view('user.novo-aluno-por-turma', ['turmas' => $turmas, 'alunos' => $alunos, 'title' => 'Aluno por turma' ]);
     }
