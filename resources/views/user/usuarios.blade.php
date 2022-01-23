@@ -6,7 +6,7 @@
 @section('conteudo')
     @include('components.flash-message')
 <div class="table-responsive">
-    <table class="table">
+    <table class="table" id="datatablesSimple">
         <thead>
         <tr>
             <th scope="col">Matricula</th>
