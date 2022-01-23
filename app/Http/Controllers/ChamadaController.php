@@ -95,9 +95,11 @@ class ChamadaController extends Controller
 
     public function create(Request $request)
     {
-       $data = date('Y-m-d') ;
+        $data = date('Y-m-d');
         $atraso = false;
         $material = false;
+
+
 
        if(self::verificaPresenca($request->aluno, $request->turma) === true){
            return redirect()
@@ -105,13 +107,22 @@ class ChamadaController extends Controller
                ->withErrors('Aluno já marcado como presente');
        }
 
+       //dd($request->all());
+
+
        if($request->atraso){
            $atraso = true;
        }
 
         if($request->material){
-            $material = true;
+            echo $material = true;
+            echo $request->material;
+            //exit();
+
         }
+
+        echo $request->material;
+
 
 
        $chamada =  $this->chamada->create([
@@ -145,12 +156,15 @@ class ChamadaController extends Controller
         $data = date('Y-m-d');
 
         $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
+
+
         $retorno = "no-checked";
         foreach ($presenca as $chamada){
-            if ($chamada->id && $chamada->material === true){
+            if ($chamada->material == true){
                 $retorno = "checked";
             }
         }
+
         return $retorno;
     }
 
