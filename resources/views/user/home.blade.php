@@ -79,6 +79,7 @@
     </div> <!-- End row -->
 
     </div> <!-- End container -->
+    <input type="hidden" value="{{$chamadas}}" id="jan">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/chart-bar-demo.js')}}"></script>

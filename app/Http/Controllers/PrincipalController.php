@@ -47,8 +47,11 @@ class PrincipalController extends Controller
         $turma = $this->turma;
         $turmaAtual = $this->turma->find(Auth::user()->turma_id);
 
+
         //$chamada= $this->chamada->where(['turma_id' => Auth::user()->turma_id,'data'=> date('Y-m-d')])->get();
         $chamada= $this->chamada->where(['aluno_id' => Auth::user()->turma_id])->get();
+        //chamadas de Janeiro
+        $chamadas = $this->chamada->whereMonth('data', '01')->get();
 
         $presencas = count($chamada);
 
@@ -66,6 +69,7 @@ class PrincipalController extends Controller
             'perfil' => $perfil,
             'presencas' => $presencas,
             'turmas' => $turmas,
+            'chamadas' => count($chamadas),
             'title' => 'Dashboard'
         ]);
     }
