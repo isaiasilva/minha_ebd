@@ -5,46 +5,41 @@
 @endsection
 @section('conteudo')
     @include('components.flash-message')
-    <form method="post">
-        @csrf
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="professor">Professor</label>
-                        <select class="form-control" name="professor" aria-label="Default select example" required>
-                            <option selected value="">Selecione</option>
-                            @foreach($professores as $professor)
-                                <option value="{{$professor->id}}">{{$professor->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="turma">Turma</label>
-                        <select class="form-control" name="turma" aria-label="Default select example" required>
-                            <option selected value="">Selecione</option>
-                            @foreach($turmas as $turma)
-                                <option value="{{$turma->id}}">{{$turma->nome_turma}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary mt-3">
-                        Associar
-                    </button>
-                </div>
-            </div>
-        </div><!-- FIM DO CONTAINER -->
-    </form>
+    <div class="table-responsive">
+        <table class="table" id="datatablesSimple">
+            <thead>
+            <tr class="">
+                <th scope="col">Professor</th>
+                <th scope="col">Turma</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($professores as $professor)
+                <tr>
+                    <form  method="post" >
+                        @csrf
+                        <input type="hidden" name="professor" value="{{ $professor->id }}">
+                        <td>{{ $professor->name }}</td>
+                        <td>
+                            <select class="form-control" name="turma" aria-label="Default select example" required>
+                                <option selected value="">Selecione</option>
+                                @foreach($turmas as $turma)
+                                    <option value="{{$turma->id}}">{{$turma->nome_turma}}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">
+                                Associar
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
 
 
