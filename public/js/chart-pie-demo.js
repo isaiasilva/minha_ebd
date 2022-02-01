@@ -1,16 +1,24 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
+//Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Pie Chart Example
+var adolescentes = document.getElementById('adolescentes');
+var adultos = document.getElementById('adultos');
+var discipulado = document.getElementById('discipulado');
+var jInfancia = document.getElementById('jInfancia');
+var juniores = document.getElementById('juniores');
+var primarios = document.getElementById('primarios');
+
+
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
-    type: 'pie',
+    type: 'line',
     data: {
-        labels: ["Jovens", "Adultos", "Discipulado", "Primario"],
+        labels: ["Adolescentes", "Adultos", "Discipulado", "J. Infância", "Juniores", "Primários"],
         datasets: [{
-            data: [12.21, 15.58, 11.25, 8.32],
-            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+            label: 'Turmas',
+            data: [adolescentes.value, adultos.value, discipulado.value, jInfancia.value, juniores.value, primarios.value],
         }],
     },
 });

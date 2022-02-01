@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlunoPorTurma;
 use App\Models\Chamada;
 use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
@@ -33,13 +34,19 @@ class PrincipalController extends Controller
      */
     private $professorPorTurma;
 
-    public function __construct(Turma $turma, User $user, Perfil $perfil, Chamada $chamada, ProfessorPorTurma $professorPorTurma)
+      /**
+     * @var AlunoPorTurma
+     */
+    private $alunoPorTurma;
+
+    public function __construct(Turma $turma, User $user, Perfil $perfil, Chamada $chamada, ProfessorPorTurma $professorPorTurma, AlunoPorTurma $alunoPorTurma)
     {
         $this->turma = $turma;
         $this->user = $user;
         $this->perfil = $perfil;
         $this->chamada = $chamada;
         $this->professorPorTurma = $professorPorTurma;
+        $this->alunoPorTurma = $alunoPorTurma;
     }
 
     public function index()
@@ -51,7 +58,21 @@ class PrincipalController extends Controller
         //$chamada= $this->chamada->where(['turma_id' => Auth::user()->turma_id,'data'=> date('Y-m-d')])->get();
         $chamada= $this->chamada->where(['aluno_id' => Auth::user()->turma_id])->get();
         //chamadas de Janeiro
-        $chamadas = $this->chamada->whereMonth('data', '01')->get();
+        $jan = $this->chamada->whereMonth('data', '01')->get();
+        $fev = $this->chamada->whereMonth('data', '02')->get();
+        $mar = $this->chamada->whereMonth('data', '03')->get();
+        $abr = $this->chamada->whereMonth('data', '04')->get();
+        $mai = $this->chamada->whereMonth('data', '05')->get();
+        $jun = $this->chamada->whereMonth('data', '06')->get();
+
+        //turmas
+        $adolescentes = $this->alunoPorTurma->where('turma_id', 1)->get();
+        $adultos = $this->alunoPorTurma->where('turma_id', 2)->get();
+        $discipulado = $this->alunoPorTurma->where('turma_id', 3)->get();
+        $jInfancia = $this->alunoPorTurma->where('turma_id', 4)->get();
+        $jovens = $this->alunoPorTurma->where('turma_id', 5)->get();
+        $juniores = $this->alunoPorTurma->where('turma_id', 6)->get();
+        $primarios = $this->alunoPorTurma->where('turma_id', 14)->get();
 
         $presencas = count($chamada);
 
@@ -69,7 +90,19 @@ class PrincipalController extends Controller
             'perfil' => $perfil,
             'presencas' => $presencas,
             'turmas' => $turmas,
-            'chamadas' => count($chamadas),
+            'jan' => count($jan),
+            'fev' => count($fev),
+            'mar' => count($mar),
+            'abr' => count($abr),
+            'mai' => count($mai),
+            'jun' => count($jun),
+            'adolescentes' => count($adolescentes),
+            'adultos' => count($adultos),
+            'discipulado' => count($discipulado),
+            'jInfancia' => count($jInfancia),
+            'jovens' => count($jovens),
+            'juniores' => count($juniores),
+            'primarios' => count($primarios),
             'title' => 'Dashboard'
         ]);
     }
