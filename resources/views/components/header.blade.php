@@ -5,7 +5,6 @@
     <meta name="keywords" content="Escola Bíblica Dominical, EBD, Chamada, Gameficação, Alunos"/>
     <meta name="robots" content="index,follow">
     <meta name="author" content="Chamada EBD - Cláudio Oliveira">
-    <meta name="theme-color" content="#4267b2">
     <link rel="icon" href="{{asset('img/logo.png')}}">
     <meta property="og:title" content="Chamada EBD">
     <meta property="og:site_name" content="Chamada EBD">
