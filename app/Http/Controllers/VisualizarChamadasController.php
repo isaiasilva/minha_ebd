@@ -100,6 +100,11 @@ class VisualizarChamadasController extends Controller
 
         foreach ($usuarios as $usuario){
             $presencas = $this->chamada->where('aluno_id', $usuario->id)->get();
+
+            if($request->id){
+                $presencas = $this->chamada->where(['aluno_id' => $usuario->id, 'turma_id' => $request->id])->get();
+            }
+
             $i = [
                 'nome' => $usuario->name,
                 'presencas' => count($presencas)
