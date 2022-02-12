@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('cabecalho')
-    Chamadas Por Turma
+    Chamadas Por Turma @if(isset($nomeTurma)) - {{$nomeTurma}} @endif
 @endsection
 @section('botao')
 

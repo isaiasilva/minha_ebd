@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlunoPorTurma;
 use App\Models\Chamada;
 use App\Models\Turma;
 use App\Models\User;
@@ -22,12 +23,17 @@ class VisualizarChamadasController extends Controller
      * @var Turma
      */
     private $turma;
+    /**
+     * @var AlunoPorTurma
+     */
+    private $alunoPorTurma;
 
-    public function __construct(Chamada $chamada, User $user, Turma $turma)
+    public function __construct(Chamada $chamada, User $user, Turma $turma, AlunoPorTurma $alunoPorTurma)
     {
         $this->chamada = $chamada;
         $this->user = $user;
         $this->turma = $turma;
+        $this->alunoPorTurma = $alunoPorTurma;
     }
 
     public function create()
@@ -76,24 +82,7 @@ class VisualizarChamadasController extends Controller
         $dez = $this->chamada->whereMonth('data', '12')->get();
 
         if($request->id){
-            $usuarios = $this->user->where('turma_id', $request->id)->get();
-            $chamadas = $this->chamada->where('turma_id', $request->id)->get();
-            $atrasos = $this->chamada->where('turma_id', $request->id)->where('atraso', true)->get();
 
-            // Número de chamadas por mês
-
-            $jan = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '01')->get();
-            $fev = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '02')->get();
-            $mar = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '03')->get();
-            $abr = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '04')->get();
-            $mai = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '05')->get();
-            $jun = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '06')->get();
-            $jul = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '07')->get();
-            $ago = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '08')->get();
-            $set = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '09')->get();
-            $out = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '10')->get();
-            $nov = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '11')->get();
-            $dez = $this->chamada->where('turma_id', $request->id)->whereMonth('data', '12')->get();
         }
 
         $alunos = [];
@@ -132,6 +121,67 @@ class VisualizarChamadasController extends Controller
             'nov' => count($nov),
             'dez' => count($dez),
             ]);
+
+    }
+
+    public function chamadasPorTurma($id)
+    {
+
+        $usuarios = $this->alunoPorTurma->where('turma_id', $id)->get();
+        $chamadas = $this->chamada->where('turma_id', $id)->get();
+        $atrasos = $this->chamada->where('turma_id', $id)->where('atraso', true)->get();
+        $turmas = $this->turma->all();
+        $nomeTurma = $this->turma->find($id)->nome_turma;
+
+        // Número de chamadas por mês
+
+        $jan = $this->chamada->where('turma_id', $id)->whereMonth('data', '01')->get();
+        $fev = $this->chamada->where('turma_id', $id)->whereMonth('data', '02')->get();
+        $mar = $this->chamada->where('turma_id', $id)->whereMonth('data', '03')->get();
+        $abr = $this->chamada->where('turma_id', $id)->whereMonth('data', '04')->get();
+        $mai = $this->chamada->where('turma_id', $id)->whereMonth('data', '05')->get();
+        $jun = $this->chamada->where('turma_id', $id)->whereMonth('data', '06')->get();
+        $jul = $this->chamada->where('turma_id', $id)->whereMonth('data', '07')->get();
+        $ago = $this->chamada->where('turma_id', $id)->whereMonth('data', '08')->get();
+        $set = $this->chamada->where('turma_id', $id)->whereMonth('data', '09')->get();
+        $out = $this->chamada->where('turma_id', $id)->whereMonth('data', '10')->get();
+        $nov = $this->chamada->where('turma_id', $id)->whereMonth('data', '11')->get();
+        $dez = $this->chamada->where('turma_id', $id)->whereMonth('data', '12')->get();
+
+        $alunos = [];
+
+        foreach ($usuarios as $usuario){
+
+            $presencas = $this->chamada->where(['aluno_id' => $usuario->aluno_id, 'turma_id' => $id])->get();
+
+            $i = [
+                'nome' => $this->user->find($usuario->aluno_id)->name,
+                'presencas' => count($presencas)
+            ];
+            array_push($alunos, (object)$i);
+        }
+
+        return view('user.chamadas-turmas', [
+            'title'=> 'Chamadas Por Turma',
+            'alunos'=> $alunos,
+            'usuarios' => count($usuarios),
+            'presencas' => count($chamadas),
+            'atrasos' => count($atrasos),
+            'turmas' => $turmas,
+            'nomeTurma' => $nomeTurma,
+            'jan' => count($jan),
+            'fev' => count($fev),
+            'mar' => count($mar),
+            'abr' => count($abr),
+            'mai' => count($mai),
+            'jun' => count($jun),
+            'jul' => count($jul),
+            'ago' => count($ago),
+            'set' => count($set),
+            'out' => count($out),
+            'nov' => count($nov),
+            'dez' => count($dez),
+        ]);
 
     }
 }
