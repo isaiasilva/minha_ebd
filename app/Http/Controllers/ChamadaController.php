@@ -107,8 +107,6 @@ class ChamadaController extends Controller
                ->withErrors('Aluno já marcado como presente');
        }
 
-       //dd($request->all());
-
 
        if($request->atraso){
            $atraso = true;

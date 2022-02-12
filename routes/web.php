@@ -11,6 +11,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ProfessorPorTurmaController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\VisualizarChamadasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,8 @@ Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware([
 Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['auth'])->name('atraso');
 //Route::post('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 Route::get('/user/excluir-presenca/{turma}/{aluno}', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
+
+Route::get('/user/visualizar-chamadas/', [VisualizarChamadasController::class, 'create'])->middleware(['auth'])->name('visualizar-chamadas');
 
 Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
 
