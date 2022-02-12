@@ -71,7 +71,9 @@
                 <ul id="submenu3" class="list-unstyled collapse" id="collapseUsuarios">
                     @if(Auth::user()->perfil_id !== 2)
                         <li><a href="{{ route('chamada') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a></li>
+                        <li><a href="{{route('todas-chamadas')}}"><i class="fa fa-eye" aria-hidden="true"></i> Todas Chamadas</a></li>
                     @endif
+
                         <li><a href="{{route('visualizar-chamadas')}}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a></li>
                 </ul>
             </li>
