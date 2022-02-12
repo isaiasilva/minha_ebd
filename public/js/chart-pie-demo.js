@@ -19,7 +19,7 @@ var myPieChart = new Chart(ctx, {
         labels: ["Adolescentes", "Adultos", "Discipulado", "J. Infância", "Juniores","Jovens" ,"Primários"],
         datasets: [{
             label: 'Turmas',
-            data: [adolescentes.value, adultos.value, discipulado.value, jInfancia.value, juniores.value, primarios.value],
+            data: [adolescentes.value, adultos.value, discipulado.value, jInfancia.value, juniores.value, jovens.value, primarios.value],
         }],
     },
 });
