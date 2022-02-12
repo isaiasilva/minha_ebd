@@ -8,6 +8,7 @@ var adultos = document.getElementById('adultos');
 var discipulado = document.getElementById('discipulado');
 var jInfancia = document.getElementById('jInfancia');
 var juniores = document.getElementById('juniores');
+var jovens = document.getElementById('jovens');
 var primarios = document.getElementById('primarios');
 
 
@@ -15,7 +16,7 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ["Adolescentes", "Adultos", "Discipulado", "J. Infância", "Juniores", "Primários"],
+        labels: ["Adolescentes", "Adultos", "Discipulado", "J. Infância", "Juniores","Jovens" ,"Primários"],
         datasets: [{
             label: 'Turmas',
             data: [adolescentes.value, adultos.value, discipulado.value, jInfancia.value, juniores.value, primarios.value],

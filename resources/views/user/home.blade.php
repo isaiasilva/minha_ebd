@@ -91,6 +91,7 @@
     <input type="hidden" value="{{$discipulado}}" id="discipulado">
     <input type="hidden" value="{{$jInfancia}}" id="jInfancia">
     <input type="hidden" value="{{$juniores}}" id="juniores">
+    <input type="hidden" value="{{$jovens}}" id="jovens">
     <input type="hidden" value="{{$primarios}}" id="primarios">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
