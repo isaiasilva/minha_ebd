@@ -18,11 +18,11 @@ class ProfessorPorTurma extends Model
 
     public function professores()
     {
-        $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'id', 'professor_id');
     }
 
     public function turmas()
     {
-        $this->hasMany(Turma::class);
+        return $this->hasMany(Turma::class, 'id', 'turma_id');
     }
 }

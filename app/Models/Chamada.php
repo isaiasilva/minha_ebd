@@ -21,12 +21,12 @@ class Chamada extends Model
 
     public function aluno()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id', 'aluno_id');
     }
 
     public function turmas()
     {
-        return $this->hasMany(Turma::class);
+        return $this->hasMany(Turma::class, 'id', 'tuma_id');
     }
 
 

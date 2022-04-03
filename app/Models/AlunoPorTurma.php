@@ -18,11 +18,11 @@ class AlunoPorTurma extends Model
 
     public function alunos()
     {
-        $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'id', 'aluno_id');
     }
 
     public function turmas()
     {
-        $this->hasMany(Turma::class);
+        return $this->hasMany(Turma::class, 'id', 'turma_id');
     }
 }
