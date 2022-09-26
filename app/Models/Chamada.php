@@ -28,6 +28,4 @@ class Chamada extends Model
     {
         return $this->hasMany(Turma::class, 'id', 'tuma_id');
     }
-
-
 }

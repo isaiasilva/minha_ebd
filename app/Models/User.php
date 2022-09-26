@@ -24,8 +24,10 @@ class User extends Authenticatable
         'estado_civil',
         'data_nascimento',
         'turma_id',
-        'password',
+        /*    'password', */
     ];
+
+    protected $appends = ['presenca'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -49,6 +51,10 @@ class User extends Authenticatable
     public function turma()
     {
         return $this->belongsTo(Turma::class);
+    }
 
+    public function getPresencaAttribute()
+    {
+        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
     }
 }
