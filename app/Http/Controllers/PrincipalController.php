@@ -34,7 +34,7 @@ class PrincipalController extends Controller
      */
     private $professorPorTurma;
 
-      /**
+    /**
      * @var AlunoPorTurma
      */
     private $alunoPorTurma;
@@ -56,7 +56,7 @@ class PrincipalController extends Controller
 
 
         //$chamada= $this->chamada->where(['turma_id' => Auth::user()->turma_id,'data'=> date('Y-m-d')])->get();
-        $chamada= $this->chamada->where(['aluno_id' => Auth::user()->turma_id])->get();
+        $chamada = $this->chamada->where(['aluno_id' => Auth::user()->turma_id])->get();
         //chamadas de Janeiro
         $jan = $this->chamada->whereMonth('data', '01')->get();
         $fev = $this->chamada->whereMonth('data', '02')->get();
@@ -64,6 +64,12 @@ class PrincipalController extends Controller
         $abr = $this->chamada->whereMonth('data', '04')->get();
         $mai = $this->chamada->whereMonth('data', '05')->get();
         $jun = $this->chamada->whereMonth('data', '06')->get();
+        $jul = $this->chamada->whereMonth('data', '07')->get();
+        $ago = $this->chamada->whereMonth('data', '08')->get();
+        $set = $this->chamada->whereMonth('data', '09')->get();
+        $out = $this->chamada->whereMonth('data', '10')->get();
+        $nov = $this->chamada->whereMonth('data', '11')->get();
+        $dez = $this->chamada->whereMonth('data', '12')->get();
 
         //turmas
         $adolescentes = $this->alunoPorTurma->where('turma_id', 1)->get();
@@ -84,8 +90,8 @@ class PrincipalController extends Controller
         $alunos = $this->user->where(['turma_id' => Auth::user()->turma_id, 'perfil_id' => 2])->get();
 
         return view('user.home', [
-            'turma'=> $turma,
-            'turmaAtual'=> $turmaAtual,
+            'turma' => $turma,
+            'turmaAtual' => $turmaAtual,
             'alunos' => $alunos,
             'perfil' => $perfil,
             'presencas' => $presencas,
@@ -96,6 +102,12 @@ class PrincipalController extends Controller
             'abr' => count($abr),
             'mai' => count($mai),
             'jun' => count($jun),
+            'jul' => count($jul),
+            'ago' => count($ago),
+            'set' => count($set),
+            'out' => count($out),
+            'nov' => count($nov),
+            'dez' => count($dez),
             'adolescentes' => count($adolescentes),
             'adultos' => count($adultos),
             'discipulado' => count($discipulado),

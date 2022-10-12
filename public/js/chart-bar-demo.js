@@ -9,16 +9,22 @@ var mar = document.getElementById('mar');
 var abr = document.getElementById('abr');
 var mai = document.getElementById('mai');
 var jun = document.getElementById('jun');
+var jul = document.getElementById('jul');
+var ago = document.getElementById('ago');
+var set = document.getElementById('set');
+var out = document.getElementById('out');
+var nov = document.getElementById('nov');
+var dez = document.getElementById('dez');
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
+        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
         datasets: [{
             label: "Revenue",
             backgroundColor: "rgba(2,117,216,1)",
             borderColor: "rgba(2,117,216,1)",
-            data: [jan.value, fev.value, mar.value, abr.value, mai.value, jun.value],
+            data: [jan.value, fev.value, mar.value, abr.value, mai.value, jun.value, jul.value, set.value, out.value, nov.value, dez.value],
         }],
     },
     options: {
@@ -31,7 +37,7 @@ var myLineChart = new Chart(ctx, {
                     display: false
                 },
                 ticks: {
-                    maxTicksLimit: 6
+                    maxTicksLimit: 12
                 }
             }],
             yAxes: [{
