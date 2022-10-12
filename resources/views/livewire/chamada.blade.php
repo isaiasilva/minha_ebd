@@ -71,24 +71,20 @@
                         </td>
                         <td>
                             <div class="d-flex">
-                                <button wire:click.prevent="store({{ $aluno->user_id }} )"
-                                    class="btn btn-primary btn-sm mr-3" alt="Presença"
-                                    @if ($aluno->presenca) disabled @endif><i class="fas fa-stopwatch"></i>
-                                    Registrar</button>
                                 @if (!$aluno->presenca)
-                                    <button alt="Excluir" class="btn btn-danger btn-sm mr-3" disabled>
-                                        <i class="fa fa-eraser" aria-hidden="true"></i> Deletar
-                                    </button>
-                                @else
+                                    <button wire:click.prevent="store({{ $aluno->user_id }} )"
+                                        class="btn btn-primary btn-sm mr-3" alt="Presença"><i
+                                            class="fas fa-stopwatch"></i>
+                                        Registrar presença</button>
+                                @elseif ($aluno->presenca)
                                     <a wire:click='destroy("{{ $aluno->user_id }}")' class="btn btn-danger btn-sm mr-3"
-                                        alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i> Deletar</a>
+                                        alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i> Deletar presença
+                                    </a>
                                 @endif
                             </div>
-
                         </td>
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>
