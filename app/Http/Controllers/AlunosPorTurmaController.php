@@ -72,14 +72,14 @@ class AlunosPorTurmaController extends Controller
     {
         $alunoPorTurma = $this->alunoPorTurma;
         if (count($alunoPorTurma->where([
-            'aluno_id' => $request->aluno,
+            'user_id' => $request->aluno,
             'turma_id' => $request->turma
         ])->get()) == 1) {
             return redirect()->back()->withErrors('Aluno já associado nessa turma!');
         }
 
         $alunoPorTurma->create([
-            'aluno_id' => $request->aluno,
+            'user_id' => $request->aluno,
             'turma_id' => $request->turma
         ]);
 
