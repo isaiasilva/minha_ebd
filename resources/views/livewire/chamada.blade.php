@@ -1,7 +1,7 @@
 <div>
     @include('components.flash-message')
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-6">
             <label for='perpage'>Registros por página</label>
             <select id='perpage' wire:model="perpage" class="form-select" aria-label="Default select example">
                 <option value="5">05</option>
