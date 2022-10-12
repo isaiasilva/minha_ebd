@@ -21,10 +21,9 @@ class AlunoPorTurma extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-
     public function turma()
     {
-        return $this->belongsTo(Turma::class, 'id', 'turma_id');
+        return $this->hasOne(Turma::class, 'id', 'turma_id');
     }
 
     public function getPresencaAttribute()
