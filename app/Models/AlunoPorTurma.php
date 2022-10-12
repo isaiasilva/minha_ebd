@@ -10,19 +10,30 @@ class AlunoPorTurma extends Model
     use HasFactory;
 
     protected $fillable = [
-        'aluno_id',
+        'user_id',
         'turma_id',
     ];
-
+    protected $appends = ['presenca', 'name'];
     public $timestamps = false;
 
-    public function alunos()
+    public function aluno()
     {
-        return $this->hasMany(User::class, 'id', 'aluno_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function turmas()
+
+    public function turma()
     {
-        return $this->hasMany(Turma::class, 'id', 'turma_id');
+        return $this->belongsTo(Turma::class, 'id', 'turma_id');
+    }
+
+    public function getPresencaAttribute()
+    {
+        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
+    }
+
+    public function getNameAttribute()
+    {
+        return User::find($this->id)->name;
     }
 }

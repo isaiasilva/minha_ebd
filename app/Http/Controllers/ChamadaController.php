@@ -26,12 +26,12 @@ class ChamadaController extends Controller
     private $alunoPorTurma;
 
     public function __construct(
-        User $user, Turma $turma,
+        User $user,
+        Turma $turma,
         Chamada $chamada,
         ProfessorPorTurma $professorPorTurma,
         AlunoPorTurma $alunoPorTurma
-    )
-    {
+    ) {
         $this->user = $user;
         $this->turma = $turma;
         $this->chamada = $chamada;
@@ -48,8 +48,8 @@ class ChamadaController extends Controller
 
         $verificaTurma = $this->verificaTurmaAtual();
 
-        if (is_null($verificaTurma)){
-            return redirect('/user/home')->with('warning','Professor não foi associado em nenhuma turma');
+        if (is_null($verificaTurma)) {
+            return redirect('/user/home')->with('warning', 'Professor não foi associado em nenhuma turma');
         }
         $turmaAtual = $verificaTurma->turma_id;
         $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
@@ -57,35 +57,34 @@ class ChamadaController extends Controller
 
 
 
-        if(isset($request->id)){
+        if (isset($request->id)) {
             $turmaAtual = $request->id;
             $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
             $alunos = $user->where(['turma_id' => $turmaAtual])->get();
         }
 
         $repositorioAlunos = [];
-        foreach ($alunos as $i => $aluno){
+        foreach ($alunos as $i => $aluno) {
 
             $i = [
                 'aluno_id' => $aluno->aluno_id,
-                'nome' => $users->find($aluno->aluno_id)->name,
-                'turmaAtual'=> $turmaAtual,
+                'nome' => $users->find($aluno->user_id)->name,
+                'turmaAtual' => $turmaAtual,
                 'nomeTurma' => $nomeTurma,
-                'material' =>  $this->verificaMaterial($aluno->aluno_id, $turmaAtual),
-                'presenca' =>  $this->verificaPresenca($aluno->aluno_id, $turmaAtual),
+                'material' =>  $this->verificaMaterial($aluno->user_id, $turmaAtual),
+                'presenca' =>  $this->verificaPresenca($aluno->user_id, $turmaAtual),
 
-                ];
+            ];
 
             array_push($repositorioAlunos, (object)$i);
-
         }
 
-        //dd($repositorioAlunos);
+
 
         return view('user.chamada', [
-            'minhasTurmas'=> $minhasTurmas,
-            'turmaAtual'=>$turmaAtual,
-            'turmas'=>$turmas,
+            'minhasTurmas' => $minhasTurmas,
+            'turmaAtual' => $turmaAtual,
+            'turmas' => $turmas,
             'alunos' => $repositorioAlunos,
             'nomeTurma' => $nomeTurma,
             'users' => $users,
@@ -101,18 +100,18 @@ class ChamadaController extends Controller
 
 
 
-       if(self::verificaPresenca($request->aluno, $request->turma) === true){
-           return redirect()
-               ->back()
-               ->withErrors('Aluno já marcado como presente');
-       }
+        if (self::verificaPresenca($request->aluno, $request->turma) === true) {
+            return redirect()
+                ->back()
+                ->withErrors('Aluno já marcado como presente');
+        }
 
 
-       if($request->atraso){
-           $atraso = true;
-       }
+        if ($request->atraso) {
+            $atraso = true;
+        }
 
-        if($request->material){
+        if ($request->material) {
             echo $material = true;
             echo $request->material;
             //exit();
@@ -123,42 +122,43 @@ class ChamadaController extends Controller
 
 
 
-       $chamada =  $this->chamada->create([
-           'data' => $data,
-           'professor_id' => (int)$request->professor,
-           'turma_id' => (int)$request->turma,
-           'aluno_id' => (int)$request->aluno,
-           'atraso' => $atraso,
-           'material' => $material,
-       ]);
+        $chamada =  $this->chamada->create([
+            'data' => $data,
+            'professor_id' => (int)$request->professor,
+            'turma_id' => (int)$request->turma,
+            'aluno_id' => (int)$request->aluno,
+            'atraso' => $atraso,
+            'material' => $material,
+        ]);
 
-       if($atraso === true){
-           return redirect()->back()->with('warning', 'Atraso registrado com sucesso!');
-       }
+        if ($atraso === true) {
+            return redirect()->back()->with('warning', 'Atraso registrado com sucesso!');
+        }
 
         return redirect()->back()->with('success', 'Presença registrada com sucesso!');
     }
 
     public function destroy(Request $request)
     {
-       $data = date('Y-m-d') ;
+        $data = date('Y-m-d');
 
-       $presenca = $this->chamada->where(['aluno_id' => $request->aluno  , 'turma_id' => $request->turma, 'data' => $data])->get();
+        $presenca = $this->chamada->where(['aluno_id' => $request->aluno, 'turma_id' => $request->turma, 'data' => $data])->get();
 
-       $presenca->first()->delete();
+        $presenca->first()->delete();
 
         return redirect()->back()->with('success', 'Presença apagada com sucesso!');
     }
 
-    private function verificaMaterial($aluno, $turma){
+    private function verificaMaterial($aluno, $turma)
+    {
         $data = date('Y-m-d');
 
-        $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
+        $presenca = Chamada::where(['aluno_id' => $aluno, 'turma_id' => $turma, 'data' => $data])->get();
 
 
         $retorno = "no-checked";
-        foreach ($presenca as $chamada){
-            if ($chamada->material == true){
+        foreach ($presenca as $chamada) {
+            if ($chamada->material == true) {
                 $retorno = "checked";
             }
         }
@@ -171,13 +171,13 @@ class ChamadaController extends Controller
         $data = date('Y-m-d');
 
 
-        $presenca = Chamada::where( ['aluno_id' => $aluno, 'turma_id' => $turma , 'data' => $data] )->get();
+        $presenca = Chamada::where(['aluno_id' => $aluno, 'turma_id' => $turma, 'data' => $data])->get();
 
         $retorno = "Pendente";
-        foreach ($presenca as $chamada){
-            if($chamada->id && $chamada->atraso == true){
+        foreach ($presenca as $chamada) {
+            if ($chamada->id && $chamada->atraso == true) {
                 $retorno = "Atraso";
-            }else if($chamada->id && $chamada->atraso == false){
+            } else if ($chamada->id && $chamada->atraso == false) {
                 $retorno = "Presença";
             }
         }
@@ -195,14 +195,13 @@ class ChamadaController extends Controller
             $turmaAtual = $this->user->find(Auth::user()->id);
         }
 
-        if (Auth::user()->perfil_id == 3){
+        if (Auth::user()->perfil_id == 3) {
             $turmaAtual = $this->professorPorTurma
                 ->where(['professor_id' => Auth::user()->id])
                 ->get()
                 ->first();
-
         }
-       /*
+        /*
         if (is_null($turmaAtual)){
             return redirect('/user/home')->with('warning','Professor não foi associado em nenhuma turma');
         } */

@@ -1,5 +1,16 @@
 <div>
     @include('components.flash-message')
+    <div class="row">
+        <div class="col-4">
+            <label for='perpage'>Registros por página</label>
+            <select id='perpage' wire:model="perpage" class="form-select" aria-label="Default select example">
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+
+    </div>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -12,7 +23,7 @@
             <tbody>
                 @foreach ($alunos as $i => $aluno)
                     <tr>
-                        <td>{{ $aluno->name }}</td>
+                        <td>{{ $aluno->aluno->name }}</td>
                         <td>
                             <div class="form-check">
                                 @if ($aluno->presenca)
@@ -60,8 +71,7 @@
                         </td>
                         <td>
                             <div class="d-flex">
-
-                                <button wire:click.prevent="store({{ $aluno->id }} )"
+                                <button wire:click.prevent="store({{ $aluno->user_id }} )"
                                     class="btn btn-primary btn-sm mr-3" alt="Presença"
                                     @if ($aluno->presenca) disabled @endif><i class="fas fa-stopwatch"></i>
                                     Registrar</button>
@@ -70,7 +80,7 @@
                                         <i class="fa fa-eraser" aria-hidden="true"></i> Deletar
                                     </button>
                                 @else
-                                    <a wire:click='destroy("{{ $aluno->id }}")' class="btn btn-danger btn-sm mr-3"
+                                    <a wire:click='destroy("{{ $aluno->user_id }}")' class="btn btn-danger btn-sm mr-3"
                                         alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i> Deletar</a>
                                 @endif
                             </div>
@@ -78,7 +88,11 @@
                         </td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $alunos->links() }}
     </div>
 </div>

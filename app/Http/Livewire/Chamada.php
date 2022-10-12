@@ -10,12 +10,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Helper\Helpers;
+use App\Models\AlunoPorTurma;
+use Livewire\WithPagination;
 
 class Chamada extends Component
 {
     use Helpers;
+    use WithPagination;
 
-    public $alunos;
+    public $perpage = 5;
+    protected $paginationTheme = 'bootstrap';
+    public $search = '';
+
     public $turmaAtual;
     public $minhasTurmas;
     public $turmas;
@@ -35,7 +41,8 @@ class Chamada extends Component
             $this->turmaAtual = User::find(Auth::user()->id)->turma_id;
         }
 
-        $this->alunos = User::where(['turma_id' => $this->turmaAtual])->orderBy('name', 'ASC')->get();
+
+
         $this->atraso = false;
         $this->material = true;
     }
@@ -56,20 +63,22 @@ class Chamada extends Component
         $nomeTurma = Turma::find($turmaAtual)->nome_turma;
 
 
-
         if (isset($request->id)) {
             $turmaAtual = $request->id;
             $nomeTurma = Turma::find($turmaAtual)->nome_turma;
-            $alunos = User::where(['turma_id' => $turmaAtual])->get();
         }
 
-
         $this->minhasTurmas = $minhasTurmas;
-
         $this->turmas = $turmas;
         $this->nomeTurma = $nomeTurma;
 
-        return view('livewire.chamada');
+
+        return view(
+            'livewire.chamada',
+            [
+                'alunos' => AlunoPorTurma::where(['turma_id' => $this->turmaAtual])->paginate($this->perpage)
+            ]
+        );
     }
 
     public function store($aluno_id)
