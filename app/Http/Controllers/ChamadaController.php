@@ -41,8 +41,7 @@ class ChamadaController extends Controller
 
     public function index(Request $request)
     {
-        $users = $this->user;
-        $user = $this->alunoPorTurma;
+
         $turmas = $this->turma;
         $minhasTurmas = $this->professorPorTurma->where(['professor_id' => Auth::user()->id])->get();
 
@@ -53,41 +52,19 @@ class ChamadaController extends Controller
         }
         $turmaAtual = $verificaTurma->turma_id;
         $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
-        $alunos = $user->where(['turma_id' => $turmaAtual])->get();
-
 
 
         if (isset($request->id)) {
             $turmaAtual = $request->id;
             $nomeTurma = $this->turma->find($turmaAtual)->nome_turma;
-            $alunos = $user->where(['turma_id' => $turmaAtual])->get();
         }
-
-        $repositorioAlunos = [];
-        foreach ($alunos as $i => $aluno) {
-
-            $i = [
-                'aluno_id' => $aluno->aluno_id,
-                'nome' => $users->find($aluno->user_id)->name,
-                'turmaAtual' => $turmaAtual,
-                'nomeTurma' => $nomeTurma,
-                'material' =>  $this->verificaMaterial($aluno->user_id, $turmaAtual),
-                'presenca' =>  $this->verificaPresenca($aluno->user_id, $turmaAtual),
-
-            ];
-
-            array_push($repositorioAlunos, (object)$i);
-        }
-
 
 
         return view('user.chamada', [
             'minhasTurmas' => $minhasTurmas,
             'turmaAtual' => $turmaAtual,
             'turmas' => $turmas,
-            'alunos' => $repositorioAlunos,
             'nomeTurma' => $nomeTurma,
-            'users' => $users,
             'title' => 'Nova Chamada'
         ]);
     }
@@ -114,8 +91,6 @@ class ChamadaController extends Controller
         if ($request->material) {
             echo $material = true;
             echo $request->material;
-            //exit();
-
         }
 
         echo $request->material;

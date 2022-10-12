@@ -50,6 +50,7 @@ class Chamada extends Component
 
     public function render(Request $request)
     {
+
         $minhasTurmas = ProfessorPorTurma::where(['professor_id' => Auth::user()->id])->get();
         $turmas = Turma::all();
 
@@ -95,13 +96,12 @@ class Chamada extends Component
         ]);
 
         if ($this->atraso === true) {
-            toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
+            $this->restauraValoresAtrasoMaterial();
+            return toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
         }
 
-        $this->atraso = false;
-        $this->material = true;
-
-        toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
+        $this->restauraValoresAtrasoMaterial();
+        return toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
     }
 
     public function destroy($aluno_id)
@@ -139,5 +139,11 @@ class Chamada extends Component
             $this->material = true;
             return;
         }
+    }
+
+    public function restauraValoresAtrasoMaterial()
+    {
+        $this->atraso = false;
+        $this->material = true;
     }
 }
