@@ -24,7 +24,7 @@ var myLineChart = new Chart(ctx, {
             label: "Revenue",
             backgroundColor: "rgba(2,117,216,1)",
             borderColor: "rgba(2,117,216,1)",
-            data: [jan.value, fev.value, mar.value, abr.value, mai.value, jun.value, jul.value, set.value, out.value, nov.value, dez.value],
+            data: [jan.value, fev.value, mar.value, abr.value, mai.value, jun.value, jul.value, ago.value, set.value, out.value, nov.value, dez.value],
         }],
     },
     options: {
