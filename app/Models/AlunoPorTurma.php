@@ -13,7 +13,7 @@ class AlunoPorTurma extends Model
         'user_id',
         'turma_id',
     ];
-    protected $appends = ['presenca', 'name'];
+    protected $appends = ['presenca'];
     public $timestamps = false;
 
     public function aluno()
@@ -29,11 +29,6 @@ class AlunoPorTurma extends Model
 
     public function getPresencaAttribute()
     {
-        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
-    }
-
-    public function getNameAttribute()
-    {
-        return User::find($this->id)->name;
+        return Chamada::where(['aluno_id' => $this->user_id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
     }
 }
