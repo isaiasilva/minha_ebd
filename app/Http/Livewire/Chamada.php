@@ -20,7 +20,7 @@ class Chamada extends Component
 
     public $perpage = 5;
     protected $paginationTheme = 'bootstrap';
-    public $search = '';
+    public $data;
 
     public $turmaAtual;
     public $minhasTurmas;
@@ -35,6 +35,7 @@ class Chamada extends Component
 
     public function mount(Request $request)
     {
+        $this->data = date('Y-m-d');
         if ($request->id) {
             $this->turmaAtual = $request->id;
         } else {
@@ -84,10 +85,9 @@ class Chamada extends Component
 
     public function store($aluno_id)
     {
-        $data = date('Y-m-d');
 
         $chamada =  ChamadaModel::create([
-            'data' => $data,
+            'data' => $this->data,
             'professor_id' => Auth::user()->id,
             'turma_id' => $this->turmaAtual,
             'aluno_id' => $aluno_id,
@@ -106,7 +106,7 @@ class Chamada extends Component
 
     public function destroy($aluno_id)
     {
-        $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'turma_id' => $this->turmaAtual, 'data' => date('Y-m-d')])->first();
+        $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'turma_id' => $this->turmaAtual, 'data' => $this->data])->first();
 
         $chamada->delete();
         toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
@@ -145,5 +145,10 @@ class Chamada extends Component
     {
         $this->atraso = false;
         $this->material = true;
+    }
+
+    public function verificaPresenca($user_id)
+    {
+        return ChamadaModel::where(['aluno_id' => $user_id, 'turma_id' => $this->turma_id, 'data' => $this->data])->first();
     }
 }

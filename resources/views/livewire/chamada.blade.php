@@ -2,15 +2,19 @@
     @include('components.flash-message')
     <div class="row">
         <div class="col-12 col-md-6">
-            <label for='perpage'>Registros por página</label>
-            <select id='perpage' wire:model="perpage" class="form-select" aria-label="Default select example">
+            <label for="data-chamada">Data </label>
+            <input type="date" value="" wire:model='data'>
+        </div>
+        <div class="col-12 col-md-6 d-md-flex justify-content-end align-items-center">
+            <label for='perpage' class="ps-3">Registros por página</label>
+            <select id='perpage' wire:model="perpage" class="form-select m-3" aria-label="Default select example">
                 <option value="5">05</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
             </select>
         </div>
-
     </div>
+
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -26,14 +30,14 @@
                         <td>{{ $aluno->aluno->name }}</td>
                         <td>
                             <div class="form-check">
-                                @if ($aluno->presenca)
+                                @if (App\Http\Livewire\HelperTrait::verificaPresenca($aluno->user_id, $turmaAtual, $data))
                                     <div class="d-flex flex-column">
                                         <div class="mb-2">
                                             <input class="form-check-input" wire:click='registraAtraso' checked
                                                 name="" type="checkbox" id="{{ $i }}" disabled>
                                             <label class="form-check-label" for="{{ $i }}"
                                                 wire:click='registraAtraso'>
-                                                @if ($aluno->presenca->atraso == false)
+                                                @if (App\Http\Livewire\HelperTrait::verificaPresenca($aluno->user_id, $turmaAtual, $data)->atraso == false)
                                                     Presença
                                                 @else
                                                     Atraso
@@ -42,7 +46,7 @@
                                         </div>
                                         <div class="mb-2">
                                             <input class="form-check-input" name=""
-                                                @if ($aluno->presenca->material == true) checked @endif type="checkbox"
+                                                @if (App\Http\Livewire\HelperTrait::verificaPresenca($aluno->user_id, $turmaAtual, $data)->material == true) checked @endif type="checkbox"
                                                 disabled id="material_didatico" required>
                                             <label class="form-check-label" for="material_didatico">
                                                 Material Didático
@@ -71,12 +75,12 @@
                         </td>
                         <td>
                             <div class="d-flex">
-                                @if (!$aluno->presenca)
+                                @if (!App\Http\Livewire\HelperTrait::verificaPresenca($aluno->user_id, $turmaAtual, $data))
                                     <button wire:click.prevent="store({{ $aluno->user_id }} )"
                                         class="btn btn-primary btn-sm mr-3" alt="Presença"><i
                                             class="fas fa-stopwatch"></i>
                                         Registrar presença</button>
-                                @elseif ($aluno->presenca)
+                                @elseif (App\Http\Livewire\HelperTrait::verificaPresenca($aluno->user_id, $turmaAtual, $data))
                                     <a wire:click='destroy("{{ $aluno->user_id }}")' class="btn btn-danger btn-sm mr-3"
                                         alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i> Deletar presença
                                     </a>
