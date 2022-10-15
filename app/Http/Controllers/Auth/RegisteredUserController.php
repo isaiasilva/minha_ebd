@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
     public function registrarAluno()
     {
         $repositorioTurmas = $this->turma;
-         $turmas = $this->professorPorTurma->where('professor_id',Auth::user()->id )->get();
+        $turmas = $this->professorPorTurma->where('professor_id', Auth::user()->id)->get();
 
         return view('auth.registrar-aluno', ['turmas' => $turmas, 'title' => 'Novo aluno', 'repositorioTurmas' => $repositorioTurmas]);
     }
@@ -82,6 +82,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -92,16 +93,17 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-         //Associando primera turma do aluno
-         $this->alunoPorTurma->create([
-             'aluno_id' => $user->id,
-             'turma_id' => $user->turma_id
-         ]);
+        //Associando primera turma do aluno
+        $this->alunoPorTurma->create([
+            'user_id' => $user->id,
+            'turma_id' => $request->turma_id,
+            'name' => $user->name
+        ]);
 
 
 
-            return redirect()
-                ->back()
-                ->with('success', 'Usuário inserido com sucesso');
+        return redirect()
+            ->back()
+            ->with('success', 'Usuário inserido com sucesso');
     }
 }

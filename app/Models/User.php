@@ -24,7 +24,7 @@ class User extends Authenticatable
         'estado_civil',
         'data_nascimento',
         'turma_id',
-        /*    'password', */
+        'password',
     ];
 
     protected $appends = ['presenca'];

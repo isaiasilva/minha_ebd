@@ -45,8 +45,7 @@ class UsuariosController extends Controller
         Chamada $chamada,
         ProfessorPorTurma $professorPorTurma,
         AlunoPorTurma $alunoPorTurma
-    )
-    {
+    ) {
         $this->turma = $turma;
         $this->user = $user;
         $this->perfil = $perfil;
@@ -60,7 +59,7 @@ class UsuariosController extends Controller
         $turma = $this->turma->find(Auth::user()->turma_id);
         $perfil = $this->perfil;
         $usuarios = $this->user->all();
-        return view('user.usuarios', ['turma'=>$turma, 'usuarios' => $usuarios, 'title' => 'Usuários', 'perfil' => $perfil]);
+        return view('user.usuarios', ['turma' => $turma, 'usuarios' => $usuarios, 'title' => 'Usuários', 'perfil' => $perfil]);
     }
 
     public function destroy($id)
@@ -68,16 +67,16 @@ class UsuariosController extends Controller
         $usuario = $this->user->find($id);
 
         // se for professor
-        if($usuario->perfil_id === "3"){
-            $colecaoProfessor = $this->professorPorTurma->where('professor_id',$usuario->id )->get();
+        if ($usuario->perfil_id === "3") {
+            $colecaoProfessor = $this->professorPorTurma->where('professor_id', $usuario->id)->get();
             $this->excluirProfessorPorTurma($colecaoProfessor);
         }
 
-        $alunosPorTurma = $this->alunoPorTurma->where('aluno_id',$usuario->id)->get();
+        $alunosPorTurma = $this->alunoPorTurma->where('aluno_id', $usuario->id)->get();
 
         $this->delataAlunoPorTurma($alunosPorTurma);
 
-        $chamadas = $this->chamada->where('aluno_id',$usuario->id)->get();
+        $chamadas = $this->chamada->where('aluno_id', $usuario->id)->get();
 
         $this->excluirChamada($chamadas);
 
@@ -96,7 +95,7 @@ class UsuariosController extends Controller
 
         //dd($perfil);
 
-        return view('user.editar-usuario',[
+        return view('user.editar-usuario', [
             'title' => 'Editar Usuários',
             'usuario' => $usuario,
             'perfis' => $perfis,
@@ -110,12 +109,12 @@ class UsuariosController extends Controller
     {
         $usuario = $this->user->find($id);
 
-        $usuario->name = filter_var($request->name, FILTER_SANITIZE_STRING);
-        $usuario->email = filter_var($request->email, FILTER_SANITIZE_EMAIL);
-        $usuario->perfil_id = filter_var($request->perfil_id, FILTER_SANITIZE_STRING);
-        $usuario->data_nascimento = filter_var($request->data_nascimento, FILTER_SANITIZE_STRING);
-        $usuario->estado_civil = filter_var($request->estado_civil, FILTER_SANITIZE_STRING);
-        $usuario->turma_id = filter_var($request->turma_id, FILTER_SANITIZE_STRING);
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->perfil_id = $request->perfil_id;
+        $usuario->data_nascimento = $request->data_nascimento;
+        $usuario->estado_civil = $request->estado_civil;
+        $usuario->turma_id = $request->turma_id;
 
         $this->atualizaAlunoPorTurma($usuario->id, $usuario->turma_id);
 
@@ -128,8 +127,7 @@ class UsuariosController extends Controller
 
         $usuario->save();
 
-        return redirect()->back()->with('success','Usuário atualizado com sucesso!');
-
+        return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
     }
 
 
@@ -167,25 +165,20 @@ class UsuariosController extends Controller
     protected function atualizaAlunoPorTurma($usuario_id, $turma_id)
     {
         $alunoPorTurma = $this->alunoPorTurma;
-        if(count($alunoPorTurma->where([
-                'aluno_id' => $usuario_id,
-                'turma_id' => $turma_id
-            ])->get()) === 1)
-        {
+        if (count($alunoPorTurma->where([
+            'user_id' => $usuario_id,
+            'turma_id' => $turma_id
+        ])->get()) === 1) {
             // retorna nada caso o usuario já esteja associado a turma
             return false;
         }
 
         $alunoPorTurma->create([
-            'aluno_id' => $usuario_id,
-            'turma_id' => $turma_id
+            'user_id' => $usuario_id,
+            'turma_id' => $turma_id,
+            'name' => $this->user->find($usuario_id)->name
         ]);
 
         return true;
-
     }
-
-
-
-
 }
