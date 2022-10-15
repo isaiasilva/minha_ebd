@@ -12,9 +12,10 @@ class AlunoPorTurma extends Model
     protected $fillable = [
         'user_id',
         'turma_id',
+        'name'
     ];
     protected $appends = ['presenca'];
-    public $timestamps = false;
+
 
     public function aluno()
     {

@@ -80,7 +80,8 @@ class AlunosPorTurmaController extends Controller
 
         $alunoPorTurma->create([
             'user_id' => $request->aluno,
-            'turma_id' => $request->turma
+            'turma_id' => $request->turma,
+            'name' => User::find($request->aluno)->name
         ]);
 
         return redirect()->back()->with('success', 'Aluno associado com sucesso!');
@@ -100,5 +101,17 @@ class AlunosPorTurmaController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao tentar desassociar aluno');
         }
+    }
+
+    public function populaNames()
+    {
+        $alunoPorTurma = $this->alunoPorTurma->all();
+
+        foreach ($alunoPorTurma as $aluno) {
+            $aluno->name = $aluno->aluno->name;
+            $aluno->save();
+        }
+
+        return "Deu certo";
     }
 }
