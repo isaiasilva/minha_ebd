@@ -28,7 +28,7 @@ trait Helpers
     {
         $data = date('Y-m-d');
 
-        $presenca = Chamada::where(['aluno_id' => $aluno, 'turma_id' => $turma, 'data' => $data])->get();
+        $presenca = Chamada::where(['' => $aluno, 'turma_id' => $turma, 'data' => $data])->get();
 
 
         $retorno = "no-checked";

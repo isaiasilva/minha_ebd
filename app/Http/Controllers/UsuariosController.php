@@ -72,9 +72,9 @@ class UsuariosController extends Controller
             $this->excluirProfessorPorTurma($colecaoProfessor);
         }
 
-        $alunosPorTurma = $this->alunoPorTurma->where('aluno_id', $usuario->id)->get();
+        $alunosPorTurma = $this->alunoPorTurma->where('user_id', $usuario->id)->get();
 
-        $this->delataAlunoPorTurma($alunosPorTurma);
+        $this->deletaAlunoPorTurma($alunosPorTurma);
 
         $chamadas = $this->chamada->where('aluno_id', $usuario->id)->get();
 
@@ -147,6 +147,9 @@ class UsuariosController extends Controller
      */
     protected function excluirChamada($chamadas): void
     {
+        if ($chamadas->count() < 1) {
+            return;
+        }
         foreach ($chamadas as $chamada) {
             $chamada->delete();
         }
@@ -155,8 +158,11 @@ class UsuariosController extends Controller
     /**
      * @param $alunosPorTurma
      */
-    protected function delataAlunoPorTurma($alunosPorTurma): void
+    protected function deletaAlunoPorTurma($alunosPorTurma): void
     {
+        if ($alunosPorTurma->count() < 1) {
+            return;
+        }
         foreach ($alunosPorTurma as $alunoPorTurma) {
             $alunoPorTurma->delete();
         }

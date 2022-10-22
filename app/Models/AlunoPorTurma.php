@@ -29,6 +29,6 @@ class AlunoPorTurma extends Model
 
     public function getPresencaAttribute()
     {
-        return Chamada::where(['aluno_id' => $this->user_id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
+        return Chamada::where(['user_id' => $this->user_id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
     }
 }
