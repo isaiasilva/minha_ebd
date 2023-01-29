@@ -53,6 +53,16 @@ class User extends Authenticatable
         return $this->belongsTo(Turma::class);
     }
 
+    public function perfil()
+    {
+        return $this->hasOne(Perfil::class, 'id', 'perfil_id');
+    }
+
+    public function turmas()
+    {
+        return $this->hasMany(AlunoPorTurma::class, 'id', 'turma_id');
+    }
+
     public function getPresencaAttribute()
     {
         return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();

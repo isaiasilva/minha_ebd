@@ -4,7 +4,6 @@
     Página Inicial
 @endsection
 
-
 @section('conteudo')
     @include('components.flash-message')
     <div class="content p-1">
@@ -27,7 +26,7 @@
                     <div class="card-body">
                         <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
                         <h6 class="card-title">Perfil</h6>
-                        <h2 class="lead">{{ ucfirst(strtolower($perfil->perfil)) }}</h2>
+                        <h2 class="lead">{{ ucfirst(strtolower(Auth::user()->perfil->perfil)) }}</h2>
                     </div>
                 </div>
             </div>
@@ -35,8 +34,10 @@
                 <div class="card bg-warning text-white">
                     <div class="card-body">
                         <i class="fa fa-users fa-3x"></i>
-                        <h6 class="card-title">Turma</h6>
-                        <h2 class="lead">{{ $turmaAtual->nome_turma }}</h2>
+                        <h6 class="card-title">Turma(s)</h6>
+                        @foreach ($turmas as $turma)
+                            <h2 class="lead">{{ $turma->turma->nome_turma }}</h2>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -75,8 +76,6 @@
                     <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
                 </div>
             </div>
-
-
         </div> <!-- End row -->
 
     </div> <!-- End container -->
