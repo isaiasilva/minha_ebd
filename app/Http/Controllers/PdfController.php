@@ -20,7 +20,7 @@ class PdfController extends Controller
             'relatorios.aluno-por-turma',
             [
                 'turma' => $this->turma->find(2),
-                'alunos' => $this->alunos->where('turma_id', 2)->get()
+                'alunos' => $this->alunos->where('turma_id', 2)->orderBy('name')->get()
             ]
         );
         return $pdf->stream();
