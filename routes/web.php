@@ -6,6 +6,7 @@ use App\Http\Controllers\AlunosPorTurmaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChamadaController;
 use App\Http\Controllers\EntrarController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ProfessorPorTurmaController;
@@ -90,6 +91,8 @@ Route::put('/user/perfil', [PerfilController::class, 'UPDATE'])->middleware(['au
 
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
 Route::post('/user/alterar-senha', [AlterarSenhaController::class, 'store'])->name('alterar-senha');
+
+Route::get('/alunos/pdf', [PdfController::class, 'alunosPorTurma']);
 
 
 Route::get('/sair', function () {
