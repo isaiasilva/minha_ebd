@@ -11,17 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PerfilController extends Controller
 {
-    /**
-     * @var Turma
-     */
     private $turma;
-    /**
-     * @var Perfil
-     */
     private $perfil;
-    /**
-     * @var User
-     */
     private $user;
 
 
@@ -30,7 +21,6 @@ class PerfilController extends Controller
         $this->turma = $turma;
         $this->perfil = $perfil;
         $this->user = $user;
-
     }
 
     public function index()
@@ -38,7 +28,7 @@ class PerfilController extends Controller
         $turma = $this->turma->find(Auth::user()->turma_id)->nome_turma;
         $perfil = $this->perfil->find(Auth::user()->perfil_id)->perfil;
 
-        return view('user.perfil', ['turma'=> $turma, 'perfil' => $perfil, 'title' => 'Perfil']);
+        return view('user.perfil', ['turma' => $turma, 'perfil' => $perfil, 'title' => 'Perfil']);
     }
 
     public function update(Request $request)
@@ -47,25 +37,20 @@ class PerfilController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'estado_civil' => 'required',
-            'data_nascimento' => 'required'
+            'data_nascimento' => 'required',
         ]);
-        echo $request->id;
 
         $usuario = $this->user->find($request->id);
 
-        $usuario->name = filter_var($request->name, FILTER_SANITIZE_STRING);
-        $usuario->email = filter_var($request->email, FILTER_SANITIZE_EMAIL);
-        $usuario->estado_civil = filter_var($request->estado_civil, FILTER_SANITIZE_STRING);
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->estado_civil = $request->estado_civil;
         $usuario->data_nascimento = $request->data_nascimento;
+        $usuario->telefone = $request->telefone;
 
 
         $usuario->save();
 
         return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
-
     }
-
-
-
-
 }

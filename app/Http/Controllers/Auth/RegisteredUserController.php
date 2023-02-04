@@ -91,6 +91,7 @@ class RegisteredUserController extends Controller
             'data_nascimento' => $request->data_nascimento,
             'turma_id' => $request->turma_id,
             'password' => Hash::make($request->password),
+            'telefone' => $request->telefone
         ]);
 
         //Associando primera turma do aluno

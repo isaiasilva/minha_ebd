@@ -25,6 +25,7 @@ class User extends Authenticatable
         'data_nascimento',
         'turma_id',
         'password',
+        'telefone'
     ];
 
     protected $appends = ['presenca'];

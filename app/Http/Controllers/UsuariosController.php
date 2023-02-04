@@ -93,7 +93,6 @@ class UsuariosController extends Controller
         $turma = $this->turma->find($usuario->turma_id);
         $turmas = $this->turma->all();
 
-        //dd($perfil);
 
         return view('user.editar-usuario', [
             'title' => 'Editar Usuários',
@@ -101,7 +100,8 @@ class UsuariosController extends Controller
             'perfis' => $perfis,
             'perfilAtual' => $perfil,
             'turmas' => $turmas,
-            'turmaAtual' => $turma
+            'turmaAtual' => $turma,
+            'telefone' => $usuario->telefone
         ]);
     }
 
@@ -115,36 +115,24 @@ class UsuariosController extends Controller
         $usuario->data_nascimento = $request->data_nascimento;
         $usuario->estado_civil = $request->estado_civil;
         $usuario->turma_id = $request->turma_id;
+        $usuario->telefone = $request->telefone;
 
         $this->atualizaAlunoPorTurma($usuario->id, $usuario->turma_id);
 
-        /*
-         * Verificar se o perfil é de professor e se existe uma turma associada para excluir
-        if($usuario->perfil_id === 3 && ){
-
-        }
-        */
 
         $usuario->save();
 
         return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
     }
 
-
-
-    /**
-     * @param $ColecaoProfessor
-     */
-    protected function excluirProfessorPorTurma($ColecaoProfessor): void
+    protected function excluirProfessorPorTurma($professores): void
     {
-        foreach ($ColecaoProfessor as $professor) {
+        foreach ($professores as $professor) {
             $professor->delete();
         }
     }
 
-    /**
-     * @param $chamadas
-     */
+
     protected function excluirChamada($chamadas): void
     {
         if ($chamadas->count() < 1) {
