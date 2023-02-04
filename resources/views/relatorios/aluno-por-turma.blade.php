@@ -56,7 +56,7 @@
             <div class="col-11">
 
 
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>
@@ -68,10 +68,10 @@
                     <tbody>
                         @foreach ($alunos as $aluno)
                             <tr>
-                                <td>{{ $aluno->aluno->name }}</td>
-                                <td>{{ $aluno->aluno->email }}</td>
-                                <td>{{ date('d/m/Y', strtotime($aluno->aluno->data_nascimento)) }}</td>
-                                <td>{{ $aluno->aluno->telefone }}</td>
+                                <td class="small">{{ $aluno->aluno->name }}</td>
+                                <td class="small">{{ $aluno->aluno->email }}</td>
+                                <td class="small">{{ date('d/m/Y', strtotime($aluno->aluno->data_nascimento)) }}</td>
+                                <td class="small">{{ $aluno->aluno->telefone }}</td>
                             </tr>
                         @endforeach
                     </tbody>
