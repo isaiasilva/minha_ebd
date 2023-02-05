@@ -78,7 +78,9 @@ class Chamada extends Component
         return view(
             'livewire.chamada',
             [
-                'alunos' => AlunoPorTurma::where(['turma_id' => $this->turmaAtual])->orderBy('name', 'ASC')->paginate($this->perpage)
+                'alunos' => AlunoPorTurma::where(['turma_id' => $this->turmaAtual])
+                    ->orderBy('name', 'ASC')
+                    ->paginate($this->perpage)
             ]
         );
     }

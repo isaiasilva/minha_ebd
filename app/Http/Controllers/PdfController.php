@@ -13,14 +13,14 @@ class PdfController extends Controller
     {
     }
 
-    public function alunosPorTurma()
+    public function alunosPorTurma(Request $request)
     {
 
         $pdf = Pdf::loadView(
             'relatorios.aluno-por-turma',
             [
-                'turma' => $this->turma->find(2),
-                'alunos' => $this->alunos->where('turma_id', 2)->orderBy('name')->get()
+                'turma' => $this->turma->find($request->turma),
+                'alunos' => $this->alunos->where('turma_id', $request->turma)->orderBy('name')->get()
             ]
         );
         return $pdf->stream();

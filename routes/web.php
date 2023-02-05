@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfessorPorTurmaController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\VisualizarChamadasController;
+use App\Http\Livewire\Relatorios;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -92,7 +93,8 @@ Route::put('/user/perfil', [PerfilController::class, 'UPDATE'])->middleware(['au
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
 Route::post('/user/alterar-senha', [AlterarSenhaController::class, 'store'])->name('alterar-senha');
 
-Route::get('/alunos/pdf', [PdfController::class, 'alunosPorTurma']);
+Route::get('/user/alunos-por-turma/', Relatorios::class)->middleware(['auth'])->name('alunos.relatorio');
+Route::post('/alunos/pdf/', [PdfController::class, 'alunosPorTurma'])->middleware(['auth'])->name('alunos-por-turma');
 
 
 Route::get('/sair', function () {
