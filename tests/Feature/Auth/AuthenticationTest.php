@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Perfil;
+use App\Models\Turma;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,11 +13,18 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        Perfil::create(['perfil' => "Usuário"]);
+        Turma::create(['nome_turma' => 'Turma de teste']);
+    }
+
     public function test_login_screen_can_be_rendered()
     {
         $response = $this->get('/login');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_users_can_authenticate_using_the_login_screen()
@@ -33,6 +42,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_not_authenticate_with_invalid_password()
     {
+
         $user = User::factory()->create();
 
         $this->post('/login', [

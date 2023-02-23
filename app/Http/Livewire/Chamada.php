@@ -42,8 +42,6 @@ class Chamada extends Component
             $this->turmaAtual = User::find(Auth::user()->id)->turma_id;
         }
 
-
-
         $this->atraso = false;
         $this->material = true;
     }
