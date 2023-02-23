@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\AlterarSenhaController;
-use App\Http\Controllers\AlunosController;
-use App\Http\Controllers\AlunosPorTurmaController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\ChamadaController;
-use App\Http\Controllers\EntrarController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\PrincipalController;
-use App\Http\Controllers\ProfessorPorTurmaController;
-use App\Http\Controllers\TurmaController;
-use App\Http\Controllers\UsuariosController;
-use App\Http\Controllers\VisualizarChamadasController;
+use App\Models\User;
 use App\Http\Livewire\Relatorios;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\TurmaController;
+use App\Http\Controllers\AlunosController;
+use App\Http\Controllers\EntrarController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\ChamadaController;
+use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\AlterarSenhaController;
+use App\Http\Controllers\AlunosPorTurmaController;
+use App\Http\Controllers\ProfessorPorTurmaController;
+use App\Http\Controllers\VisualizarChamadasController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Models\UsuariosPorIgreja;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +102,13 @@ Route::post('/alunos/pdf/', [PdfController::class, 'alunosPorTurma'])->middlewar
 Route::get('/sair', function () {
     Auth::logout();
     return redirect('/entrar');
+});
+
+Route::get('/popula-banco', function () {
+    $usuarios = User::all();
+    $usuarios->map(function ($usuario) {
+        UsuariosPorIgreja::create(['user_id' => $usuario->id, 'igreja_id' => 1]);
+    });
 });
 
 
