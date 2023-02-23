@@ -104,12 +104,7 @@ Route::get('/sair', function () {
     return redirect('/entrar');
 });
 
-Route::get('/popula-banco', function () {
-    $usuarios = User::all();
-    $usuarios->map(function ($usuario) {
-        UsuariosPorIgreja::create(['user_id' => $usuario->id, 'igreja_id' => 1]);
-    });
-});
+
 
 
 
