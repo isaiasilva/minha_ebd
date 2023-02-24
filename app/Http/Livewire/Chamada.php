@@ -38,10 +38,13 @@ class Chamada extends Component
         $this->data = date('Y-m-d');
         if ($request->id) {
             $this->turmaAtual = $request->id;
+            $this->turma = Turma::find($request->id);
         } else {
             $this->turmaAtual = User::find(Auth::user()->id)->turma_id;
+            $this->turma = Turma::find($this->turmaAtual);
         }
 
+        $this->turmas = Turma::where('igreja_id', User::getIgreja()->id)->get();
         $this->atraso = false;
         $this->material = true;
     }
@@ -51,7 +54,7 @@ class Chamada extends Component
     {
 
         $minhasTurmas = ProfessorPorTurma::where(['professor_id' => Auth::user()->id])->get();
-        $turmas = Turma::all();
+
 
         $verificaTurma = $this->verificaTurmaAtual();
 
@@ -69,10 +72,8 @@ class Chamada extends Component
         }
 
         $this->minhasTurmas = $minhasTurmas;
-        $this->turmas = $turmas;
+
         $this->nomeTurma = $nomeTurma;
-
-
         return view(
             'livewire.chamada',
             [

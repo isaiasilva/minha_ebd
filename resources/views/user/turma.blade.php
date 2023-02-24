@@ -1,9 +1,9 @@
-@extends('layouts.template')
+<x-app-layout>
 
-@section('cabecalho')
-    Registrar Turma
-@endsection
-@section('conteudo')
+    @section('cabecalho')
+        Registrar Turma
+    @endsection
+
     @include('components.flash-message')
     <form method="post">
         @csrf
@@ -25,6 +25,4 @@
             </div>
         </div><!-- FIM DO CONTAINER -->
     </form>
-@endsection
-
-
+</x-app-layout>

@@ -1,10 +1,8 @@
-@extends('layouts.template')
+<x-app-layout>
+    @section('cabecalho')
+        Editar Usuário
+    @endsection
 
-@section('cabecalho')
-    Editar Usuário
-@endsection
-
-@section('conteudo')
     @include('components.flash-message')
     <form method="post">
         @csrf
@@ -68,7 +66,8 @@
                     <div class="form-group">
                         <label for="turma">Turma</label>
                         <select class="form-control" name="turma_id" aria-label="Default select example" required>
-                            <option selected value="{{ $turmaAtual->id }}" hidden>{{ $turmaAtual->nome_turma }}</option>
+                            <option selected value="{{ $turmaAtual->id }}" hidden>{{ $turmaAtual->nome_turma }}
+                            </option>
                             @foreach ($turmas as $key => $turma)
                                 <option value="{{ $turma->id }}">{{ $turma->nome_turma }}</option>
                             @endforeach
@@ -95,4 +94,4 @@
             </div>
         </div> <!-- Final do container -->
     </form>
-@endsection
+</x-app-layout>

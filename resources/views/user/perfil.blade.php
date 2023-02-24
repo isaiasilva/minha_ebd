@@ -1,10 +1,9 @@
-@extends('layouts.template')
+<x-app-layout>
 
-@section('cabecalho')
-    Perfil
-@endsection
+    @section('cabecalho')
+        Perfil
+    @endsection
 
-@section('conteudo')
     @include('components.flash-message')
     <form method="post">
         @csrf
@@ -33,8 +32,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="perfil">Perfil</label>
-                        <input type="text" name="perfil" id="perfil" value="{{ $perfil }}" readonly required
-                            class="form-control">
+                        <input type="text" name="perfil" id="perfil" value="{{ $perfil }}" readonly
+                            required class="form-control">
                     </div>
                 </div>
 
@@ -83,4 +82,4 @@
 
         </div> <!-- Final do container -->
     </form>
-@endsection
+</x-app-layout>

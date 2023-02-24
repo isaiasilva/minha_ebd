@@ -1,9 +1,9 @@
-@extends('layouts.template')
+<x-app-layout>
 
-@section('cabecalho')
-    Aluno por Turma
-@endsection
-@section('conteudo')
+    @section('cabecalho')
+        Aluno por Turma
+    @endsection
+
     @include('components.flash-message')
     <div class="table-responsive">
         <table class="table" id="datatablesSimple">
@@ -38,4 +38,4 @@
             </tbody>
         </table>
     </div>
-@endsection
+</x-app-layout>

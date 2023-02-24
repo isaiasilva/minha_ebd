@@ -1,10 +1,9 @@
-@extends('layouts.template')
+<x-app-layout>
+    @section('cabecalho')
+        Página Inicial - {{ $igreja->igreja->nome }}
+    @endsection
 
-@section('cabecalho')
-    Página Inicial
-@endsection
 
-@section('conteudo')
     @include('components.flash-message')
     <div class="content p-1">
         <p>Hoje é {{ date('d/m/Y') }}</p>
@@ -103,4 +102,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/chart-bar-demo.js') }}"></script>
     <script src="{{ asset('js/chart-pie-demo.js') }}"></script>
-@endsection
+</x-app-layout>

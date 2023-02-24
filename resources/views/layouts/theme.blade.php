@@ -38,6 +38,25 @@
         <nav class="sidebar">
             <ul class="list-unstyled">
                 <li><a href="{{ route('principal') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
+                    <li>
+                        <a href="#administracao" class="" data-toggle="collapse" aria-expanded="false"
+                            aria-controls="collapseUsuarios">
+                            <i class="fas fa-user-cog"></i></i> Administração
+                        </a>
+                        <ul id="administracao" class="list-unstyled collapse" id="collapseUsuarios">
+                            <li><a href="{{ route('usuarios') }}"><i class="fas fa-users"></i> Todos os usuários</a>
+                            </li>
+
+                            <li><a href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a>
+                            </li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Igrejas</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                @endif
 
                 <li>
                     <a href="#submenu1" class="" data-toggle="collapse" aria-expanded="false"
@@ -47,7 +66,8 @@
                     <ul id="submenu1" class="list-unstyled collapse" id="collapseUsuarios">
                         <li><a href="{{ route('usuarios') }}"><i class="fas fa-users"></i> Usuários</a></li>
                         @if (Auth::user()->perfil_id === 1)
-                            <li><a href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a>
+                            <li><a href="{{ route('registrar.index') }}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Novo</a>
                             </li>
                         @endif
                     </ul>
@@ -80,13 +100,15 @@
                     </a>
                     <ul id="submenu3" class="list-unstyled collapse" id="collapseUsuarios">
                         @if (Auth::user()->perfil_id !== 2)
-                            <li><a href="{{ route('chamada') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nova</a>
+                            <li><a href="{{ route('chamada') }}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Nova</a>
                             </li>
                             <li><a href="{{ route('todas-chamadas') }}"><i class="fa fa-eye" aria-hidden="true"></i>
                                     Todas Chamadas</a></li>
                         @endif
 
-                        <li><a href="{{ route('visualizar-chamadas') }}"><i class="fa fa-eye" aria-hidden="true"></i>
+                        <li><a href="{{ route('visualizar-chamadas') }}"><i class="fa fa-eye"
+                                    aria-hidden="true"></i>
                                 Visualizar</a></li>
                     </ul>
                 </li>
@@ -147,8 +169,7 @@
                     </div>
                     <div class=" p-2">@yield('botao')</div>
                 </div>
-                @yield('conteudo')
-
+                {{ $slot }}
             </div>
         </div>
     </div>

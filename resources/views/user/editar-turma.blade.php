@@ -1,9 +1,9 @@
-@extends('layouts.template')
+<x-app-layout>
 
-@section('cabecalho')
-    Editar Turma
-@endsection
-@section('conteudo')
+    @section('cabecalho')
+        Editar Turma
+    @endsection
+
     @include('components.flash-message')
     <form method="post">
         @csrf
@@ -13,7 +13,8 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input type="text" name="nome_turma" value="{{$turma->nome_turma}}"  id="nome" required class="form-control">
+                        <input type="text" name="nome_turma" value="{{ $turma->nome_turma }}" id="nome" required
+                            class="form-control">
                     </div>
                 </div>
             </div>
@@ -26,4 +27,4 @@
             </div>
         </div><!-- FIM DO CONTAINER -->
     </form>
-@endsection
+</x-app-layout>
