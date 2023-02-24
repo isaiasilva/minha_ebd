@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\AlunoPorTurma;
+use App\Models\Igreja;
 use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
+use App\Models\UsuariosPorIgreja;
 use App\Providers\RouteServiceProvider;
+use DomainException;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,21 +23,24 @@ class RegisteredUserController extends Controller
 {
     private $turma;
     private $perfil;
-    /**
-     * @var AlunoPorTurma
-     */
-    private $alunoPorTurma;
-    /**
-     * @var ProfessorPorTurma
-     */
-    private $professorPorTurma;
 
-    public function __construct(Turma $turma, Perfil $perfil, AlunoPorTurma $alunoPorTurma, ProfessorPorTurma $professorPorTurma)
-    {
+    private $alunoPorTurma;
+
+    private $professorPorTurma;
+    private UsuariosPorIgreja $igreja;
+
+    public function __construct(
+        Turma $turma,
+        Perfil $perfil,
+        AlunoPorTurma $alunoPorTurma,
+        ProfessorPorTurma $professorPorTurma,
+        UsuariosPorIgreja $igreja
+    ) {
         $this->turma = $turma;
         $this->perfil = $perfil;
         $this->alunoPorTurma = $alunoPorTurma;
         $this->professorPorTurma = $professorPorTurma;
+        $this->igreja = $igreja;
     }
 
     /**
@@ -72,6 +79,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -82,26 +91,29 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'perfil_id' => $request->perfil_id,
+                'estado_civil' => $request->estado_civil,
+                'data_nascimento' => $request->data_nascimento,
+                'turma_id' => $request->turma_id,
+                'password' => Hash::make($request->password),
+                'telefone' => $request->telefone
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'perfil_id' => $request->perfil_id,
-            'estado_civil' => $request->estado_civil,
-            'data_nascimento' => $request->data_nascimento,
-            'turma_id' => $request->turma_id,
-            'password' => Hash::make($request->password),
-            'telefone' => $request->telefone
-        ]);
+            //Associando primera turma do aluno
+            $this->alunoPorTurma->create([
+                'user_id' => $user->id,
+                'turma_id' => $request->turma_id,
+                'name' => $user->name
+            ]);
 
-        //Associando primera turma do aluno
-        $this->alunoPorTurma->create([
-            'user_id' => $user->id,
-            'turma_id' => $request->turma_id,
-            'name' => $user->name
-        ]);
-
-
+            $this->igreja->create(['user_id' => $user->id, 'igreja_id' => User::getIgreja()->id]);
+        } catch (Exception $e) {
+            return back()->with('error', 'Não foi possível incluir o usuário');
+        }
 
         return redirect()
             ->back()

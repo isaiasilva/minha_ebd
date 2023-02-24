@@ -17,6 +17,8 @@ use App\Http\Controllers\AlunosPorTurmaController;
 use App\Http\Controllers\ProfessorPorTurmaController;
 use App\Http\Controllers\VisualizarChamadasController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Livewire\Chamada;
+use App\Http\Livewire\User\Register;
 use App\Models\UsuariosPorIgreja;
 
 /*
@@ -55,8 +57,9 @@ Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->
 
 Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
 
-Route::get('/user/chamada', [ChamadaController::class, 'index'])->middleware(['auth'])->name('chamada');
-Route::get('/user/chamada/{id}', [ChamadaController::class, 'index'])->middleware(['auth']);
+Route::get('/user/chamada', Chamada::class)->middleware(['auth'])->name('chamada');
+
+Route::get('/user/chamada/{id}', Chamada::class)->middleware(['auth']);
 
 Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
 Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['auth'])->name('atraso');
@@ -98,6 +101,7 @@ Route::post('/user/alterar-senha', [AlterarSenhaController::class, 'store'])->na
 Route::get('/user/alunos-por-turma/', Relatorios::class)->middleware(['auth'])->name('alunos.relatorio');
 Route::post('/alunos/pdf/', [PdfController::class, 'alunosPorTurma'])->middleware(['auth'])->name('alunos-por-turma');
 
+Route::get('/registrar-usuario', Register::class)->name('registrar.index')->middleware(['auth']);
 
 Route::get('/sair', function () {
     Auth::logout();

@@ -9,4 +9,9 @@ class UsuariosPorIgreja extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'igreja_id'];
+
+    public function igreja()
+    {
+        return $this->hasOne(Igreja::class, 'id', 'igreja_id');
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
+use App\Models\UsuariosPorIgreja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,7 +49,8 @@ class PrincipalController extends Controller
             'jovens' => $this->alunoPorTurma->where('turma_id', 5)->count(),
             'juniores' => $this->alunoPorTurma->where('turma_id', 6)->count(),
             'primarios' => $this->alunoPorTurma->where('turma_id', 14)->count(),
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'igreja' => UsuariosPorIgreja::where('user_id', Auth::user()->id)->first()
         ]);
     }
 }
