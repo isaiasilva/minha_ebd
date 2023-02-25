@@ -36,7 +36,7 @@ class Chamada extends Component
 
     public function mount(Request $request)
     {
-        $turmas = $this->verificaTurmas();
+        $turmas = $this->getTurmas();
 
         if (is_null($turmas)) {
             return redirect('/user/home')->with('warning', 'Professor não foi associado em nenhuma turma');

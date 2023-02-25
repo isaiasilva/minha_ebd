@@ -19,8 +19,8 @@
                     <tr>
                         <form method="post">
                             @csrf
-                            <input type="hidden" name="aluno" value="{{ $aluno->id }}">
-                            <td>{{ $aluno->name }}</td>
+                            <input type="hidden" name="aluno" value="{{ $aluno->user->id }}">
+                            <td>{{ $aluno->user->name }}</td>
                             <td>
                                 <select class="form-control" name="turma" aria-label="Default select example"
                                     required>

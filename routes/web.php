@@ -82,7 +82,6 @@ Route::post('/user/associar-professor', [ProfessorPorTurmaController::class, 'st
 Route::get('/user/atualiza-turma/{id}', [ProfessorPorTurmaController::class, 'atualizaTurma'])->middleware(['auth']);
 Route::post('/user/excluir-professor', [ProfessorPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-professor');
 
-Route::get('/user/aluno-por-turma/popular', [AlunosPorTurmaController::class, 'populaNames'])->middleware(['auth'])->name('populaNames');
 Route::get('/user/aluno-por-turma', [AlunosPorTurmaController::class, 'index'])->middleware(['auth'])->name('alunoPorTurma');
 Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-aluno');
 Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);

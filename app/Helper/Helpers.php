@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait Helpers
 {
-    public function verificaTurmas()
+    public function getTurmas()
     {
 
         if (Auth::user()->perfil_id == Perfil::SUPERINTENDENTE || Auth::user()->perfil_id == Perfil::ADMINISTRADOR) {
@@ -21,7 +21,7 @@ trait Helpers
         if (Auth::user()->perfil_id == Perfil::PROFESSOR) {
             $turmasPorProfessor =  ProfessorPorTurma::where(['professor_id' => Auth::user()->id, 'igreja_id' => User::getIgreja()->id])->get();
             $collect = new Collection();
-            $turmasPorProfessor->map(function ($turmaPorProfessor) use (&$collect) {
+            $turmasPorProfessor->map(function (ProfessorPorTurma $turmaPorProfessor) use (&$collect) {
                 $turma = Turma::find($turmaPorProfessor->turma_id);
 
                 $collect->push($turma);

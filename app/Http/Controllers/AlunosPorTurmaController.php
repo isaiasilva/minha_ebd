@@ -2,32 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helpers;
 use App\Models\AlunoPorTurma;
+use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
+use App\Models\UsuariosPorIgreja;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AlunosPorTurmaController extends Controller
 {
-    /**
-     * @var User
-     */
-    private $user;
-    /**
-     * @var AlunoPorTurma
-     */
-    private $alunoPorTurma;
-    /**
-     * @var Turma
-     */
-    private $turma;
-    /**
-     * @var ProfessorPorTurma
-     */
-    private $professorPorTurma;
+    use Helpers;
+    private User $user;
+    private AlunoPorTurma $alunoPorTurma;
+    private Turma $turma;
+    private ProfessorPorTurma $professorPorTurma;
 
     public function __construct(User $user, AlunoPorTurma $alunoPorTurma, Turma $turma, ProfessorPorTurma $professorPorTurma)
     {
@@ -39,7 +31,7 @@ class AlunosPorTurmaController extends Controller
 
     public function index()
     {
-        $alunosPorTurma  = $this->alunoPorTurma::all();
+        $alunosPorTurma  = $this->alunoPorTurma::where('igreja_id', User::getIgreja()->id)->get();
         $usuario = $this->user;
         $turma = $this->turma;
 
@@ -48,20 +40,13 @@ class AlunosPorTurmaController extends Controller
 
     public function create()
     {
-        $turmas = $this->turma->all();
+        $turmas = $this->turma->where('igreja_id', User::getIgreja()->id)->get();
+
         $alunos = $this->user->all();
+        $alunos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->get();
 
-        if (Auth::user()->perfil_id === 3) {
-            $repositorioTurmas = $this->professorPorTurma->where('professor_id', Auth::user()->id)->get();
-            $turmas = [];
-
-            foreach ($repositorioTurmas as $turma) {
-                $i = [
-                    'id' => $turma->turma_id,
-                    'nome_turma' => $this->turma->find($turma->turma_id)->nome_turma
-                ];
-                array_push($turmas, (object)$i);
-            }
+        if (Auth::user()->perfil_id == Perfil::PROFESSOR) {
+            $turmas = $this->getTurmas();
         }
 
 
@@ -71,20 +56,23 @@ class AlunosPorTurmaController extends Controller
     public function store(Request $request)
     {
         $alunoPorTurma = $this->alunoPorTurma;
-        if (count($alunoPorTurma->where([
+        if ($alunoPorTurma->where([
             'user_id' => $request->aluno,
             'turma_id' => $request->turma
-        ])->get()) == 1) {
-            return redirect()->back()->withErrors('Aluno já associado nessa turma!');
+        ])->first()) {
+            toastr()->addError('Aluno já está associado a essa turma', 'Erro');
+            return redirect()->back();
         }
 
+        $user = User::find($request->aluno);
         $alunoPorTurma->create([
             'user_id' => $request->aluno,
             'turma_id' => $request->turma,
-            'name' => User::find($request->aluno)->name
+            'igreja_id' => (UsuariosPorIgreja::where('user_id', $user->id)->first()->igreja)->id,
+            'name' => $user->name
         ]);
-
-        return redirect()->back()->with('success', 'Aluno associado com sucesso!');
+        toastr()->addSuccess('Aluno associado com sucesso!', 'Feito!');
+        return redirect()->back();
     }
 
     public function destroy(Request $request)
@@ -97,21 +85,11 @@ class AlunosPorTurmaController extends Controller
 
             $alunoPorTurma->delete();
 
-            return redirect()->back()->with('success', 'Aluno desassociado com sucesso!');
+            toastr()->addSuccess('Aluno desassociado com sucesso!', 'Feito!');
+            return redirect()->back();
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao tentar desassociar aluno');
+            toastr()->addError('Erro ao tentar desassociar aluno', 'Erro');
+            return redirect()->back();
         }
-    }
-
-    public function populaNames()
-    {
-        $alunoPorTurma = $this->alunoPorTurma->all();
-
-        foreach ($alunoPorTurma as $aluno) {
-            $aluno->name = $aluno->aluno->name;
-            $aluno->save();
-        }
-
-        return "Deu certo";
     }
 }

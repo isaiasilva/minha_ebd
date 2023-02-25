@@ -12,6 +12,7 @@ class AlunoPorTurma extends Model
     protected $fillable = [
         'user_id',
         'turma_id',
+        'igreja_id',
         'name'
     ];
     protected $appends = ['presenca'];
