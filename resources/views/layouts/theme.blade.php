@@ -86,12 +86,6 @@
                                     Associar Aluno</a></li>
                         @endif
 
-                        @if (Auth::user()->perfil_id === 3)
-                            <li><a href="{{ route('registrar-aluno') }}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Novo</a></li>
-                        @endif
-                        <li><a href="{{ route('alunos') }}"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</a>
-                        </li>
                     </ul>
                 </li>
 
@@ -108,8 +102,7 @@
                                     Todas Chamadas</a></li>
                         @endif
 
-                        <li><a href="{{ route('visualizar-chamadas') }}"><i class="fa fa-eye"
-                                    aria-hidden="true"></i>
+                        <li><a href="{{ route('visualizar-chamadas') }}"><i class="fa fa-eye" aria-hidden="true"></i>
                                 Visualizar</a></li>
                     </ul>
                 </li>
