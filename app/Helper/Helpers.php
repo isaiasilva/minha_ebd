@@ -3,25 +3,33 @@
 namespace App\Helper;
 
 use App\Models\Chamada;
+use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
+use App\Models\Turma;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 trait Helpers
 {
-    public function verificaTurmaAtual()
+    public function verificaTurmas()
     {
-        if (Auth::user()->perfil_id == 1) {
-            $turmaAtual = User::find(Auth::user()->id);
+
+        if (Auth::user()->perfil_id == Perfil::SUPERINTENDENTE || Auth::user()->perfil_id == Perfil::ADMINISTRADOR) {
+            $turmas = Turma::where(['igreja_id' => User::getIgreja()->id])->get();
+        }
+        if (Auth::user()->perfil_id == Perfil::PROFESSOR) {
+            $turmasPorProfessor =  ProfessorPorTurma::where(['professor_id' => Auth::user()->id, 'igreja_id' => User::getIgreja()->id])->get();
+            $collect = new Collection();
+            $turmasPorProfessor->map(function ($turmaPorProfessor) use (&$collect) {
+                $turma = Turma::find($turmaPorProfessor->turma_id);
+
+                $collect->push($turma);
+            });
+            $turmas = $collect;
         }
 
-        if (Auth::user()->perfil_id == 3) {
-            $turmaAtual = ProfessorPorTurma::where(['professor_id' => Auth::user()->id])
-                ->get()
-                ->first();
-        }
-
-        return $turmaAtual;
+        return $turmas;
     }
 
     public function verificaMaterial($aluno, $turma)

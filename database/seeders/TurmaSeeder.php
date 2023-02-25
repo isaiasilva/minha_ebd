@@ -15,7 +15,8 @@ class TurmaSeeder extends Seeder
     public function run()
     {
         DB::table('turmas')->insert([
-            'nome_turma' => 'Adolescentes'
+            'nome_turma' => 'Adolescentes',
+
         ]);
 
         DB::table('turmas')->insert([
@@ -46,9 +47,5 @@ class TurmaSeeder extends Seeder
         DB::table('turmas')->insert([
             'nome_turma' => 'Maternal'
         ]);
-
-
-
-
     }
 }

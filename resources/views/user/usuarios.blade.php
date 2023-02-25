@@ -33,10 +33,11 @@
                                     <a href="/user/usuario/{{ $usuario->id }}/editar" class="btn btn-primary"><i
                                             class="fas fa-edit"></i> </a>
 
-                                    <form action="/user/usuario/{{ $usuario->id }}" method="get"
+                                    <form action="{{ route('delete.user', ['id' => $usuario->id]) }}" method="post"
                                         onsubmit="return confirm('Tem certeza? Todos os registros serão apagados e não poderão ser recuperados.')">
                                         @csrf
-                                        <input type="hidden" name="turma_id" value="{{ $turma->id }}">
+                                        @method('DELETE')
+                                        {{-- <input type="hidden" name="turma_id" value="{{ $turma->id }}"> --}}
                                         <button class="btn btn-danger" alt="Excluir"><i class="fa fa-eraser"
                                                 aria-hidden="true"></i></button>
                                     </form>

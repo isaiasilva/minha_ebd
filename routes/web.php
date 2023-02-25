@@ -17,7 +17,10 @@ use App\Http\Controllers\AlunosPorTurmaController;
 use App\Http\Controllers\ProfessorPorTurmaController;
 use App\Http\Controllers\VisualizarChamadasController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Chamada;
+use App\Http\Livewire\Church\Create;
+use App\Http\Livewire\Church\Index;
 use App\Http\Livewire\User\Register;
 use App\Models\UsuariosPorIgreja;
 
@@ -39,11 +42,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-/*
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-*/
 
 Route::get('/entrar', [EntrarController::class, 'index'])->name("entrar");
 Route::post('/entrar', [EntrarController::class, 'login']);
@@ -51,7 +49,7 @@ Route::post('/entrar', [EntrarController::class, 'login']);
 Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['auth'])->name('principal');
 
 Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware(['auth'])->name('usuarios');
-Route::get('/user/usuario/{id}', [UsuariosController::class, 'destroy'])->middleware(['auth']);
+Route::delete('/user/{id}/delete', [UsuariosController::class, 'destroy'])->middleware(['auth'])->name('delete.user');
 Route::get('/user/usuario/{id}/editar', [UsuariosController::class, 'editarUsuario'])->middleware(['auth']);
 Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->middleware(['auth']);
 
@@ -102,13 +100,15 @@ Route::get('/user/alunos-por-turma/', Relatorios::class)->middleware(['auth'])->
 Route::post('/alunos/pdf/', [PdfController::class, 'alunosPorTurma'])->middleware(['auth'])->name('alunos-por-turma');
 
 Route::get('/registrar-usuario', Register::class)->name('registrar.index')->middleware(['auth']);
+Route::get('/igrejas', Index::class)->name('igrejas.index')->middleware(['auth']);
+Route::get('/igrejas/novo', Create::class)->name('igrejas.create')->middleware(['auth']);
 
 Route::get('/sair', function () {
     Auth::logout();
     return redirect('/entrar');
 });
 
-
+Route::get('/register', UserRegister::class)->name('register')->middleware(['auth']);
 
 
 

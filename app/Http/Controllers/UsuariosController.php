@@ -8,6 +8,7 @@ use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
+use App\Models\UsuariosPorIgreja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,10 +68,13 @@ class UsuariosController extends Controller
         $usuario = $this->user->find($id);
 
         // se for professor
-        if ($usuario->perfil_id === "3") {
+        if ($usuario->perfil_id === Perfil::PROFESSOR) {
             $colecaoProfessor = $this->professorPorTurma->where('professor_id', $usuario->id)->get();
             $this->excluirProfessorPorTurma($colecaoProfessor);
         }
+
+        $igreja = UsuariosPorIgreja::where('user_id', $id)->first();
+        $igreja->delete();
 
         $alunosPorTurma = $this->alunoPorTurma->where('user_id', $usuario->id)->get();
 
@@ -90,17 +94,13 @@ class UsuariosController extends Controller
         $perfil = $this->perfil->find($usuario->perfil_id);
         $perfis = $this->perfil->all();
 
-        $turma = $this->turma->find($usuario->turma_id);
-        $turmas = $this->turma->all();
-
 
         return view('user.editar-usuario', [
             'title' => 'Editar Usuários',
             'usuario' => $usuario,
             'perfis' => $perfis,
             'perfilAtual' => $perfil,
-            'turmas' => $turmas,
-            'turmaAtual' => $turma,
+
             'telefone' => $usuario->telefone
         ]);
     }
@@ -114,10 +114,8 @@ class UsuariosController extends Controller
         $usuario->perfil_id = $request->perfil_id;
         $usuario->data_nascimento = $request->data_nascimento;
         $usuario->estado_civil = $request->estado_civil;
-        $usuario->turma_id = $request->turma_id;
         $usuario->telefone = $request->telefone;
 
-        $this->atualizaAlunoPorTurma($usuario->id, $usuario->turma_id);
 
 
         $usuario->save();

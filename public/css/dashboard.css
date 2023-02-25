@@ -53,3 +53,8 @@ body {
     margin-top: 5px;
     margin-right: 70px;
 }
+
+.error {
+    color: red;
+    font-weight: 500;
+}

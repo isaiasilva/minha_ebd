@@ -50,7 +50,7 @@
 
                             <li><a href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a>
                             </li>
-                            <li><a href="{{ route('register') }}"><i class="fa fa-plus" aria-hidden="true"></i>
+                            <li><a href="{{ route('igrejas.index') }}"><i class="fas fa-church"></i>
                                     Igrejas</a>
                             </li>
 
@@ -65,7 +65,8 @@
                     </a>
                     <ul id="submenu1" class="list-unstyled collapse" id="collapseUsuarios">
                         <li><a href="{{ route('usuarios') }}"><i class="fas fa-users"></i> Usuários</a></li>
-                        @if (Auth::user()->perfil_id === 1)
+                        @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
+                                Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
                             <li><a href="{{ route('registrar.index') }}"><i class="fa fa-plus" aria-hidden="true"></i>
                                     Novo</a>
                             </li>

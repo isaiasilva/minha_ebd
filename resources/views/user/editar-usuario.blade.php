@@ -32,9 +32,14 @@
                         <label for="perfil">Perfil</label>
                         <select class="form-control" name="perfil_id" aria-label="Default select example" required>
                             <option selected value="">Selecione</option>
-                            <option selected value="{{ $perfilAtual->id }}">{{ $perfilAtual->perfil }}</option>
+
+                            {{-- <option selected value="{{ $perfilAtual->id }}">{{ $perfilAtual->perfil }}</option> --}}
                             @foreach ($perfis as $perfil)
-                                <option value="{{ $perfil->id }}">{{ $perfil->perfil }}</option>
+                                @if (!Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR && $perfil->id == App\Models\Perfil::ADMINISTRADOR)
+                                    @continue
+                                @endif
+                                <option @if ($perfilAtual->id == $perfil->id) selected @endif value="{{ $perfil->id }}">
+                                    {{ $perfil->perfil }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -62,18 +67,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="turma">Turma</label>
-                        <select class="form-control" name="turma_id" aria-label="Default select example" required>
-                            <option selected value="{{ $turmaAtual->id }}" hidden>{{ $turmaAtual->nome_turma }}
-                            </option>
-                            @foreach ($turmas as $key => $turma)
-                                <option value="{{ $turma->id }}">{{ $turma->nome_turma }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">

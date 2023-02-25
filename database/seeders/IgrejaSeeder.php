@@ -17,5 +17,13 @@ class IgrejaSeeder extends Seeder
         DB::table('igrejas')->insert(
             ['nome' => 'MEPB Goiabeiras']
         );
+
+        DB::table('igrejas')->insert(
+            ['nome' => 'MEPB Colônia']
+        );
+
+        DB::table('igrejas')->insert(
+            ['nome' => 'MEPB Jardim Iracema']
+        );
     }
 }

@@ -51,10 +51,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function turma()
-    {
-        return $this->belongsTo(Turma::class);
-    }
 
     public function perfil()
     {
@@ -88,37 +84,40 @@ class User extends Authenticatable
         int $perfil_id,
         string $estado_civil,
         string $data_nascimento,
-        int $turma_id,
+        ?int $turma_id,
         ?string $password,
         ?string $telefone,
         ?int $igreja_id
     ) {
         try {
+
             $user = User::create([
                 'name' => $name,
                 'email' => $email,
                 'perfil_id' => $perfil_id,
                 'estado_civil' => $estado_civil,
                 'data_nascimento' => $data_nascimento,
-                'turma_id' => $turma_id,
                 'password' => $password ? Hash::make($password) : Hash::make("ChamadaEBD"),
                 'telefone' => $telefone ? $telefone : ""
             ]);
 
             //Associando primera turma do aluno
-            AlunoPorTurma::create([
-                'user_id' => $user->id,
-                'turma_id' => $turma_id,
-                'name' => $name
-            ]);
+            if (!is_null($turma_id)) {
+                AlunoPorTurma::create([
+                    'user_id' => $user->id,
+                    'turma_id' => $turma_id,
+                    'name' => $name
+                ]);
+            }
+
 
             $igreja = User::getIgreja()->id;
 
-            if ($igreja_id) {
+            if (!is_null($igreja_id)) {
                 $igreja = $igreja_id;
             }
 
-            UsuariosPorIgreja::create(['user_id' => $user->id, 'igreja_id' => $igreja]);
+            $igreja = UsuariosPorIgreja::create(['user_id' => $user->id, 'igreja_id' => $igreja]);
         } catch (\Exception $e) {
             return back()->with('error', 'Não foi possível incluir o usuário');
         }
