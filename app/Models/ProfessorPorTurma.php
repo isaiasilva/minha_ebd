@@ -12,6 +12,7 @@ class ProfessorPorTurma extends Model
     protected $fillable = [
         'professor_id',
         'turma_id',
+        'igreja_id'
     ];
 
     public $timestamps = false;
@@ -21,8 +22,18 @@ class ProfessorPorTurma extends Model
         return $this->hasMany(User::class, 'id', 'professor_id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'professor_id');
+    }
+
     public function turmas()
     {
         return $this->hasMany(Turma::class, 'id', 'turma_id');
+    }
+
+    public function turma()
+    {
+        return $this->hasOne(Turma::class, 'id', 'turma_id');
     }
 }

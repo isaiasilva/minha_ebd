@@ -113,7 +113,8 @@
                         <i class="fas fa-chalkboard-teacher"></i> Professores
                     </a>
                     <ul id="submenu4" class="list-unstyled collapse" id="collapseUsuarios">
-                        @if (Auth::user()->perfil_id === 1)
+                        @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
+                                Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
                             <li><a href="{{ route('associar-professor') }}"><i class="fa fa-plus"
                                         aria-hidden="true"></i> Associar Professor</a></li>
                         @endif
@@ -128,14 +129,16 @@
                         <i class="fas fa-graduation-cap"></i> Turmas
                     </a>
                     <ul id="submenu5" class="list-unstyled collapse" id="collapseUsuarios">
-                        @if (Auth::user()->perfil_id === 1)
+                        @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
+                                Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
                             <li><a href="{{ route('turma') }}"><i class="fas fa-chalkboard"></i> Nova turma</a></li>
                         @endif
                         <li><a href="{{ route('turmas') }}"><i class="fa fa-eye" aria-hidden="true"></i>
                                 Visualizar</a></li>
                     </ul>
                 </li>
-                @if (Auth::user()->perfil_id === 1)
+                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
+                        Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
                     <li>
                         <a href="#submenu6" class="" data-toggle="collapse" aria-expanded="false"
                             aria-controls="collapseUsuarios">

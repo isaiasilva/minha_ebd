@@ -2,73 +2,77 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Igreja;
+use App\Models\Perfil;
 use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
+use App\Models\UsuariosPorIgreja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfessorPorTurmaController extends Controller
 {
-    /**
-     * @var ProfessorPorTurma
-     */
-    private $professorPorTurma;
-    /**
-     * @var Turma
-     */
-    private $turma;
-    /**
-     * @var User
-     */
-    private $user;
+
+    private ProfessorPorTurma $professorPorTurma;
+    private Turma $turma;
+    private User $user;
+    private Igreja $igreja;
 
     public function __construct(ProfessorPorTurma $professorPorTurma, Turma $turma, User $user)
     {
         $this->professorPorTurma = $professorPorTurma;
         $this->turma = $turma;
         $this->user = $user;
+        $this->igreja = $this->user::getIgreja();
     }
 
     public function index()
     {
-        $professorPorTurma  = $this->professorPorTurma::all();
-        $usuario = $this->user;
-        $turma = $this->turma;
 
-        return view('user.professor-por-turma', ['turma'=>$turma, 'usuario' => $usuario, 'professorPorTurma' => $professorPorTurma, 'title' => 'Professor por turma']);
+        return view('user.professor-por-turma', [
+            'professores' => $this->professorPorTurma::where('igreja_id', $this->igreja->id)->get(),
+            'title' => 'Professor por turma'
+        ]);
     }
 
     public function create()
     {
-       $turmas = $this->turma->all();
-       $professores = $this->user->where('perfil_id', '!=', 2)->get();
+        $turmas = $this->turma->where('igreja_id', $this->igreja->id)->get();
 
-       return view('user.novo-professor-por-turma',
-           [
-               'turmas' => $turmas,
-               'professores' => $professores,
-               'title' => 'Associar Professor'
-           ]);
+        $professores  = UsuariosPorIgreja::join('users', 'usuarios_por_igrejas.user_id', '=', 'users.id')
+            ->orderBy('users.name', 'ASC')
+            ->select('users.*')
+            ->where('perfil_id', '!=', Perfil::ALUNO)
+            ->get();
+
+        return view(
+            'user.novo-professor-por-turma',
+            [
+                'turmas' => $turmas,
+                'professores' => $professores,
+                'title' => 'Associar Professor'
+            ]
+        );
     }
 
     public function store(Request $request)
     {
         $professorPorTurma = $this->professorPorTurma;
-        if(count($professorPorTurma->where([
+        if (count($professorPorTurma->where([
             'professor_id' => $request->professor,
             'turma_id' => $request->turma
-        ])->get()) == 1)
-        {
+        ])->get()) == 1) {
             return redirect()->back()->withErrors('Professor já associado nessa turma!');
         }
 
         $professorPorTurma->create([
             'professor_id' => $request->professor,
-            'turma_id' => $request->turma
+            'turma_id' => $request->turma,
+            'igreja_id' => $this->igreja->id
         ]);
 
-        return redirect()->back()->with('success','Professor associado com sucesso!');
+        return redirect()->back()->with('success', 'Professor associado com sucesso!');
     }
 
     public function atualizaTurma(Request $request)
@@ -95,5 +99,4 @@ class ProfessorPorTurmaController extends Controller
 
         return redirect()->back()->with('success', 'Professor desassociado com sucesso!');
     }
-
 }
