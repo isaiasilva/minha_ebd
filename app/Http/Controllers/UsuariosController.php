@@ -14,30 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UsuariosController extends Controller
 {
-    /**
-     * @var Turma
-     */
-    private $turma;
-    /**
-     * @var User
-     */
-    private $user;
-    /**
-     * @var Perfil
-     */
-    private $perfil;
-    /**
-     * @var Chamada
-     */
-    private $chamada;
-    /**
-     * @var ProfessorPorTurma
-     */
-    private $professorPorTurma;
-    /**
-     * @var AlunoPorTurma
-     */
-    private $alunoPorTurma;
+    private Turma $turma;
+    private User $user;
+    private Perfil $perfil;
+    private Chamada $chamada;
+    private ProfessorPorTurma $professorPorTurma;
+    private AlunoPorTurma $alunoPorTurma;
 
     public function __construct(
         Turma $turma,
@@ -59,7 +41,19 @@ class UsuariosController extends Controller
     {
         $turma = $this->turma->find(Auth::user()->turma_id);
         $perfil = $this->perfil;
-        $usuarios = $this->user->all();
+
+        if (Auth::user()->perfil_id == Perfil::ADMINISTRADOR) {
+            $usuarios = $this->user->all();
+        } else {
+            $usuarios = UsuariosPorIgreja::where('igreja_id', $this->user::getIgreja()->id)
+                ->join('users', 'usuarios_por_igrejas.user_id', '=', 'users.id')
+                ->orderBy('users.name', 'ASC')
+                ->select('users.*')
+                ->get();
+        }
+
+        //dd($usuarios);
+
         return view('user.usuarios', ['turma' => $turma, 'usuarios' => $usuarios, 'title' => 'Usuários', 'perfil' => $perfil]);
     }
 
@@ -67,7 +61,6 @@ class UsuariosController extends Controller
     {
         $usuario = $this->user->find($id);
 
-        // se for professor
         if ($usuario->perfil_id === Perfil::PROFESSOR) {
             $colecaoProfessor = $this->professorPorTurma->where('professor_id', $usuario->id)->get();
             $this->excluirProfessorPorTurma($colecaoProfessor);

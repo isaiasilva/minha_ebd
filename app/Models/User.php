@@ -67,9 +67,9 @@ class User extends Authenticatable
         return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
     }
 
-    public function getIgrejaName()
+    public static function getIgrejaName($id)
     {
-        $igreja = UsuariosPorIgreja::where('user_id', $this->id)->first()->igreja;
+        $igreja = UsuariosPorIgreja::where('user_id', $id)->first()->igreja;
         return $igreja->nome;
     }
 

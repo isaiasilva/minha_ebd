@@ -16,8 +16,8 @@ class Turma extends Model
      */
     protected $fillable = [
         'nome_turma',
+        'igreja_id'
     ];
 
     public $timestamps = false;
-
 }

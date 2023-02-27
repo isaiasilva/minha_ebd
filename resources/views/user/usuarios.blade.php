@@ -26,7 +26,7 @@
                         <td>{{ $usuario->name }}</td>
                         <td>{{ date('d/m/Y', strtotime($usuario->data_nascimento)) }}</td>
                         <td>{{ $perfil->find($usuario->perfil_id)->perfil }} </td>
-                        <td>{{ $usuario->getIgrejaName() }}</td>
+                        <td>{{ App\Models\User::getIgrejaName($usuario->id) }}</td>
                         @if (Auth::user()->perfil_id === 1)
                             <td>
                                 <span class="d-flex justify-content-around">

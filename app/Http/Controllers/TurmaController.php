@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chamada;
-use App\Models\Turma;
 use App\Models\User;
+use App\Models\Turma;
+use App\Models\Igreja;
+use App\Models\Chamada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TurmaController extends Controller
 {
-    private $turma;
-    private $user;
+    private Turma $turma;
+    private User $user;
+
+
     public function __construct(Turma $turma, User $user)
     {
         $this->turma = $turma;
@@ -20,21 +23,22 @@ class TurmaController extends Controller
 
     public function index()
     {
-        $turmas = $this->turma::all();
+        $turmas = $this->turma::where('igreja_id', $this->user::getIgreja()->id)->get();
 
-        return view('user.turmas', ['turmas'=>$turmas, 'title' => 'Turmas']);
+        return view('user.turmas', ['turmas' => $turmas, 'title' => 'Turmas']);
     }
 
     public function create()
     {
-       return view('user.turma', ['title' => 'Nova Turma']);
+        return view('user.turma', ['title' => 'Nova Turma']);
     }
 
     public function store(Request $request)
     {
         $turma = $this->turma;
         $turma->create([
-            'nome_turma' => $request->nome_turma
+            'nome_turma' => $request->nome_turma,
+            'igreja_id' => $this->user::getIgreja()->id
         ]);
 
         return redirect('user/turma')->with('success', 'Turma registrada com sucesso!');
@@ -43,9 +47,9 @@ class TurmaController extends Controller
     public function destroy(Request $request)
     {
         $turma = $this->turma->find($request->turma_id);
-        $usuarios = $this->user->where(['turma_id'=> $request->turma_id])->get();
+        $usuarios = $this->user->where(['turma_id' => $request->turma_id])->get();
 
-        if(count($usuarios) >= 1){
+        if (count($usuarios) >= 1) {
             return redirect('user/turmas')->with('warning', 'Erro ao apagar a turma! Existem alunos');
             // Coleção vazia
         }
@@ -59,22 +63,21 @@ class TurmaController extends Controller
     {
         $turma = $this->turma->find($id);
 
-        if(is_null($turma)){
+        if (is_null($turma)) {
             return view('user.turmas')->with('danger', 'Houve algum problema, não encontrei a turma.');
         }
-        return view('user.editar-turma', ['title' => 'Editar Turma', 'turma'=> $turma]);
+        return view('user.editar-turma', ['title' => 'Editar Turma', 'turma' => $turma]);
     }
 
     public function update($id, Request $request)
     {
         $turma = $this->turma->find($id);
 
-        $request->validate(['nome_turma' => 'required|string']);
+        $request->validate(['nome_turma' => 'required|string'], ["nome_turma.required" => 'O campo é obrigatório']);
 
-        $turma->nome_turma = filter_var($request->nome_turma, FILTER_SANITIZE_STRING);
+        $turma->nome_turma = $request->nome_turma;
         $turma->save();
 
         return redirect()->back()->with('success', 'Turma atualizada com sucesso!');
-
     }
 }

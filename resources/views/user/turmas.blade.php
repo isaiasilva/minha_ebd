@@ -11,7 +11,8 @@
                 <tr class="">
                     <th scope="col">#ID</th>
                     <th scope="col">Nome</th>
-                    @if (Auth::user()->perfil_id === 1)
+                    @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
+                            Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
                         <th scope="col">Ações</th>
                     @endif
                 </tr>
@@ -21,7 +22,8 @@
                     <tr>
                         <td>{{ $turma->id }}</td>
                         <td>{{ $turma->nome_turma }}</td>
-                        @if (Auth::user()->perfil_id === 1)
+                        @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
+                                Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
                             <td>
                                 <span class="d-flex justify-content-around">
                                     <a href="/user/turma/{{ $turma->id }}/editar" class="btn btn-primary"
