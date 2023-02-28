@@ -38,8 +38,9 @@ class Chamada extends Component
     {
         $turmas = $this->getTurmas();
 
-        if (is_null($turmas)) {
-            return redirect('/user/home')->with('warning', 'Professor não foi associado em nenhuma turma');
+        if (is_null($turmas->first())) {
+            toastr()->addError('Não foi encontrado nenhuma turma', 'Erro');
+            return redirect('/user/home');
         }
 
         $turma = $turmas->first();
