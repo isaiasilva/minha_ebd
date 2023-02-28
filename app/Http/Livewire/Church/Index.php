@@ -17,4 +17,15 @@ class Index extends Component
     {
         return view('livewire.church.index');
     }
+
+    public function destroy(Igreja $igreja)
+    {
+        try {
+            $igreja->delete();
+            $this->igrejas = Igreja::all();
+            toastr()->addSuccess('Igreja apagada com sucesso!', 'Feito');
+        } catch (\Exception $e) {
+            toastr()->addError('Não foi possível excluir Igreja pois existem registro associados a ela!', 'Erro');
+        }
+    }
 }
