@@ -65,17 +65,20 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area"></i>
-                        Alunos por sala
+        @if ($igreja->igreja->id == 1)
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area"></i>
+                            Alunos por sala
+                        </div>
+                        <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
                     </div>
-                    <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
                 </div>
-            </div>
-        </div> <!-- End row -->
+            </div> <!-- End row -->
+        @endif
+
 
     </div> <!-- End container -->
     <input type="hidden" value="{{ $jan }}" id="jan">
