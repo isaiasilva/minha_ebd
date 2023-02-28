@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => "Cláudio Oliveira",
             'email' => 'claudio@professor',
-            'perfil_id' => 3,
+            'perfil_id' => 1,
             'estado_civil' => 'SOLTEIRO',
             'data_nascimento' => '1994-04-08',
             'password' => Hash::make('12345678'),

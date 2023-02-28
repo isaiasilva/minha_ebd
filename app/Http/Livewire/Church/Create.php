@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Church;
 
 use App\Models\Igreja;
+use App\Models\Turma;
 use Livewire\Component;
 
 class Create extends Component
@@ -38,9 +39,10 @@ class Create extends Component
 
     public function store()
     {
+
         $this->validate();
 
-        Igreja::create([
+        $igreja = Igreja::create([
             'nome' => $this->name,
             'endereco' => $this->address,
             'pastor' => $this->minister,
@@ -48,6 +50,9 @@ class Create extends Component
             'dia_ebd' => $this->day,
             'horario' => $this->hour,
         ]);
+
+        Turma::storeClass($igreja);
+
 
         toastr()->addSuccess('Igreja adicionada com sucesso!', 'Feito!');
         return redirect(route('igrejas.index'));
