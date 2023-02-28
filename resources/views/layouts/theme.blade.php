@@ -137,8 +137,7 @@
                                 Visualizar</a></li>
                     </ul>
                 </li>
-                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
-                        Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
+                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
                     <li>
                         <a href="#submenu6" class="" data-toggle="collapse" aria-expanded="false"
                             aria-controls="collapseUsuarios">
