@@ -109,7 +109,10 @@ Route::get('/sair', function () {
 
 Route::get('/register', UserRegister::class)->name('register')->middleware(['auth']);
 
-
+Route::get('/gameficacao', function () {
+    toastr()->addInfo('Função em desenvolvimento', 'Aguarde!');
+    return back();
+})->name('gamiicacao')->middleware('auth');
 
 
 require __DIR__ . '/auth.php';
