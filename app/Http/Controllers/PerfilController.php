@@ -25,10 +25,9 @@ class PerfilController extends Controller
 
     public function index()
     {
-        $turma = $this->turma->find(Auth::user()->turma_id)->nome_turma;
         $perfil = $this->perfil->find(Auth::user()->perfil_id)->perfil;
 
-        return view('user.perfil', ['turma' => $turma, 'perfil' => $perfil, 'title' => 'Perfil']);
+        return view('user.perfil', ['perfil' => $perfil, 'title' => 'Perfil']);
     }
 
     public function update(Request $request)
