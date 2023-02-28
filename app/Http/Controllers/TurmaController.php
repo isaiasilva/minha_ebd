@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Turma;
 use App\Models\Igreja;
 use App\Models\Chamada;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,17 +47,15 @@ class TurmaController extends Controller
 
     public function destroy(Request $request)
     {
-        $turma = $this->turma->find($request->turma_id);
-        $usuarios = $this->user->where(['turma_id' => $request->turma_id])->get();
-
-        if (count($usuarios) >= 1) {
-            return redirect('user/turmas')->with('warning', 'Erro ao apagar a turma! Existem alunos');
-            // Coleção vazia
+        try {
+            $turma = $this->turma->find($request->turma_id);
+            $turma->delete();
+            toastr()->addSuccess('Turma apagada com sucesso!', 'Feito!');
+            return redirect('user/turmas');
+        } catch (Exception $e) {
+            toastr()->addError('Não foi possível apagar a turma!', 'Erro!');
+            return redirect()->back();
         }
-
-        $turma->delete();
-
-        return redirect('user/turmas')->with('success', 'Turma apagada com sucesso!');
     }
 
     public function editar($id)
