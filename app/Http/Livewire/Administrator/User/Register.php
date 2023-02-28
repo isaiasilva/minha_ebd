@@ -62,7 +62,7 @@ class Register extends Component
                 $this->birthDate,
                 null,
                 null,
-                null,
+                $this->phone ? $this->phone : null,
                 $this->church
             );
 
