@@ -9,5 +9,5 @@ class Igreja extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome'];
+    protected $fillable = ['nome', 'endereco', 'pastor', 'tipo_igreja', 'dia_ebd', 'horario'];
 }

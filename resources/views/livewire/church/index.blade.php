@@ -17,9 +17,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
-                    @if (Auth::user()->perfil_id === 1)
-                        <th scope="col">Ações</th>
-                    @endif
+                    <th scope="col">EBD</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +26,21 @@
                     <tr>
                         <th scope="row">{{ $igreja->id }}</th>
                         <td>{{ $igreja->nome }}</td>
+                        <td>{{ $igreja->dia_ebd }} de {{ $igreja->horario }}</td>
+                        <td>
+
+                            <p class="" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog"></i>
+                            </p>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Editar</a>
+                                <a class="dropdown-item" href="#">Excluir</a>
+                                <a class="dropdown-item" href="#">Visualizar</a>
+
+                            </div>
+
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
