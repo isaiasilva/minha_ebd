@@ -1,6 +1,12 @@
 @extends('layouts.inicio')
 
 @section('conteudo')
+    <style>
+        .error {
+            color: red;
+            font-weight: 500;
+        }
+    </style>
     <form method="post" action="/entrar">
         @csrf
         <div class="container-fluid">
@@ -9,18 +15,18 @@
                     <div class="row full-height justify-content-center">
                         <div class="col-12 col-md-8 col-xxl-5 align-self-center">
                             <img src="{{ asset('img/logo_sem_fundo.png') }}" class="img-fluid pt-5" alt="login">
-                            @include('components.flash-message')
+
                             <p class="lead mb-4">Faça o login para continuar</p>
                             <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email"
                                 name="email" value="{{ old('email') }}" />
                             @error('email')
-                                <p>{{ $message }}</p>
+                                <p class="error">{{ $message }}</p>
                             @enderror
                             <br />
                             <input class="input border-0 border-bottom p-2" placeholder="Senha" type="password"
                                 name="password" />
                             @error('password')
-                                <p>{{ $message }}</p>
+                                <p class="error">{{ $message }}</p>
                             @enderror
                             <br />
                             <div class="mt-4 d-flex justify-content-between align-items-center">

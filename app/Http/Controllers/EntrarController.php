@@ -15,9 +15,9 @@ class EntrarController extends Controller
     ];
 
     protected array $messages = [
-        'email.required' => "Campo Email é obrigatório.",
-        'email.email' => "Campo Email precisa ser de um formato válido.",
-        'password.required' => "Campo Senha é obrigatório."
+        'email.required' => "Campo email é obrigatório.",
+        'email.email' => "Campo email precisa ser de um formato válido.",
+        'password.required' => "Campo eenha é obrigatório."
     ];
 
     public function index()
@@ -33,7 +33,7 @@ class EntrarController extends Controller
         $this->validate($request, $this->rules, $this->messages);
 
         if (!Auth::attempt($request->only(['email', 'password']))) {
-            toastr()->addError('Usuário ou senha invalido', 'Erro');
+            toastr()->addError('Usuário ou senha inválidos', 'Erro');
             return redirect()
                 ->back()
                 ->withInput($request->except('password'));
