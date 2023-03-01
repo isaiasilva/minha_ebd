@@ -11286,3 +11286,8 @@
     margin-bottom: 10px;
     outline: none;
 }
+
+.message-error {
+    color: red;
+    font-weight: 500;
+}
