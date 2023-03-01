@@ -2,45 +2,56 @@
 
 @section('conteudo')
     <style>
-        .error {
+        .message-error {
             color: red;
             font-weight: 500;
         }
     </style>
-    <form method="post" action="/entrar">
-        @csrf
-        <div class="container-fluid">
-            <div class="row full-height">
-                <div class="col-md-6 col-12">
-                    <div class="row full-height justify-content-center">
-                        <div class="col-12 col-md-8 col-xxl-5 align-self-center">
-                            <img src="{{ asset('img/logo_sem_fundo.png') }}" class="img-fluid pt-5" alt="login">
 
-                            <p class="lead mb-4">Faça o login para continuar</p>
-                            <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email"
-                                name="email" value="{{ old('email') }}" />
-                            @error('email')
-                                <p class="error">{{ $message }}</p>
-                            @enderror
-                            <br />
-                            <input class="input border-0 border-bottom p-2" placeholder="Senha" type="password"
-                                name="password" />
-                            @error('password')
-                                <p class="error">{{ $message }}</p>
-                            @enderror
-                            <br />
-                            <div class="mt-4 d-flex justify-content-between align-items-center">
-                                <button class="btn btn-primary">Logar</button>
+
+    <div class="row justify-content-center pt-5">
+
+        <div class="col-xl-5 col-lg-5 col-md-6">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="col-lg pb-4">
+                        <div class="p-2 pb-3 ">
+                            <div class="text-center pb-4">
+                                <img src="{{ asset('img/logo_sem_fundo.png') }}" class="img-fluid pt-5" alt="login">
+                            </div>
+                            <form class="user" method="post" action="/entrar">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="text" name="email" class="form-control form-control-user"
+                                        id="email" placeholder="Insira o seu email." value="{{ old('email') }}">
+                                    @error('email')
+                                        <small class="message-error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control form-control-user"
+                                        id="password" placeholder="Senha">
+                                    @error('password')
+                                        <small class="message-error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Login
+                                </button>
+
+                            </form>
+
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Esqueceu a senha?</a>
                             </div>
 
-                            <hr class="m-5" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-        </script>
-    </form>
+    </div>
 @endsection
