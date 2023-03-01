@@ -12,10 +12,16 @@
                             @include('components.flash-message')
                             <p class="lead mb-4">Faça o login para continuar</p>
                             <input class="input border-0 border-bottom p-2" placeholder="E-mail" type="email"
-                                name="email" value="{{ old('email') }}" required />
+                                name="email" value="{{ old('email') }}" />
+                            @error('email')
+                                <p>{{ $message }}</p>
+                            @enderror
                             <br />
                             <input class="input border-0 border-bottom p-2" placeholder="Senha" type="password"
-                                name="password" required />
+                                name="password" />
+                            @error('password')
+                                <p>{{ $message }}</p>
+                            @enderror
                             <br />
                             <div class="mt-4 d-flex justify-content-between align-items-center">
                                 <button class="btn btn-primary">Logar</button>
