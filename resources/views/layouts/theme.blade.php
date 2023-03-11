@@ -161,7 +161,7 @@
             <div class="list-group-item">
                 <div class="d-flex justify-content-between">
                     <div class="mr-auto p-2 d-flex ">
-                        <h2 class="display-4 titulo">@yield('cabecalho')</h2>
+                        <h1 class="display-4 titulo">@yield('cabecalho')</h1>
                     </div>
                     <div class=" p-2">@yield('botao')</div>
                 </div>

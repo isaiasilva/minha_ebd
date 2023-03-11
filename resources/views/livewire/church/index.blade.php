@@ -1,13 +1,14 @@
 <div>
     <div class="d-flex justify-content-between align-items-center">
-        <div>
-            @section('cabecalho')
-                Igrejas
-            @endsection
-        </div>
 
-        <a href="{{ route('igrejas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Nova igreja
-        </a>
+        @section('cabecalho')
+            Igrejas
+        @endsection
+
+        @section('botao')
+            <a href="{{ route('igrejas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Nova igreja
+            </a>
+        @endsection
     </div>
 
 
@@ -46,4 +47,9 @@
                     </tr>
                 @endforeach
             </tbody>
+        </table>
     </div>
+    <div class="d-flex justify-content-center">
+        {{ $igrejas->links() }}
+    </div>
+</div>
