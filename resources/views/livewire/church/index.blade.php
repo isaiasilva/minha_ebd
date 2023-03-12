@@ -40,7 +40,8 @@
                                 <a class="dropdown-item" href="#"
                                     onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
                                     wire:click='destroy({{ $igreja->id }})'>Excluir</a>
-                                <a class="dropdown-item" href="#">Visualizar</a>
+                                <a class="dropdown-item"
+                                    href="{{ route('igrejas.show', ['id' => $igreja->id]) }}">Visualizar</a>
 
                             </div>
 
