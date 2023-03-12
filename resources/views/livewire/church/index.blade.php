@@ -19,7 +19,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">EBD</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col" class="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@
                         <td>{{ $igreja->dia_ebd }} de {{ $igreja->horario }}</td>
                         <td>
 
-                            <p class="" data-toggle="dropdown" aria-expanded="false">
+                            <p class="text-center pointer" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
                             </p>
 
