@@ -35,7 +35,8 @@
                             </p>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Editar</a>
+                                <a class="dropdown-item"
+                                    href="{{ route('igrejas.edit', ['id' => $igreja->id]) }}">Editar</a>
                                 <a class="dropdown-item" href="#"
                                     onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
                                     wire:click='destroy({{ $igreja->id }})'>Excluir</a>

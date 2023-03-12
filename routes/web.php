@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Chamada;
 use App\Http\Livewire\Church\Create;
+use App\Http\Livewire\Church\Edit;
 use App\Http\Livewire\Church\Index;
 use App\Http\Livewire\User\Register;
 use App\Models\UsuariosPorIgreja;
@@ -101,6 +102,7 @@ Route::post('/alunos/pdf/', [PdfController::class, 'alunosPorTurma'])->middlewar
 Route::get('/registrar-usuario', Register::class)->name('registrar.index')->middleware(['auth']);
 Route::get('/igrejas', Index::class)->name('igrejas.index')->middleware(['auth']);
 Route::get('/igrejas/novo', Create::class)->name('igrejas.create')->middleware(['auth']);
+Route::get('/igrejas/editar/{id}', Edit::class)->name('igrejas.edit')->middleware(['auth']);
 
 Route::get('/sair', function () {
     Auth::logout();
