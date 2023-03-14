@@ -30,7 +30,7 @@ class User extends Authenticatable
         'telefone'
     ];
 
-    protected $appends = ['presenca', 'igreja'];
+    protected $appends = ['presenca', 'igreja', 'presencas'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -65,6 +65,15 @@ class User extends Authenticatable
     public function getPresencaAttribute()
     {
         return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
+    }
+
+    public function presencas(?int $turma_id)
+    {
+        if (is_null($turma_id)) {
+            return Chamada::where(['aluno_id' => $this->id])->count();
+        }
+
+        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $turma_id])->count();
     }
 
     public static function getIgrejaName($id)

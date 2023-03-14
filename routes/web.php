@@ -67,8 +67,8 @@ Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['
 Route::get('/user/excluir-presenca/{turma}/{aluno}', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 
 Route::get('/user/visualizar-chamadas/', [VisualizarChamadasController::class, 'create'])->middleware(['auth'])->name('visualizar-chamadas');
-Route::get('/user/visualizar-chamadas-por-turma/', [VisualizarChamadasController::class, 'todasChamadas'])->middleware(['auth'])->name('todas-chamadas');
-Route::get('/user/visualizar-chamadas-por-turma/{id}', [VisualizarChamadasController::class, 'chamadasPorTurma'])->middleware(['auth']);
+Route::get('/user/visualizar-chamadas-por-turma/', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth'])->name('todas-chamadas');
+Route::get('/user/visualizar-chamadas-por-turma/{id}', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth']);
 
 Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
 

@@ -76,8 +76,9 @@
                         <tbody>
                             @foreach ($alunos as $aluno)
                                 <tr>
-                                    <td>{{ $aluno->nome }}</td>
-                                    <td>{{ $aluno->presencas }}</td>
+
+                                    <td>{{ $aluno->user->name }}</td>
+                                    <td>{{ $aluno->user->presencas($turma_id) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
