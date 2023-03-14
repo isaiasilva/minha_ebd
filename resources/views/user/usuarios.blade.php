@@ -14,7 +14,8 @@
                     <th scope="col">Nascimento</th>
                     <th scope="col">Perfil</th>
                     <th scope="col">Igreja</th>
-                    @if (Auth::user()->perfil_id === 1)
+                    @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
+                            Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
                         <th scope="col">Ações</th>
                     @endif
                 </tr>
@@ -27,7 +28,8 @@
                         <td>{{ date('d/m/Y', strtotime($usuario->data_nascimento)) }}</td>
                         <td>{{ $perfil->find($usuario->perfil_id)->perfil }} </td>
                         <td>{{ App\Models\User::getIgrejaName($usuario->id) }}</td>
-                        @if (Auth::user()->perfil_id === 1)
+                        @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
+                                Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
                             <td>
                                 <span class="d-flex justify-content-around">
                                     <a href="/user/usuario/{{ $usuario->id }}/editar" class="btn btn-primary"><i
