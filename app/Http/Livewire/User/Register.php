@@ -62,8 +62,8 @@ class Register extends Component
                 $this->birthDate,
                 $this->class_id,
                 null,
-                null,
-                null
+                $this->phone,
+                User::getIgreja()->id
             );
 
             toastr()->addSuccess('Usuário cadastrado', 'Sucesso');

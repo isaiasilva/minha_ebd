@@ -115,7 +115,8 @@ class User extends Authenticatable
                 AlunoPorTurma::create([
                     'user_id' => $user->id,
                     'turma_id' => $turma_id,
-                    'name' => $name
+                    'name' => $name,
+                    'igreja_id' => $igreja_id
                 ]);
             }
 
