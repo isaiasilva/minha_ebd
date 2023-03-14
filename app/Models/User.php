@@ -67,7 +67,7 @@ class User extends Authenticatable
         return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $this->turma_id, 'data' => date('Y-m-d')])->first();
     }
 
-    public function presencas(?int $turma_id)
+    public function presencas(?int $turma_id): int
     {
         if (is_null($turma_id)) {
             return Chamada::where(['aluno_id' => $this->id])->count();

@@ -55,10 +55,10 @@ class VisualizarChamadasController extends Controller
         $atrasos =  $this->chamada->where('atraso', true)->where('igreja_id', User::getIgreja()->id)->whereYear('data', date('Y'))->count();
         if ($request->id) {
             $alunos = $this->alunoPorTurma->where([
-                'turma_id' => $request->id, 'igreja_id' => User::getIgreja()->id
+                'turma_id' => $request->id
             ])->get();
-            $presencas =  $this->chamada->where('atraso', false)->where(['turma_id' => $request->id, 'igreja_id' => User::getIgreja()->id])->whereYear('data', date('Y'))->count();
-            $atrasos =  $this->chamada->where('atraso', true)->where(['turma_id' => $request->id, 'igreja_id' => User::getIgreja()->id])->whereYear('data', date('Y'))->count();
+            $presencas =  $this->chamada->where('atraso', false)->where(['turma_id' => $request->id])->whereYear('data', date('Y'))->count();
+            $atrasos =  $this->chamada->where('atraso', true)->where(['turma_id' => $request->id])->whereYear('data', date('Y'))->count();
         }
 
         return view('user.chamadas-turmas', [
