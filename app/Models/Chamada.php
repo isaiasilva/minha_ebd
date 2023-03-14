@@ -14,7 +14,8 @@ class Chamada extends Model
         'turma_id',
         'aluno_id',
         'atraso',
-        'material'
+        'material',
+        'igreja_id'
     ];
 
     public $timestamps = false;

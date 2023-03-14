@@ -82,6 +82,7 @@ class Chamada extends Component
             'aluno_id' => $aluno_id,
             'atraso' => $this->atraso,
             'material' => $this->material,
+            'igreja_id' => User::getIgreja()->id
         ]);
 
         if ($this->atraso === true) {
