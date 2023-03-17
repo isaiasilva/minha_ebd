@@ -12,6 +12,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
+                    <img src="{{ asset(auth()->user()->path_photo) }}" style="max-width: 200px;">
+                </div>
+                <div class="col-md">
                     <div class="form-group">
                         <label for="email">Nome</label>
                         <input type="text" name="name" id="name" value="{{ Auth::user()->name }}" required
@@ -19,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md">
                     <div class="form-group">
                         <label for="email">Usuário</label>
                         <input type="email" name="email" id="email" value="{{ Auth::user()->email }}" required
