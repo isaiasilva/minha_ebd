@@ -24,7 +24,7 @@ class Profile extends Component
     public function mount()
     {
         $user = User::find(Auth::user()->id);
-        $this->profile = Perfil::find($user->id)->perfil;
+        $this->profile = Perfil::find($user->perfil_id)->perfil;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->maritalStatus = $user->estado_civil;
