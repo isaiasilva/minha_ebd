@@ -23,6 +23,7 @@ use App\Http\Livewire\Church\Create;
 use App\Http\Livewire\Church\Edit;
 use App\Http\Livewire\Church\Index;
 use App\Http\Livewire\Church\Show;
+use App\Http\Livewire\User\Profile;
 use App\Http\Livewire\User\Register;
 use App\Models\UsuariosPorIgreja;
 
@@ -90,7 +91,8 @@ Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])-
 Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-aluno');
 
 
-Route::get('/user/perfil', [PerfilController::class, 'index'])->middleware(['auth'])->name('perfil');
+Route::get('/user/perfil', Profile::class)->middleware(['auth'])->name('perfil');
+//Route::get('/user/perfil', [PerfilController::class, 'index'])->middleware(['auth'])->name('perfil');
 Route::put('/user/perfil', [PerfilController::class, 'UPDATE'])->middleware(['auth']);
 
 
