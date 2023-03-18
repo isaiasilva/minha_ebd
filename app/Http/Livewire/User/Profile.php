@@ -4,10 +4,12 @@ namespace App\Http\Livewire\User;
 
 use App\Models\User;
 use App\Models\Perfil;
+use Exception;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Profile extends Component
 {
@@ -38,17 +40,23 @@ class Profile extends Component
 
     public function update()
     {
-        $user = User::find(Auth::user()->id);
+        try {
 
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $user->estado_civil = $this->maritalStatus;
-        $user->data_nascimento = $this->date;
-        $user->telefone = $this->phone;
-        $user->path_photo = $this->photo ? 'storage/' . $this->photo->storeAs('users', Str::slug($user->name) . '.' . $this->photo->getClientOriginalExtension()) : $user->path_photo;
 
-        $user->save();
+            $user = User::find(Auth::user()->id);
 
-        toastr()->addSuccess('Perfil atualizado com sucesso', 'Feito!');
+            $user->name = $this->name;
+            $user->email = $this->email;
+            $user->estado_civil = $this->maritalStatus;
+            $user->data_nascimento = $this->date;
+            $user->telefone = $this->phone;
+            $user->path_photo = $this->photo ? 'storage/' . $this->photo->storeAs('users', Str::slug($user->name) . date('u') .  '.' . $this->photo->getClientOriginalExtension()) : $user->path_photo;
+
+            $user->save();
+
+            toastr()->addSuccess('Perfil atualizado com sucesso', 'Feito!');
+        } catch (Exception $e) {
+            toastr()->addError('Ocorreu um erro ao atualizar', 'Erro!');
+        }
     }
 }
