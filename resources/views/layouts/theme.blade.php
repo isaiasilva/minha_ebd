@@ -17,8 +17,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle menu-header" href="#" id="navbarDropdownMenuLink"
                             data-toggle="dropdown" aria-expanded="false">
-                            <img class="rounded-circle" src="{{ asset(auth()->user()->path_photo) }}" width="20"
-                                height="20"> &nbsp;
+                            <img class="rounded-circle" src="{{ asset(auth()->user()->path_photo) }}" width="35"
+                                height="35"> &nbsp;
                             <span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
