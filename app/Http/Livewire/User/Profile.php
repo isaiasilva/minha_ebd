@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\User;
 
+use DateTime;
+use Exception;
 use App\Models\User;
 use App\Models\Perfil;
-use Exception;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -41,7 +42,9 @@ class Profile extends Component
     public function update()
     {
         try {
+            $today = new DateTime('now');
 
+            $nameFile = hash('sha1', $this->file->getClientOriginalName() . $today->format('u'));
 
             $user = User::find(Auth::user()->id);
 
@@ -50,7 +53,7 @@ class Profile extends Component
             $user->estado_civil = $this->maritalStatus;
             $user->data_nascimento = $this->date;
             $user->telefone = $this->phone;
-            $user->path_photo = $this->photo ? 'storage/' . $this->photo->storeAs('users', Str::slug($user->name) . date('u') .  '.' . $this->photo->getClientOriginalExtension()) : $user->path_photo;
+            $user->path_photo = $this->photo ? 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension()) : $user->path_photo;
 
             $user->save();
 
