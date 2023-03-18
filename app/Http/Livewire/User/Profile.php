@@ -44,7 +44,7 @@ class Profile extends Component
         try {
             $today = new DateTime('now');
 
-            $nameFile = hash('sha1', $this->file->getClientOriginalName() . $today->format('u'));
+            $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
 
             $user = User::find(Auth::user()->id);
 
@@ -59,7 +59,7 @@ class Profile extends Component
 
             toastr()->addSuccess('Perfil atualizado com sucesso', 'Feito!');
         } catch (Exception $e) {
-            toastr()->addError('Ocorreu um erro ao atualizar', 'Erro!');
+            toastr()->addError('Não foi posível atualizar', 'Erro!');
         }
     }
 }
