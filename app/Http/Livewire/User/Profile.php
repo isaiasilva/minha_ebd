@@ -24,6 +24,23 @@ class Profile extends Component
     public $date;
     public $photo;
 
+    protected $rules = [
+        'name' => 'required',
+        'email' => 'required',
+        'maritalStatus' => 'required',
+        'phone' => 'nullable',
+        'date' => 'required',
+        'photo' => 'nullable|mimes:jpg,jpeg,png',
+    ];
+
+    protected $messages = [
+        'name.required' => 'Campo obrigatório',
+        'email.required' => 'Campo obrigatório',
+        'maritalStatus.required' => 'Campo obrigatório',
+        'date.required' => 'Campo obrigatório',
+        'photo.mimes' => 'A foto precisa ser de um formato válido (jpg,jpeg,png)',
+    ];
+
     public function mount()
     {
         $user = User::find(Auth::user()->id);
@@ -41,10 +58,14 @@ class Profile extends Component
 
     public function update()
     {
+        $this->validate();
         try {
-            $today = new DateTime('now');
+            if ($this->photo) {
+                $today = new DateTime('now');
 
-            $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+                $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+            }
+
 
             $user = User::find(Auth::user()->id);
 

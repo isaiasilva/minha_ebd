@@ -5,7 +5,7 @@
 
     <form wire:submit.prevent='update'>
 
-        <input type="hidden" name="id" id="name" value="{{ Auth::user()->id }}" required class="form-control">
+        <input type="hidden" name="id" id="name" value="{{ Auth::user()->id }}" class="form-control">
         <div class="container">
             <div class="row">
                 @if ($photo)
@@ -13,6 +13,9 @@
                         <img src="{{ $photo->temporaryUrl() }}" width="200px" height="200px"
                             class="img-fluid img-thumbnail" style="max-width: 200px;">
                         <p><strong>Aquivo selecionado: </strong> {{ $photo->getClientOriginalName() }} </p>
+                        @error('photo')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
                 @else
                     <div class="col-md-3">
@@ -34,16 +37,22 @@
                             <div class="form-group">
                                 <label for="email">Nome</label>
                                 <input type="text" name="name" id="name" value="" wire:model='name'
-                                    required class="form-control">
+                                    class="form-control">
                             </div>
+                            @error('name')
+                                <p class="error">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="email">Usuário</label>
                                 <input type="email" name="email" id="email" value="{{ Auth::user()->email }}"
-                                    wire:model='email' required class="form-control">
+                                    wire:model='email' class="form-control">
                             </div>
+                            @error('email')
+                                <p class="error">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -56,21 +65,27 @@
                     <div class="form-group">
                         <label for="perfil">Perfil</label>
                         <input type="text" name="perfil" id="perfil" wire:model='profile' value="" readonly
-                            required class="form-control">
+                            class="form-control">
                     </div>
+                    @error('profile')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="estado_civil">Estado Civil</label>
-                        <select class="form-control" name="estado_civil" wire:model='maritalStatus' required>
+                        <select class="form-control" name="estado_civil" wire:model='maritalStatus'>
                             <option value="Solteiro(a)">Solteiro(a)</option>
                             <option value="Casado(a)">Casado(a)</option>
                             <option value="Viuvo(a)">Viuvo(a)</option>
                         </select>
                     </div>
                 </div>
+                @error('maritalStatus')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="row">
@@ -78,8 +93,11 @@
                     <div class="form-group">
                         <label for="data_nascimento">Data de Nascimento</label>
                         <input type="date" name="data_nascimento" id="data_nascimento" value=""
-                            wire:model='date' required class="form-control">
+                            wire:model='date' class="form-control">
                     </div>
+                    @error('date')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="col-md-6">
@@ -88,6 +106,9 @@
                         <input type="tel" name="telefone" id="telefone" class="form-control" value=""
                             wire:model='phone'>
                     </div>
+                    @error('pone')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
