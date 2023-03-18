@@ -79,6 +79,7 @@ class Profile extends Component
             $user->save();
 
             toastr()->addSuccess('Perfil atualizado com sucesso', 'Feito!');
+            return redirect(route('perfil'));
         } catch (Exception $e) {
             toastr()->addError('Não foi posível atualizar', 'Erro!');
         }
