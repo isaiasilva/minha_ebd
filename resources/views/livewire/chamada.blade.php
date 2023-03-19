@@ -56,10 +56,14 @@
             <tbody>
                 @foreach ($alunos as $i => $aluno)
                     <tr>
-                        <td class="text-center">
-                            <img class="rounded-circle" src="{{ asset($aluno->aluno->path_photo) }}" width="60"
-                                height="60">
-                            {{ $aluno->aluno->name }}
+                        <td class="row">
+                            <div class="col">
+                                <img class="rounded-circle" src="{{ asset($aluno->aluno->path_photo) }}" width="60"
+                                    height="60">
+                            </div>
+                            <div class="col ">
+                                {{ $aluno->aluno->name }}
+                            </div>
                         </td>
                         <td>
                             <div class="form-check">
