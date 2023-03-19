@@ -11,7 +11,8 @@
                 <tr class="">
                     <th scope="col">Aluno</th>
                     <th scope="col">Turma</th>
-                    @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
+                    @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE ||
+                            Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR)
                         <th scope="col">Ações</th>
                     @endif
                 </tr>
@@ -21,7 +22,8 @@
                     <tr>
                         <td>{{ $aluno->aluno->name }}</td>
                         <td>{{ $aluno->turma->nome_turma }}</td>
-                        @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
+                        @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE ||
+                                Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR)
                             <td>
                                 <form action="{{ route('excluir-aluno') }}" method="post"
                                     onsubmit="return confirm('Tem certeza?')">
