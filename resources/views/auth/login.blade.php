@@ -18,7 +18,7 @@
                     <div class="col-lg pb-4">
                         <div class="p-2 pb-3 ">
                             <div class="text-center pb-4">
-                                <img src="{{ asset('img/logo_sem_fundo.png') }}" class="img-fluid pt-5" alt="login">
+                                <img src="{{ asset('img/logo_ebd.png') }}" class="img-fluid pt-5" alt="login">
                             </div>
                             <form class="user" method="post" action="/entrar">
                                 @csrf
@@ -44,9 +44,9 @@
 
                             </form>
 
-                            <div class="text-center">
+                            {{--  <div class="text-center">
                                 <a class="small" href="forgot-password.html">Esqueceu a senha?</a>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
