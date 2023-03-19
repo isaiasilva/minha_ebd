@@ -31,19 +31,27 @@
                         @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
                                 Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
                             <td>
-                                <span class="d-flex justify-content-around">
-                                    <a href="/user/usuario/{{ $usuario->id }}/editar" class="btn btn-primary"><i
-                                            class="fas fa-edit"></i> </a>
+                                <p class="text-center pointer" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cog"></i>
+                                </p>
 
-                                    <form action="{{ route('delete.user', ['id' => $usuario->id]) }}" method="post"
-                                        onsubmit="return confirm('Tem certeza? Todos os registros serão apagados e não poderão ser recuperados.')">
-                                        @csrf
-                                        @method('DELETE')
-                                        {{-- <input type="hidden" name="turma_id" value="{{ $turma->id }}"> --}}
-                                        <button class="btn btn-danger" alt="Excluir"><i class="fa fa-eraser"
-                                                aria-hidden="true"></i></button>
-                                    </form>
-                                </span>
+                                <div class="dropdown-menu">
+                                    <span class="dropdown-item">
+                                        <a class="btn" href="/user/usuario/{{ $usuario->id }}/editar"><i
+                                                class="fas fa-edit"></i> Editar</a>
+                                    </span>
+
+                                    <span class="dropdown-item"">
+                                        <form action="{{ route('delete.user', ['id' => $usuario->id]) }}" method="post"
+                                            onsubmit="return confirm('Tem certeza? Todos os registros serão apagados e não poderão ser recuperados.')">
+                                            @csrf
+                                            @method('DELETE')
+                                            {{-- <input type="hidden" name="turma_id" value="{{ $turma->id }}"> --}}
+                                            <button class="btn" alt="Excluir"><i class="fa fa-eraser"
+                                                    aria-hidden="true"></i> Excluir</button>
+                                        </form>
+                                    </span>
+                                </div>
                             </td>
                         @endif
                     </tr>

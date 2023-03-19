@@ -9,6 +9,7 @@ use App\Models\ProfessorPorTurma;
 use App\Models\Turma;
 use App\Models\User;
 use App\Models\UsuariosPorIgreja;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,26 +60,30 @@ class UsuariosController extends Controller
 
     public function destroy($id)
     {
-        $usuario = $this->user->find($id);
+        try {
+            $usuario = $this->user->find($id);
+            $professor = $this->professorPorTurma->where('professor_id', $usuario->id)->get();
+            if ($professor->count() > 0) {
 
-        if ($usuario->perfil_id === Perfil::PROFESSOR) {
-            $colecaoProfessor = $this->professorPorTurma->where('professor_id', $usuario->id)->get();
-            $this->excluirProfessorPorTurma($colecaoProfessor);
+                $this->excluirProfessorPorTurma($professor);
+            }
+
+            $igreja = UsuariosPorIgreja::where('user_id', $id)->first();
+            $igreja->delete();
+
+            $alunosPorTurma = $this->alunoPorTurma->where('user_id', $usuario->id)->get();
+
+            $this->deletaAlunoPorTurma($alunosPorTurma);
+
+            $chamadas = $this->chamada->where('aluno_id', $usuario->id)->get();
+
+            $this->excluirChamada($chamadas);
+
+            $usuario->delete();
+            return redirect()->back()->with('success', 'Usuário excluido com sucesso.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Não foi possível excluir');
         }
-
-        $igreja = UsuariosPorIgreja::where('user_id', $id)->first();
-        $igreja->delete();
-
-        $alunosPorTurma = $this->alunoPorTurma->where('user_id', $usuario->id)->get();
-
-        $this->deletaAlunoPorTurma($alunosPorTurma);
-
-        $chamadas = $this->chamada->where('aluno_id', $usuario->id)->get();
-
-        $this->excluirChamada($chamadas);
-
-        $usuario->delete();
-        return redirect()->back()->with('success', 'Usuário excluido com sucesso.');
     }
 
     public function editarUsuario($id)
