@@ -19,7 +19,7 @@ class Chamada extends Component
     use Helpers;
     use WithPagination;
 
-    public $perpage = 5;
+    public $perpage = 15;
     protected $paginationTheme = 'bootstrap';
     public $data;
 
@@ -32,6 +32,12 @@ class Chamada extends Component
 
     public $atraso;
     public $material;
+
+    protected $rules = [
+        'data' => 'required'
+    ];
+
+    protected $messages = ['data.required' => 'A data é obrigatória!'];
 
 
     public function mount(Request $request)
@@ -75,6 +81,7 @@ class Chamada extends Component
 
     public function store($aluno_id)
     {
+        $this->validate();
         $chamada =  ChamadaModel::create([
             'data' => $this->data,
             'professor_id' => Auth::user()->id,
@@ -142,6 +149,10 @@ class Chamada extends Component
 
     public function verificaPresenca($user_id)
     {
-        return ChamadaModel::where(['aluno_id' => $user_id, 'turma_id' => $this->turma_id, 'data' => $this->data])->first();
+        try {
+            return ChamadaModel::where(['aluno_id' => $user_id, 'turma_id' => $this->turmaAtual, 'data' => $this->data])->first();
+        } catch (Exception $e) {
+            return toastr()->addError('O correu um erro! Verifique se a data está preenchida normalmente', 'Erro!');
+        }
     }
 }
