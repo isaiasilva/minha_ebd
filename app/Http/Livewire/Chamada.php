@@ -82,6 +82,10 @@ class Chamada extends Component
     public function store($aluno_id)
     {
         $this->validate();
+        $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'data' => $this->data])->first();
+        if ($chamada) {
+            return toastr()->addWarning('Não foi possível registrar a presença. Aluno já tem a presença em outra turma hoje.', 'Atenção!');
+        }
         $chamada =  ChamadaModel::create([
             'data' => $this->data,
             'professor_id' => Auth::user()->id,
