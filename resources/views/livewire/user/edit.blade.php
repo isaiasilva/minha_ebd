@@ -1,9 +1,9 @@
 <div>
     @section('cabecalho')
-        Perfil
+        Editar Usuário
     @endsection
 
-    <form wire:submit.prevent='update'>
+    <form wire:submit.prevent='update()'>
 
         <div class="container">
             <div class="row">
@@ -18,8 +18,7 @@
                     </div>
                 @else
                     <div class="col-md-3">
-                        <img src="{{ asset(auth()->user()->path_photo) }}" class="img-fluid img-thumbnail"
-                            style="max-width: 200px;">
+                        <img src="{{ asset($path_photo) }}" class="img-fluid img-thumbnail" style="max-width: 200px;">
                         <div class="input-group mt-2">
                             <label for="uploadFoto" class="btn btn-outline-secondary">Alterar
                                 foto</label>
@@ -63,8 +62,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="perfil">Perfil</label>
-                        <input type="text" name="perfil" id="perfil" wire:model='profile' value="" readonly
-                            class="form-control">
+                        <select class="form-control" wire:model="profile" aria-label="Default select example" required>
+                            <option selected value="">Selecione</option>
+
+                            @foreach ($profiles as $perfil)
+                                <option value="{{ $perfil->id }}">
+                                    {{ $perfil->perfil }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     @error('profile')
                         <p class="error">{{ $message }}</p>

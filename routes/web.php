@@ -23,6 +23,7 @@ use App\Http\Livewire\Church\Create;
 use App\Http\Livewire\Church\Edit;
 use App\Http\Livewire\Church\Index;
 use App\Http\Livewire\Church\Show;
+use App\Http\Livewire\User\Edit as UserEdit;
 use App\Http\Livewire\User\Profile;
 use App\Http\Livewire\User\Register;
 use App\Models\UsuariosPorIgreja;
@@ -53,7 +54,8 @@ Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['au
 
 Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware(['auth'])->name('usuarios');
 Route::delete('/user/{id}/delete', [UsuariosController::class, 'destroy'])->middleware(['auth'])->name('delete.user');
-Route::get('/user/usuario/{id}/editar', [UsuariosController::class, 'editarUsuario'])->middleware(['auth']);
+Route::get('/user/usuario/{id}/editar', UserEdit::class)->name('user.edit')->middleware(['auth']);
+//Route::get('/user/usuario/{id}/editar', [UsuariosController::class, 'editarUsuario'])->middleware(['auth']);
 Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->middleware(['auth']);
 
 Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
@@ -92,7 +94,6 @@ Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])
 
 
 Route::get('/user/perfil', Profile::class)->middleware(['auth'])->name('perfil');
-//Route::get('/user/perfil', [PerfilController::class, 'index'])->middleware(['auth'])->name('perfil');
 Route::put('/user/perfil', [PerfilController::class, 'UPDATE'])->middleware(['auth']);
 
 

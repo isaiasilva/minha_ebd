@@ -37,7 +37,7 @@
 
                                 <div class="dropdown-menu">
                                     <span class="dropdown-item">
-                                        <a class="btn" href="/user/usuario/{{ $usuario->id }}/editar"><i
+                                        <a class="btn" href="{{ route('user.edit', ['id' => $usuario->id]) }}"><i
                                                 class="fas fa-edit"></i> Editar</a>
                                     </span>
 
