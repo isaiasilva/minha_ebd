@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class Profile extends Component
 {
@@ -60,21 +61,13 @@ class Profile extends Component
     {
         $this->validate();
         try {
-            if ($this->photo) {
-                $today = new DateTime('now');
-
-                $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
-            }
-
-
             $user = User::find(Auth::user()->id);
-
             $user->name = $this->name;
             $user->email = $this->email;
             $user->estado_civil = $this->maritalStatus;
             $user->data_nascimento = $this->date;
             $user->telefone = $this->phone;
-            $user->path_photo = $this->photo ? 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension()) : $user->path_photo;
+            $user->path_photo = $this->photo ?  $this->updatePhoto($user->path_photo) : $user->path_photo;
 
             $user->save();
 
@@ -83,5 +76,18 @@ class Profile extends Component
         } catch (Exception $e) {
             toastr()->addError('Não foi posível atualizar', 'Erro!');
         }
+    }
+
+    protected function updatePhoto(string $path_photo): string
+    {
+        if ($path_photo != "img/profile/user-512.webp") {
+            Storage::delete($path_photo);
+        }
+
+        $today = new DateTime('now');
+
+        $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+
+        return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
     }
 }
