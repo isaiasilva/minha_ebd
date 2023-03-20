@@ -8,9 +8,12 @@ use App\Models\User;
 use App\Models\Perfil;
 use Livewire\Component;
 use Illuminate\Support\Str;
+
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class Profile extends Component
@@ -74,7 +77,7 @@ class Profile extends Component
             toastr()->addSuccess('Perfil atualizado com sucesso', 'Feito!');
             return redirect(route('perfil'));
         } catch (Exception $e) {
-            toastr()->addError('Não foi posível atualizar', 'Erro!');
+            toastr()->addError($e->getMessage(), 'Erro!');
         }
     }
 
@@ -86,8 +89,14 @@ class Profile extends Component
 
         $today = new DateTime('now');
 
-        $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+        $img = Image::make($this->photo->getRealPath());
+        $img->crop(200, 200);
 
-        return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
+
+        $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+        $img->save('storage/users/' . $nameFile  .  '.' . 'png');
+
+        //return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
+        return 'storage/users/' . $nameFile  .  '.' . 'png';
     }
 }
