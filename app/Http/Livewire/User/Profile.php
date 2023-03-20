@@ -89,14 +89,14 @@ class Profile extends Component
 
         $today = new DateTime('now');
 
-        $img = Image::make($this->photo->getRealPath());
-        $img->crop(200, 200);
+        /*  $img = Image::make($this->photo->getRealPath());
+        $img->crop(200, 200); */
 
 
         $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
-        $img->save('storage/users/' . $nameFile  .  '.' . 'png');
+        // $img->save('storage/users/' . $nameFile  .  '.' . 'png');
 
-        //return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
-        return 'storage/users/' . $nameFile  .  '.' . 'png';
+        return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
+        // return 'storage/users/' . $nameFile  .  '.' . 'png';
     }
 }
