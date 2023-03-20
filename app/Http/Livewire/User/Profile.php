@@ -90,7 +90,7 @@ class Profile extends Component
         $today = new DateTime('now');
 
         $img = Image::make($this->photo->getRealPath());
-        //$img->crop(200, 200);
+        $img->crop(200, 200);
 
 
         $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
