@@ -7,7 +7,7 @@ use Exception;
 use App\Models\User;
 use App\Models\Perfil;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
@@ -90,13 +90,19 @@ class Edit extends Component
     protected function updatePhoto(string $path_photo): string
     {
         if ($path_photo != "img/profile/user-512.webp") {
-            Storage::delete($path_photo);
+            unlink($path_photo);
         }
 
         $today = new DateTime('now');
 
-        $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+        $img = Image::make($this->photo->getRealPath());
+        /* $img->crop(200, 200); */
 
-        return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
+
+        $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
+        $img->save('storage/users/' . $nameFile  .  '.' . 'webp', 50, 'webp');
+
+        // return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
+        return 'storage/users/' . $nameFile  .  '.' . 'webp';
     }
 }

@@ -7,12 +7,8 @@ use Exception;
 use App\Models\User;
 use App\Models\Perfil;
 use Livewire\Component;
-use Illuminate\Support\Str;
-
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -84,19 +80,19 @@ class Profile extends Component
     protected function updatePhoto(string $path_photo): string
     {
         if ($path_photo != "img/profile/user-512.webp") {
-            Storage::delete($path_photo);
+
+            unlink($path_photo);
         }
 
         $today = new DateTime('now');
 
-        /*  $img = Image::make($this->photo->getRealPath());
-        $img->crop(200, 200); */
+        $img = Image::make($this->photo->getRealPath());
 
 
         $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
-        // $img->save('storage/users/' . $nameFile  .  '.' . 'png');
+        $img->save('storage/users/' . $nameFile  .  '.' . 'webp', 50, 'webp');
 
-        return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
-        // return 'storage/users/' . $nameFile  .  '.' . 'png';
+        // return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
+        return 'storage/users/' . $nameFile  .  '.' . 'webp';
     }
 }
