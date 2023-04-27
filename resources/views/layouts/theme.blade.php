@@ -69,8 +69,8 @@
                     <li class="nav-item mobile-menu d-lg-none mr-auto"><a
                             class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                 class="ft-menu font-large-1"></i></a></li>
-                    <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo"
-                                alt="modern admin logo" src="{{ asset('img/missao-png.png') }}">
+                    <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('principal') }}"><img
+                                class="brand-logo" alt="modern admin logo" src="{{ asset('img/missao-png.png') }}">
                             <h3 class="brand-text">Minha EBD</h3>
                         </a></li>
                     <li class="nav-item d-none d-lg-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0"
