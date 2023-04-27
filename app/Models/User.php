@@ -76,6 +76,15 @@ class User extends Authenticatable
         return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $turma_id])->count();
     }
 
+    public function presencasAnoCorrente(?int $turma_id): int
+    {
+        if (is_null($turma_id)) {
+            return Chamada::where(['aluno_id' => $this->id])->whereYear('data', date('Y'))->count();
+        }
+
+        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $turma_id])->whereYear('data', date('Y'))->count();
+    }
+
     public static function getIgrejaName($id)
     {
         $igreja = UsuariosPorIgreja::where('user_id', $id)->first()->igreja;

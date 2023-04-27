@@ -27,7 +27,7 @@ class PrincipalController extends Controller
 
     public function index()
     {
-        $assiduos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->whereYear('created_at', date('Y'))->get();
+        $assiduos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->get();
         $collect =  collect();
         $assiduos->map(function (UsuariosPorIgreja $user) use (&$collect) {
 
@@ -37,7 +37,7 @@ class PrincipalController extends Controller
                 $usuario = [
                     'name' => $name[0],
                     'photo' => $user->user->path_photo,
-                    'presencas' => $user->user->presencas(null),
+                    'presencas' => $user->user->presencasAnoCorrente(null),
                 ];
 
                 $collect->push((object) $usuario);
