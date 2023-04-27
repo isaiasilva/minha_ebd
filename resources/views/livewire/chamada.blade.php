@@ -1,28 +1,32 @@
 <div>
     <div class="row">
         <div class="col d-flex justify-content-between">
-            <h1 class="display-4 titulo">Chamada - {{ $turma->nome_turma }}</h1>
-            <div class="btn-group">
-                <button type="button" class="btn btn-info  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-exchange-alt"></i> Alterar
-                </button>
-                @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE ||
-                        Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR)
-                    <div class="dropdown-menu altera-curso">
-                        @foreach ($turmas->all() as $turma)
-                            <a class="dropdown-item"
-                                href="/user/chamada/{{ $turma->id }}">{{ $turma->nome_turma }}</a>
-                        @endforeach
-                    </div>
-                @else
-                    <div class="dropdown-menu altera-curso">
-                        @foreach ($minhasTurmas as $minhaTurma)
-                            <a class="dropdown-item"
-                                href="/user/chamada/{{ $minhaTurma->id }}">{{ $minhaTurma->nome_turma }}</a>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
+            @section('cabecalho')
+                Chamada - {{ $turma->nome_turma }}
+            @endsection
+            @section('botao')
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-exchange-alt"></i> Alterar
+                    </button>
+                    @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE ||
+                            Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR)
+                        <div class="dropdown-menu altera-curso">
+                            @foreach ($turmas->all() as $turma)
+                                <a class="dropdown-item"
+                                    href="/user/chamada/{{ $turma->id }}">{{ $turma->nome_turma }}</a>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="dropdown-menu altera-curso">
+                            @foreach ($minhasTurmas as $minhaTurma)
+                                <a class="dropdown-item"
+                                    href="/user/chamada/{{ $minhaTurma->id }}">{{ $minhaTurma->nome_turma }}</a>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            @endsection
         </div>
     </div>
 
