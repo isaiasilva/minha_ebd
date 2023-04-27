@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AlunoPorTurma;
-use App\Models\Chamada;
-use App\Models\Perfil;
-use App\Models\ProfessorPorTurma;
-use App\Models\Turma;
 use App\Models\User;
-use App\Models\UsuariosPorIgreja;
+use App\Models\Turma;
+use App\Models\Perfil;
+use App\Models\Chamada;
 use Illuminate\Http\Request;
+use App\Models\AlunoPorTurma;
+use App\Models\ProfessorPorTurma;
+use App\Models\UsuariosPorIgreja;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
 
 class PrincipalController extends Controller
 {
@@ -26,6 +27,19 @@ class PrincipalController extends Controller
 
     public function index()
     {
+        $assiduos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->get();
+        $collect =  collect();
+        $assiduos->map(function (UsuariosPorIgreja $user) use (&$collect) {
+            $turma = Turma::find($user->turma_id);
+            $name = explode(" ", $user->user->name);
+            $usuario = [
+                'name' => $name[0],
+                'photo' => $user->user->path_photo,
+                'presencas' => $user->user->presencas(null),
+            ];
+
+            $collect->push((object) $usuario);
+        });
 
         return view('user.home', [
             'turmas' => AlunoPorTurma::where('user_id', Auth::user()->id)->get(),
@@ -50,7 +64,8 @@ class PrincipalController extends Controller
             'juniores' => $this->alunoPorTurma->where('turma_id', 6)->count(),
             'primarios' => $this->alunoPorTurma->where('turma_id', 14)->count(),
             'title' => 'Dashboard',
-            'igreja' => UsuariosPorIgreja::where('user_id', Auth::user()->id)->first()
+            'igreja' => UsuariosPorIgreja::where('user_id', Auth::user()->id)->first(),
+            'assiduos' => $collect->sortByDesc('presencas')->take(6)
         ]);
     }
 }

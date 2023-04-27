@@ -9,6 +9,7 @@
         <p>Hoje é {{ date('d/m/Y') }}</p>
     </div>
 
+
     <div class="row">
         <div class="col-xl-3 col-lg-6 col-12">
             <div class="card pull-up">
@@ -106,7 +107,7 @@
         <div class="col-xl-4 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">New Orders</h4>
+                    <h4 class="card-title">Alunos assíduos!</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -120,156 +121,30 @@
                             <table id="new-orders-table" class="table table-hover table-xl mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="border-top-0">Product</th>
-                                        <th class="border-top-0">Customers</th>
-                                        <th class="border-top-0">Total</th>
+                                        <th class="border-top-0">Aluno</th>
+                                        <th class="border-top-0">Foto</th>
+                                        <th class="border-top-0">Presenças</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-truncate">iPhone X</td>
-                                        <td class="text-truncate p-1">
-                                            <ul class="list-unstyled users-list m-0">
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="John Doe" class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-19.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Katherine Nichols"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-18.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Joseph Weaver"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-17.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li class="avatar avatar-sm">
-                                                    <span class="badge badge-info">+4 more</span>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="text-truncate">$8999</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-truncate">Pixel 2</td>
-                                        <td class="text-truncate p-1">
-                                            <ul class="list-unstyled users-list m-0">
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Alice Scott" class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-16.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Charles Miller"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-15.png"
-                                                        alt="Avatar">
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="text-truncate">$5550</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-truncate">OnePlus</td>
-                                        <td class="text-truncate p-1">
-                                            <ul class="list-unstyled users-list m-0">
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Christine Ramos"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-11.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Thomas Brewer"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-10.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Alice Chapman"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-9.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li class="avatar avatar-sm">
-                                                    <span class="badge badge-info">+3 more</span>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="text-truncate">$9000</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-truncate">Galaxy</td>
-                                        <td class="text-truncate p-1">
-                                            <ul class="list-unstyled users-list m-0">
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Ryan Schneider"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-14.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Tiffany Oliver"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-13.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Joan Reid" class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-12.png"
-                                                        alt="Avatar">
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="text-truncate">$7500</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-truncate">Moto Z2</td>
-                                        <td class="text-truncate p-1">
-                                            <ul class="list-unstyled users-list m-0">
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Kimberly Simmons"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-8.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Willie Torres"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-7.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li data-toggle="tooltip" data-popup="tooltip-custom"
-                                                    data-original-title="Rebecca Jones"
-                                                    class="avatar avatar-sm pull-up">
-                                                    <img class="media-object rounded-circle"
-                                                        src="../../../app-assets/images/portrait/small/avatar-s-6.png"
-                                                        alt="Avatar">
-                                                </li>
-                                                <li class="avatar avatar-sm">
-                                                    <span class="badge badge-info">+1 more</span>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                        <td class="text-truncate">$8500</td>
-                                    </tr>
+                                    @foreach ($assiduos as $ass)
+                                        <tr>
+                                            <td class="text-truncate">{{ $ass->name }}</td>
+                                            <td class="text-truncate p-1">
+                                                <ul class="list-unstyled users-list m-0">
+                                                    <li data-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-original-title="{{ $ass->name }}"
+                                                        class="avatar avatar-sm pull-up">
+                                                        <img class="media-object rounded-circle"
+                                                            src="{{ asset($ass->photo) }}" alt="Avatar">
+                                                    </li>
+
+                                                </ul>
+                                            </td>
+                                            <td class="text-truncate">{{ $ass->presencas }}</td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
