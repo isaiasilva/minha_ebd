@@ -27,18 +27,21 @@ class PrincipalController extends Controller
 
     public function index()
     {
-        $assiduos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->get();
+        $assiduos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->whereYear('created_at', date('Y'))->get();
         $collect =  collect();
         $assiduos->map(function (UsuariosPorIgreja $user) use (&$collect) {
-            $turma = Turma::find($user->turma_id);
-            $name = explode(" ", $user->user->name);
-            $usuario = [
-                'name' => $name[0],
-                'photo' => $user->user->path_photo,
-                'presencas' => $user->user->presencas(null),
-            ];
 
-            $collect->push((object) $usuario);
+
+            if ($user->user->perfil_id == Perfil::ALUNO) {
+                $name = explode(" ", $user->user->name);
+                $usuario = [
+                    'name' => $name[0],
+                    'photo' => $user->user->path_photo,
+                    'presencas' => $user->user->presencas(null),
+                ];
+
+                $collect->push((object) $usuario);
+            }
         });
 
         return view('user.home', [
