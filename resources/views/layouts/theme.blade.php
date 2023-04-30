@@ -129,9 +129,8 @@
                             <li><a class="menu-item" href="{{ route('usuarios') }}"><i
                                         class="fas fa-users mr-1"></i><span data-i18n="">Usuários</span></a>
                             </li>
-                            <li><a class="menu-item" href="invoice-template.html"><i class="fa fa-plus mr-1"
-                                        aria-hidden="true"></i><span
-                                        data-i18n="{{ route('register') }}">Novo</span></a>
+                            <li><a class="menu-item" href="{{ route('register') }}"><i class="fa fa-plus mr-1"
+                                        aria-hidden="true"></i><span data-i18n="">Novo</span></a>
                             </li>
                             <li><a class="menu-item" href="{{ route('igrejas.index') }}"><i
                                         class="fas fa-church mr-1"></i><span
