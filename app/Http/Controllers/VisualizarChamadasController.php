@@ -28,7 +28,7 @@ class VisualizarChamadasController extends Controller
 
     public function create()
     {
-        $chamadas = $this->chamada->where('aluno_id', Auth::user()->id)->get();
+        $chamadas = $this->chamada->where('aluno_id', Auth::user()->id)->whereYear('data', date('Y'))->get();
         $presencas = [];
 
         foreach ($chamadas as $chamada) {

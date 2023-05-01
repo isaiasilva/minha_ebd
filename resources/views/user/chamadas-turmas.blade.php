@@ -20,7 +20,7 @@
     @endsection
 
 
-    <div class="content p-1">
+    <div class="">
         <div class="row mb-3">
             <div class="col-lg col-sm-6 mb-3">
                 <div class="card bg-info text-white">
