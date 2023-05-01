@@ -33,12 +33,18 @@
     <div class="row">
         <div class="col-12 col-md-6">
             <label for="data-chamada">Data </label>
-            <input type="date" value="" wire:model='data'>
+            <input class="form-control" type="date" value="" wire:model='data'>
             @error('data')
                 <p>{{ $message }}</p>
             @enderror
         </div>
-        <div class="col-12 col-md-6 d-md-flex justify-content-end align-items-center">
+    </div>
+    <div class="row d-md-flex justify-content-between align-items-center">
+
+        <div class="col-12 col-sm-6 ">
+            <input class="form-control" type="text" placeholder="Filtre pelo nome" wire:model='search'>
+        </div>
+        <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
             <select id='perpage' wire:model="perpage" class="form-select m-3" aria-label="Default select example">
                 <option value="15">15</option>
@@ -46,6 +52,7 @@
                 <option value="30">30</option>
             </select>
         </div>
+
     </div>
 
     <div class="table-responsive">
@@ -58,7 +65,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($alunos as $i => $aluno)
+                @forelse ( $alunos as $i => $aluno )
                     <tr>
                         <td class="row">
                             <div class="col">
@@ -129,7 +136,17 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td class="text-center">
+
+                            <h2>Não existem alunos associados a essa turma!</h2>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforelse
+
             </tbody>
         </table>
     </div>

@@ -22,6 +22,7 @@ class Chamada extends Component
     public $perpage = 15;
     protected $paginationTheme = 'bootstrap';
     public $data;
+    public $search;
 
     public $turmaAtual;
     public $minhasTurmas;
@@ -72,7 +73,7 @@ class Chamada extends Component
         return view(
             'livewire.chamada',
             [
-                'alunos' => AlunoPorTurma::where(['turma_id' => $this->turmaAtual])
+                'alunos' => AlunoPorTurma::where(['turma_id' => $this->turmaAtual])->where('name', 'like', '%' . $this->search . '%')
                     ->orderBy('name', 'ASC')
                     ->paginate($this->perpage)
             ]
