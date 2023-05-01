@@ -78,7 +78,15 @@
                                             width="60" height="60">
                                     </div>
                                     <div class="col mt-1">
-                                        {{ $aluno->aluno->name }}
+                                        @php
+                                            $name = explode(' ', $aluno->aluno->name);
+                                        @endphp
+                                        @if (array_key_exists(1, $name))
+                                            {{ $name[0] }} {{ $name[1] }}
+                                        @else
+                                            {{ $name[0] }}
+                                        @endif
+
                                     </div>
                                 </td>
                                 <td class="text-truncate">
