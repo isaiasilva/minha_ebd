@@ -46,7 +46,7 @@
         </div>
         <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
-            <select id='perpage' wire:model="perpage" class="form-select m-3">
+            <select id='perpage' wire:model="perpage" class="form-select my-3">
                 <option value="15">15</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
@@ -55,100 +55,111 @@
 
     </div>
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th scope="col">Nome</th>
-                    <th scope="col">Presença</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ( $alunos as $i => $aluno )
-                    <tr>
-                        <td class="row">
-                            <div class="col">
-                                <img class="rounded-circle" src="{{ asset($aluno->aluno->path_photo) }}" width="60"
-                                    height="60">
-                            </div>
-                            <div class="col ">
-                                {{ $aluno->aluno->name }}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-check">
-                                @if ($this->verificaPresenca($aluno->user_id))
-                                    <div class="d-flex flex-column">
-                                        <div class="mb-2">
-                                            <input class="form-check-input" wire:click='registraAtraso' checked
-                                                name="" type="checkbox" id="{{ $i }}" disabled>
-                                            <label class="form-check-label" for="{{ $i }}"
-                                                wire:click='registraAtraso'>
-                                                @if ($this->verificaPresenca($aluno->user_id)->atraso == false)
-                                                    Presença
-                                                @else
-                                                    Atraso
-                                                @endif
-                                            </label>
-                                        </div>
-                                        <div class="mb-2">
-                                            <input class="form-check-input" name=""
-                                                @if ($this->verificaPresenca($aluno->user_id)->material == true) checked @endif type="checkbox"
-                                                disabled id="material_didatico" required>
-                                            <label class="form-check-label" for="material_didatico">
-                                                Material Didático
-                                            </label>
-                                        </div>
+    <div class="card ">
+        <div class="card-header">
+            <h4 class="card-title">Alunos</h4>
+        </div>
+        <div class="card-content">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="border-top-0" scope="col">Nome</th>
+                            <th class="border-top-0" scope="col">Presença</th>
+                            <th class="border-top-0" scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ( $alunos as $i => $aluno )
+                            <tr>
+                                <td class="text-truncate text-center">
+                                    <div class="col">
+                                        <img class="rounded-circle" src="{{ asset($aluno->aluno->path_photo) }}"
+                                            width="60" height="60">
                                     </div>
-                                @else
-                                    <div class="d-flex flex-column">
-                                        <div class="mb-2">
-                                            <input class="form-check-input" wire:change='registraAtraso' name="atraso"
-                                                type="checkbox" id="{{ 'presenca' . $i }}">
-                                            <label class="form-check-label" for="{{ 'presenca' . $i }}">
-                                                Atraso
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <input class="form-check-input" wire:change='registraMaterial'
-                                                name="material" checked type="checkbox" id="{{ 'material' . $i }}">
-                                            <label class="form-check-label" for="{{ 'material' . $i }}">
-                                                Material Didático
-                                            </label>
-                                        </div>
+                                    <div class="col mt-1">
+                                        {{ $aluno->aluno->name }}
                                     </div>
-                                @endif
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex">
-                                @if (!$this->verificaPresenca($aluno->user_id))
-                                    <button wire:click.prevent="store({{ $aluno->user_id }} )"
-                                        class="btn btn-primary btn-sm mr-3" alt="Presença"><i
-                                            class="fas fa-stopwatch"></i>
-                                        Registrar presença</button>
-                                @elseif ($this->verificaPresenca($aluno->user_id))
-                                    <a wire:click='destroy("{{ $aluno->user_id }}")' class="btn btn-danger btn-sm mr-3"
-                                        alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i> Deletar presença
-                                    </a>
-                                @endif
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td class="text-center">
+                                </td>
+                                <td class="text-truncate">
+                                    <div class="form-check">
+                                        @if ($this->verificaPresenca($aluno->user_id))
+                                            <div class="d-flex flex-column">
+                                                <div class="mb-2">
+                                                    <input class="form-check-input" wire:click='registraAtraso' checked
+                                                        name="" type="checkbox" id="{{ $i }}"
+                                                        disabled>
+                                                    <label class="form-check-label" for="{{ $i }}"
+                                                        wire:click='registraAtraso'>
+                                                        @if ($this->verificaPresenca($aluno->user_id)->atraso == false)
+                                                            Presença
+                                                        @else
+                                                            Atraso
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input class="form-check-input" name=""
+                                                        @if ($this->verificaPresenca($aluno->user_id)->material == true) checked @endif type="checkbox"
+                                                        disabled id="material_didatico" required>
+                                                    <label class="form-check-label" for="material_didatico">
+                                                        Material Didático
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="d-flex flex-column">
+                                                <div class="mb-2">
+                                                    <input class="form-check-input" wire:change='registraAtraso'
+                                                        name="atraso" type="checkbox" id="{{ 'presenca' . $i }}">
+                                                    <label class="form-check-label" for="{{ 'presenca' . $i }}">
+                                                        Atraso
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input class="form-check-input" wire:change='registraMaterial'
+                                                        name="material" checked type="checkbox"
+                                                        id="{{ 'material' . $i }}">
+                                                    <label class="form-check-label" for="{{ 'material' . $i }}">
+                                                        Material Didático
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="text-center">
 
-                            <h2>Não existem alunos associados a essa turma!</h2>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                @endforelse
+                                    @if (!$this->verificaPresenca($aluno->user_id))
+                                        <button wire:click.prevent="store({{ $aluno->user_id }} )"
+                                            class="btn btn-primary btn-sm mr-3" alt="Presença"><i
+                                                class="fas fa-stopwatch"></i>
+                                            Registrar presença</button>
+                                    @elseif ($this->verificaPresenca($aluno->user_id))
+                                        <a wire:click='destroy("{{ $aluno->user_id }}")'
+                                            class="btn btn-danger btn-sm mr-3" alt="Excluir"><i class="fa fa-eraser"
+                                                aria-hidden="true"></i> Deletar
+                                            presença
+                                        </a>
+                                    @endif
 
-            </tbody>
-        </table>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center">
+
+                                    <h2>Não existem alunos associados a essa turma!</h2>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <div class="d-flex justify-content-center">
         {{ $alunos->links() }}
