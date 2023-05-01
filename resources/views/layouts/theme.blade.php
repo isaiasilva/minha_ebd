@@ -69,8 +69,8 @@
                     <li class="nav-item mobile-menu d-lg-none mr-auto"><a
                             class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                 class="ft-menu font-large-1"></i></a></li>
-                    <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo"
-                                alt="modern admin logo" src="{{ asset('img/missao-png.png') }}">
+                    <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('principal') }}"><img
+                                class="brand-logo" alt="modern admin logo" src="{{ asset('img/missao-png.png') }}">
                             <h3 class="brand-text">Minha EBD</h3>
                         </a></li>
                     <li class="nav-item d-none d-lg-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0"
@@ -129,9 +129,8 @@
                             <li><a class="menu-item" href="{{ route('usuarios') }}"><i
                                         class="fas fa-users mr-1"></i><span data-i18n="">Usuários</span></a>
                             </li>
-                            <li><a class="menu-item" href="invoice-template.html"><i class="fa fa-plus mr-1"
-                                        aria-hidden="true"></i><span
-                                        data-i18n="{{ route('register') }}">Novo</span></a>
+                            <li><a class="menu-item" href="{{ route('register') }}"><i class="fa fa-plus mr-1"
+                                        aria-hidden="true"></i><span data-i18n="">Novo</span></a>
                             </li>
                             <li><a class="menu-item" href="{{ route('igrejas.index') }}"><i
                                         class="fas fa-church mr-1"></i><span
