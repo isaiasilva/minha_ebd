@@ -70,10 +70,10 @@ class User extends Authenticatable
     public function presencas(?int $turma_id): int
     {
         if (is_null($turma_id)) {
-            return Chamada::where(['aluno_id' => $this->id])->whereYear('data', date('Y'))->count();
+            return Chamada::where(['aluno_id' => $this->id])->count();
         }
 
-        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $turma_id])->whereYear('data', date('Y'))->count();
+        return Chamada::where(['aluno_id' => $this->id, 'turma_id' => $turma_id])->count();
     }
 
     public function presencasAnoCorrente(?int $turma_id): int

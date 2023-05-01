@@ -78,7 +78,7 @@
                                 <tr>
 
                                     <td>{{ $aluno->user->name }}</td>
-                                    <td>{{ $aluno->user->presencas($turma_id) }}</td>
+                                    <td>{{ $aluno->user->presencasAnoCorrente($turma_id) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
