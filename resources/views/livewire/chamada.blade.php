@@ -41,12 +41,12 @@
     </div>
     <div class="row d-md-flex justify-content-between align-items-center">
 
-        <div class="col-12 col-sm-6 ">
+        <div class="col-12 col-sm-6 mt-2 mt-md-0">
             <input class="form-control" type="text" placeholder="Filtre pelo nome" wire:model='search'>
         </div>
         <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
-            <select id='perpage' wire:model="perpage" class="form-select m-3" aria-label="Default select example">
+            <select id='perpage' wire:model="perpage" class="form-select m-3">
                 <option value="15">15</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
