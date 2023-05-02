@@ -3,7 +3,7 @@
         {{ $igreja->nome }}
     @endsection
 
-    <div class="content p-1">
+    <div class="p-1">
         <div class="row mb-3">
             <div class="col-lg-3 col-sm-6 mb-3">
                 <div class="card bg-success text-white">
