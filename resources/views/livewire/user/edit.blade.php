@@ -110,18 +110,26 @@
                         <input type="tel" name="telefone" id="telefone" class="form-control" value=""
                             wire:model='phone'>
                     </div>
-                    @error('pone')
+                    @error('pHone')
                         <p class="error">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md">
+                <div class="col-md d-flex justify-content-between ">
                     <button type="submit" class="btn btn-primary mt-3">
                         Atualizar
                     </button>
+                    @if (Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE ||
+                            Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR)
+                        <a href='#' type="submit" wire:click.prevent="resetPassword()"
+                            class="btn btn-primary mt-3">
+                            Resetar senha
+                        </a>
+                    @endif
                 </div>
+
             </div>
 
         </div> <!-- Final do container -->

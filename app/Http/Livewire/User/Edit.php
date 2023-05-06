@@ -6,6 +6,7 @@ use DateTime;
 use Exception;
 use App\Models\User;
 use App\Models\Perfil;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,7 @@ use Livewire\WithFileUploads;
 class Edit extends Component
 {
     use WithFileUploads;
+
     public $user_id;
     public $profile;
     public $profiles;
@@ -104,5 +106,18 @@ class Edit extends Component
 
         // return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
         return 'storage/users/' . $nameFile  .  '.' . 'webp';
+    }
+
+    public function resetPassword()
+    {
+        try {
+            $user = User::find($this->user_id);
+            $user->password = Hash::make(env('PASSWORD_DEFAULT'));
+            $user->save();
+            toastr()->addSuccess('Senha resetada com sucesso', 'Feito!');
+        } catch (Exception $e) {
+
+            toastr()->addError('Não foi posível resetar a senha', 'Erro!');
+        }
     }
 }
