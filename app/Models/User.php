@@ -30,7 +30,7 @@ class User extends Authenticatable
         'telefone'
     ];
 
-    protected $appends = ['presenca', 'igreja', 'presencas'];
+    protected $appends = ['presenca'];
 
     /**
      * The attributes that should be hidden for serialization.
