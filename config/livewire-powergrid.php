@@ -12,7 +12,8 @@ return [
     */
 
     //'theme' => \PowerComponents\LivewirePowerGrid\Themes\Tailwind::class,
-    'theme' => \PowerComponents\LivewirePowerGrid\Themes\Bootstrap5::class,
+    //'theme' => \PowerComponents\LivewirePowerGrid\Themes\Bootstrap5::class,
+    'theme' => \App\View\PowerGrid\Bootstrap4::class,
 
     /*
     |--------------------------------------------------------------------------
