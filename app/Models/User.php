@@ -141,4 +141,9 @@ class User extends Authenticatable
             return back()->with('error', 'Não foi possível incluir o usuário');
         }
     }
+
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
 }

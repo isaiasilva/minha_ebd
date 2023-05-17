@@ -173,8 +173,8 @@
                         @endif
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="la la-file-text"></i><span class="menu-title"
-                            data-i18n="Form Layouts">Chamadas</span></a>
+                <li class=" nav-item"><a href="#" class="menu-title"><i
+                            class="fas fa-list mr-1"></i>Chamadas</a>
                     <ul class="menu-content">
                         @if (Auth::user()->perfil_id !== 2)
                             <li><a class="menu-item" href="{{ route('chamada') }}"><i class="fa fa-plus"
@@ -190,6 +190,10 @@
                                 Visualizar</a></li>
 
                     </ul>
+                </li>
+                <li class=" nav-item"><a href="{{ route('material.index') }}"><i class="la la-file-text"></i><span
+                            class="menu-title" data-i18n="Form Layouts">Material de Apoio</span></a>
+
                 </li>
 
                 <li class=" nav-item"><a href="#"><i class="fas fa-chalkboard-teacher mr-1"></i><span

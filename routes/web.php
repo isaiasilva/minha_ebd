@@ -23,23 +23,14 @@ use App\Http\Livewire\Church\Create;
 use App\Http\Livewire\Church\Edit;
 use App\Http\Livewire\Church\Index;
 use App\Http\Livewire\Church\Show;
+use App\Http\Livewire\Material\Create as MaterialCreate;
+use App\Http\Livewire\Material\Index as MaterialIndex;
+use App\Http\Livewire\Material\Show as MaterialShow;
 use App\Http\Livewire\User\Edit as UserEdit;
 use App\Http\Livewire\User\Profile;
 use App\Http\Livewire\User\Register;
+use App\Http\Livewire\UserTable;
 use App\Models\UsuariosPorIgreja;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 
 
 Route::get('/', function () {
@@ -108,6 +99,15 @@ Route::get('/igrejas', Index::class)->name('igrejas.index')->middleware(['auth']
 Route::get('/igrejas/novo', Create::class)->name('igrejas.create')->middleware(['auth']);
 Route::get('/igrejas/editar/{id}', Edit::class)->name('igrejas.edit')->middleware(['auth']);
 Route::get('/igrejas/{id}', Show::class)->name('igrejas.show')->middleware(['auth']);
+
+Route::prefix('user/material')->name('material.')->group(function () {
+    Route::get('/', MaterialIndex::class)->middleware(['auth'])->name('index');
+    Route::get('create', MaterialCreate::class)->name('create')->middleware(['auth']);
+    Route::get('show/{material}', MaterialShow::class)->name('show')->middleware(['auth']);
+});
+
+Route::get('/users/data-table', UserTable::class)->middleware('auth');
+
 
 Route::get('/sair', function () {
     Auth::logout();
