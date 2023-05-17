@@ -1,6 +1,6 @@
 <div>
-    <div class="content-header row">
-        <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+    <div class="row">
+        <div class=" col-md-6 col-12 mb-2">
             <div class="d-flex justify-content-between align-items-center">
                 @section('cabecalho')
                     Material de Apoio
@@ -17,15 +17,54 @@
                         </li>
                         <li class="breadcrumb-item active"><a href="{{ route('material.index') }}">Materiais</a>
                         </li>
-
                     </ol>
                 </div>
             </div>
         </div>
     </div>
+    <section class="row d-md-flex justify-content-between align-items-center">
+
+        <div class="col-12 col-sm-6 mt-2 mt-md-0">
+            <input class="form-control" type="text" placeholder="Filtre" wire:model='search'>
+        </div>
+        <div class="col-12 col-md-6 text-right">
+            <label for='perpage' class="ps-3">Registros por página</label>
+            <select id='perpage' wire:model="perpage" class="form-select my-3">
+                <option value="15">5</option>
+                <option value="20">10</option>
+                <option value="30">20</option>
+            </select>
+        </div>
+    </section>
     @forelse ($materials as $material)
-        {{ $material->titulo }}
+        <div class="row card">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <span>
+                    <h5>
+                        <b>
+                            <a href="{{ route('material.show', ['material' => $material->id]) }}">{{ $material->titulo }}
+                                - {{ $material->descricao }}</a>
+                        </b>
+                    </h5>
+                </span>
+
+                <div class="btn-group">
+                    <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="la la-ellipsis-v tamanho-pontos"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="">Editar</a></li>
+                        <li><a class="dropdown-item"
+                                onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                                wire:click='delete({{ $material->id }})' href="">Excluir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     @empty
         <p>Não existem materiais</p>
     @endforelse
+    <div class="row d-flex justify-content-around">
+        {{ $materials->links() }}
+    </div>
 </div>
