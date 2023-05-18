@@ -191,13 +191,13 @@
 
                     </ul>
                 </li>
-                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
-                    <li class=" nav-item"><a href="{{ route('material.index') }}"><i
-                                class="la la-file-text"></i><span class="menu-title"
-                                data-i18n="Form Layouts">Material de Apoio</span></a>
-                @endif
+
+                <li class=" nav-item"><a href="{{ route('material.index') }}"><i class="la la-file-text"></i><span
+                            class="menu-title" data-i18n="Form Layouts">Material de Apoio</span></a>
 
                 </li>
+
+
 
                 <li class=" nav-item"><a href="#"><i class="fas fa-chalkboard-teacher mr-1"></i><span
                             class="menu-title" data-i18n="Bootstrap Tables">Professores</span></a>

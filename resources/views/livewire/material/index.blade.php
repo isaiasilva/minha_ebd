@@ -5,10 +5,12 @@
                 @section('cabecalho')
                     Material de Apoio
                 @endsection
-                @section('botao')
-                    <a href="{{ route('material.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Novo
-                    </a>
-                @endsection
+                @can('actions_materials')
+                    @section('botao')
+                        <a href="{{ route('material.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Novo
+                        </a>
+                    @endsection
+                @endcan
             </div>
             <div class="row breadcrumbs-top d-inline-block">
                 <div class="breadcrumb-wrapper col-12">
@@ -47,18 +49,19 @@
                         </b>
                     </h5>
                 </span>
-
-                <div class="btn-group">
-                    <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
-                        <i class="la la-ellipsis-v tamanho-pontos"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('material.edit', $material->id) }}">Editar</a></li>
-                        <li><a class="dropdown-item"
-                                onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                                wire:click.prevent='delete({{ $material->id }})' href="">Excluir</a></li>
-                    </ul>
-                </div>
+                @can('actions_materials')
+                    <div class="btn-group">
+                        <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="la la-ellipsis-v tamanho-pontos"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('material.edit', $material->id) }}">Editar</a></li>
+                            <li><a class="dropdown-item"
+                                    onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                                    wire:click.prevent='delete({{ $material->id }})' href="">Excluir</a></li>
+                        </ul>
+                    </div>
+                @endcan
             </div>
         </div>
     @empty
