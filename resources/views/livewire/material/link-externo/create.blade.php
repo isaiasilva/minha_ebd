@@ -13,7 +13,7 @@
             </div>
 
             <div class="form-group">
-                <label for="link">Url do vídeo</label>
+                <label for="link">Url</label>
                 <input type="text" id="link" wire:model='link' class="form-control">
                 @error('link')
                     <p class="error">

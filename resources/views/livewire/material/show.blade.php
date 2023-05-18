@@ -64,6 +64,7 @@
                 </div>
             </div>
         @endforeach
+
         @foreach ($material->links_externos as $link_externo)
             <div class="card">
                 <div class="card-body">

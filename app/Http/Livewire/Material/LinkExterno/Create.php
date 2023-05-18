@@ -34,7 +34,7 @@ class Create extends Component
             $data = [];
             $data['titulo'] = $this->title;
             $data['url'] = $this->link;
-            $this->material->you_tubes()->create($data);
+            $this->material->links_externos()->create($data);
 
             toastr()->addSuccess('Link inserido', 'Sucesso');
             return redirect(route('material.show', $this->material->id));
