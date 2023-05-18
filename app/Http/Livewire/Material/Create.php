@@ -40,8 +40,8 @@ class Create extends Component
 
             return redirect(route('material.show', $material->id));
         } catch (QueryException $e) {
-            dd($e->getMessage());
-            toastr()->addError('Ocorreu um erro', 'Erro');
+
+            env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível cadastrar', 'Erro!');
         }
     }
 
