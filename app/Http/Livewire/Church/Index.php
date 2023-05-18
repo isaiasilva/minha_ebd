@@ -10,9 +10,13 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+
+    public int $perpage = 5;
+    public string $search = '';
+
     public function render()
     {
-        return view('livewire.church.index', ['igrejas' => Igreja::orderBy('nome')->paginate(10)]);
+        return view('livewire.church.index', ['igrejas' => Igreja::where('nome', 'like', '%' . $this->search . '%')->orderBy('nome')->paginate($this->perpage)]);
     }
 
     public function destroy(Igreja $igreja)
