@@ -19,4 +19,26 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Detalhes do material</h3>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Arquivo</a>
+                    <a class="dropdown-item" href="#">Link </a>
+                    <a class="dropdown-item" href="#">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <p><b>Titulo:</b> {{ $material->titulo }}</p>
+            <p><b>Descricao:</b> {{ $material->descricao }}</p>
+            <p><b>Data de publicação:</b> {{ date('d/m/Y H:i:s', strtotime($material->publicar_em)) }}</p>
+        </div>
+
+    </div>
 </div>

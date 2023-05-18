@@ -191,8 +191,11 @@
 
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="{{ route('material.index') }}"><i class="la la-file-text"></i><span
-                            class="menu-title" data-i18n="Form Layouts">Material de Apoio</span></a>
+                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
+                    <li class=" nav-item"><a href="{{ route('material.index') }}"><i
+                                class="la la-file-text"></i><span class="menu-title"
+                                data-i18n="Form Layouts">Material de Apoio</span></a>
+                @endif
 
                 </li>
 
