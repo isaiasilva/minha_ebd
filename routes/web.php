@@ -24,6 +24,7 @@ use App\Http\Livewire\Church\Edit;
 use App\Http\Livewire\Church\Index;
 use App\Http\Livewire\Church\Show;
 use App\Http\Livewire\Material\Create as MaterialCreate;
+use App\Http\Livewire\Material\Edit as MaterialEdit;
 use App\Http\Livewire\Material\Index as MaterialIndex;
 use App\Http\Livewire\Material\Show as MaterialShow;
 use App\Http\Livewire\User\Edit as UserEdit;
@@ -104,6 +105,7 @@ Route::prefix('user/material')->name('material.')->group(function () {
     Route::get('/', MaterialIndex::class)->middleware(['auth'])->name('index');
     Route::get('create', MaterialCreate::class)->name('create')->middleware(['auth']);
     Route::get('show/{material}', MaterialShow::class)->name('show')->middleware(['auth']);
+    Route::get('edit/{material}', MaterialEdit::class)->name('edit')->middleware(['auth']);
 });
 
 Route::get('/users/data-table', UserTable::class)->middleware('auth');

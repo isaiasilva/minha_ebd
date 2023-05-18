@@ -53,7 +53,7 @@
                         <i class="la la-ellipsis-v tamanho-pontos"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">Editar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('material.edit', $material->id) }}">Editar</a></li>
                         <li><a class="dropdown-item"
                                 onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
                                 wire:click.prevent='delete({{ $material->id }})' href="">Excluir</a></li>
