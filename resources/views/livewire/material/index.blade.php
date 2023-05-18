@@ -37,7 +37,7 @@
         </div>
     </section>
     @forelse ($materials as $material)
-        <div class="row card">
+        <div class="card">
             <div class="card-body d-flex justify-content-between align-items-center">
                 <span>
                     <h5>
@@ -56,7 +56,7 @@
                         <li><a class="dropdown-item" href="">Editar</a></li>
                         <li><a class="dropdown-item"
                                 onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                                wire:click='delete({{ $material->id }})' href="">Excluir</a></li>
+                                wire:click.prevent='delete({{ $material->id }})' href="">Excluir</a></li>
                     </ul>
                 </div>
             </div>

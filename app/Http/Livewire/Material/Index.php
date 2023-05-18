@@ -31,6 +31,7 @@ class Index extends Component
         try {
             $material->delete();
             toastr()->addSuccess('Material excluído', 'Sucesso');
+            return redirect()->back();
         } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
         }
