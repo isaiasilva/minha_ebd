@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\Material\YouTube;
+namespace App\Http\Livewire\Material\LinkExterno;
 
 use Livewire\Component;
 use App\Models\Material;
 use Illuminate\Database\QueryException;
-
 
 class Create extends Component
 {
@@ -22,9 +21,10 @@ class Create extends Component
         'required' => 'Campo obrigatório',
         'url' => 'O link precisa ser uma url válida'
     ];
+
     public function render()
     {
-        return view('livewire.material.you-tube.create');
+        return view('livewire.material.link-externo.create');
     }
 
     public function store()

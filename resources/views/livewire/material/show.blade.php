@@ -31,7 +31,7 @@
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#arquivo">Arquivo</a>
-                    <a class="dropdown-item" href="#">Link </a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#link-externo">Link </a>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#you-tube">YouTube</a>
                 </div>
             </div>
@@ -64,8 +64,18 @@
                 </div>
             </div>
         @endforeach
+        @foreach ($material->links_externos as $link_externo)
+            <div class="card">
+                <div class="card-body">
+                    <strong>Link Externo:</strong> <a target="_blank"
+                        href="{{ $link_externo->url }}">{{ $link_externo->titulo }}</a>
+
+                </div>
+            </div>
+        @endforeach
     </section>
 
     @include('livewire.material.includes.modals.arquivo')
     @include('livewire.material.includes.modals.you-tube')
+    @include('livewire.material.includes.modals.link-externo')
 </div>
