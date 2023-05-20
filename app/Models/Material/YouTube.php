@@ -10,9 +10,19 @@ class YouTube extends Model
 {
     use HasFactory;
     protected $fillable = ['titulo', 'url'];
+    protected $appends = ['code_video'];
 
     public function material()
     {
         return $this->belongsTo(Material::class);
+    }
+
+    public function getCodeVideoAttribute() : string
+    {
+        $parsedUrl = parse_url($this->url);
+
+        $data = explode('=',$parsedUrl['query']);
+
+        return $data[1];
     }
 }

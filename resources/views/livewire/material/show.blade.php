@@ -59,10 +59,21 @@
 
         @foreach ($material->you_tubes as $you_tube)
             <div class="card">
-                <div class="card-body">
-                    <strong>YouTube:</strong> <a target="_blank"
-                        href="{{ $you_tube->url }}">{{ $you_tube->titulo }}</a>
+                <div class="card-header">
+                   <h4>{{ $you_tube->titulo }}</h4>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/{{ $you_tube->code_video ?? null}}"
+                                title="YouTube video player"
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    </div>
 
+                    <div class="mt-3">
+                        <strong>Assistir fora do MinhaEBD:</strong> <a target="_blank"
+                                                                       href="{{ $you_tube->url }}">{{ $you_tube->titulo }}</a>
+                    </div>
                 </div>
             </div>
         @endforeach

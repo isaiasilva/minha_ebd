@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Material\YouTube;
 use Livewire\Component;
 use App\Models\Material;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 
 
 class Create extends Component
@@ -15,13 +16,28 @@ class Create extends Component
 
     protected $rules = [
         'title' => 'required',
-        'link' => 'required|url'
+        'link' => 'required|url|youtube_url'
     ];
 
     protected $messages = [
         'required' => 'Campo obrigatório',
-        'url' => 'O link precisa ser uma url válida'
+        'url' => 'O link precisa ser uma url válida',
+        'youtube_url' => 'O link precisa ser do domínio do YouTube'
     ];
+
+    public function boot()
+    {
+        Validator::extend('youtube_url', function ($url) {
+            $parsedUrl = parse_url($url);
+            $host = $parsedUrl['host'] ?? '';
+
+            if (str_contains($host, 'youtube.com') !== false || str_contains($host, 'youtu.be') !== false) {
+                return true;
+            }
+            return false;
+        });
+    }
+
     public function render()
     {
         return view('livewire.material.you-tube.create');
@@ -42,4 +58,6 @@ class Create extends Component
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível cadastrar', 'Erro!');
         }
     }
+
+
 }
