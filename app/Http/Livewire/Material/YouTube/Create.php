@@ -27,8 +27,9 @@ class Create extends Component
 
     public function boot()
     {
-        Validator::extend('youtube_url', function ($url) {
-            $parsedUrl = parse_url($url);
+        Validator::extend('youtube_url', function ($attribute, $value) {
+
+            $parsedUrl = parse_url($value);
             $host = $parsedUrl['host'] ?? '';
 
             if (str_contains($host, 'youtube.com') !== false || str_contains($host, 'youtu.be') !== false) {
