@@ -49,6 +49,17 @@
 
         @foreach ($material->arquivos as $arquivo)
             <div class="card">
+                <div class="card-header d-flex justify-content-between align-content-center">
+                    <h4>{{ $arquivo->titulo }}</h4>
+                    @can('actions_materials')
+                        <a href="#"
+                           class="btn btn-danger"
+                           onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                           wire:click.prevent="deleteFile({{$arquivo->id}})">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    @endcan
+                </div>
                 <div class="card-body">
                     <strong>Arquivo:</strong> <a target="_blank"
                         href="{{ asset('storage/' . $arquivo->caminho_arquivo) }}">{{ $arquivo->titulo }}</a>
@@ -58,6 +69,16 @@
         @endforeach
 
         @foreach ($material->links_externos as $link_externo)
+                <div class="card-header d-flex justify-content-between align-content-center">
+                    <h4>{{ $link_externo->titulo }}</h4>
+                    @can('actions_materials')
+                        <a href="#"  class="btn btn-danger"
+                           onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                           wire:click.prevent="deleteLink({{$link_externo->id}})" >
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    @endcan
+                </div>
                 <div class="card">
                    <div class="card-body">
                         <strong>Link Externo:</strong> <a target="_blank"
@@ -69,9 +90,17 @@
 
         @foreach ($material->you_tubes as $you_tube)
             <div class="card">
-                <div class="card-header">
-                   <h4>{{ $you_tube->titulo }}</h4>
+                <div class="card-header d-flex justify-content-between align-content-center">
+                    <h4>{{ $you_tube->titulo }}</h4>
+                    @can('actions_materials')
+                        <a href="#" class="btn btn-danger"
+                           onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                           wire:click.prevent="deleteYouTube({{$you_tube->id}})">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    @endcan
                 </div>
+
                 <div class="card-body d-flex flex-column">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/{{ $you_tube->code_video ?? null}}"
