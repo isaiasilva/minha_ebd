@@ -20,9 +20,11 @@ class YouTube extends Model
     public function getCodeVideoAttribute() : string
     {
         $parsedUrl = parse_url($this->url);
+        if (array_key_exists('query',$parsedUrl )){
+            $data = explode('=',$parsedUrl['query']);
+            return $data[1];
+        }
 
-        $data = explode('=',$parsedUrl['query']);
-
-        return $data[1];
+        return "";
     }
 }
