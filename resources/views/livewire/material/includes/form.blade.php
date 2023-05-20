@@ -32,24 +32,26 @@
                     </p>
                 @enderror
             </div>
-            <div class="row ">
-                <div class="col-12 col-lg-2">
-                    <div class="form-group">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox"
-                                @if ($fields['material_global']) checked @endif wire:click='changeGlobalPublish'
-                                id="flexSwitchCheckDefault">
-                            <label for="flexSwitchCheckDefault" class="fs-5 text">Publicação
-                                global?</label>
+            @can('is_admin')
+
+                <div class="row ">
+                    <div class="col-12 col-lg-2">
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox"
+                                    @if ($fields['material_global']) checked @endif wire:click='changeGlobalPublish'
+                                    id="flexSwitchCheckDefault">
+                                <label for="flexSwitchCheckDefault" class="fs-5 text">Publicação
+                                    global?</label>
+                            </div>
 
                         </div>
-
                     </div>
+                    <span class="small">Publicações globais serão visiveis para todas
+                        as
+                        igrejas.</span>
                 </div>
-                <span class="small">Publicações globais serão visiveis para todas
-                    as
-                    igrejas.</span>
-            </div>
+            @endcan
         </div>
     </div>
 </div>
