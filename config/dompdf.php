@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ return array(
      */
     'convert_entities' => true,
 
-    'options' => array(
+    'options' => [
         /**
          * The location of the DOMPDF font directory
          *
@@ -91,12 +91,12 @@ return array(
          * @var array
          */
         'allowed_protocols' => [
-            "file://" => ["rules" => []],
-            "http://" => ["rules" => []],
-            "https://" => ["rules" => []]
+            "file://"  => ["rules" => []],
+            "http://"  => ["rules" => []],
+            "https://" => ["rules" => []],
         ],
 
-         /**
+        /**
           * @var string
           */
         'log_output_file' => null,
@@ -171,7 +171,7 @@ return array(
          */
         "default_paper_size" => "a4",
 
-         /**
+        /**
           * The default paper orientation.
           *
           * The orientation of the page (portrait or landscape).
@@ -278,7 +278,6 @@ return array(
          * @var bool
          */
         "enable_html5_parser" => true,
-    ),
+    ],
 
-
-);
+];

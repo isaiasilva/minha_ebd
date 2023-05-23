@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Turma;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\{Turma, User};
 use Illuminate\Support\Facades\Auth;
 
 class AlunosController extends Controller
@@ -15,7 +13,7 @@ class AlunosController extends Controller
 
         $alunos = User::where(['turma_id' => Auth::user()->turma_id, 'perfil_id' => 2])->get();
 
-        return view('user.alunos', ['turma'=>$turma, 'alunos' => $alunos, 'title' => 'Alunos']);
+        return view('user.alunos', ['turma' => $turma, 'alunos' => $alunos, 'title' => 'Alunos']);
 
     }
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\AlunoPorTurma;
-use App\Models\Turma;
-use Livewire\Component;
-use Illuminate\Http\Request;
+use App\Models\{AlunoPorTurma, Turma};
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Livewire\Component;
 
 class Relatorios extends Component
 {
     public $turmas;
+
     public $turma_id;
     public function mount()
     {
@@ -26,10 +26,11 @@ class Relatorios extends Component
         $pdf = Pdf::loadView(
             'relatorios.aluno-por-turma',
             [
-                'turma' => Turma::find($this->turma_id),
-                'alunos' => AlunoPorTurma::where('turma_id', $this->turma_id)->orderBy('name')->get()
+                'turma'  => Turma::find($this->turma_id),
+                'alunos' => AlunoPorTurma::where('turma_id', $this->turma_id)->orderBy('name')->get(),
             ]
         );
+
         return $pdf->stream();
     }
 }

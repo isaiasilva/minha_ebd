@@ -3,30 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\AlunoPorTurma;
-use App\Models\Igreja;
-use App\Models\Perfil;
-use App\Models\ProfessorPorTurma;
-use App\Models\Turma;
-use App\Models\User;
-use App\Models\UsuariosPorIgreja;
-use App\Providers\RouteServiceProvider;
-use DomainException;
+use App\Models\{AlunoPorTurma, Igreja, Perfil, ProfessorPorTurma, Turma, User, UsuariosPorIgreja};
 use Exception;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{Auth, Hash};
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
     private $turma;
+
     private $perfil;
 
     private $alunoPorTurma;
 
     private $professorPorTurma;
+
     private UsuariosPorIgreja $igreja;
 
     public function __construct(
@@ -36,11 +28,11 @@ class RegisteredUserController extends Controller
         ProfessorPorTurma $professorPorTurma,
         UsuariosPorIgreja $igreja
     ) {
-        $this->turma = $turma;
-        $this->perfil = $perfil;
-        $this->alunoPorTurma = $alunoPorTurma;
+        $this->turma             = $turma;
+        $this->perfil            = $perfil;
+        $this->alunoPorTurma     = $alunoPorTurma;
         $this->professorPorTurma = $professorPorTurma;
-        $this->igreja = $igreja;
+        $this->igreja            = $igreja;
     }
 
     /**
@@ -64,7 +56,7 @@ class RegisteredUserController extends Controller
     public function registrarAluno()
     {
         $repositorioTurmas = $this->turma;
-        $turmas = $this->professorPorTurma->where('professor_id', Auth::user()->id)->get();
+        $turmas            = $this->professorPorTurma->where('professor_id', Auth::user()->id)->get();
 
         return view('auth.registrar-aluno', ['turmas' => $turmas, 'title' => 'Novo aluno', 'repositorioTurmas' => $repositorioTurmas]);
     }
@@ -80,34 +72,33 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'perfil_id' => ['required'],
-            'estado_civil' => ['required', 'string'],
+            'name'            => ['required', 'string', 'max:255'],
+            'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'perfil_id'       => ['required'],
+            'estado_civil'    => ['required', 'string'],
             'data_nascimento' => ['required', 'date'],
-            'turma_id' => ['required'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'turma_id'        => ['required'],
+            'password'        => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         try {
             $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'perfil_id' => $request->perfil_id,
-                'estado_civil' => $request->estado_civil,
+                'name'            => $request->name,
+                'email'           => $request->email,
+                'perfil_id'       => $request->perfil_id,
+                'estado_civil'    => $request->estado_civil,
                 'data_nascimento' => $request->data_nascimento,
-                'turma_id' => $request->turma_id,
-                'password' => Hash::make($request->password),
-                'telefone' => $request->telefone
+                'turma_id'        => $request->turma_id,
+                'password'        => Hash::make($request->password),
+                'telefone'        => $request->telefone,
             ]);
 
             //Associando primera turma do aluno
             $this->alunoPorTurma->create([
-                'user_id' => $user->id,
+                'user_id'  => $user->id,
                 'turma_id' => $request->turma_id,
-                'name' => $user->name
+                'name'     => $user->name,
             ]);
 
             $this->igreja->create(['user_id' => $user->id, 'igreja_id' => User::getIgreja()->id]);

@@ -2,10 +2,7 @@
 
 namespace Tests\Feature\Livewire\Administrator\User;
 
-use App\Http\Livewire\Administrator\User\Register;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Livewire\Livewire;
+use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -13,7 +10,6 @@ class RegisterTest extends TestCase
     /** @test */
     public function the_component_can_render()
     {
-
 
         $this->assertTrue(true);
     }

@@ -73,9 +73,9 @@ return [
         */
         'mapping' => [
             'success' => ['success'],
-            'error' => ['error', 'danger'],
+            'error'   => ['error', 'danger'],
             'warning' => ['warning', 'alarm'],
-            'info' => ['info', 'notice', 'alert'],
+            'info'    => ['info', 'notice', 'alert'],
         ],
     ],
 

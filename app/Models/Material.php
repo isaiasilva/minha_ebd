@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Material\Arquivo;
-use App\Models\Material\LinkExterno;
-use App\Models\Material\Texto;
-use App\Models\Material\YouTube;
+use App\Models\Material\{Arquivo, LinkExterno, Texto, YouTube};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

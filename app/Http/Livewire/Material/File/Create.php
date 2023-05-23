@@ -4,25 +4,26 @@ namespace App\Http\Livewire\Material\File;
 
 use App\Models\Material;
 use Illuminate\Database\QueryException;
-use Livewire\Component;
-use Livewire\WithFileUploads;
+use Livewire\{Component, WithFileUploads};
 
 class Create extends Component
 {
     use WithFileUploads;
 
     public Material $material;
+
     public $title = '';
+
     public $file;
 
     protected $rules = [
         'title' => 'required',
-        'file' => 'required|mimes:pdf,docx,pptx,txt'
+        'file'  => 'required|mimes:pdf,docx,pptx,txt',
     ];
 
     protected $messages = [
         'required' => 'Campo obrigatório',
-        'mimes' => 'Só é permitido arquvios das seguintes extenções: pdf,docx,pptx,txt'
+        'mimes'    => 'Só é permitido arquvios das seguintes extenções: pdf,docx,pptx,txt',
     ];
 
     public function render()
@@ -34,12 +35,13 @@ class Create extends Component
     {
         try {
             $this->validate();
-            $data = [];
-            $data['titulo'] = $this->title;
+            $data                    = [];
+            $data['titulo']          = $this->title;
             $data['caminho_arquivo'] = $this->file->store('arquivos');
             $this->material->arquivos()->create($data);
 
             toastr()->addSuccess('Aquivo inserido', 'Sucesso');
+
             return redirect(route('material.show', $this->material->id));
         } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível cadastrar', 'Erro!');

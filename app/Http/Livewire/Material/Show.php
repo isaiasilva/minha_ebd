@@ -21,8 +21,9 @@ class Show extends Component
             $arquivo->delete();
             Storage::delete($arquivo->caminho_arquivo);
             toastr()->addSuccess('Arquivo apagado', 'Sucesso');
+
             return redirect(route('material.show', $this->material->id));
-        } catch (QueryException $e){
+        } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
 
         }
@@ -33,8 +34,9 @@ class Show extends Component
         try {
             $linkExterno->delete();
             toastr()->addSuccess('Link apagado', 'Sucesso');
+
             return redirect(route('material.show', $this->material->id));
-        } catch (QueryException $e){
+        } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
 
         }
@@ -46,8 +48,9 @@ class Show extends Component
             $youTube->delete();
 
             toastr()->addSuccess('Vídeo apagado', 'Sucesso');
+
             return redirect(route('material.show', $this->material->id));
-        } catch (QueryException $e){
+        } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
 
         }

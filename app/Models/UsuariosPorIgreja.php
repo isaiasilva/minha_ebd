@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UsuariosPorIgreja extends Model
 {
     use HasFactory;
+
     protected $fillable = ['user_id', 'igreja_id'];
 
     public function igreja()

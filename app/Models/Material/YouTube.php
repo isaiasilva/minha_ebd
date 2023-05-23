@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class YouTube extends Model
 {
     use HasFactory;
+
     protected $fillable = ['titulo', 'url'];
+
     protected $appends = ['code_video'];
 
     public function material()
@@ -17,16 +19,19 @@ class YouTube extends Model
         return $this->belongsTo(Material::class);
     }
 
-    public function getCodeVideoAttribute() : string
+    public function getCodeVideoAttribute(): string
     {
         $parsedUrl = parse_url($this->url);
-        if (array_key_exists('query',$parsedUrl ) && str_contains("/watch", $parsedUrl['path'] )){
-            $data = explode('=',$parsedUrl['query']);
+
+        if (array_key_exists('query', $parsedUrl) && str_contains("/watch", $parsedUrl['path'])) {
+            $data = explode('=', $parsedUrl['query']);
+
             return $data[1];
         }
 
-        if (!array_key_exists('query',$parsedUrl ) && array_key_exists('path',$parsedUrl )){
-            $data = explode('/',$parsedUrl['path']);
+        if (!array_key_exists('query', $parsedUrl) && array_key_exists('path', $parsedUrl)) {
+            $data = explode('/', $parsedUrl['path']);
+
             return $data[1];
         }
 

@@ -2,8 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Tests\TestCase;
 
 class ChamadaTest extends TestCase

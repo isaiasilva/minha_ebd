@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Turma;
-use App\Models\Igreja;
-use App\Models\Chamada;
+use App\Models\{Chamada, Igreja, Turma, User};
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TurmaController extends Controller
 {
     private Turma $turma;
-    private User $user;
 
+    private User $user;
 
     public function __construct(Turma $turma, User $user)
     {
         $this->turma = $turma;
-        $this->user = $user;
+        $this->user  = $user;
     }
 
     public function index()
@@ -39,7 +35,7 @@ class TurmaController extends Controller
         $turma = $this->turma;
         $turma->create([
             'nome_turma' => $request->nome_turma,
-            'igreja_id' => $this->user::getIgreja()->id
+            'igreja_id'  => $this->user::getIgreja()->id,
         ]);
 
         return redirect('user/turma')->with('success', 'Turma registrada com sucesso!');
@@ -51,9 +47,11 @@ class TurmaController extends Controller
             $turma = $this->turma->find($request->turma_id);
             $turma->delete();
             toastr()->addSuccess('Turma apagada com sucesso!', 'Feito!');
+
             return redirect('user/turmas');
         } catch (Exception $e) {
             toastr()->addError('Não foi possível apagar a turma!', 'Erro!');
+
             return redirect()->back();
         }
     }
@@ -65,6 +63,7 @@ class TurmaController extends Controller
         if (is_null($turma)) {
             return view('user.turmas')->with('danger', 'Houve algum problema, não encontrei a turma.');
         }
+
         return view('user.editar-turma', ['title' => 'Editar Turma', 'turma' => $turma]);
     }
 

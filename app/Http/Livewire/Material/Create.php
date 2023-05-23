@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Material;
 
-use App\Models\Material;
 use Illuminate\Database\QueryException;
 use Livewire\Component;
 
@@ -11,13 +10,13 @@ class Create extends Component
     public array $fields = [];
 
     protected array $rules = [
-        'fields.titulo' => 'required',
-        'fields.descricao' => 'required',
+        'fields.titulo'      => 'required',
+        'fields.descricao'   => 'required',
         'fields.publicar_em' => 'required',
     ];
 
     protected array $messages = [
-        'required' => 'Campo obrigatório'
+        'required' => 'Campo obrigatório',
     ];
 
     public function mount()
@@ -32,9 +31,10 @@ class Create extends Component
     public function store()
     {
         $this->validate();
+
         try {
             $this->fields['igreja_id'] = auth()->user()->getIgreja()->id;
-            $material =  auth()->user()->materials()->create($this->fields);
+            $material                  = auth()->user()->materials()->create($this->fields);
 
             toastr()->addSuccess('Material criado', 'Sucesso');
 
@@ -48,7 +48,12 @@ class Create extends Component
     public function changeGlobalPublish()
     {
 
-        if ($this->fields['material_global'] == false) return $this->fields['material_global'] = true;
-        if ($this->fields['material_global'] == true) return $this->fields['material_global'] = false;
+        if ($this->fields['material_global'] == false) {
+            return $this->fields['material_global'] = true;
+        }
+
+        if ($this->fields['material_global'] == true) {
+            return $this->fields['material_global'] = false;
+        }
     }
 }

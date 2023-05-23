@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\{Auth, Hash};
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +27,7 @@ class User extends Authenticatable
         'data_nascimento',
         'turma_id',
         'password',
-        'telefone'
+        'telefone',
     ];
 
     protected $appends = ['presenca'];
@@ -50,7 +50,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
 
     public function perfil()
     {
@@ -88,6 +87,7 @@ class User extends Authenticatable
     public static function getIgrejaName($id)
     {
         $igreja = UsuariosPorIgreja::where('user_id', $id)->first()->igreja;
+
         return $igreja->nome;
     }
 
@@ -110,25 +110,24 @@ class User extends Authenticatable
         try {
 
             $user = User::create([
-                'name' => $name,
-                'email' => $email,
-                'perfil_id' => $perfil_id,
-                'estado_civil' => $estado_civil,
+                'name'            => $name,
+                'email'           => $email,
+                'perfil_id'       => $perfil_id,
+                'estado_civil'    => $estado_civil,
                 'data_nascimento' => $data_nascimento,
-                'password' => $password ? Hash::make($password) : Hash::make("ChamadaEBD"),
-                'telefone' => $telefone ? $telefone : ""
+                'password'        => $password ? Hash::make($password) : Hash::make("ChamadaEBD"),
+                'telefone'        => $telefone ? $telefone : "",
             ]);
 
             //Associando primera turma do aluno
             if (!is_null($turma_id)) {
                 AlunoPorTurma::create([
-                    'user_id' => $user->id,
-                    'turma_id' => $turma_id,
-                    'name' => $name,
-                    'igreja_id' => $igreja_id
+                    'user_id'   => $user->id,
+                    'turma_id'  => $turma_id,
+                    'name'      => $name,
+                    'igreja_id' => $igreja_id,
                 ]);
             }
-
 
             $igreja = User::getIgreja()->id;
 

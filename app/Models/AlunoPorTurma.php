@@ -13,10 +13,10 @@ class AlunoPorTurma extends Model
         'user_id',
         'turma_id',
         'igreja_id',
-        'name'
+        'name',
     ];
-    protected $appends = ['presenca'];
 
+    protected $appends = ['presenca'];
 
     public function aluno()
     {

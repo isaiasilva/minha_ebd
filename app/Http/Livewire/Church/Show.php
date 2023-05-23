@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire\Church;
 
-use App\Models\Igreja;
-use App\Models\Chamada;
-use Livewire\Component;
+use App\Models\{Chamada, Igreja};
 use Illuminate\Http\Request;
+use Livewire\Component;
 
 class Show extends Component
 {
     public $igreja;
+
     public $presencas;
     public function mount(Request $request)
     {
-        $this->igreja = Igreja::find($request->id);
+        $this->igreja    = Igreja::find($request->id);
         $this->presencas = $this->recuperaPresencas();
     }
     public function render()

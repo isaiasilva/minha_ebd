@@ -12,7 +12,7 @@ class ProfessorPorTurma extends Model
     protected $fillable = [
         'professor_id',
         'turma_id',
-        'igreja_id'
+        'igreja_id',
     ];
 
     public $timestamps = false;

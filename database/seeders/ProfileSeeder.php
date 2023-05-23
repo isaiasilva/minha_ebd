@@ -15,7 +15,7 @@ class ProfileSeeder extends Seeder
     public function run()
     {
         DB::table('perfils')->insert([
-            'perfil' => 'Superintendente'
+            'perfil' => 'Superintendente',
         ]);
     }
 }

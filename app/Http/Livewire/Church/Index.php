@@ -3,15 +3,16 @@
 namespace App\Http\Livewire\Church;
 
 use App\Models\Igreja;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public int $perpage = 5;
+
     public string $search = '';
 
     public function render()

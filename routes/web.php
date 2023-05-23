@@ -1,43 +1,17 @@
 <?php
 
-use App\Models\User;
-use App\Http\Livewire\Relatorios;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\TurmaController;
-use App\Http\Controllers\AlunosController;
-use App\Http\Controllers\EntrarController;
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ChamadaController;
-use App\Http\Controllers\UsuariosController;
-use App\Http\Controllers\PrincipalController;
-use App\Http\Controllers\AlterarSenhaController;
-use App\Http\Controllers\AlunosPorTurmaController;
-use App\Http\Controllers\ProfessorPorTurmaController;
-use App\Http\Controllers\VisualizarChamadasController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTurmaController, ChamadaController, EntrarController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
 use App\Http\Livewire\Administrator\User\Register as UserRegister;
-use App\Http\Livewire\Chamada;
-use App\Http\Livewire\Church\Create;
-use App\Http\Livewire\Church\Edit;
-use App\Http\Livewire\Church\Index;
-use App\Http\Livewire\Church\Show;
-use App\Http\Livewire\Material\Create as MaterialCreate;
-use App\Http\Livewire\Material\Edit as MaterialEdit;
-use App\Http\Livewire\Material\Index as MaterialIndex;
-use App\Http\Livewire\Material\Show as MaterialShow;
-use App\Http\Livewire\User\Edit as UserEdit;
-use App\Http\Livewire\User\Profile;
-use App\Http\Livewire\User\Register;
-use App\Http\Livewire\UserTable;
-use App\Models\UsuariosPorIgreja;
-
+use App\Http\Livewire\Church\{Create, Edit, Index, Show};
+use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
+use App\Http\Livewire\User\{Edit as UserEdit, Profile, Register};
+use App\Http\Livewire\{Chamada, Relatorios, UserTable};
+use App\Models\{User, UsuariosPorIgreja};
+use Illuminate\Support\Facades\{Auth, Route};
 
 Route::get('/', function () {
     return view('auth.login');
 });
-
 
 Route::get('/entrar', [EntrarController::class, 'index'])->name("entrar");
 Route::post('/entrar', [EntrarController::class, 'login']);
@@ -84,10 +58,8 @@ Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])-
 Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);
 Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-aluno');
 
-
 Route::get('/user/perfil', Profile::class)->middleware(['auth'])->name('perfil');
 Route::put('/user/perfil', [PerfilController::class, 'UPDATE'])->middleware(['auth']);
-
 
 Route::get('/user/alterar-senha', [AlterarSenhaController::class, 'create'])->name('alterar-senha');
 Route::post('/user/alterar-senha', [AlterarSenhaController::class, 'store'])->name('alterar-senha');
@@ -110,9 +82,9 @@ Route::prefix('user/material')->name('material.')->group(function () {
 
 Route::get('/users/data-table', UserTable::class)->middleware('auth');
 
-
 Route::get('/sair', function () {
     Auth::logout();
+
     return redirect('/entrar');
 });
 
@@ -120,8 +92,8 @@ Route::get('/register', UserRegister::class)->name('register')->middleware(['aut
 
 Route::get('/gameficacao', function () {
     toastr()->addInfo('Função em desenvolvimento', 'Aguarde!');
+
     return back();
 })->name('gamiicacao')->middleware('auth');
-
 
 require __DIR__ . '/auth.php';

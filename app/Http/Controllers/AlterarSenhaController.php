@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\{Auth, Hash, Password};
 use Illuminate\Support\Str;
 
 class AlterarSenhaController extends Controller
@@ -37,10 +34,10 @@ class AlterarSenhaController extends Controller
         $usuario = $this->user->find(Auth::user()->id);
 
         $usuario->update([
-            'password' => Hash::make($request->password),
-            'remember_token' => Str::random(60)
+            'password'       => Hash::make($request->password),
+            'remember_token' => Str::random(60),
         ]);
 
-        return redirect()->back()->with('success','Senha alterada com sucesso!');
+        return redirect()->back()->with('success', 'Senha alterada com sucesso!');
     }
 }

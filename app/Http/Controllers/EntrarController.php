@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Turma;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{Auth, DB};
 
 class EntrarController extends Controller
 {
     protected array $rules = [
-        'email' => 'required|email',
-        'password' => 'required'
+        'email'    => 'required|email',
+        'password' => 'required',
     ];
 
     protected array $messages = [
-        'email.required' => "Campo email é obrigatório.",
-        'email.email' => "Campo email precisa ser de um formato válido.",
-        'password.required' => "Campo eenha é obrigatório."
+        'email.required'    => "Campo email é obrigatório.",
+        'email.email'       => "Campo email precisa ser de um formato válido.",
+        'password.required' => "Campo eenha é obrigatório.",
     ];
 
     public function index()
@@ -25,6 +23,7 @@ class EntrarController extends Controller
         if (Auth::user()) {
             redirect(route('principal'));
         }
+
         return view('auth.login');
     }
 
@@ -34,10 +33,12 @@ class EntrarController extends Controller
 
         if (!Auth::attempt($request->only(['email', 'password']))) {
             toastr()->addError('Usuário ou senha inválidos', 'Erro');
+
             return redirect()
                 ->back()
                 ->withInput($request->except('password'));
         }
+
         return redirect('/user/home');
     }
 }

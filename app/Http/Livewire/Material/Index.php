@@ -2,16 +2,18 @@
 
 namespace App\Http\Livewire\Material;
 
-use Livewire\Component;
 use App\Models\Material;
 use Illuminate\Database\QueryException;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
+
     public int $perpage = 5;
+
     public string $search = '';
 
     public function render()
@@ -31,6 +33,7 @@ class Index extends Component
         try {
             $material->delete();
             toastr()->addSuccess('Material excluído', 'Sucesso');
+
             return redirect()->back();
         } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');

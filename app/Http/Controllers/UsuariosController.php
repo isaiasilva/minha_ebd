@@ -2,13 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AlunoPorTurma;
-use App\Models\Chamada;
-use App\Models\Perfil;
-use App\Models\ProfessorPorTurma;
-use App\Models\Turma;
-use App\Models\User;
-use App\Models\UsuariosPorIgreja;
+use App\Models\{AlunoPorTurma, Chamada, Perfil, ProfessorPorTurma, Turma, User, UsuariosPorIgreja};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class UsuariosController extends Controller
 {
     private Turma $turma;
+
     private User $user;
+
     private Perfil $perfil;
+
     private Chamada $chamada;
+
     private ProfessorPorTurma $professorPorTurma;
+
     private AlunoPorTurma $alunoPorTurma;
 
     public function __construct(
@@ -30,17 +29,17 @@ class UsuariosController extends Controller
         ProfessorPorTurma $professorPorTurma,
         AlunoPorTurma $alunoPorTurma
     ) {
-        $this->turma = $turma;
-        $this->user = $user;
-        $this->perfil = $perfil;
-        $this->chamada = $chamada;
+        $this->turma             = $turma;
+        $this->user              = $user;
+        $this->perfil            = $perfil;
+        $this->chamada           = $chamada;
         $this->professorPorTurma = $professorPorTurma;
-        $this->alunoPorTurma = $alunoPorTurma;
+        $this->alunoPorTurma     = $alunoPorTurma;
     }
 
     public function index()
     {
-        $turma = $this->turma->find(Auth::user()->turma_id);
+        $turma  = $this->turma->find(Auth::user()->turma_id);
         $perfil = $this->perfil;
 
         if (Auth::user()->perfil_id == Perfil::ADMINISTRADOR) {
@@ -61,8 +60,9 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         try {
-            $usuario = $this->user->find($id);
+            $usuario   = $this->user->find($id);
             $professor = $this->professorPorTurma->where('professor_id', $usuario->id)->get();
+
             if ($professor->count() > 0) {
 
                 $this->excluirProfessorPorTurma($professor);
@@ -80,6 +80,7 @@ class UsuariosController extends Controller
             $this->excluirChamada($chamadas);
 
             $usuario->delete();
+
             return redirect()->back()->with('success', 'Usuário excluido com sucesso.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Não foi possível excluir');
@@ -89,17 +90,16 @@ class UsuariosController extends Controller
     public function editarUsuario($id)
     {
         $usuario = $this->user->find($id);
-        $perfil = $this->perfil->find($usuario->perfil_id);
-        $perfis = $this->perfil->all();
-
+        $perfil  = $this->perfil->find($usuario->perfil_id);
+        $perfis  = $this->perfil->all();
 
         return view('user.editar-usuario', [
-            'title' => 'Editar Usuários',
-            'usuario' => $usuario,
-            'perfis' => $perfis,
+            'title'       => 'Editar Usuários',
+            'usuario'     => $usuario,
+            'perfis'      => $perfis,
             'perfilAtual' => $perfil,
 
-            'telefone' => $usuario->telefone
+            'telefone' => $usuario->telefone,
         ]);
     }
 
@@ -107,14 +107,12 @@ class UsuariosController extends Controller
     {
         $usuario = $this->user->find($id);
 
-        $usuario->name = $request->name;
-        $usuario->email = $request->email;
-        $usuario->perfil_id = $request->perfil_id;
+        $usuario->name            = $request->name;
+        $usuario->email           = $request->email;
+        $usuario->perfil_id       = $request->perfil_id;
         $usuario->data_nascimento = $request->data_nascimento;
-        $usuario->estado_civil = $request->estado_civil;
-        $usuario->telefone = $request->telefone;
-
-
+        $usuario->estado_civil    = $request->estado_civil;
+        $usuario->telefone        = $request->telefone;
 
         $usuario->save();
 
@@ -128,12 +126,12 @@ class UsuariosController extends Controller
         }
     }
 
-
     protected function excluirChamada($chamadas): void
     {
         if ($chamadas->count() < 1) {
             return;
         }
+
         foreach ($chamadas as $chamada) {
             $chamada->delete();
         }
@@ -147,6 +145,7 @@ class UsuariosController extends Controller
         if ($alunosPorTurma->count() < 1) {
             return;
         }
+
         foreach ($alunosPorTurma as $alunoPorTurma) {
             $alunoPorTurma->delete();
         }
@@ -155,18 +154,19 @@ class UsuariosController extends Controller
     protected function atualizaAlunoPorTurma($usuario_id, $turma_id)
     {
         $alunoPorTurma = $this->alunoPorTurma;
+
         if (count($alunoPorTurma->where([
-            'user_id' => $usuario_id,
-            'turma_id' => $turma_id
+            'user_id'  => $usuario_id,
+            'turma_id' => $turma_id,
         ])->get()) === 1) {
             // retorna nada caso o usuario já esteja associado a turma
             return false;
         }
 
         $alunoPorTurma->create([
-            'user_id' => $usuario_id,
+            'user_id'  => $usuario_id,
             'turma_id' => $turma_id,
-            'name' => $this->user->find($usuario_id)->name
+            'name'     => $this->user->find($usuario_id)->name,
         ]);
 
         return true;

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chamada extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'data',
         'professor_id',
@@ -15,7 +16,7 @@ class Chamada extends Model
         'aluno_id',
         'atraso',
         'material',
-        'igreja_id'
+        'igreja_id',
     ];
 
     public $timestamps = false;

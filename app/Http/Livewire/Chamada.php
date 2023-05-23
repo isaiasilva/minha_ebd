@@ -2,17 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ProfessorPorTurma;
-use App\Models\Turma;
-use App\Models\User;
-use App\Models\Chamada as ChamadaModel;
+use App\Helper\Helpers;
+use App\Models\{AlunoPorTurma, Chamada as ChamadaModel, ProfessorPorTurma, Turma, User};
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
-use App\Helper\Helpers;
-use App\Models\AlunoPorTurma;
-use Exception;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class Chamada extends Component
 {
@@ -20,26 +15,34 @@ class Chamada extends Component
     use WithPagination;
 
     public $perpage = 15;
+
     protected $paginationTheme = 'bootstrap';
+
     public $data;
+
     public $search;
 
     public $turmaAtual;
+
     public $minhasTurmas;
+
     public $turmas;
+
     public $nomeTurma;
+
     public $professor;
+
     public $turma;
 
     public $atraso;
+
     public $material;
 
     protected $rules = [
-        'data' => 'required'
+        'data' => 'required',
     ];
 
     protected $messages = ['data.required' => 'A data é obrigatória!'];
-
 
     public function mount(Request $request)
     {
@@ -47,26 +50,27 @@ class Chamada extends Component
 
         if (is_null($turmas->first())) {
             toastr()->addError('Não foi encontrado nenhuma turma', 'Erro');
+
             return redirect('/user/home');
         }
 
         $turma = $turmas->first();
 
         $this->minhasTurmas = $turmas;
-        $this->nomeTurma = $turma->nome_turma;
-        $this->data = date('Y-m-d');
-        $this->turmaAtual = $turma->id;
-        $this->turma = $turmas->first();
+        $this->nomeTurma    = $turma->nome_turma;
+        $this->data         = date('Y-m-d');
+        $this->turmaAtual   = $turma->id;
+        $this->turma        = $turmas->first();
+
         if ($request->id) {
             $this->turmaAtual = $request->id;
-            $this->turma = Turma::find($request->id);
+            $this->turma      = Turma::find($request->id);
         }
 
-        $this->turmas = Turma::where('igreja_id', User::getIgreja()->id)->get();
-        $this->atraso = false;
+        $this->turmas   = Turma::where('igreja_id', User::getIgreja()->id)->get();
+        $this->atraso   = false;
         $this->material = true;
     }
-
 
     public function render()
     {
@@ -75,7 +79,7 @@ class Chamada extends Component
             [
                 'alunos' => AlunoPorTurma::where(['turma_id' => $this->turmaAtual])->where('name', 'like', '%' . $this->search . '%')
                     ->orderBy('name', 'ASC')
-                    ->paginate($this->perpage)
+                    ->paginate($this->perpage),
             ]
         );
     }
@@ -84,25 +88,28 @@ class Chamada extends Component
     {
         $this->validate();
         $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'data' => $this->data])->first();
+
         if ($chamada) {
             return toastr()->addWarning('Não foi possível registrar a presença. Aluno já tem a presença em outra turma hoje.', 'Atenção!');
         }
-        $chamada =  ChamadaModel::create([
-            'data' => $this->data,
+        $chamada = ChamadaModel::create([
+            'data'         => $this->data,
             'professor_id' => Auth::user()->id,
-            'turma_id' => $this->turmaAtual,
-            'aluno_id' => $aluno_id,
-            'atraso' => $this->atraso,
-            'material' => $this->material,
-            'igreja_id' => User::getIgreja()->id
+            'turma_id'     => $this->turmaAtual,
+            'aluno_id'     => $aluno_id,
+            'atraso'       => $this->atraso,
+            'material'     => $this->material,
+            'igreja_id'    => User::getIgreja()->id,
         ]);
 
         if ($this->atraso === true) {
             $this->restauraValoresAtrasoMaterial();
+
             return toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
         }
 
         $this->restauraValoresAtrasoMaterial();
+
         return toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
     }
 
@@ -123,11 +130,13 @@ class Chamada extends Component
         if ($this->atraso == false) {
 
             $this->atraso = true;
+
             return;
         }
 
         if ($this->atraso == true) {
             $this->atraso = false;
+
             return;
         }
     }
@@ -137,18 +146,20 @@ class Chamada extends Component
 
         if ($this->material == true) {
             $this->material = false;
+
             return;
         }
 
         if ($this->material == false) {
             $this->material = true;
+
             return;
         }
     }
 
     public function restauraValoresAtrasoMaterial()
     {
-        $this->atraso = false;
+        $this->atraso   = false;
         $this->material = true;
     }
 

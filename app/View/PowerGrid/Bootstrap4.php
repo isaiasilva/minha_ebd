@@ -2,7 +2,6 @@
 
 namespace App\View\PowerGrid;
 
-use PowerComponents\LivewirePowerGrid\Themes\{Theme, ThemeBase};
 use PowerComponents\LivewirePowerGrid\Themes\Components\{
     Actions,
     Checkbox,
@@ -20,7 +19,7 @@ use PowerComponents\LivewirePowerGrid\Themes\Components\{
     Table,
     Toggleable,
 };
-
+use PowerComponents\LivewirePowerGrid\Themes\{Theme, ThemeBase};
 
 class Bootstrap4 extends ThemeBase
 {

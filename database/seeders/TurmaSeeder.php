@@ -20,32 +20,31 @@ class TurmaSeeder extends Seeder
         ]);
 
         DB::table('turmas')->insert([
-            'nome_turma' => 'Adultos'
+            'nome_turma' => 'Adultos',
         ]);
 
         DB::table('turmas')->insert([
-            'nome_turma' => 'Discipulado'
-        ]);
-
-
-        DB::table('turmas')->insert([
-            'nome_turma' => 'Jardim da Infância'
+            'nome_turma' => 'Discipulado',
         ]);
 
         DB::table('turmas')->insert([
-            'nome_turma' => 'Jovens'
+            'nome_turma' => 'Jardim da Infância',
         ]);
 
         DB::table('turmas')->insert([
-            'nome_turma' => 'Juniores'
+            'nome_turma' => 'Jovens',
         ]);
 
         DB::table('turmas')->insert([
-            'nome_turma' => 'Líderes'
+            'nome_turma' => 'Juniores',
         ]);
 
         DB::table('turmas')->insert([
-            'nome_turma' => 'Maternal'
+            'nome_turma' => 'Líderes',
+        ]);
+
+        DB::table('turmas')->insert([
+            'nome_turma' => 'Maternal',
         ]);
     }
 }

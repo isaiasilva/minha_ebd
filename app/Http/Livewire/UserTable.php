@@ -3,11 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
-use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class UserTable extends PowerGridComponent
@@ -172,7 +172,6 @@ final class UserTable extends PowerGridComponent
      * @return array<int, Button>
      */
 
-
     public function actions(): array
     {
         return [
@@ -188,10 +187,9 @@ final class UserTable extends PowerGridComponent
                 ->route('delete.user', function (\App\Models\User $model) {
                     return ['id' => $model->id];
                 })
-                ->method('delete')
+                ->method('delete'),
         ];
     }
-
 
     /*
     |--------------------------------------------------------------------------

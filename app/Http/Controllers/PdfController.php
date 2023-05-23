@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AlunoPorTurma;
-use App\Models\Turma;
-use Illuminate\Http\Request;
+use App\Models\{AlunoPorTurma, Turma};
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
@@ -19,10 +18,11 @@ class PdfController extends Controller
         $pdf = Pdf::loadView(
             'relatorios.aluno-por-turma',
             [
-                'turma' => $this->turma->find($request->turma),
-                'alunos' => $this->alunos->where('turma_id', $request->turma)->orderBy('name')->get()
+                'turma'  => $this->turma->find($request->turma),
+                'alunos' => $this->alunos->where('turma_id', $request->turma)->orderBy('name')->get(),
             ]
         );
+
         return $pdf->stream();
     }
 }
