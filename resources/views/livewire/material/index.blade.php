@@ -48,6 +48,13 @@
                                 - {{ $material->descricao }}</a>
                         </b>
                     </h5>
+                    <p>
+                        @if ($material->material_global)
+                            Material Global
+                        @else
+                            {{ $material->igreja->nome }}
+                        @endif
+                    </p>
                 </span>
                 @can('actions_materials')
                     <div class="btn-group">

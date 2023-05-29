@@ -31,4 +31,9 @@ class Material extends Model
     {
         return $this->hasMany(Texto::class);
     }
+
+    public function igreja()
+    {
+        return $this->belongsTo(Igreja::class);
+    }
 }

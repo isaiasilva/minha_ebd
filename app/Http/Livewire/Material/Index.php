@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Material;
 
 use App\Models\Material;
+use App\Models\Perfil;
 use Illuminate\Database\QueryException;
 use Livewire\{Component, WithPagination};
 
@@ -18,7 +19,17 @@ class Index extends Component
 
     public function render()
     {
+        if (auth()->user()->perfil_id == Perfil::ADMINISTRADOR) {
+            $materials = Material::where('titulo', 'like', '%' . $this->search . '%')
+                ->orderBy('id', 'desc')
+                ->whereYear('created_at', now('Y'))
+                ->paginate($this->perpage);
+
+            return view('livewire.material.index', ['materials' => $materials]);
+        }
+
         $materials = Material::whereIgrejaId(auth()->user()->getIgreja()->id)
+            ->orWhere('material_global', true)
             ->where('titulo', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'desc')
             ->where('publicar_em', '<=', date('Y-m-d H:i:s'))
