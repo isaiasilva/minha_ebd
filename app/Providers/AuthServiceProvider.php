@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\{Perfil, User};
+use App\Models\{Material, Perfil, User};
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,18 +26,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('actions_materials', function () {
-            if (auth()->user()->perfil_id == Perfil::ALUNO) {
-                return false;
-            }
-
-            return true;
-        });
 
         Gate::define('is_admin', function () {
             if (auth()->user()->perfil_id == Perfil::ADMINISTRADOR) {
                 return true;
             }
+
+            return false;
+        });
+
+        Gate::define('action_material', function (User $user, Material $material) {
+
+            if ($user->perfil_id == Perfil::ADMINISTRADOR) return true;
+            if ($user->perfil_id == Perfil::SUPERINTENDENTE && $material->material_global == false) return true;
+            if ($user->id == $material->user_id) return true;
 
             return false;
         });

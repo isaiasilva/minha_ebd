@@ -24,7 +24,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h3>Detalhes do material</h3>
-            @can('actions_materials')
+            @can('action_material', $material)
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">
@@ -39,6 +39,7 @@
             @endcan
         </div>
         <div class="card-body">
+            <p><b>Autor:</b> {{ $material->user->name }}</p>
             <p><b>Titulo:</b> {{ $material->titulo }}</p>
             <p><b>Descricao:</b> {{ $material->descricao }}</p>
             <p><b>Data de publicação:</b> {{ date('d/m/Y H:i:s', strtotime($material->publicar_em)) }}</p>
@@ -51,11 +52,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-content-center">
                     <h4>{{ $arquivo->titulo }}</h4>
-                    @can('actions_materials')
-                        <a href="#"
-                           class="btn btn-danger"
-                           onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                           wire:click.prevent="deleteFile({{$arquivo->id}})">
+                    @can('action_material', $material)
+                        <a href="#" class="btn btn-danger"
+                            onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                            wire:click.prevent="deleteFile({{ $arquivo->id }})">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     @endcan
@@ -69,33 +69,33 @@
         @endforeach
 
         @foreach ($material->links_externos as $link_externo)
-                <div class="card-header d-flex justify-content-between align-content-center">
-                    <h4>{{ $link_externo->titulo }}</h4>
-                    @can('actions_materials')
-                        <a href="#"  class="btn btn-danger"
-                           onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                           wire:click.prevent="deleteLink({{$link_externo->id}})" >
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    @endcan
-                </div>
-                <div class="card">
-                   <div class="card-body">
-                        <strong>Link Externo:</strong> <a target="_blank"
-                                                          href="{{ $link_externo->url }}">{{ $link_externo->titulo }}</a>
+            <div class="card-header d-flex justify-content-between align-content-center">
+                <h4>{{ $link_externo->titulo }}</h4>
+                @can('action_material', $material)
+                    <a href="#" class="btn btn-danger"
+                        onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                        wire:click.prevent="deleteLink({{ $link_externo->id }})">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                @endcan
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <strong>Link Externo:</strong> <a target="_blank"
+                        href="{{ $link_externo->url }}">{{ $link_externo->titulo }}</a>
 
-                    </div>
                 </div>
+            </div>
         @endforeach
 
         @foreach ($material->you_tubes as $you_tube)
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-content-center">
                     <h4>{{ $you_tube->titulo }}</h4>
-                    @can('actions_materials')
+                    @can('action_material', $material)
                         <a href="#" class="btn btn-danger"
-                           onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                           wire:click.prevent="deleteYouTube({{$you_tube->id}})">
+                            onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                            wire:click.prevent="deleteYouTube({{ $you_tube->id }})">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     @endcan
@@ -103,15 +103,16 @@
 
                 <div class="card-body d-flex flex-column">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/{{ $you_tube->code_video ?? null}}"
-                                title="YouTube video player"
-                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item"
+                            src="https://www.youtube.com/embed/{{ $you_tube->code_video ?? null }}"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
                     </div>
 
                     <div class="mt-3">
                         <strong>Assistir fora do MinhaEBD:</strong> <a target="_blank"
-                                                                       href="{{ $you_tube->url }}">{{ $you_tube->titulo }}</a>
+                            href="{{ $you_tube->url }}">{{ $you_tube->titulo }}</a>
                     </div>
                 </div>
             </div>

@@ -56,7 +56,7 @@
                         @endif
                     </p>
                 </span>
-                @can('actions_materials')
+                @can('action_material', $material)
                     <div class="btn-group">
                         <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="la la-ellipsis-v tamanho-pontos"></i>

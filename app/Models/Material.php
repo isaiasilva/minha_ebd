@@ -6,6 +6,7 @@ use App\Models\Material\{Arquivo, LinkExterno, Texto, YouTube};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Material extends Model
 {
     use HasFactory;
@@ -35,5 +36,10 @@ class Material extends Model
     public function igreja()
     {
         return $this->belongsTo(Igreja::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
