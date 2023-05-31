@@ -21,6 +21,7 @@ class Index extends Component
         $alunos = AlunoPorTurma::join('users', 'aluno_por_turmas.user_id', '=', 'users.id')
             ->join('turmas', 'aluno_por_turmas.turma_id', '=', 'turmas.id')
             ->orderBy('users.name', 'ASC')
+            ->where('aluno_por_turmas.igreja_id', auth()->user()->getIgreja()->id)
             ->where('users.name', 'LIKE', '%' . $this->search . '%')
             ->orWhere('turmas.nome_turma', 'LIKE', '%' . $this->search . '%')
             ->paginate($this->perpage);
