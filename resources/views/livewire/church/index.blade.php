@@ -40,7 +40,6 @@
         <table class="card-body table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">EBD</th>
                     <th scope="col" class="text-center">Ações</th>
@@ -49,7 +48,6 @@
             <tbody>
                 @foreach ($igrejas as $igreja)
                     <tr>
-                        <th scope="row">{{ $igreja->id }}</th>
                         <td><a href="{{ route('igrejas.show', $igreja->id) }}">{{ $igreja->nome }}</a></td>
                         <td>{{ $igreja->dia_ebd }} de {{ $igreja->horario }}</td>
                         <td>
