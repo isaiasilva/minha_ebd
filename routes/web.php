@@ -5,7 +5,7 @@ use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Church\{Create, Edit, Index, Show};
 use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
 use App\Http\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
-use App\Http\Livewire\User\{Edit as UserEdit, Profile, Register};
+use App\Http\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
 use App\Http\Livewire\{Chamada, Relatorios, UserTable};
 use App\Models\{User, UsuariosPorIgreja};
 use Illuminate\Support\Facades\{Auth, Route};
@@ -19,7 +19,7 @@ Route::post('/entrar', [EntrarController::class, 'login']);
 
 Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['auth'])->name('principal');
 
-Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware(['auth'])->name('usuarios');
+Route::get('/user/usuarios', UserIndex::class)->middleware(['auth'])->name('usuarios');
 Route::delete('/user/{id}/delete', [UsuariosController::class, 'destroy'])->middleware(['auth'])->name('delete.user');
 Route::get('/user/usuario/{id}/editar', UserEdit::class)->name('user.edit')->middleware(['auth']);
 Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->middleware(['auth']);
