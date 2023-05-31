@@ -35,17 +35,17 @@
                         <tr class="">
                             <th scope="col">Aluno</th>
                             <th scope="col">Turma</th>
-                            <th scope="col">Ações</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($alunos as $aluno)
                             <tr>
-                                <form method="post">
-                                    @csrf
-                                    <input type="hidden" name="aluno" value="{{ $aluno->user->id }}">
-                                    <td>{{ $aluno->user->name }}</td>
-                                    <td>
+                                <td>{{ $aluno->user->name }}</td>
+                                <td class="col-8 ">
+                                    <form method="post" class="d-lg-flex">
+                                        @csrf
+                                        <input type="hidden" name="aluno" value="{{ $aluno->user->id }}">
                                         <select class="form-control" name="turma" aria-label="Default select example"
                                             required>
                                             <option selected value="">Selecione</option>
@@ -53,13 +53,15 @@
                                                 <option value="{{ $turma->id }}">{{ $turma->nome_turma }}</option>
                                             @endforeach
                                         </select>
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-primary">
-                                            Associar
-                                        </button>
-                                    </td>
-                                </form>
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-primary mt-1 mt-lg-0 mx-lg-1 ">
+                                                Associar
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </td>
+
                             </tr>
                         @endforeach
                     </tbody>
