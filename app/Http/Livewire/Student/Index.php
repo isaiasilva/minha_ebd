@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Student;
 
 use App\Models\AlunoPorTurma;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
 use Livewire\{Component, WithPagination};
 
@@ -18,13 +19,15 @@ class Index extends Component
 
     public function render()
     {
+        $igreja = auth()->user()->getIgreja()->id;
+
         $alunos = AlunoPorTurma::join('users', 'aluno_por_turmas.user_id', '=', 'users.id')
             ->join('turmas', 'aluno_por_turmas.turma_id', '=', 'turmas.id')
-            ->join('igrejas', 'aluno_por_turmas.igreja_id', '=', 'igrejas.id')
-            ->where('igrejas.id', auth()->user()->getIgreja()->id)
             ->orderBy('users.name', 'ASC')
             ->where('users.name', 'LIKE', '%' . $this->search . '%')
-            ->orWhere('turmas.nome_turma', 'LIKE', '%' . $this->search . '%')
+            ->when($igreja, function (Builder $query, $igreja) {
+                $query->where('aluno_por_turmas.igreja_id', $igreja);
+            })
             ->paginate($this->perpage);
 
         return view('livewire.student.index', ['alunos' => $alunos]);
