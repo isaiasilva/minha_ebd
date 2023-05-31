@@ -15,8 +15,7 @@
     <div class="card">
         <div class="card-body">
             <form wire:submit.prevent='update'>
-
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row">
                         @if ($photo)
                             <div class="col-md-3">
