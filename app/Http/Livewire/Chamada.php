@@ -67,7 +67,7 @@ class Chamada extends Component
             $this->turma      = Turma::find($request->id);
         }
 
-        $this->turmas   = Turma::where('igreja_id', User::getIgreja()->id)->get();
+        $this->turmas   = Turma::where('igreja_id', User::getIgreja()->id)->orderBy('nome_turma', 'ASC')->get();
         $this->atraso   = false;
         $this->material = true;
     }
