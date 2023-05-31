@@ -2,12 +2,31 @@
 
 namespace App\Http\Livewire\Student;
 
-use Livewire\Component;
+use App\Models\{Perfil, Turma, User, UsuariosPorIgreja};
+use Livewire\{Component, WithPagination};
 
 class Create extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
+    public int $perpage = 5;
+
+    public string $search = '';
+
     public function render()
     {
-        return view('livewire.student.create');
+        $turmas = Turma::where('igreja_id', auth()->user()->getIgreja()->id)->get();
+        $alunos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)
+            ->join('users', 'usuarios_por_igrejas.user_id', 'users.id')
+            ->where('users.name', 'LIKE', '%' . $this->search . '%')
+            ->paginate($this->perpage);
+
+        if (auth()->user()->perfil_id == Perfil::PROFESSOR) {
+            $turmas = $this->getTurmas();
+        }
+
+        return view('livewire.student.create', ['turmas' => $turmas, 'alunos' => $alunos]);
     }
 }

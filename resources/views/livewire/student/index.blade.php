@@ -20,9 +20,9 @@
         <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
             <select id='perpage' wire:model="perpage" class="form-select my-3">
-                <option value="15">5</option>
-                <option value="20">10</option>
-                <option value="30">20</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
             </select>
         </div>
     </section>

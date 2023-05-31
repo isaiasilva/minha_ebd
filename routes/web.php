@@ -4,7 +4,7 @@ use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTur
 use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Church\{Create, Edit, Index, Show};
 use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
-use App\Http\Livewire\Student\Index as StudentIndex;
+use App\Http\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Http\Livewire\User\{Edit as UserEdit, Profile, Register};
 use App\Http\Livewire\{Chamada, Relatorios, UserTable};
 use App\Models\{User, UsuariosPorIgreja};
@@ -53,7 +53,7 @@ Route::get('/user/atualiza-turma/{id}', [ProfessorPorTurmaController::class, 'at
 Route::post('/user/excluir-professor', [ProfessorPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-professor');
 
 Route::get('/user/aluno-por-turma', StudentIndex::class)->middleware(['auth'])->name('alunoPorTurma');
-Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-aluno');
+Route::get('/user/associar-aluno', StudentCreate::class)->middleware(['auth'])->name('associar-aluno');
 Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);
 Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-aluno');
 
