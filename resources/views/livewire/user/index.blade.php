@@ -50,9 +50,8 @@
                                 <td>{{ $usuario->name }}</td>
                                 <td>{{ date('d/m/Y', strtotime($usuario->data_nascimento)) }}</td>
                                 <td>{{ $usuario->perfil }} </td>
-                                <td>{{ App\Models\User::getIgrejaName($usuario->id) }}</td>
-                                @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
-                                        Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
+                                <td>{{ App\Models\User::getIgrejaName($usuario->user_id) }}</td>
+                                @can('admin_superintendente')
                                     <td>
                                         <p class="text-center pointer" data-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-cog"></i>
@@ -61,12 +60,12 @@
                                         <div class="dropdown-menu">
                                             <span class="dropdown-item">
                                                 <a class="btn"
-                                                    href="{{ route('user.edit', ['id' => $usuario->id]) }}"><i
+                                                    href="{{ route('user.edit', ['id' => $usuario->user_id]) }}"><i
                                                         class="fas fa-edit"></i> Editar</a>
                                             </span>
 
                                             <span class="dropdown-item"">
-                                                <form action="{{ route('delete.user', ['id' => $usuario->id]) }}"
+                                                <form action="{{ route('delete.user', ['id' => $usuario->user_id]) }}"
                                                     method="post"
                                                     onsubmit="return confirm('Tem certeza? Todos os registros serão apagados e não poderão ser recuperados.')">
                                                     @csrf
@@ -78,7 +77,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                @endif
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>
