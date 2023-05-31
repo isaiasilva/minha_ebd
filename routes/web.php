@@ -4,6 +4,7 @@ use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTur
 use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Church\{Create, Edit, Index, Show};
 use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
+use App\Http\Livewire\Student\Index as StudentIndex;
 use App\Http\Livewire\User\{Edit as UserEdit, Profile, Register};
 use App\Http\Livewire\{Chamada, Relatorios, UserTable};
 use App\Models\{User, UsuariosPorIgreja};
@@ -21,7 +22,6 @@ Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['au
 Route::get('/user/usuarios', [UsuariosController::class, 'index'])->middleware(['auth'])->name('usuarios');
 Route::delete('/user/{id}/delete', [UsuariosController::class, 'destroy'])->middleware(['auth'])->name('delete.user');
 Route::get('/user/usuario/{id}/editar', UserEdit::class)->name('user.edit')->middleware(['auth']);
-//Route::get('/user/usuario/{id}/editar', [UsuariosController::class, 'editarUsuario'])->middleware(['auth']);
 Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->middleware(['auth']);
 
 Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
@@ -32,7 +32,6 @@ Route::get('/user/chamada/{id}', Chamada::class)->middleware(['auth']);
 
 Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
 Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['auth'])->name('atraso');
-//Route::post('/user/excluir-presenca', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 Route::get('/user/excluir-presenca/{turma}/{aluno}', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 
 Route::get('/user/visualizar-chamadas/', [VisualizarChamadasController::class, 'create'])->middleware(['auth'])->name('visualizar-chamadas');
@@ -53,7 +52,7 @@ Route::post('/user/associar-professor', [ProfessorPorTurmaController::class, 'st
 Route::get('/user/atualiza-turma/{id}', [ProfessorPorTurmaController::class, 'atualizaTurma'])->middleware(['auth']);
 Route::post('/user/excluir-professor', [ProfessorPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-professor');
 
-Route::get('/user/aluno-por-turma', [AlunosPorTurmaController::class, 'index'])->middleware(['auth'])->name('alunoPorTurma');
+Route::get('/user/aluno-por-turma', StudentIndex::class)->middleware(['auth'])->name('alunoPorTurma');
 Route::get('/user/associar-aluno', [AlunosPorTurmaController::class, 'create'])->middleware(['auth'])->name('associar-aluno');
 Route::post('/user/associar-aluno', [AlunosPorTurmaController::class, 'store'])->middleware(['auth']);
 Route::post('/user/excluir-aluno', [AlunosPorTurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-aluno');
