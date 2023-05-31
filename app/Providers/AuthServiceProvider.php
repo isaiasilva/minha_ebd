@@ -26,7 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-
         Gate::define('is_admin', function () {
             if (auth()->user()->perfil_id == Perfil::ADMINISTRADOR) {
                 return true;
@@ -36,16 +35,26 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('post_material', function (User $user) {
-            if ($user->perfil_id == Perfil::ALUNO) return false;
+            if ($user->perfil_id == Perfil::ALUNO) {
+                return false;
+            }
 
             return true;
         });
 
         Gate::define('action_material', function (User $user, Material $material) {
 
-            if ($user->perfil_id == Perfil::ADMINISTRADOR) return true;
-            if ($user->perfil_id == Perfil::SUPERINTENDENTE && $material->material_global == false) return true;
-            if ($user->id == $material->user_id) return true;
+            if ($user->perfil_id == Perfil::ADMINISTRADOR) {
+                return true;
+            }
+
+            if ($user->perfil_id == Perfil::SUPERINTENDENTE && $material->material_global == false) {
+                return true;
+            }
+
+            if ($user->id == $material->user_id) {
+                return true;
+            }
 
             return false;
         });

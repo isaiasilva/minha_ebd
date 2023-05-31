@@ -6,7 +6,6 @@ use App\Models\Material\{Arquivo, LinkExterno, Texto, YouTube};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Material extends Model
 {
     use HasFactory;
