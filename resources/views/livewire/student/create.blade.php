@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
         {{ $alunos->links() }}
     </div>
 </div>
