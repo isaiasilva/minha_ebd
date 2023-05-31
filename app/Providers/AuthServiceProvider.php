@@ -35,6 +35,12 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('post_material', function (User $user) {
+            if ($user->perfil_id == Perfil::ALUNO) return false;
+
+            return true;
+        });
+
         Gate::define('action_material', function (User $user, Material $material) {
 
             if ($user->perfil_id == Perfil::ADMINISTRADOR) return true;

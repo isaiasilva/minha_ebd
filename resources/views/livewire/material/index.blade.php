@@ -5,7 +5,7 @@
                 @section('cabecalho')
                     Material de Apoio
                 @endsection
-                @can('actions_materials')
+                @can('post_material')
                     @section('botao')
                         <a href="{{ route('material.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Novo
                         </a>
