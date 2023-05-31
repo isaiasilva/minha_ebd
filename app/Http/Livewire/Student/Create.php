@@ -21,6 +21,7 @@ class Create extends Component
         $alunos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)
             ->join('users', 'usuarios_por_igrejas.user_id', 'users.id')
             ->where('users.name', 'LIKE', '%' . $this->search . '%')
+            ->orderBy('users.name', 'ASC')
             ->paginate($this->perpage);
 
         if (auth()->user()->perfil_id == Perfil::PROFESSOR) {
