@@ -2,44 +2,56 @@
     @section('cabecalho')
         {{ $igreja->nome }}
     @endsection
+    <div class="row breadcrumbs-top d-inline-block">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home</a>
+                </li>
+                <li class="breadcrumb-item active"><a href="{{ route('igrejas.index') }}">Igrejas</a>
+                </li>
+                <li class="breadcrumb-item active"><a href="#">{{ $igreja->nome }}</a>
+                </li>
+            </ol>
+        </div>
+    </div>
 
-    <div class="p-1">
-        <div class="row mb-3">
-            <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card bg-success text-white">
-                    <div class="card-body">
-                        <i class="fas fa-user fa-3x"></i>
-                        <h6 class="card-title">Usuários</h6>
-                        <h2 class="lead">{{ $igreja->users->count() }}</h2>
+    <div class="mt-1">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 ">
+                <div class="card bg-success pull-up">
+                    <div class="card-body ">
+                        <i class="fas fa-user fa-3x text-white"></i>
+                        <h6 class="card-title text-white">Usuários</h6>
+                        <h2 class="lead text-white">{{ $igreja->users->count() }}</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card bg-danger text-white">
+            <div class="col-lg-3 col-sm-6 ">
+                <div class="card bg-danger pull-up">
                     <div class="card-body">
-                        <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
-                        <h6 class="card-title">Categoria</h6>
-                        <h2 class="lead">{{ $igreja->tipo_igreja }}</h2>
+                        <i class="fa fa-graduation-cap fa-3x text-white" aria-hidden="true"></i>
+                        <h6 class="card-title text-white">Categoria</h6>
+                        <h2 class="lead text-white">{{ $igreja->tipo_igreja }}</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card bg-warning text-white">
+            <div class="col-lg-3 col-sm-6 ">
+                <div class="card bg-warning pull-up">
                     <div class="card-body">
-                        <i class="fa fa-users fa-3x"></i>
-                        <h6 class="card-title">Número de Turmas</h6>
+                        <i class="fa fa-users fa-3x text-white"></i>
+                        <h6 class="card-title text-white">Número de Turmas</h6>
 
-                        <h2 class="lead">{{ $igreja->turmas->count() }}</h2>
+                        <h2 class="lead text-white">{{ $igreja->turmas->count() }}</h2>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card bg-info text-white">
+            <div class="col-lg-3 col-sm-6 ">
+                <div class="card bg-info pull-up">
                     <div class="card-body">
-                        <i class="fa fa-list-alt fa-3x"></i>
-                        <h6 class="card-title">Presenças</h6>
-                        <h2 class="lead">{{ $presencas }}</h2>
+                        <i class="fa fa-list-alt fa-3x text-white"></i>
+                        <h6 class="card-title text-white">Presenças</h6>
+                        <h2 class="lead text-white">{{ $presencas }}</h2>
                     </div>
                 </div>
             </div>

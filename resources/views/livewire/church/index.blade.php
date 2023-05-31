@@ -1,4 +1,5 @@
 <div>
+
     <div class="d-flex justify-content-between align-items-center">
 
         @section('cabecalho')
@@ -9,6 +10,16 @@
             <a href="{{ route('igrejas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Nova igreja
             </a>
         @endsection
+    </div>
+    <div class="row breadcrumbs-top d-inline-block">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home</a>
+                </li>
+                <li class="breadcrumb-item active"><a href="#">Igrejas</a>
+                </li>
+            </ol>
+        </div>
     </div>
     <section class="row d-md-flex justify-content-between align-items-center">
 
@@ -39,7 +50,7 @@
                 @foreach ($igrejas as $igreja)
                     <tr>
                         <th scope="row">{{ $igreja->id }}</th>
-                        <td>{{ $igreja->nome }}</td>
+                        <td><a href="{{ route('igrejas.show', $igreja->id) }}">{{ $igreja->nome }}</a></td>
                         <td>{{ $igreja->dia_ebd }} de {{ $igreja->horario }}</td>
                         <td>
 

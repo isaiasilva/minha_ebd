@@ -3,9 +3,15 @@
         Página Inicial - {{ $igreja->igreja->nome }}
     @endsection
 
-
-    @include('components.flash-message')
-    <div class="">
+    <div class="d-flex justify-content-between">
+        <div class="row breadcrumbs-top d-inline-block mb-2">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
         <p>Hoje é {{ date('d/m/Y') }}</p>
     </div>
 
