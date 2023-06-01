@@ -123,7 +123,7 @@
                 <li class=" navigation-header">MENU<i class="la la-ellipsis-h" data-toggle="tooltip"
                         data-placement="right" data-original-title="User Interface"></i>
                 </li>
-                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
+                @can('is_admin')
                     <li class=" nav-item"><a href="#"><i class="fas fa-user-cog mr-1"></i>
                             <span class="menu-title">Administração</span>
                         </a>
@@ -135,25 +135,22 @@
                                         aria-hidden="true"></i><span data-i18n="">Novo</span></a>
                             </li>
                             <li><a class="menu-item" href="{{ route('igrejas.index') }}"><i
-                                        class="fas fa-church mr-1"></i><span
-                                        data-i18n="Invoice List">Igrejas</span></a>
+                                        class="fas fa-church mr-1"></i><span data-i18n="Invoice List">Igrejas</span></a>
                             </li>
                         </ul>
                     </li>
-                @endif
+                @endcan
                 <li class=" nav-item"><a href="#"><i class="fas fa-user mr-1"></i><span class="menu-title"
                             data-i18n="Components">Usuário</span></a>
                     <ul class="menu-content">
                         <li><a class="menu-item" href="{{ route('usuarios') }}"><i
                                     class="fas fa-users mr-1"></i><span data-i18n="Alerts">Usuários</span></a>
                         </li>
-                        @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
-                                Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
-                            <li><a class="menu-item" href="{{ route('registrar.index') }}"><i
-                                        class="fa fa-plus mr-1" aria-hidden="true"></i><span
-                                        data-i18n="Callout">Novo</span></a>
+                        @can('admin_superintendente')
+                            <li><a class="menu-item" href="{{ route('registrar.index') }}"><i class="fa fa-plus mr-1"
+                                        aria-hidden="true"></i><span data-i18n="Callout">Novo</span></a>
                             </li>
-                        @endif
+                        @endcan
 
 
                     </ul>
