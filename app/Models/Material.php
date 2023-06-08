@@ -32,6 +32,11 @@ class Material extends Model
         return $this->hasMany(Texto::class);
     }
 
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
+
     public function igreja()
     {
         return $this->belongsTo(Igreja::class);
