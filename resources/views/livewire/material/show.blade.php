@@ -138,7 +138,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4">
-            {{-- LIKE --}}
+            @livewire('material.votes', ['material' => $material])
         </div>
     </div>
 
