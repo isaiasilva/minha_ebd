@@ -22,7 +22,7 @@
     <div class="card-header">
         <p class="card-title text-center">Avalie esse material</p>
     </div>
-    <div class="card-body ">
+    <div class="card-body">
         <div class="d-flex justify-content-around">
             <img id="meu-svg" class="emoji" src="{{ asset('img/emojis/muito-ruim.svg') }}" alt="muito ruim">
             <img id="meu-svg" class="emoji" src="{{ asset('img/emojis/ruim.svg') }}" alt="ruim">
