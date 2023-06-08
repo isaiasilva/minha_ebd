@@ -120,6 +120,27 @@
 
 
     </section>
+    <div class="row">
+        <div class="col-12 col-md-8">
+            @livewire('comment.create', ['material' => $material])
+            <div class="card">
+                <div class="card-body">
+                    @foreach ($material->comentarios as $comentario)
+                        <p>
+                            {{ $comentario->user->name }} disse ...
+                        </p>
+                        <p class="lead">
+                            {{ $comentario->text }}
+                        </p>
+                        <hr>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            {{-- LIKE --}}
+        </div>
+    </div>
 
     @include('livewire.material.includes.modals.arquivo')
     @include('livewire.material.includes.modals.you-tube')

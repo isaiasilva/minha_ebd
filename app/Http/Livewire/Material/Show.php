@@ -10,6 +10,13 @@ use Livewire\Component;
 class Show extends Component
 {
     public Material $material;
+
+    protected $listeners = ['reload'];
+
+    public function reload()
+    {
+        $this->material->refresh();
+    }
     public function render()
     {
         return view('livewire.material.show');
@@ -25,7 +32,6 @@ class Show extends Component
             return redirect(route('material.show', $this->material->id));
         } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
-
         }
     }
 
@@ -38,7 +44,6 @@ class Show extends Component
             return redirect(route('material.show', $this->material->id));
         } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
-
         }
     }
 
@@ -52,7 +57,6 @@ class Show extends Component
             return redirect(route('material.show', $this->material->id));
         } catch (QueryException $e) {
             env('APP_ENV') == 'local' ? toastr()->addError($e->getMessage()) : toastr()->addError('Não foi possível excluir', 'Erro!');
-
         }
     }
 }

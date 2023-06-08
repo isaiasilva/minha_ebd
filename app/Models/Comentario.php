@@ -13,11 +13,11 @@ class Comentario extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function material()
     {
-        return $this->belongsTo(Material::class, 'id', 'material_id');
+        return $this->belongsTo(Material::class);
     }
 }
