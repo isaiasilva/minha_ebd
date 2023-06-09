@@ -35,11 +35,13 @@ class Votes extends Component
             $this->getVote();
             toastr()->addSuccess('Voto registrado', 'Sucesso');
 
-            return;
+            return to_route('material.show', $this->material->id);
         }
         AvaliacaoMaterial::create($data);
         $this->getVote();
         toastr()->addSuccess('Voto registrado', 'Sucesso');
+
+        return to_route('material.show', $this->material->id);
     }
 
     public function muitoRuim()
