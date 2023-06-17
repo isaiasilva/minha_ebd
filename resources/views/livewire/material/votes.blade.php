@@ -27,29 +27,29 @@
             <div>
                 <img @if (is_null($vote) || !$vote->muito_ruim) id="meu-svg" @endif class="emoji"
                     src="{{ asset('img/emojis/muito-ruim.svg') }}" alt="muito ruim" wire:click='muitoRuim'>
-                <span>{{ $votes->muitoRuim($material->id) }}</span>
+                <span>{{ $votes ? $votes->muitoRuim($material->id) : 0 }}</span>
             </div>
             <div>
                 <img @if (is_null($vote) || !$vote->ruim) id="meu-svg" @endif class="emoji"
                     src="{{ asset('img/emojis/ruim.svg') }}" alt="ruim" wire:click='ruim'>
-                <span>{{ $votes->ruim($material->id) }}</span>
+                <span>{{ $votes ? $votes->ruim($material->id) : 0 }}</span>
 
             </div>
             <div>
                 <img @if (is_null($vote) || !$vote->razoavel) id="meu-svg" @endif class="emoji"
                     src="{{ asset('img/emojis/razoavel.svg') }}" alt="razoavel" wire:click='razoavel'>
-                <span>{{ $votes->razoavel($material->id) }}</span>
+                <span>{{ $votes ? $votes->razoavel($material->id) : 0 }}</span>
             </div>
             <div>
                 <img @if (is_null($vote) || !$vote->muito_bom) id="meu-svg" @endif class="emoji"
                     src="{{ asset('img/emojis/muito-bom.svg') }}" alt="muito bom" wire:click='muitoBom'>
-                <span>{{ $votes->muitoBom($material->id) }}</span>
+                <span>{{ $votes ? $votes->muitoBom($material->id) : 0 }}</span>
             </div>
 
             <div>
                 <img @if (is_null($vote) || !$vote->excelente) id="meu-svg" @endif class="emoji"
                     src="{{ asset('img/emojis/excelente.svg') }}" alt="excelente" wire:click='excelente'>
-                <span>{{ $votes->excelente($material->id) }}</span>
+                <span>{{ $votes ? $votes->excelente($material->id) : 0 }}</span>
             </div>
 
 
