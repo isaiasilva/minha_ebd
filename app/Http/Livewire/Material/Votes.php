@@ -11,11 +11,15 @@ class Votes extends Component
 
     public $vote;
 
+    public $votes;
+
     public Material $material;
 
     public function mount()
     {
         $this->getVote();
+        $this->votes = AvaliacaoMaterial::where('material_id', $this->material->id)
+            ->first();
     }
 
     public function getVote()
