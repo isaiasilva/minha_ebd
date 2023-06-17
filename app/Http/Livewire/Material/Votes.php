@@ -20,6 +20,7 @@ class Votes extends Component
         $this->getVote();
         $this->votes = AvaliacaoMaterial::where('material_id', $this->material->id)
             ->first();
+        //dd($this->votes);
     }
 
     public function getVote()

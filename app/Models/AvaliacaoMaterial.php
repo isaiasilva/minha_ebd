@@ -30,28 +30,33 @@ class AvaliacaoMaterial extends Model
         return $this->belongsTo(Material::class);
     }
 
-    public function muitoRuim()
+    public function muitoRuim($id)
     {
-        return new Attribute(fn () => $this->material()->sum('muito_ruim'));
+        //return new Attribute(fn () => $this->material()->where('muito_ruim', true)->count());
+        return $this->where(['material_id' => $id, 'muito_ruim' => true])->count();
     }
 
-    public function ruim()
+    public function ruim($id)
     {
-        return new Attribute(fn () => $this->material()->sum('ruim'));
+        // return new Attribute(fn () => $this->material()->sum('ruim'));
+        return $this->where(['material_id' => $id, 'ruim' => true])->count();
     }
 
-    public function razoavel()
+    public function razoavel($id)
     {
-        return new Attribute(fn () => $this->material()->sum('razoavel'));
+        // return new Attribute(fn () => $this->material()->sum('razoavel'));
+        return $this->where(['material_id' => $id, 'razoavel' => true])->count();
     }
 
-    public function muitoBom()
+    public function muitoBom($id)
     {
-        return new Attribute(fn () => $this->material()->sum('muito_bom'));
+        // return new Attribute(fn () => $this->material()->sum('muito_bom'));
+        return $this->where(['material_id' => $id, 'muito_bom' => true])->count();
     }
 
-    public function excelente()
+    public function excelente($id)
     {
-        return new Attribute(fn () => $this->material()->sum('excelente'));
+        // return new Attribute(fn () => $this->material()->sum('excelente'));
+        return $this->where(['material_id' => $id, 'excelente' => true])->count();
     }
 }
