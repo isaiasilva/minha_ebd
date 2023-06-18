@@ -148,7 +148,7 @@
                                         <div class="btn-group mr-1 mb-1">
                                             <button type="button" class="btn btn-primary"><i
                                                     class="fas fa-stopwatch"></i>
-                                                Registrar presença</button>
+                                                Registrar </button>
                                             <button type="button" class="btn btn-primary dropdown-toggle"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
@@ -163,8 +163,8 @@
                                         </div>
                                     @elseif ($this->verificaPresenca($aluno->user_id))
                                         <a wire:click='destroy("{{ $aluno->user_id }}")'
-                                            class="btn btn-danger btn-sm mr-3" alt="Excluir"><i class="fa fa-eraser"
-                                                aria-hidden="true"></i> Deletar
+                                            class="btn btn-danger btn-min-width mr-1 mb-1" alt="Excluir"><i
+                                                class="fa fa-eraser" aria-hidden="true"></i> Deletar
                                             registro
                                         </a>
                                     @endif
