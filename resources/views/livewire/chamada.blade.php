@@ -163,8 +163,8 @@
                                         </div>
                                     @elseif ($this->verificaPresenca($aluno->user_id))
                                         <a wire:click='destroy("{{ $aluno->user_id }}")'
-                                            class="btn btn-danger btn-min-width mr-1 mb-1" alt="Excluir"><i
-                                                class="fa fa-eraser" aria-hidden="true"></i> Deletar
+                                            class="btn btn-danger btn-min-width mr-1 mb-1 text-white"
+                                            alt="Excluir"><i class="fa fa-eraser" aria-hidden="true"></i> Deletar
                                             registro
                                         </a>
                                     @endif
