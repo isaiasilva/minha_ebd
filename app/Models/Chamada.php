@@ -15,6 +15,7 @@ class Chamada extends Model
         'turma_id',
         'aluno_id',
         'atraso',
+        'falta_justificada',
         'material',
         'igreja_id',
     ];

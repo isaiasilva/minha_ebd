@@ -84,7 +84,7 @@ class Chamada extends Component
         );
     }
 
-    public function store($aluno_id)
+    public function store($aluno_id, bool $absence = false)
     {
         $this->validate();
         $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'data' => $this->data])->first();
@@ -93,13 +93,14 @@ class Chamada extends Component
             return toastr()->addWarning('Não foi possível registrar a presença. Aluno já tem a presença em outra turma hoje.', 'Atenção!');
         }
         $chamada = ChamadaModel::create([
-            'data'         => $this->data,
-            'professor_id' => Auth::user()->id,
-            'turma_id'     => $this->turmaAtual,
-            'aluno_id'     => $aluno_id,
-            'atraso'       => $this->atraso,
-            'material'     => $this->material,
-            'igreja_id'    => User::getIgreja()->id,
+            'data'              => $this->data,
+            'professor_id'      => Auth::user()->id,
+            'turma_id'          => $this->turmaAtual,
+            'aluno_id'          => $aluno_id,
+            'atraso'            => $this->atraso,
+            'falta_justificada' => $absence,
+            'material'          => $this->material,
+            'igreja_id'         => User::getIgreja()->id,
         ]);
 
         if ($this->atraso === true) {
