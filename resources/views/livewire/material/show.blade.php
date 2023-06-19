@@ -125,15 +125,19 @@
             @livewire('comment.create', ['material' => $material])
             <div class="card">
                 <div class="card-body">
-                    @foreach ($material->comentarios as $comentario)
+                    @forelse ($material->comentarios as $comentario)
                         <p>
                             {{ $comentario->user->name }} disse ...
                         </p>
                         <p class="lead">
                             {{ $comentario->text }}
                         </p>
+                        <small>{{ $comentario->created_at->diffForHumans() }}</small>
                         <hr>
-                    @endforeach
+                    @empty
+                        <p>Ainda não existem comentários ...</p>
+                    @endforelse ()
+
                 </div>
             </div>
         </div>
