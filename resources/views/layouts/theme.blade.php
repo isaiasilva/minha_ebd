@@ -161,19 +161,19 @@
                         <li><a class="menu-item" href="{{ route('alunoPorTurma') }}"><i
                                     class="fas fa-chalkboard-teacher mr-1"></i><span>Alunos por turma</span></a>
                         </li>
-                        @if (Auth::user()->perfil_id !== 2)
+                        @cannot('aluno')
                             <li>
                                 <a class="menu-item" href="{{ route('associar-aluno') }}">
                                     <i class="fa fa-plus mr-1"></i>
                                     <span>Associar Aluno</span></a>
                             </li>
-                        @endif
+                        @endcannot
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#" class="menu-title"><i
                             class="fas fa-list mr-1"></i>Chamadas</a>
                     <ul class="menu-content">
-                        @if (Auth::user()->perfil_id !== 2)
+                        @cannot('aluno')
                             <li><a class="menu-item" href="{{ route('chamada') }}"><i class="fa fa-plus"
                                         aria-hidden="true"></i>
                                     Nova</a>
@@ -181,7 +181,7 @@
                             <li><a class="menu-item" href="{{ route('todas-chamadas') }}"><i class="fa fa-eye"
                                         aria-hidden="true"></i>
                                     Todas Chamadas</a></li>
-                        @endif
+                        @endcannot
                         <li><a class="menu-item" href="{{ route('visualizar-chamadas') }}"><i class="fa fa-eye"
                                     aria-hidden="true"></i>
                                 Visualizar</a></li>
@@ -194,16 +194,13 @@
 
                 </li>
 
-
-
                 <li class=" nav-item"><a href="#"><i class="fas fa-chalkboard-teacher mr-1"></i><span
-                            class="menu-title" data-i18n="Bootstrap Tables">Professores</span></a>
+                            class="menu-title">Professores</span></a>
                     <ul class="menu-content">
-                        @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
-                                Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
+                        @can('admin_superintendente')
                             <li><a class="menu-item" href="{{ route('associar-professor') }}"><i class="fa fa-plus"
                                         aria-hidden="true"></i> Associar Professor</a></li>
-                        @endif
+                        @endcan
                         <li><a class="menu-item" href="{{ route('professorPorTurma') }}"><i class="fa fa-eye"
                                     aria-hidden="true"></i>
                                 Professor por Turma</a></li>
@@ -213,17 +210,17 @@
                 <li class=" nav-item"><a href="#"><i class="fas fa-graduation-cap mr-1"></i><span
                             class="menu-title" data-i18n="Chartjs">Turmas</span></a>
                     <ul class="menu-content">
-                        @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR ||
-                                Auth::user()->perfil_id === App\Models\Perfil::SUPERINTENDENTE)
+                        @can('admin_superintendente')
                             <li><a class="menu-item" href="{{ route('turma') }}"><i class="fas fa-chalkboard"></i>
                                     Nova turma</a></li>
-                        @endif
+                        @endcan
+
                         <li><a class="menu-item" href="{{ route('turmas') }}"><i class="fa fa-eye"
                                     aria-hidden="true"></i>
                                 Visualizar</a></li>
                     </ul>
                 </li>
-                @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
+                @can('is_admin')
                     <li class=" nav-item"><a href="#"><i class="fas fa-file mr-1"></i><span class="menu-title"
                                 data-i18n="Chartjs">Relatórios</span></a>
                         <ul class="menu-content">
@@ -233,7 +230,9 @@
                                     Turma</a></li>
                         </ul>
                     </li>
-                @endif
+                @endcan
+
+
                 <li><a href="{{ route('gamiicacao') }}"><i class="fas fa-gamepad mr-1"></i> Gameficação</a></li>
             </ul>
         </div>
