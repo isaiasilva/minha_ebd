@@ -79,7 +79,7 @@
             </div>
         </section>
         <footer>
-            <p class="small text-center">Chamada EBD - MEPB Goiabeiras {{ date('Y') }}</p>
+            <p class="small text-center">Minha EBD {{ date('Y') }}</p>
         </footer>
 </body>
 
