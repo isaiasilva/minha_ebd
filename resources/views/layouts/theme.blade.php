@@ -224,8 +224,8 @@
                     </ul>
                 </li>
                 @if (Auth::user()->perfil_id === App\Models\Perfil::ADMINISTRADOR)
-                    <li class=" nav-item"><a href="#"><i class="fas fa-graduation-cap mr-1"></i><span
-                                class="menu-title" data-i18n="Chartjs">Relatórios</span></a>
+                    <li class=" nav-item"><a href="#"><i class="fas fa-file mr-1"></i><span class="menu-title"
+                                data-i18n="Chartjs">Relatórios</span></a>
                         <ul class="menu-content">
 
                             <li><a href="{{ route('alunos.relatorio') }}"><i class="fas fa-chalkboard"></i> Alunos
