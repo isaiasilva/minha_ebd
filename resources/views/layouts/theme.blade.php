@@ -170,8 +170,8 @@
                         @endcannot
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="#" class="menu-title"><i
-                            class="fas fa-list mr-1"></i>Chamadas</a>
+                <li class=" nav-item"><a href="#" class="menu-title"><i class="fas fa-list mr-1"></i><span
+                            class="menu-title">Chamadas</span> </a>
                     <ul class="menu-content">
                         @cannot('aluno')
                             <li><a class="menu-item" href="{{ route('chamada') }}"><i class="fa fa-plus"
@@ -233,7 +233,10 @@
                 @endcan
 
 
-                <li><a href="{{ route('gamiicacao') }}"><i class="fas fa-gamepad mr-1"></i> Gameficação</a></li>
+                <li>
+                    <a href="{{ route('gamiicacao') }}">
+                        <i class="fas fa-gamepad mr-1"></i><span class="menu-title">Gameficação</span> </a>
+                </li>
             </ul>
         </div>
     </div>
