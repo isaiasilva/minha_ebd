@@ -16,6 +16,12 @@ class Relatorios extends Component
     public $igreja_id;
 
     public $turma_id;
+
+    public array $rules = [
+        'igreja_id' => 'required',
+        'turma_id'  => 'required',
+    ];
+
     public function mount()
     {
         $this->igrejas = Igreja::all();
@@ -27,6 +33,7 @@ class Relatorios extends Component
 
     public function renderPdf(Request $request)
     {
+        $this->validate();
         $pdf = Pdf::loadView(
             'relatorios.aluno-por-turma',
             [
