@@ -2,19 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{AlunoPorTurma, Turma};
+use App\Models\{AlunoPorTurma, Igreja, Turma};
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Relatorios extends Component
 {
-    public $turmas;
+    public $turmas = [];
+
+    public $igrejas;
+
+    public $igreja_id;
 
     public $turma_id;
     public function mount()
     {
-        $this->turmas = Turma::all();
+        $this->igrejas = Igreja::all();
     }
     public function render()
     {
@@ -32,5 +36,11 @@ class Relatorios extends Component
         );
 
         return $pdf->stream();
+    }
+
+    public function recuperaTurmas()
+    {
+        //$this->turmas = Turma::where('igreja_id', auth()->user()->getIgreja()->id)->get();
+        $this->turmas = Turma::where('igreja_id', $this->igreja_id)->get();
     }
 }
