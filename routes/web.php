@@ -11,6 +11,10 @@ use App\Models\{User, UsuariosPorIgreja};
 use Illuminate\Support\Facades\{Auth, Route};
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('principal');
+    }
+
     return view('auth.login');
 });
 
