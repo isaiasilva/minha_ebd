@@ -136,6 +136,12 @@ class User extends Authenticatable
             }
 
             $igreja = UsuariosPorIgreja::create(['user_id' => $user->id, 'igreja_id' => $igreja]);
+
+            $user->xp()->create([
+                'igreja_id' => $igreja->igreja_id,
+                'points'    => 0,
+                'year'      => date('Y'),
+            ]);
         } catch (\Exception $e) {
             return back()->with('error', 'Não foi possível incluir o usuário');
         }
