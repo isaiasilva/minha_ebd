@@ -132,6 +132,24 @@ class Chamada extends Component
         try {
             $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'turma_id' => $this->turmaAtual, 'data' => $this->data])->first();
             $chamada->delete();
+            $user = User::find($aluno_id);
+
+            if ($chamada->atraso) {
+                XPJob::dispatch($user, -7);
+                toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
+
+                return;
+            }
+
+            if ($chamada->falta_justificada) {
+                XPJob::dispatch($user, -2);
+                toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
+
+                return;
+            }
+
+            XPJob::dispatch($user, -10);
+
             toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
         } catch (Exception $e) {
             toastr()->addError('Não foi possível excluir. Por favor, procure a superintendência.', 'Feito!');
