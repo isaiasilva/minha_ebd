@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Helper\Helpers;
+use App\Jobs\XPJob;
 use App\Models\{AlunoPorTurma, Chamada as ChamadaModel, ProfessorPorTurma, Turma, User};
 use Exception;
 use Illuminate\Http\Request;
@@ -103,13 +104,25 @@ class Chamada extends Component
             'igreja_id'         => User::getIgreja()->id,
         ]);
 
+        $user = User::find($aluno_id);
+
+        if ($absence === true) {
+            $this->restauraValoresAtrasoMaterial();
+            XPJob::dispatch($user, 2);
+
+            return toastr()->addWarning('Falta justificada registrada com sucesso', 'Feito');
+        }
+
         if ($this->atraso === true) {
             $this->restauraValoresAtrasoMaterial();
+            XPJob::dispatch($user, 7);
 
             return toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
         }
 
         $this->restauraValoresAtrasoMaterial();
+
+        XPJob::dispatch($user, 10);
 
         return toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
     }
