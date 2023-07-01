@@ -12,7 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('x_p_s', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->uniqid();
             $table->foreignId('igreja_id')->constrained()->cascadeOnDelete();
             $table->integer('points')->default(0);
             $table->string('year')->default(date('Y'));
