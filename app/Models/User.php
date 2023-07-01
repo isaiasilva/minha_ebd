@@ -150,4 +150,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comentario::class);
     }
+
+    public function xp()
+    {
+        return $this->hasOne(XP::class);
+    }
 }

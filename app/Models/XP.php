@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class XP extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'igreja_id',
+        'points',
+        'year',
+    ];
 }
