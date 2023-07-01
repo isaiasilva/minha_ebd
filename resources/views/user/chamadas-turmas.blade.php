@@ -71,6 +71,7 @@
                             <tr class="">
                                 <th scope="col">Alunos</th>
                                 <th scope="col">N° Chamadas</th>
+                                <th scope="col">N° Pontos</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +80,7 @@
 
                                     <td>{{ $aluno->user->name }}</td>
                                     <td>{{ $aluno->user->presencasAnoCorrente($turma_id) }}</td>
+                                    <td>{{ $aluno->user->xp->points }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

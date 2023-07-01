@@ -12,9 +12,9 @@ class PointsSeeder extends Seeder
      */
     public function run(): void
     {
-        $atraso       = Chamada::where(['atraso' => true, 'falta_justificada' => false])->get();
-        $presencas    = Chamada::where(['atraso' => false, 'falta_justificada' => false])->get();
-        $justificadas = Chamada::where(['atraso' => false, 'falta_justificada' => true])->get();
+        $atraso       = Chamada::where(['atraso' => true, 'falta_justificada' => false])->whereYear('data', date('Y'))->get();
+        $presencas    = Chamada::where(['atraso' => false, 'falta_justificada' => false])->whereYear('data', date('Y'))->get();
+        $justificadas = Chamada::where(['atraso' => false, 'falta_justificada' => true])->whereYear('data', date('Y'))->get();
 
         $atraso->map(function ($item) {
 
