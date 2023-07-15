@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Socialite\SocialiteServiceProvider;
+
 return [
 
     /*
@@ -176,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        SocialiteServiceProvider::class,
 
     ],
 

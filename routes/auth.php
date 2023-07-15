@@ -3,6 +3,9 @@
 use App\Http\Controllers\Auth\{AuthenticatedSessionController, ConfirmablePasswordController, EmailVerificationNotificationController, EmailVerificationPromptController, NewPasswordController, PasswordResetLinkController, RegisteredUserController, VerifyEmailController};
 use Illuminate\Support\Facades\Route;
 
+Route::get('auth/google', [AuthenticatedSessionController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback']);
+
 Route::get('/registrar-aluno', [RegisteredUserController::class, 'registrarAluno'])
     ->middleware('auth')
     ->name('registrar-aluno');

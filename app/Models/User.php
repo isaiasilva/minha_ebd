@@ -28,6 +28,7 @@ class User extends Authenticatable
         'turma_id',
         'password',
         'telefone',
+        'google_email',
     ];
 
     protected $appends = ['presenca'];
