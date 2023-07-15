@@ -120,6 +120,18 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email-google">Email Google</label>
+                                <input type="email" name="email" id="email-google" value=""
+                                    wire:model='googleEmail' class="form-control">
+                            </div>
+                            @error('email')
+                                <p class="error">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md">
                             <button type="submit" class="btn btn-primary mt-3">
                                 Atualizar

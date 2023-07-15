@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="email">Nome</label>
+                                    <label for="name">Nome</label>
                                     <input type="text" name="name" id="name" value="" wire:model='name'
                                         class="form-control">
                                 </div>
@@ -58,8 +58,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email">Usuário</label>
-                                    <input type="email" name="email" id="email"
-                                        value="{{ Auth::user()->email }}" wire:model='email' class="form-control">
+                                    <input type="email" name="email" id="email" value=""
+                                        wire:model='email' class="form-control">
                                 </div>
                                 @error('email')
                                     <p class="error">{{ $message }}</p>
@@ -125,6 +125,18 @@
                                 wire:model='phone'>
                         </div>
                         @error('pHone')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email-google">Email Google</label>
+                            <input type="email" name="email" id="email-google" value=""
+                                wire:model='googleEmail' class="form-control">
+                        </div>
+                        @error('email')
                             <p class="error">{{ $message }}</p>
                         @enderror
                     </div>

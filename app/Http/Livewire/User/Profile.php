@@ -19,6 +19,8 @@ class Profile extends Component
 
     public $email;
 
+    public $googleEmail;
+
     public $maritalStatus;
 
     public $phone;
@@ -33,12 +35,14 @@ class Profile extends Component
         'maritalStatus' => 'required',
         'phone'         => 'nullable',
         'date'          => 'required',
+        'googleEmail'   => 'nullable|email',
         'photo'         => 'nullable|mimes:jpg,jpeg,png',
     ];
 
     protected $messages = [
         'name.required'          => 'Campo obrigatório',
         'email.required'         => 'Campo obrigatório',
+        'googleEmail.email'      => 'E-mail inválido',
         'maritalStatus.required' => 'Campo obrigatório',
         'date.required'          => 'Campo obrigatório',
         'photo.mimes'            => 'A foto precisa ser de um formato válido (jpg,jpeg,png)',
@@ -50,6 +54,7 @@ class Profile extends Component
         $this->profile       = Perfil::find($user->perfil_id)->perfil;
         $this->name          = $user->name;
         $this->email         = $user->email;
+        $this->googleEmail   = $user->google_email;
         $this->maritalStatus = $user->estado_civil;
         $this->phone         = $user->telefone;
         $this->date          = $user->data_nascimento;
@@ -67,6 +72,7 @@ class Profile extends Component
             $user                  = User::find(Auth::user()->id);
             $user->name            = $this->name;
             $user->email           = $this->email;
+            $user->google_email    = $this->googleEmail;
             $user->estado_civil    = $this->maritalStatus;
             $user->data_nascimento = $this->date;
             $user->telefone        = $this->phone;
@@ -96,7 +102,6 @@ class Profile extends Component
         $nameFile = hash('sha1', $this->photo->getClientOriginalName() . $today->format('u'));
         $img->save('storage/users/' . $nameFile . '.' . 'webp', 50, 'webp');
 
-        // return 'storage/' . $this->photo->storeAs('users', $nameFile  .  '.' . $this->photo->getClientOriginalExtension());
         return 'storage/users/' . $nameFile . '.' . 'webp';
     }
 }

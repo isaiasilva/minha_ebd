@@ -23,6 +23,8 @@ class Edit extends Component
 
     public $email;
 
+    public $googleEmail;
+
     public $maritalStatus;
 
     public $phone;
@@ -39,6 +41,7 @@ class Edit extends Component
         'maritalStatus' => 'required',
         'phone'         => 'nullable',
         'date'          => 'required',
+        'googleEmail'   => 'nullable|email',
         'photo'         => 'nullable|mimes:jpg,jpeg,png',
     ];
 
@@ -47,6 +50,7 @@ class Edit extends Component
         'email.required'         => 'Campo obrigatório',
         'maritalStatus.required' => 'Campo obrigatório',
         'date.required'          => 'Campo obrigatório',
+        'googleEmail.email'      => 'E-mail inválido',
         'photo.mimes'            => 'A foto precisa ser de um formato válido (jpg,jpeg,png)',
     ];
 
@@ -63,6 +67,7 @@ class Edit extends Component
         $this->profile       = $user->perfil_id;
         $this->name          = $user->name;
         $this->email         = $user->email;
+        $this->googleEmail   = $user->google_email;
         $this->maritalStatus = $user->estado_civil;
         $this->path_photo    = $user->path_photo;
         $this->phone         = $user->telefone;
@@ -82,6 +87,7 @@ class Edit extends Component
             $user                  = User::find($this->user_id);
             $user->name            = $this->name;
             $user->email           = $this->email;
+            $user->google_email    = $this->googleEmail;
             $user->estado_civil    = $this->maritalStatus;
             $user->perfil_id       = $this->profile;
             $user->data_nascimento = $this->date;
