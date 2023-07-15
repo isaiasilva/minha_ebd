@@ -20,7 +20,7 @@
                             <div class="text-center pb-4">
                                 <img src="{{ asset('img/logo_ebd.png') }}" class="img-fluid pt-5" alt="login">
                             </div>
-                            <form class="user" method="post" action="/entrar">
+                            <form class="user" method="post" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" name="email" class="form-control form-control-user"

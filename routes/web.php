@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTurmaController, ChamadaController, EntrarController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
+use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTurmaController, ChamadaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
 use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Church\{Create, Edit, Index, Show};
 use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
@@ -18,8 +18,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/entrar', [EntrarController::class, 'index'])->name("entrar");
-Route::post('/entrar', [EntrarController::class, 'login']);
+Route::get('/entrar', function () {
+    if (Auth::check()) {
+        return redirect()->route('principal');
+    }
+
+    return view('auth.login');
+})->name("entrar");
 
 Route::get('/user/home', [PrincipalController::class, 'index'])->middleware(['auth'])->name('principal');
 

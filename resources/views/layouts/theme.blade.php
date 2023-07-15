@@ -101,8 +101,12 @@
                                 <a class="dropdown-item" href="{{ route('perfil') }}"><i class="ft-user"></i>
                                     Perfil</a>
 
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="/sair"><i
-                                        class="ft-power"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"><i class="ft-power"></i>
+                                        Logout</button>
+                                </form>
                             </div>
                         </li>
                     </ul>
