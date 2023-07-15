@@ -137,7 +137,8 @@ class User extends Authenticatable
 
             $igreja = UsuariosPorIgreja::create(['user_id' => $user->id, 'igreja_id' => $igreja]);
 
-            $user->xp()->create([
+            XP::create([
+                'user_id'   => $user->id,
                 'igreja_id' => $igreja->igreja_id,
                 'points'    => 0,
                 'year'      => date('Y'),
