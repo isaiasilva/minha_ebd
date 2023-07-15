@@ -14,6 +14,8 @@ class Register extends Component
 
     public $email;
 
+    public $googleEmail;
+
     public $maritalStatus;
 
     public $class_id;
@@ -28,7 +30,9 @@ class Register extends Component
 
     protected $rules = [
         'name'          => 'required',
-        'email'         => 'required|email',
+        'email'         => 'required|email|unique:users,email',
+        'perfil'        => 'required',
+        'googleEmail'   => 'nullable|email',
         'maritalStatus' => 'required',
         'class_id'      => 'required',
         'birthDate'     => 'required',
@@ -42,6 +46,7 @@ class Register extends Component
         'class_id.required'  => 'O campo Turma é obrigatório.',
         'birthDate.required' => 'O campo Data de nascimento é obrigatório',
         'phone.min'          => 'O campo Telefone precisa ter pelo menos 9 caracteres.',
+        'perfil.required'    => 'O campo Perfil é obrigatório.',
     ];
 
     public function mount()
@@ -68,7 +73,8 @@ class Register extends Component
                 $this->class_id,
                 null,
                 $this->phone,
-                User::getIgreja()->id
+                User::getIgreja()->id,
+                $this->googleEmail ?? null
             );
 
             toastr()->addSuccess('Usuário cadastrado', 'Sucesso');

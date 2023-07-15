@@ -11,6 +11,8 @@ class Register extends Component
 
     public $email;
 
+    public $googleEmail;
+
     public $maritalStatus;
 
     public $birthDate;
@@ -27,20 +29,24 @@ class Register extends Component
 
     protected $rules = [
         'name'          => 'required',
-        'email'         => 'required|email',
+        'email'         => 'required|email|unique:users,email',
+        'googleEmail'   => 'nullable|email',
         'maritalStatus' => 'required',
         'church'        => 'required',
         'birthDate'     => 'required',
         'phone'         => 'nullable|min:9',
+        'perfil'        => 'required',
     ];
 
     protected $messages = [
         'name.required'      => 'O campo Nome é obrigatório.',
         'email.required'     => 'O campo Email é obrigatório.',
+        'email.unique'       => 'O campo Email já está em uso.',
         'email.email'        => 'O campo Email precisa ter um formato válido.',
         'church.required'    => 'O campo Igreja é obrgatório',
         'birthDate.required' => 'O campo Data de nascimento é obrigatório',
         'phone.min'          => 'O campo Telefone precisa ter pelo menos 9 caracteres.',
+        'perfil.required'    => 'O campo Perfil é obrigatório',
     ];
 
     public function mount()
@@ -68,7 +74,8 @@ class Register extends Component
                 null,
                 null,
                 $this->phone ? $this->phone : null,
-                $this->church
+                $this->church,
+                $this->googleEmail ? $this->googleEmail : null
             );
 
             toastr()->addSuccess('Usuário cadastrado', 'Sucesso');

@@ -106,7 +106,8 @@ class User extends Authenticatable
         ?int $turma_id,
         ?string $password,
         ?string $telefone,
-        ?int $igreja_id
+        ?int $igreja_id,
+        ?string $googleEmail
     ) {
         try {
 
@@ -118,6 +119,7 @@ class User extends Authenticatable
                 'data_nascimento' => $data_nascimento,
                 'password'        => $password ? Hash::make($password) : Hash::make("ChamadaEBD"),
                 'telefone'        => $telefone ? $telefone : "",
+                'google_email'    => $googleEmail,
             ]);
 
             //Associando primera turma do aluno

@@ -117,9 +117,24 @@
                                         {{ $profile->perfil }}</option>
                                 @endforeach
                             </select>
+                            @error('perfil')
+                                <p class="error">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email-google">Email Google</label>
+                            <input type="email" name="email" id="email-google" value=""
+                                wire:model='googleEmail' class="form-control">
+                        </div>
+                        @error('googleEmail')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                 </div>
+
 
                 <div class="row">
                     <div class="col">

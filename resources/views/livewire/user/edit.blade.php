@@ -136,7 +136,7 @@
                             <input type="email" name="email" id="email-google" value=""
                                 wire:model='googleEmail' class="form-control">
                         </div>
-                        @error('email')
+                        @error('googleEmail')
                             <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
