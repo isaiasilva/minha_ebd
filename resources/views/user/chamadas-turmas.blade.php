@@ -22,30 +22,30 @@
 
     <div class="">
         <div class="row mb-3">
-            <div class="col-lg col-sm-6 mb-3">
-                <div class="card bg-info text-white">
+            <div class="col-lg col-sm-6 ">
+                <div class="card pull-up bg-info ">
                     <div class="card-body">
-                        <i class="fas fa-users fa-3x"></i>
-                        <h6 class="card-title">N° Alunos</h6>
-                        <h2 class="lead">{{ $usuarios }}</h2>
+                        <i class="fas fa-users fa-3x text-white"></i>
+                        <h6 class="card-title text-white">N° Alunos</h6>
+                        <h2 class="lead text-white">{{ $usuarios }}</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-lg col-sm-6 mb-3">
-                <div class="card bg-success text-white">
+            <div class="col-lg col-sm-6 ">
+                <div class="card pull-up bg-success text-white">
                     <div class="card-body">
-                        <i class="fas fa-list fa-3x"></i>
-                        <h6 class="card-title">Presenças</h6>
-                        <h2 class="lead">{{ $presencas }}</h2>
+                        <i class="fas fa-list fa-3x text-white"></i>
+                        <h6 class="card-title text-white">Presenças</h6>
+                        <h2 class="lead text-white">{{ $presencas }}</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-lg col-sm-6 mb-3">
-                <div class="card bg-warning text-white">
+            <div class="col-lg col-sm-6 ">
+                <div class="card pull-up bg-warning text-white">
                     <div class="card-body">
-                        <i class="fas fa-exclamation fa-3x"></i>
-                        <h6 class="card-title">N° Atrasos</h6>
-                        <h2 class="lead">{{ $atrasos }}</h2>
+                        <i class="fas fa-exclamation fa-3x text-white"></i>
+                        <h6 class="card-title text-white">N° Atrasos</h6>
+                        <h2 class="lead text-white">{{ $atrasos }}</h2>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
 
         <div class="row mb-3">
             <div class="col-xl-12">
-                <div class="card mb-4">
+                <div class="card pull-up mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-bar me-1"></i>
                         Frequência por mês
