@@ -49,6 +49,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg col-sm-6 ">
+                <div class="card pull-up bg-secondary text-white">
+                    <div class="card-body">
+                        <i class="fas fa-times-circle fa-3x"></i>
+                        <h6 class="card-title text-white">N° Faltas Justificadas</h6>
+                        <h2 class="lead text-white">{{ $justificadas }}</h2>
+                    </div>
+                </div>
+            </div>
 
         </div> <!-- End row -->
 
