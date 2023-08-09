@@ -15,7 +15,7 @@
                                 <a class="dropdown-item" href="/user/chamada/{{ $turma->id }}">{{ $turma->nome_turma }}</a>
                             @endforeach
                         </div>
-                    @elsecan()
+                    @elsecan('is_teacher')
                         <div class="dropdown-menu altera-curso">
                             @foreach ($minhasTurmas as $minhaTurma)
                                 <a class="dropdown-item"

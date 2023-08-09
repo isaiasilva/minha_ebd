@@ -34,6 +34,14 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('is_teacher', function () {
+            if (auth()->user()->perfil_id == Perfil::PROFESSOR) {
+                return true;
+            }
+
+            return false;
+        });
+
         Gate::define('admin_superintendente', function (User $user) {
             if ($user->perfil_id == Perfil::ADMINISTRADOR || $user->perfil_id == Perfil::SUPERINTENDENTE) {
                 return true;
