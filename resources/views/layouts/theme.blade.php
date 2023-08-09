@@ -252,7 +252,7 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-                <div class="mr-auto d-flex justify-content-between">
+                <div class="mr-auto d-flex justify-content-between align-items-center">
                     <h1 class="display-4 titulo">@yield('cabecalho')</h1>
                     <div class=" py-2">@yield('botao')</div>
                 </div>

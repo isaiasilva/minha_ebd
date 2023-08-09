@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col d-flex justify-content-between">
             @section('cabecalho')
-                Chamada - {{ $turma->nome_turma }}
+                {{ $turma->nome_turma }}
             @endsection
             @section('botao')
                 <div class="btn-group">
@@ -29,6 +29,18 @@
             @endsection
         </div>
     </div>
+
+    <div class="row breadcrumbs-top d-inline-block mb-2">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home</a>
+                </li>
+                <li class="breadcrumb-item active"><a href="{{ route('chamada') }}">Chamada </a>
+                </li>
+            </ol>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-12 col-md-6">
