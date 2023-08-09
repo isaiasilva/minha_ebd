@@ -1,13 +1,13 @@
 <x-app-layout class="content-body">
     @section('cabecalho')
-        Página Inicial - {{ $igreja->igreja->nome }}
+        Página Inicial
     @endsection
 
-    <div class="d-flex justify-content-between">
-        <div class="row breadcrumbs-top d-inline-block mb-2">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="row breadcrumbs-top d-inline-block mb-1">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home</a>
+                    <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home - {{ $igreja->igreja->nome }}</a>
                     </li>
                 </ol>
             </div>
