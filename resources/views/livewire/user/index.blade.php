@@ -54,7 +54,7 @@
                                 @can('admin_superintendente')
                                     <td>
                                         @if ($usuario->is_active)
-                                            <span style="cursor: pointer;" class="badge badge-primary"
+                                            <span style="cursor: pointer;" class="badge badge-success"
                                                 wire:click="changeStatus({{ $usuario->user_id }})">ativo</span>
                                         @else
                                             <span style="cursor: pointer;" class="badge badge-danger"
