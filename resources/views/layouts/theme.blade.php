@@ -215,7 +215,8 @@
                             class="menu-title" data-i18n="Chartjs">Turmas</span></a>
                     <ul class="menu-content">
                         @can('admin_superintendente')
-                            <li><a class="menu-item" href="{{ route('turma') }}"><i class="fas fa-chalkboard"></i>
+                            <li><a class="menu-item" href="{{ route('turma.create') }}"><i
+                                        class="fas fa-chalkboard"></i>
                                     Nova turma</a></li>
                         @endcan
 

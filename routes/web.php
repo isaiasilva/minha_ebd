@@ -3,6 +3,7 @@
 use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTurmaController, ChamadaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
 use App\Http\Livewire\Administrator\User\Register as UserRegister;
 use App\Http\Livewire\Church\{Create, Edit, Index, Show};
+use App\Http\Livewire\Class\Index as ClassIndex;
 use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
 use App\Http\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Http\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
@@ -47,10 +48,11 @@ Route::get('/user/visualizar-chamadas/', [VisualizarChamadasController::class, '
 Route::get('/user/visualizar-chamadas-por-turma/', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth'])->name('todas-chamadas');
 Route::get('/user/visualizar-chamadas-por-turma/{id}', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth']);
 
-Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
+//Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
+Route::get('/user/turmas', ClassIndex::class)->middleware(['auth'])->name('turmas');
 
-Route::get('/user/turma', [TurmaController::class, 'create'])->middleware(['auth'])->name('turma');
-Route::post('/user/turma', [TurmaController::class, 'store'])->middleware(['auth']);
+Route::get('/user/turma', [TurmaController::class, 'create'])->middleware(['auth'])->name('turma.create');
+Route::post('/user/turma', [TurmaController::class, 'store'])->middleware(['auth'])->name('turma.store');
 Route::get('/user/turma/{id}/editar', [TurmaController::class, 'editar'])->middleware(['auth']);
 Route::put('/user/turma/{id}/editar', [TurmaController::class, 'update'])->middleware(['auth']);
 Route::delete('/user/excluir-turma', [TurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-turma');

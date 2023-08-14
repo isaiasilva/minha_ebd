@@ -12,19 +12,19 @@ trait Helpers
     {
 
         if (Auth::user()->perfil_id == Perfil::SUPERINTENDENTE || Auth::user()->perfil_id == Perfil::ADMINISTRADOR) {
-            $turmas = Turma::where(['igreja_id' => User::getIgreja()->id])->get();
+            $turmas = Turma::where(['igreja_id' => User::getIgreja()->id, 'is_active' => true])->get();
+
+            return $turmas;
         }
 
-        if (Auth::user()->perfil_id == Perfil::PROFESSOR) {
-            $turmasPorProfessor = ProfessorPorTurma::where(['professor_id' => Auth::user()->id, 'igreja_id' => User::getIgreja()->id])->get();
-            $collect            = new Collection();
-            $turmasPorProfessor->map(function (ProfessorPorTurma $turmaPorProfessor) use (&$collect) {
-                $turma = Turma::find($turmaPorProfessor->turma_id);
+        $turmasPorProfessor = ProfessorPorTurma::where(['professor_id' => Auth::user()->id, 'igreja_id' => User::getIgreja()->id])->get();
+        $collect            = new Collection();
+        $turmasPorProfessor->map(function (ProfessorPorTurma $turmaPorProfessor) use (&$collect) {
+            $turma = Turma::find($turmaPorProfessor->turma_id);
 
-                $collect->push($turma);
-            });
-            $turmas = $collect;
-        }
+            $turma->is_active ? $collect->push($turma) : null;
+        });
+        $turmas = $collect;
 
         return $turmas;
     }
@@ -52,7 +52,6 @@ trait Helpers
 
         $presenca = Chamada::where(['aluno_id' => $aluno, 'turma_id' => $turma, 'data' => $data])->get();
 
-        //dd($presenca);
         $retorno = "Pendente";
 
         foreach ($presenca as $chamada) {

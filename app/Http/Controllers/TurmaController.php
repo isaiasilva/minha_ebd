@@ -32,8 +32,8 @@ class TurmaController extends Controller
 
     public function store(Request $request)
     {
-        $turma = $this->turma;
-        $turma->create([
+        $request->validate(['nome_turma' => 'required|string'], ["nome_turma.required" => 'O campo é obrigatório']);
+        $this->turma->create([
             'nome_turma' => $request->nome_turma,
             'igreja_id'  => $this->user::getIgreja()->id,
         ]);
