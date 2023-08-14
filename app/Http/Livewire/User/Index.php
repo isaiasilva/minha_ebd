@@ -17,6 +17,11 @@ class Index extends Component
 
     public string $search = '';
 
+    protected $queryString = [
+        'search'  => ['except' => ''],
+        'perpage' => ['except' => 5],
+    ];
+
     public function render()
     {
         if (Auth::user()->perfil_id == Perfil::ADMINISTRADOR) {
@@ -35,5 +40,16 @@ class Index extends Component
         }
 
         return view('livewire.user.index', ['usuarios' => $usuarios]);
+    }
+
+    public function changeStatus(User $user)
+    {
+        $user->is_active = !$user->is_active;
+        $user->save();
+    }
+
+    public function getChurchName($usuario): string
+    {
+        return User::getIgrejaName($usuario->user_id);
     }
 }

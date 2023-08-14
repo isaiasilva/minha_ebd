@@ -38,10 +38,10 @@
                             <th scope="col">Nascimento</th>
                             <th scope="col">Perfil</th>
                             <th scope="col">Igreja</th>
-                            @if (Auth::user()->perfil_id == App\Models\Perfil::ADMINISTRADOR ||
-                                    Auth::user()->perfil_id == App\Models\Perfil::SUPERINTENDENTE)
+                            @can('admin_superintendente')
+                                <th scope="col">Status</th>
                                 <th scope="col">Ações</th>
-                            @endif
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -50,8 +50,18 @@
                                 <td>{{ $usuario->name }}</td>
                                 <td>{{ date('d/m/Y', strtotime($usuario->data_nascimento)) }}</td>
                                 <td>{{ $usuario->perfil }} </td>
-                                <td>{{ App\Models\User::getIgrejaName($usuario->user_id) }}</td>
+                                <td>{{ $this->getChurchName($usuario) }}</td>
                                 @can('admin_superintendente')
+                                    <td>
+                                        @if ($usuario->is_active)
+                                            <span style="cursor: pointer;" class="badge badge-primary"
+                                                wire:click="changeStatus({{ $usuario->user_id }})">ativo</span>
+                                        @else
+                                            <span style="cursor: pointer;" class="badge badge-danger"
+                                                wire:click="changeStatus({{ $usuario->user_id }})">inativo</span>
+                                        @endif
+                                    </td>
+
                                     <td>
                                         <p class="text-center pointer" data-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-cog"></i>
