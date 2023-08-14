@@ -39,7 +39,7 @@ class AlunosPorTurmaController extends Controller
 
     public function create()
     {
-        $turmas = $this->turma->where('igreja_id', User::getIgreja()->id)->get();
+        $turmas = $this->turma->where(['igreja_id' => User::getIgreja()->id, 'is_active' => true])->get();
 
         $alunos = $this->user->all();
         $alunos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)->get();

@@ -17,7 +17,7 @@ class Create extends Component
 
     public function render()
     {
-        $turmas = Turma::where('igreja_id', auth()->user()->getIgreja()->id)->orderBy('nome_turma', 'ASC')->get();
+        $turmas = Turma::where(['igreja_id' => auth()->user()->getIgreja()->id, 'is_active' => true])->orderBy('nome_turma', 'ASC')->get();
         $alunos = UsuariosPorIgreja::where('igreja_id', User::getIgreja()->id)
             ->join('users', 'usuarios_por_igrejas.user_id', 'users.id')
             ->where('users.name', 'LIKE', '%' . $this->search . '%')
