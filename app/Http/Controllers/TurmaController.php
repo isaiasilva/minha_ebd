@@ -76,6 +76,8 @@ class TurmaController extends Controller
         $turma->nome_turma = $request->nome_turma;
         $turma->save();
 
-        return redirect()->back()->with('success', 'Turma atualizada com sucesso!');
+        toastr()->addSuccess('Turma atualizada com sucesso!', 'Feito!');
+
+        return redirect()->back();
     }
 }

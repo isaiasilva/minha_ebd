@@ -47,14 +47,12 @@ Route::get('/user/excluir-presenca/{turma}/{aluno}', [ChamadaController::class, 
 Route::get('/user/visualizar-chamadas/', [VisualizarChamadasController::class, 'create'])->middleware(['auth'])->name('visualizar-chamadas');
 Route::get('/user/visualizar-chamadas-por-turma/', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth'])->name('todas-chamadas');
 Route::get('/user/visualizar-chamadas-por-turma/{id}', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth']);
-
-//Route::get('/user/turmas', [TurmaController::class, 'index'])->middleware(['auth'])->name('turmas');
 Route::get('/user/turmas', ClassIndex::class)->middleware(['auth'])->name('turmas');
 
 Route::get('/user/turma', [TurmaController::class, 'create'])->middleware(['auth'])->name('turma.create');
 Route::post('/user/turma', [TurmaController::class, 'store'])->middleware(['auth'])->name('turma.store');
-Route::get('/user/turma/{id}/editar', [TurmaController::class, 'editar'])->middleware(['auth']);
-Route::put('/user/turma/{id}/editar', [TurmaController::class, 'update'])->middleware(['auth']);
+Route::get('/user/turma/{id}/editar', [TurmaController::class, 'editar'])->middleware(['auth'])->name('turma.edit');
+Route::put('/user/turma/{id}/editar', [TurmaController::class, 'update'])->middleware(['auth'])->name('turma.update');
 Route::delete('/user/excluir-turma', [TurmaController::class, 'destroy'])->middleware(['auth'])->name('excluir-turma');
 
 Route::get('/user/professor-por-turma', [ProfessorPorTurmaController::class, 'index'])->middleware(['auth'])->name('professorPorTurma');
