@@ -184,12 +184,10 @@
                             </tr>
                         @empty
                             <tr>
-                                <td class="text-center">
+                                <td class="text-center" colspan="3">
 
                                     <h2>Não existem alunos associados a essa turma!</h2>
                                 </td>
-                                <td></td>
-                                <td></td>
                             </tr>
                         @endforelse
 
