@@ -32,7 +32,7 @@ class ProfessorPorTurmaController extends Controller
 
     public function create()
     {
-        $turmas = $this->turma->where(['igreja_id' => $this->user::getIgreja()->id, 'is_ative' => true])->get();
+        $turmas = $this->turma->where(['igreja_id' => $this->user::getIgreja()->id, 'is_active' => true])->get();
 
         $professores = UsuariosPorIgreja::where('igreja_id', $this->user::getIgreja()->id)
             ->join('users', 'usuarios_por_igrejas.user_id', '=', 'users.id')
