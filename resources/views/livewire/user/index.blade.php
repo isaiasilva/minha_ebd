@@ -48,7 +48,15 @@
                         @foreach ($usuarios as $usuario)
                             <tr>
                                 <td>{{ $usuario->name }}</td>
-                                <td>{{ date('d/m/Y', strtotime($usuario->data_nascimento)) }}</td>
+                                <td>
+                                    <span class="me-5">
+                                        {{ date('d/m/Y', strtotime($usuario->data_nascimento)) }}
+                                    </span>
+
+                                    <span class="badge badge-primary">
+                                        {{ calculateAge($usuario->data_nascimento) }}
+                                    </span>
+                                </td>
                                 <td>{{ $usuario->perfil }} </td>
                                 <td>{{ $this->getChurchName($usuario) }}</td>
                                 @can('admin_superintendente')
