@@ -75,7 +75,7 @@
                 <table class="table">
                     <thead>
                         <tr class="text-center">
-                            <th class="border-top-0" scope="col">Nome</th>
+                            <th class="border-top-0" scope="col">Aluno</th>
                             <th class="border-top-0" scope="col">Presença</th>
                             <th class="border-top-0" scope="col">Ações</th>
                         </tr>
@@ -89,16 +89,11 @@
                                             width="60" height="60">
                                     </div>
                                     <div class="col mt-1">
-                                        @php
-                                            $name = explode(' ', $aluno->aluno->name);
-                                        @endphp
-                                        @if (array_key_exists(1, $name))
-                                            {{ $name[0] }} {{ $name[1] }}
-                                        @else
-                                            {{ $name[0] }}
-                                        @endif
-
+                                        {{ cutName($aluno->aluno->name) }}
                                     </div>
+                                    <span class="badge badge-info">
+                                        {{ calculateAge($aluno->aluno->data_nascimento) }}
+                                    </span>
                                 </td>
                                 <td class="text-truncate">
                                     <div class="form-check">
