@@ -16,8 +16,7 @@ class Index extends Component
     public string $search = '';
 
     protected $queryString = [
-        'search'  => ['except' => ''],
-        'perpage' => ['except' => 5],
+        'search' => ['except' => ''],
     ];
 
     public function render()

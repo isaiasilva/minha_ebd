@@ -38,7 +38,7 @@
             </select>
         </div>
     </section>
-    @forelse ($materials as $material)
+    @foreach ($materials as $material)
         <div class="card">
             <div class="card-body d-flex justify-content-between align-items-center">
                 <span>
@@ -71,10 +71,12 @@
                 @endcan
             </div>
         </div>
-    @empty
+    @endforeach
+    @if (count($materials) == 0)
         <p>Não existem materiais</p>
-    @endforelse
-    <div class="row d-flex justify-content-around">
-        {{ $materials->links() }}
-    </div>
+    @else
+        <div class="row d-flex justify-content-around">
+            {{ $materials->links() }}
+        </div>
+    @endif
 </div>

@@ -25,7 +25,7 @@ class Create extends Component
         $this->validate();
         auth()->user()->comentarios()->create(['text' => $this->text, 'material_id' => $this->material->id]);
         $this->reset(['text']);
-        $this->emit('reload');
+        $this->dispatch('reload');
         toastr()->addSuccess('Comentário publicado', 'Sucesso!');
     }
 }

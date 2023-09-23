@@ -9,13 +9,13 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $perpage = 5;
+    public int $perpage = 5;
 
-    public $search = '';
+    public string $search = '';
 
-    protected $paginationTheme = 'bootstrap';
-
-    protected $queryString = ['search'];
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
 
     public function render()
     {

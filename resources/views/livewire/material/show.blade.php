@@ -136,7 +136,7 @@
                         <hr>
                     @empty
                         <p>Ainda não existem comentários ...</p>
-                    @endforelse ()
+                    @endforelse
 
                 </div>
             </div>

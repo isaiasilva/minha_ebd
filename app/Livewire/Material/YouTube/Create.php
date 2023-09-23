@@ -55,7 +55,7 @@ class Create extends Component
             $data['url']    = $this->link;
             $this->material->you_tubes()->create($data);
 
-            toastr()->addSuccess('Link inserido', 'Sucesso');
+            toastr()->addSuccess('Link do You Tube inserido', 'Sucesso');
 
             return redirect(route('material.show', $this->material->id));
         } catch (QueryException $e) {
