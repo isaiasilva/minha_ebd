@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTurmaController, ChamadaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
-use App\Http\Livewire\Administrator\User\Register as UserRegister;
-use App\Http\Livewire\Church\{Create, Edit, Index, Show};
-use App\Http\Livewire\Class\Index as ClassIndex;
-use App\Http\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
-use App\Http\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
-use App\Http\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
-use App\Http\Livewire\{Chamada, Relatorios, UserTable};
+use App\Livewire\Administrator\User\Register as UserRegister;
+use App\Livewire\Church\{Create, Edit, Index, Show};
+use App\Livewire\Class\Index as ClassIndex;
+use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
+use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
+use App\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
+use App\Livewire\{Chamada, Relatorios, UserTable};
 use App\Models\{User, UsuariosPorIgreja};
 use Illuminate\Support\Facades\{Auth, Route};
 
@@ -87,8 +87,6 @@ Route::prefix('user/material')->name('material.')->group(function () {
     Route::get('show/{material}', MaterialShow::class)->name('show')->middleware(['auth']);
     Route::get('edit/{material}', MaterialEdit::class)->name('edit')->middleware(['auth']);
 });
-
-Route::get('/users/data-table', UserTable::class)->middleware('auth');
 
 Route::get('/sair', function () {
     Auth::logout();

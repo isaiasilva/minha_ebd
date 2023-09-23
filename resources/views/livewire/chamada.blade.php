@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-12 col-md-6">
             <label for="data-chamada">Data </label>
-            <input class="form-control" type="date" value="" wire:model='data'>
+            <input class="form-control" type="date" value="" wire:model.live='data'>
             @error('data')
                 <p>{{ $message }}</p>
             @enderror
@@ -53,11 +53,11 @@
     <div class="row d-md-flex justify-content-between align-items-center">
 
         <div class="col-12 col-sm-6 mt-2 mt-md-0">
-            <input class="form-control" type="text" placeholder="Filtre pelo nome" wire:model='search'>
+            <input class="form-control" type="text" placeholder="Filtre pelo nome" wire:model.live='search'>
         </div>
         <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
-            <select id='perpage' wire:model="perpage" class="form-select my-3">
+            <select id='perpage' wire:model.live="perpage" class="form-select my-3">
                 <option value="15">15</option>
                 <option value="20">20</option>
                 <option value="30">30</option>

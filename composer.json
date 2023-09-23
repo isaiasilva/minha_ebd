@@ -18,10 +18,9 @@
         "laravel/socialite": "^5.8",
         "laravel/telescope": "^4.15",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.10",
+        "livewire/livewire": "3.0",
         "php-flasher/flasher": "^1.7",
-        "php-flasher/flasher-toastr-laravel": "^1.7",
-        "power-components/livewire-powergrid": "^4.4"
+        "php-flasher/flasher-toastr-laravel": "^1.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
