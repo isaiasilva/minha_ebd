@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\{AlterarSenhaController, AlunosController, AlunosPorTurmaController, ChamadaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
+use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
 use App\Livewire\Administrator\User\Register as UserRegister;
 use App\Livewire\Church\{Create, Edit, Index, Show};
 use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
-use App\Livewire\{Chamada, Relatorios, UserTable};
-use App\Models\{User, UsuariosPorIgreja};
+use App\Livewire\{Chamada, Relatorios};
 use Illuminate\Support\Facades\{Auth, Route};
 
 Route::get('/', function () {
@@ -34,15 +33,8 @@ Route::delete('/user/{id}/delete', [UsuariosController::class, 'destroy'])->midd
 Route::get('/user/usuario/{id}/editar', UserEdit::class)->name('user.edit')->middleware(['auth']);
 Route::put('/user/usuario/{id}/editar', [UsuariosController::class, 'update'])->middleware(['auth']);
 
-Route::get('/user/alunos', [AlunosController::class, 'index'])->middleware(['auth'])->name('alunos');
-
 Route::get('/user/chamada', Chamada::class)->middleware(['auth'])->name('chamada');
-
 Route::get('/user/chamada/{id}', Chamada::class)->middleware(['auth']);
-
-Route::post('/user/chamada', [ChamadaController::class, 'create'])->middleware(['auth'])->name('chamada');
-Route::post('/user/atraso', [ChamadaController::class, 'create'])->middleware(['auth'])->name('atraso');
-Route::get('/user/excluir-presenca/{turma}/{aluno}', [ChamadaController::class, 'destroy'])->middleware(['auth'])->name('excluir-presenca');
 
 Route::get('/user/visualizar-chamadas/', [VisualizarChamadasController::class, 'create'])->middleware(['auth'])->name('visualizar-chamadas');
 Route::get('/user/visualizar-chamadas-por-turma/', [VisualizarChamadasController::class, 'chamadas'])->middleware(['auth'])->name('todas-chamadas');
