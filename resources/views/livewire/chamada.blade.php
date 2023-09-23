@@ -81,7 +81,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ( $alunos as $i => $aluno )
+
+
+                        @foreach ($alunos as $i => $aluno)
                             <tr>
                                 <td class="text-truncate text-center">
                                     <div class="col">
@@ -177,21 +179,23 @@
 
                                 </td>
                             </tr>
-                        @empty
+                        @endforeach
+                        @if (count($alunos) == 0)
                             <tr>
                                 <td class="text-center" colspan="3">
 
                                     <h2>Não existem alunos associados a essa turma!</h2>
                                 </td>
                             </tr>
-                        @endforelse
-
+                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center">
-        {{ $alunos->links() }}
-    </div>
+    @if (count($alunos) > 0)
+        <div class="d-flex justify-content-center">
+            {{ $alunos->links() }}
+        </div>
+    @endif
 </div>

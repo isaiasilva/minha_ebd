@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Helper\Helpers;
 use App\Jobs\XPJob;
-use App\Models\{AlunoPorTurma, Chamada as ChamadaModel, ProfessorPorTurma, Turma, User};
+use App\Models\{AlunoPorTurma, Chamada as ChamadaModel, Turma, User};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +16,6 @@ class Chamada extends Component
     use WithPagination;
 
     public $perpage = 15;
-
-    protected $paginationTheme = 'bootstrap';
 
     public $data;
 
@@ -120,14 +118,17 @@ class Chamada extends Component
             $this->restauraValoresAtrasoMaterial();
             XPJob::dispatch($user, 7);
 
-            return toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
+            toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
+
+            return;
         }
 
         $this->restauraValoresAtrasoMaterial();
 
         XPJob::dispatch($user, 10);
 
-        return toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
+        toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
+
     }
 
     public function destroy($aluno_id)
