@@ -27,11 +27,11 @@
         <div class="row d-md-flex justify-content-between align-items-center">
 
             <div class="col-12 col-sm-6 mt-2 mt-md-0">
-                <input class="form-control" type="text" placeholder="Filtre pelo nome" wire:model='search'>
+                <input class="form-control" type="text" placeholder="Filtre pelo nome" wire:model.live='search'>
             </div>
             <div class="col-12 col-md-6 text-right">
                 <label for='perpage' class="ps-3">Registros por página</label>
-                <select id='perpage' wire:model="perpage" class="form-select my-3">
+                <select id='perpage' wire:model.live="perpage" class="form-select my-3">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -57,7 +57,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($turmas as $turma)
+                            @foreach ($turmas as $turma)
                                 <tr>
                                     <td class="text-truncate text-center">
                                         {{ $turma->nome_turma }}
@@ -89,21 +89,24 @@
                                         </td>
                                     @endcan
                                 </tr>
-                            @empty
+                            @endforeach
+                            @if (count($turmas) == 0)
                                 <tr>
                                     <td class="text-center" colspan="3">
                                         <h2>Não existem turmas cadastradas!</h2>
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endif
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            {{ $turmas->links() }}
-        </div>
+        @if (count($turmas) > 0)
+            <div class="d-flex justify-content-center">
+                {{ $turmas->links() }}
+            </div>
+        @endif
     </div>
 </div>

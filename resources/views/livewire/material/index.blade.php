@@ -27,18 +27,18 @@
     <section class="row d-md-flex justify-content-between align-items-center">
 
         <div class="col-12 col-sm-6 mt-2 mt-md-0">
-            <input class="form-control" type="text" placeholder="Filtre" wire:model='search'>
+            <input class="form-control" type="text" placeholder="Filtre" wire:model.live='search'>
         </div>
         <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
-            <select id='perpage' wire:model="perpage" class="form-select my-3">
-                <option value="15">5</option>
-                <option value="20">10</option>
-                <option value="30">20</option>
+            <select id='perpage' wire:model.live="perpage" class="form-select my-3">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
             </select>
         </div>
     </section>
-    @forelse ($materials as $material)
+    @foreach ($materials as $material)
         <div class="card">
             <div class="card-body d-flex justify-content-between align-items-center">
                 <span>
@@ -71,10 +71,12 @@
                 @endcan
             </div>
         </div>
-    @empty
+    @endforeach
+    @if (count($materials) == 0)
         <p>Não existem materiais</p>
-    @endforelse
-    <div class="row d-flex justify-content-around">
-        {{ $materials->links() }}
-    </div>
+    @else
+        <div class="row d-flex justify-content-around">
+            {{ $materials->links() }}
+        </div>
+    @endif
 </div>

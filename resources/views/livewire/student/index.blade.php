@@ -15,11 +15,11 @@
     <section class="row d-md-flex justify-content-between align-items-center">
 
         <div class="col-12 col-sm-6 mt-2 mt-md-0">
-            <input class="form-control" type="text" placeholder="Filtre" wire:model='search'>
+            <input class="form-control" type="text" placeholder="Filtre" wire:model.live='search'>
         </div>
         <div class="col-12 col-md-6 text-right">
             <label for='perpage' class="ps-3">Registros por página</label>
-            <select id='perpage' wire:model="perpage" class="form-select my-3">
+            <select id='perpage' wire:model.live="perpage" class="form-select my-3">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
