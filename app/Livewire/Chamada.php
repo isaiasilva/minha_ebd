@@ -7,7 +7,7 @@ use App\Jobs\XPJob;
 use App\Models\{AlunoPorTurma, Chamada as ChamadaModel, Turma, User};
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Auth, Session};
 use Livewire\{Component, WithPagination};
 
 class Chamada extends Component
@@ -37,9 +37,13 @@ class Chamada extends Component
 
     public $material;
 
-    protected $rules = [
-        'data' => 'required',
-    ];
+    protected function rules()
+    {
+        return [
+            'data' => 'required',
+
+        ];
+    }
 
     protected $messages = ['data.required' => 'A data é obrigatória!'];
 
@@ -86,13 +90,15 @@ class Chamada extends Component
         );
     }
 
-    public function store($aluno_id, bool $absence = false)
+    public function store(int $aluno_id, bool $absence = false)
     {
         $this->validate();
         $chamada = ChamadaModel::where(['aluno_id' => $aluno_id, 'data' => $this->data])->first();
 
         if ($chamada) {
-            return toastr()->addWarning('Não foi possível registrar a presença. Aluno já tem a presença em outra turma hoje.', 'Atenção!');
+            Session::flash('error', 'Não foi possível registrar a presença. Aluno já tem a presença em outra turma hoje.');
+
+            return;
         }
         $chamada = ChamadaModel::create([
             'data'              => $this->data,
@@ -110,15 +116,16 @@ class Chamada extends Component
         if ($absence === true) {
             $this->restauraValoresAtrasoMaterial();
             XPJob::dispatch($user, 2);
+            Session::flash('warning', 'Falta justificada registrada com sucesso.');
 
-            return toastr()->addWarning('Falta justificada registrada com sucesso', 'Feito');
+            return;
         }
 
         if ($this->atraso === true) {
             $this->restauraValoresAtrasoMaterial();
             XPJob::dispatch($user, 7);
 
-            toastr()->addWarning('Atraso registrado com sucesso', 'Feito');
+            Session::flash('warning', 'Atraso registrado com sucesso');
 
             return;
         }
@@ -127,7 +134,7 @@ class Chamada extends Component
 
         XPJob::dispatch($user, 10);
 
-        toastr()->addSuccess('Presença registrada com sucesso', 'Feito!');
+        Session::flash('success', 'Presença registrada com sucesso!');
 
     }
 
@@ -140,23 +147,26 @@ class Chamada extends Component
 
             if ($chamada->atraso) {
                 XPJob::dispatch($user, -7);
-                toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
+                Session::flash('success', 'Presença apagada com sucesso!');
 
                 return;
             }
 
             if ($chamada->falta_justificada) {
                 XPJob::dispatch($user, -2);
-                toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
+                Session::flash('success', 'Presença apagada com sucesso!');
 
                 return;
             }
 
             XPJob::dispatch($user, -10);
 
-            toastr()->addSuccess('Presença apagada com sucesso!', 'Feito!');
+            Session::flash('success', 'Presença registrada com sucesso!');
         } catch (Exception $e) {
-            toastr()->addError('Não foi possível excluir. Por favor, procure a superintendência.', 'Feito!');
+
+            Session::flash('error', 'Não foi possível excluir. Por favor, procure a superintendência.');
+
+            return;
         }
     }
 
@@ -204,7 +214,10 @@ class Chamada extends Component
         try {
             return ChamadaModel::where(['aluno_id' => $user_id, 'turma_id' => $this->turmaAtual, 'data' => $this->data])->first();
         } catch (Exception $e) {
-            return toastr()->addError('O correu um erro! Verifique se a data está preenchida normalmente', 'Erro!');
+
+            Session::flash('error', 'Ocorreu um erro! Verifique se a data está preenchida normalmente');
+
+            return;
         }
     }
 }

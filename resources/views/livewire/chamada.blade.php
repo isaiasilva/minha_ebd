@@ -50,6 +50,8 @@
             @enderror
         </div>
     </div>
+
+
     <div class="row d-md-flex justify-content-between align-items-center">
 
         <div class="col-12 col-sm-6 mt-2 mt-md-0">
@@ -66,9 +68,14 @@
 
     </div>
 
+    <x-flash-message></x-flash-message>
+
     <div class="card ">
         <div class="card-header">
             <h4 class="card-title">Alunos</h4>
+            @error('chamada.unique')
+                <p>{{ $message }}</p>
+            @enderror
         </div>
         <div class="card-content">
             <div class="table-responsive">
@@ -81,6 +88,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
 
 
                         @foreach ($alunos as $i => $aluno)
