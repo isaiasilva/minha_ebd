@@ -29,6 +29,7 @@ class PrincipalController extends Controller
                     'name'      => $name[0],
                     'photo'     => $user->user->path_photo,
                     'presencas' => $user->user->presencasAnoCorrente(null),
+                    'pontos'    => $user->user->xp->points,
                 ];
 
                 $collect->push((object) $usuario);
@@ -59,7 +60,7 @@ class PrincipalController extends Controller
             'primarios'    => $this->alunoPorTurma->where('turma_id', 14)->count(),
             'title'        => 'Dashboard',
             'igreja'       => UsuariosPorIgreja::where('user_id', Auth::user()->id)->first(),
-            'assiduos'     => $collect->sortByDesc('presencas')->take(6),
+            'assiduos'     => $collect->sortByDesc('pontos')->take(6),
         ]);
     }
 }

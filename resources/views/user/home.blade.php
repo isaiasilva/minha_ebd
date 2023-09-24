@@ -147,6 +147,7 @@
                                         <th class="border-top-0">Aluno</th>
                                         <th class="border-top-0">Foto</th>
                                         <th class="border-top-0">Presenças</th>
+                                        <th class="border-top-0">XP</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -165,6 +166,7 @@
                                                 </ul>
                                             </td>
                                             <td class="text-truncate">{{ $ass->presencas }}</td>
+                                            <td class="text-truncate">{{ $ass->pontos }}</td>
                                         </tr>
                                     @endforeach
 
