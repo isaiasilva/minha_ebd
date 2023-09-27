@@ -169,9 +169,11 @@
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                             </button>
-                                            <div class="dropdown-menu">
+                                            <div class="dropdown-menu" wire:key="{{ $aluno->user_id }}">
+
                                                 <a class="dropdown-item" href="#"
-                                                    wire:click.prevent="store({{ $aluno->user_id }} )">Presença</a>
+                                                    wire:click.prevent="store({{ $aluno->user_id }} )">
+                                                    Presença</a>
                                                 <a class="dropdown-item" href="#"
                                                     wire:click.prevent="store({{ $aluno->user_id }}, {{ true }} )">Falta
                                                     Justificada</a>
