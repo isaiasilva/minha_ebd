@@ -5,6 +5,7 @@ use App\Livewire\Administrator\User\Register as UserRegister;
 use App\Livewire\Church\{Create, Edit, Index, Show};
 use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
+use App\Livewire\Quiz\{Create as QuizCreate, Index as QuizIndex};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
 use App\Livewire\{Chamada, Relatorios};
@@ -78,6 +79,13 @@ Route::prefix('user/material')->name('material.')->group(function () {
     Route::get('create', MaterialCreate::class)->name('create')->middleware(['auth']);
     Route::get('show/{material}', MaterialShow::class)->name('show')->middleware(['auth']);
     Route::get('edit/{material}', MaterialEdit::class)->name('edit')->middleware(['auth']);
+});
+
+Route::prefix('user/quiz')->name('quiz.')->group(function () {
+    Route::get('/', QuizIndex::class)->middleware(['auth'])->name('index');
+    Route::get('create', QuizCreate::class)->name('create')->middleware(['auth']);
+    //Route::get('show/{material}', MaterialShow::class)->name('show')->middleware(['auth']);
+    //Route::get('edit/{material}', MaterialEdit::class)->name('edit')->middleware(['auth']);
 });
 
 Route::get('/sair', function () {
