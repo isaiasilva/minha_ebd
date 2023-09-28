@@ -20,7 +20,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "3.0",
         "php-flasher/flasher": "^1.7",
-        "php-flasher/flasher-toastr-laravel": "^1.7"
+        "php-flasher/flasher-toastr-laravel": "^1.7",
+        "tinymce/tinymce": "^6.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -266,7 +266,7 @@
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <!-- BEGIN: Footer-->
+
     <footer class="footer footer-static footer-light navbar-border navbar-shadow">
         <p class="clearfix blue-grey lighten-2 text-center mb-0 px-2"><span
                 class="float-md-left d-block d-md-inline-block">Copyright &copy; {{ date('Y') }} <a
@@ -275,31 +275,10 @@
                     href="https://www.linkedin.com/in/claudio-oliveira-5857a8139/" target="_blank">Cláudio
                     Oliveira</a></span> </p>
     </footer>
-    <!-- END: Footer-->
 
-    <script defer src="{{ asset('js/dataTables.js') }}"></script>
-    <script defer src="{{ asset('js/datatables-demo.js') }}"></script>
-    <script defer src="{{ asset('js/all.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
-    <!-- BEGIN Vendor JS-->
 
-    <!-- BEGIN: Page Vendor JS-->
+    <x-scripts />
 
-    <script src="{{ asset('app-assets/vendors/js/charts/chartist.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/charts/raphael-min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/charts/morris.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/timeline/horizontal-timeline.js') }}"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
-    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="{{ asset('app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
-    <!-- END: Page JS-->
 </body>
 
 </html>
