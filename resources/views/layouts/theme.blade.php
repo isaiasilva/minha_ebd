@@ -235,7 +235,10 @@
                     </li>
                 @endcan
 
-
+                <li>
+                    <a href="{{ route('quiz.create') }}">
+                        <i class="fas fa-gamepad mr-1"></i><span class="menu-title">Quizzes</span> </a>
+                </li>
                 <li>
                     <a href="{{ route('gamiicacao') }}">
                         <i class="fas fa-gamepad mr-1"></i><span class="menu-title">Gameficação</span> </a>
