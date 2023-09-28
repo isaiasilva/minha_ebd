@@ -155,8 +155,6 @@
                                         aria-hidden="true"></i><span data-i18n="Callout">Novo</span></a>
                             </li>
                         @endcan
-
-
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="fas fa-user-graduate mr-1"></i><span
@@ -246,7 +244,7 @@
         </div>
     </div>
 
-    <!-- END: Main Menu-->
+
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
