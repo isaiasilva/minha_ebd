@@ -10,7 +10,7 @@ use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
 use App\Livewire\Quiz\Item\Create as ItemCreate;
 use App\Livewire\Quiz\Question\{Create as QuestionCreate, Show as QuestionShow};
-use App\Livewire\Quiz\{Create as QuizCreate, Edit as QuizEdit, Index as QuizIndex, Show as QuizShow};
+use App\Livewire\Quiz\{Create as QuizCreate, Edit as QuizEdit, Index as QuizIndex, Show as QuizShow, ShowAll};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
 use App\Livewire\{Chamada, Relatorios};
@@ -90,6 +90,7 @@ Route::prefix('user/quiz')->name('quiz.')->group(function () {
     Route::get('/', QuizIndex::class)->middleware(['auth'])->name('index');
     Route::get('create', QuizCreate::class)->name('create')->middleware(['auth']);
     Route::get('show/{quiz}', QuizShow::class)->name('show')->middleware(['auth']);
+    Route::get('show/{quiz}/all', ShowAll::class)->name('show.all')->middleware(['auth']);
     Route::get('edit/{quiz}', QuizEdit::class)->name('edit')->middleware(['auth']);
     Route::delete('delete/{quiz}', DeleteQuizController::class)->name('delete')->middleware(['auth']);
 });

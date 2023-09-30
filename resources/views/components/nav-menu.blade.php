@@ -117,7 +117,7 @@
 
             <li>
                 <a href="{{ route('quiz.index') }}">
-                    <i class="fas fa-gamepad mr-1"></i><span class="menu-title">Quizzes</span> </a>
+                    <i class="fas fa-pencil-ruler mr-1"></i></i><span class="menu-title">Quizzes</span> </a>
             </li>
             <li>
                 <a href="{{ route('gamiicacao') }}">

@@ -62,7 +62,9 @@
                                 <button type="submit" class="dropdown-item">Excluir</button>
                             </form>
                         </li>
-
+                        <li>
+                            <a class="dropdown-item" href="{{ route('quiz.show.all', $quiz) }}">Ver todo o Quiz</a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 <div>
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-
             @section('cabecalho')
                 {{ $quiz->title }}
             @endsection
@@ -41,24 +40,20 @@
         <h2>Questões</h2>
         <a href="{{ route('question.create', $quiz) }}" class="btn btn-primary"><i class="fas fa-plus"></i> </a>
     </section>
-    <section>
-        @foreach ($quiz->questions as $key => $question)
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-content-center">
-                    <h4><a href="{{ route('question.show', ['quiz' => $quiz, 'question' => $question->id]) }}">Questão
-                            {{ $key + 1 }} </a></h4>
-                    {{-- @can('action_material', $material) --}}
-                    <a href="#" class="btn btn-danger"
-                        onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()" ">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    {{-- @endcan --}}
-                </div>
+    @forelse ($quiz->questions as $key => $question)
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-content-center">
+                <h4><a href="{{ route('question.show', ['quiz' => $quiz, 'question' => $question->id]) }}">Questão
+                        {{ $key + 1 }} </a></h4>
+                {{-- @can('action_material', $material) --}}
+                <a href="#" class="btn btn-danger"
+                    onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                {{-- @endcan --}}
             </div>
- @endforeach
-
-    </section>
-
-</div>
-
+        </div>
+    @empty
+        <p>Não existem questões cadastradas.</p>
+    @endforelse
 </div>
