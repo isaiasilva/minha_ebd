@@ -15,7 +15,7 @@ class CreateController extends Controller
                 'body' => 'required',
             ]
         );
-        Question::create(
+        $question = Question::create(
             [
                 'body'    => $request->body,
                 'quiz_id' => $quiz->id,
@@ -24,6 +24,6 @@ class CreateController extends Controller
 
         toastr()->AddSuccess('Questão criada com sucesso!', 'Feito!');
 
-        return to_route('quiz.show', ['quiz' => $quiz->id]);
+        return to_route('item.create', ['quiz' => $quiz->id, 'question' => $question->id]);
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Item\CreateController as ItemCreateController;
 use App\Http\Controllers\Question\CreateController;
 use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
 use App\Livewire\Administrator\User\Register as UserRegister;
 use App\Livewire\Church\{Create, Edit, Index, Show};
 use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
+use App\Livewire\Quiz\Item\Create as ItemCreate;
 use App\Livewire\Quiz\Question\Create as QuestionCreate;
 use App\Livewire\Quiz\{Create as QuizCreate, Index as QuizIndex, Show as QuizShow};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
@@ -92,6 +94,9 @@ Route::prefix('user/quiz')->name('quiz.')->group(function () {
 
 Route::get('/user/quiz/{quiz}/question/create', QuestionCreate::class)->name('question.create')->middleware(['auth'])->lazy();
 Route::post('/user/quiz/{quiz}/question/create', CreateController::class)->name('question.store')->middleware(['auth']);
+
+Route::get('/user/quiz/{quiz}/question/{question}/item/create', ItemCreate::class)->name('item.create')->middleware(['auth'])->lazy();
+Route::post('/user/quiz/{quiz}/question/{question}/item/create', ItemCreateController::class)->name('item.store')->middleware(['auth'])->lazy();
 
 Route::get('/sair', function () {
     Auth::logout();
