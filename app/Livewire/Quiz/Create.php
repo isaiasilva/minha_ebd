@@ -31,15 +31,16 @@ class Create extends Component
     {
         $this->validate();
 
-        Quiz::create([
+        $quiz = Quiz::create([
             'title'     => $this->title,
             'type'      => $this->type,
             'igreja_id' => getChurch()->id,
             'slug'      => Str::slug($this->title),
+            'is_draft'  => true,
         ]);
 
-        toastr()->AddSuccess('Quiz criado com sucesso!');
+        toastr()->AddSuccess('Quiz criado com sucesso!', 'Feito!');
 
-        return redirect()->route('quiz.create');
+        return redirect()->route('question.create', ['quiz' => $quiz->id]);
     }
 }

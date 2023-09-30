@@ -46,7 +46,6 @@
                                     <option value="" selected="" disabled="">Selecione ...</option>
                                     <option value="Avaliação">Avaliação</option>
                                     <option value="Revisão">Revisão</option>
-
                                 </select>
                                 @error('type')
                                     <p class="error">

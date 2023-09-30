@@ -25,7 +25,6 @@
         </div>
     </div>
     <section class="row d-md-flex justify-content-between align-items-center">
-
         <div class="col-12 col-sm-6 mt-2 mt-md-0">
             <input class="form-control" type="text" placeholder="Filtre" wire:model.live='search'>
         </div>
@@ -44,7 +43,7 @@
                 <span>
                     <h5>
                         <b>
-                            <a href="#">{{ $quiz->title }}</a> - {{ $quiz->type }}
+                            <a href="{{ route('quiz.show', $quiz) }}">{{ $quiz->title }}</a> - {{ $quiz->type }}
                         </b>
                     </h5>
                 </span>

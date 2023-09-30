@@ -16,7 +16,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.quiz.index', [
-            'quizzes' => Quiz::where('igreja_id', getChurch()->id)->paginate(10),
+            'quizzes' => Quiz::where('igreja_id', getChurch()->id)->where('title', 'LIKE', '%' . $this->search . '%')->paginate($this->perpage),
         ]);
     }
 }
