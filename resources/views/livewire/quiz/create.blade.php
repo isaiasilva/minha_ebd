@@ -43,7 +43,7 @@
                                 <label for="projectinput5">Tipo do Quiz</label>
                                 <select id="projectinput5" name="type" wire:model.live="type"
                                     class="form-control">
-                                    <option value="" selected="" disabled="">Selecione ...</option>
+                                    <option value="" selected>Selecione ...</option>
                                     <option value="Avaliação">Avaliação</option>
                                     <option value="Revisão">Revisão</option>
                                 </select>
