@@ -53,7 +53,7 @@
                         <i class="la la-ellipsis-v tamanho-pontos"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Editar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Agendamento</a></li>
                         <li>
                             <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
                                 onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">

@@ -32,11 +32,14 @@
                             aria-expanded="false">
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                data-target="#arquivo">Editar</a>
-                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                data-target="#link-externo">Excluir
-                            </a>
+                            <a class="dropdown-item"
+                                href="{{ route('question.edit', ['question' => $question, 'quiz' => $quiz]) }}">Editar</a>
+                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
+                                onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item">Excluir</button>
+                            </form>
                         </div>
                     </div>
                 </div>
