@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Item\CreateController as ItemCreateController;
-use App\Http\Controllers\Question\{CreateController, UpdateQuestionController};
+use App\Http\Controllers\Question\{CreateController, DeleteQuestionController, UpdateQuestionController};
 use App\Http\Controllers\Quiz\DeleteQuizController;
 use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
 use App\Livewire\Administrator\User\Register as UserRegister;
@@ -100,6 +100,7 @@ Route::get('/user/quiz/{quiz}/question/create', QuestionCreate::class)->name('qu
 Route::post('/user/quiz/{quiz}/question/create', CreateController::class)->name('question.store')->middleware(['auth']);
 Route::get('/user/quiz/{quiz}/question/{question}/edit', QuestionEdit::class)->name('question.edit')->middleware(['auth']);
 Route::put('/user/quiz/{quiz}/question/{question}/edit', UpdateQuestionController::class)->name('question.update')->middleware(['auth']);
+Route::delete('/user/question/{question}/delete', DeleteQuestionController::class)->name('question.delete')->middleware(['auth']);
 
 Route::get('/user/quiz/{quiz}/question/{question}/item/create', ItemCreate::class)->name('item.create')->middleware(['auth'])->lazy();
 Route::post('/user/quiz/{quiz}/question/{question}/item/create', ItemCreateController::class)->name('item.store')->middleware(['auth'])->lazy();

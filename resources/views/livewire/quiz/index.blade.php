@@ -55,14 +55,6 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Agendamento</a></li>
                         <li>
-                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
-                                onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="dropdown-item">Excluir</button>
-                            </form>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="{{ route('quiz.show.all', $quiz) }}">Ver todo o Quiz</a>
                         </li>
                     </ul>

@@ -34,7 +34,8 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item"
                                 href="{{ route('question.edit', ['question' => $question, 'quiz' => $quiz]) }}">Editar</a>
-                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
+
+                            <form action="{{ route('question.delete', $question) }}" method="POST"
                                 onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
                                 @csrf
                                 @method('DELETE')

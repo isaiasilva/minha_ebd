@@ -46,6 +46,6 @@ class Edit extends Component
 
         toastr()->AddSuccess('Quiz atualizado com sucesso!', 'Feito!');
 
-        return redirect()->route('quiz.index');
+        return redirect()->route('quiz.show', $this->quiz);
     }
 }

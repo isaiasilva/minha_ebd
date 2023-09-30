@@ -20,8 +20,22 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-header ">
+        <div class="card-header d-flex justify-content-between">
             <h3>Detalhes do Quiz</h3>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    aria-expanded="false">
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('quiz.edit', ['quiz' => $quiz]) }}">Editar</a>
+                    <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
+                        onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="dropdown-item">Excluir</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <p><b>Titulo:</b> {{ $quiz->title }}</p>
@@ -45,24 +59,7 @@
             <div class="card-header d-flex justify-content-between align-content-center">
                 <h4><a href="{{ route('question.show', ['quiz' => $quiz, 'question' => $question->id]) }}">Questão
                         {{ $key + 1 }} </a></h4>
-                <div class="btn-group">
-                    <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
-                        <i class="la la-ellipsis-v tamanho-pontos"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item"
-                                href="{{ route('question.edit', ['quiz' => $quiz, 'question' => $question]) }}">Editar</a>
-                        </li>
-                        <li>
-                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
-                                onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="dropdown-item">Excluir</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     @empty

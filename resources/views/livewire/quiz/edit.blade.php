@@ -11,6 +11,9 @@
                         </li>
                         <li class="breadcrumb-item"><a href="{{ route('quiz.index') }}">Quizzes</a>
                         </li>
+                        <li class="breadcrumb-item"><a
+                                href="{{ route('quiz.show', ['quiz' => $quiz]) }}">{{ $quiz->title }}</a>
+                        </li>
                         <li class="breadcrumb-item active"> <a href="#">Editar Quiz</a>
                         </li>
                     </ol>
