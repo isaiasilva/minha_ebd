@@ -53,14 +53,13 @@
                         <i class="la la-ellipsis-v tamanho-pontos"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Editar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Editar</a></li>
                         <li>
-                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST">
+                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
+                                onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="dropdown-item"
-                                    onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                                    href="">Excluir</button>
+                                <button type="submit" class="dropdown-item">Excluir</button>
                             </form>
                         </li>
 
