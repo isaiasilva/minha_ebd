@@ -42,24 +42,30 @@
             <div class="card-body d-flex justify-content-between align-items-center">
                 <span>
                     <h5>
-                        <b>
-                            <a href="{{ route('quiz.show', $quiz) }}">{{ $quiz->title }}</a> - {{ $quiz->type }}
-                        </b>
+                        <strong>
+                            <a href="{{ route('quiz.show', $quiz) }}">{{ $quiz->title }}</a>
+                        </strong>
+                        <p>{{ $quiz->type }}</p>
                     </h5>
                 </span>
-                {{-- @can('action_material', $material) --}}
                 <div class="btn-group">
                     <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
                         <i class="la la-ellipsis-v tamanho-pontos"></i>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Editar</a></li>
-                        <li><a class="dropdown-item"
-                                onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                                href="">Excluir</a></li>
+                        <li>
+                            <form action="{{ route('quiz.delete', $quiz) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item"
+                                    onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
+                                    href="">Excluir</button>
+                            </form>
+                        </li>
+
                     </ul>
                 </div>
-                {{--  @endcan --}}
             </div>
         </div>
     @endforeach

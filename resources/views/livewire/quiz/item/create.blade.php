@@ -2,7 +2,7 @@
     <div class="row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
             @section('cabecalho')
-                Nova Questão
+                Novo Item
             @endsection
             <div class="row breadcrumbs-top d-inline-block">
                 <div class="breadcrumb-wrapper col-12">
@@ -15,7 +15,8 @@
                             <a href="{{ route('quiz.show', $quiz) }}">{{ $quiz->title }}</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">Questão</a>
+                            <a
+                                href="{{ route('question.show', ['question' => $question, 'quiz' => $quiz]) }}">Questão</a>
                         </li>
                         <li class="breadcrumb-item active"> <a href="#">Novo Item</a>
                         </li>
