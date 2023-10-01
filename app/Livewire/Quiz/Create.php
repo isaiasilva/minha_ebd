@@ -37,6 +37,7 @@ class Create extends Component
             'igreja_id' => getChurch()->id,
             'slug'      => Str::slug($this->title),
             'is_draft'  => true,
+            'owner_id'  => auth()->user()->id,
         ]);
 
         toastr()->AddSuccess('Quiz criado com sucesso!', 'Feito!');
