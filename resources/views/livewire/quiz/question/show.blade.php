@@ -74,9 +74,17 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="">Editar</a></li>
-                                <li><a class="dropdown-item"
-                                        onclick="return confirm('Você tem certeza? Essa ação não poderá ser desfeita') ||  event.stopImmediatePropagation()"
-                                        wire:click='delete({{ $item->id }})' href="">Excluir</a></li>
+                                <li>
+                                    <form
+                                        action="{{ route('item.delete', ['item' => $item, 'question' => $item->question_id, 'quiz' => $quiz]) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item">Excluir</button>
+                                    </form>
+
+                                </li>
                             </ul>
                         </div>
                     </div>

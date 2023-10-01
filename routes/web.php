@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Item\CreateController as ItemCreateController;
+use App\Http\Controllers\Item\{CreateController as ItemCreateController, DeleteItemController};
 use App\Http\Controllers\Question\{CreateController, DeleteQuestionController, UpdateQuestionController};
 use App\Http\Controllers\Quiz\DeleteQuizController;
 use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
@@ -104,6 +104,7 @@ Route::delete('/user/question/{question}/delete', DeleteQuestionController::clas
 
 Route::get('/user/quiz/{quiz}/question/{question}/item/create', ItemCreate::class)->name('item.create')->middleware(['auth'])->lazy();
 Route::post('/user/quiz/{quiz}/question/{question}/item/create', ItemCreateController::class)->name('item.store')->middleware(['auth'])->lazy();
+Route::delete('/user/quiz/{quiz}/question/{question}/item/{item}/delete', DeleteItemController::class)->name('item.delete')->middleware(['auth']);
 
 Route::get('/sair', function () {
     Auth::logout();
