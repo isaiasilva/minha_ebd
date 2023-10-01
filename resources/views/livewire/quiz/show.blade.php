@@ -1,4 +1,9 @@
 <div>
+    <style>
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
             @section('cabecalho')
@@ -43,9 +48,19 @@
             <p><b>Status:</b>
                 @if ($quiz->is_draft)
                     <span class="badge badge-warning">Rascunho</span>
+                    <span class="pointer" wire:click="changeStatus">
+                        <i class="fas fa-exchange-alt ml-1"></i>
+                    </span>
                 @else
                     <span class="badge badge-success">Ativo</span>
+
+                    <span class="pointer" wire:click="changeStatus">
+                        <i class="fas fa-exchange-alt ml-1"></i>
+                    </span>
                 @endif
+                @error('is_draft')
+                <p class="error">{{ $message }}</p>
+            @enderror
             </p>
             {{--  <p><b>Data de publicação:</b> {{ date('d/m/Y H:i:s', strtotime($material->publicar_em)) }}</p> --}}
         </div>
