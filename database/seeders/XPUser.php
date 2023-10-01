@@ -14,7 +14,6 @@ class XPUser extends Seeder
     {
         User::all()->each(function ($user) {
             $igreja = UsuariosPorIgreja::where('user_id', $user->id)->first();
-            //  dd($igreja);
             $user->xp()->create([
                 'igreja_id' => $igreja->igreja_id,
                 'points'    => 0,

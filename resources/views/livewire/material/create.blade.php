@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div>
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
             @section('cabecalho')

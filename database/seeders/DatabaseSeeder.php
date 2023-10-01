@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(IgrejaSeeder::class);
         $this->call(PerfilSeeder::class);
-        $this->call(ProfileSeeder::class);
         $this->call(TurmaSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(XPUser::class);
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\{Igreja, UsuariosPorIgreja};
+use Illuminate\Support\Facades\Auth;
+
 function calculateAge(string $birthDate): string
 {
     $startDate = new \DateTime($birthDate);
@@ -18,4 +21,16 @@ function cutName(string $name): string
     }
 
     return $name[0];
+}
+
+function getChurch(): Igreja
+{
+    return UsuariosPorIgreja::where('user_id', Auth::user()->id)->first()->igreja;
+}
+
+function alternatives(int $key): string
+{
+    $alternatives = ["A)", "B)", "C)", "D)", "E)", "F)", "G)", "H)", "I)", "J)", ];
+
+    return $alternatives[$key];
 }
