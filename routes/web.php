@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Item\{CreateController as ItemCreateController, DeleteItemController};
+use App\Http\Controllers\Item\{CreateController as ItemCreateController, DeleteItemController, UpdateItemController};
 use App\Http\Controllers\Question\{CreateController, DeleteQuestionController, UpdateQuestionController};
 use App\Http\Controllers\Quiz\DeleteQuizController;
 use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
@@ -8,7 +8,7 @@ use App\Livewire\Administrator\User\Register as UserRegister;
 use App\Livewire\Church\{Create, Edit, Index, Show};
 use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
-use App\Livewire\Quiz\Item\Create as ItemCreate;
+use App\Livewire\Quiz\Item\{Create as ItemCreate, Edit as ItemEdit};
 use App\Livewire\Quiz\Question\{Create as QuestionCreate, Edit as QuestionEdit, Show as QuestionShow};
 use App\Livewire\Quiz\{Create as QuizCreate, Edit as QuizEdit, Index as QuizIndex, Show as QuizShow, ShowAll};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
@@ -105,6 +105,8 @@ Route::delete('/user/question/{question}/delete', DeleteQuestionController::clas
 Route::get('/user/quiz/{quiz}/question/{question}/item/create', ItemCreate::class)->name('item.create')->middleware(['auth'])->lazy();
 Route::post('/user/quiz/{quiz}/question/{question}/item/create', ItemCreateController::class)->name('item.store')->middleware(['auth'])->lazy();
 Route::delete('/user/quiz/{quiz}/question/{question}/item/{item}/delete', DeleteItemController::class)->name('item.delete')->middleware(['auth']);
+Route::get('/user/quiz/{quiz}/question/{question}/item/{item}/edit', ItemEdit::class)->name('item.edit')->middleware(['auth']);
+Route::put('/user/quiz/{quiz}/question/{question}/item/{item}/edit', UpdateItemController::class)->name('item.update')->middleware(['auth']);
 
 Route::get('/sair', function () {
     Auth::logout();

@@ -73,7 +73,9 @@
                                 <i class="la la-ellipsis-v tamanho-pontos"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="">Editar</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ route('item.edit', ['item' => $item, 'question' => $item->question_id, 'quiz' => $quiz]) }}">Editar</a>
+                                </li>
                                 <li>
                                     <form
                                         action="{{ route('item.delete', ['item' => $item, 'question' => $item->question_id, 'quiz' => $quiz]) }}"
