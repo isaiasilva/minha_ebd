@@ -47,6 +47,7 @@
         <div class="card-body">
             <p><b>Titulo:</b> {{ $quiz->title }}</p>
             <p><b>Tipo:</b> {{ $quiz->type }}</p>
+            <p><b>Total de Questões:</b> {{ $quiz->questions->count() }}</p>
             <p><b>Status:</b>
                 @if ($quiz->is_draft)
                     <span class="badge badge-warning">Rascunho</span>
@@ -62,7 +63,7 @@
             @error('is_draft')
                 <p class="error">{{ $message }}</p>
             @enderror
-            {{--  <p><b>Data de publicação:</b> {{ date('d/m/Y H:i:s', strtotime($material->publicar_em)) }}</p> --}}
+            <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder agora!</a>
         </div>
     </div>
     @can('actionsQuiz', $quiz)

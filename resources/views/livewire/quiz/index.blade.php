@@ -53,7 +53,9 @@
                         <i class="la la-ellipsis-v tamanho-pontos"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Agendamento</a></li>
+                        @can('actionsQuiz', $quiz)
+                            <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Agendamento</a></li>
+                        @endcan
                         <li>
                             <a class="dropdown-item" href="{{ route('quiz.show.all', $quiz) }}">Ver todo o Quiz</a>
                         </li>
