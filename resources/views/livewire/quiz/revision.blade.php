@@ -20,10 +20,18 @@
             </div>
         </div>
     </div>
+    @error('countQustions')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     @foreach ($questions as $i => $question)
         <div class="card" wire:key="{{ $question->id }}">
             <div class="card-header">
-                <h3>Questão </h3>
+                <div class="d-flex justify-content-between">
+                    <h3>Questão </h3>
+                    @if ($questions->toArray()['last_page'] == $questions->toArray()['current_page'])
+                        <a href="#" wire:click.prevent="result" class="btn btn-primary">Resultado</a>
+                    @endif
+                </div>
                 {!! $question->body !!}
             </div>
             <div class="card-body">
@@ -32,7 +40,8 @@
                     <div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="item" id="item{{ $key }}"
-                                value="option2">
+                                wire:click="answer({{ $question->id }},{{ $item->id }})"
+                                @if ($this->answered($question->id, $item->id)) checked @endif>
                             <label class="form-check-label d-flex" for="item{{ $key }}">
                                 <strong class="mr-1">{{ alternatives($key) }}</strong> {!! $item->body !!}
                             </label>
