@@ -10,7 +10,7 @@ use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
 use App\Livewire\Quiz\Item\{Create as ItemCreate, Edit as ItemEdit};
 use App\Livewire\Quiz\Question\{Create as QuestionCreate, Edit as QuestionEdit, Show as QuestionShow};
-use App\Livewire\Quiz\{Create as QuizCreate, Edit as QuizEdit, Index as QuizIndex, Revision, Show as QuizShow, ShowAll};
+use App\Livewire\Quiz\{Create as QuizCreate, Edit as QuizEdit, Index as QuizIndex, Response, Revision, Show as QuizShow, ShowAll};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
 use App\Livewire\{Chamada, Relatorios};
@@ -111,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/quiz/{quiz}/question/{question}/item/{item}/edit', UpdateItemController::class)->name('item.update');
 
     Route::get('/user/quiz/{quiz}/revision', Revision::class)->name('quiz.revision');
+    Route::get('/user/quiz/{quiz}/response', Response::class)->name('quiz.response');
 
     Route::get('/register', UserRegister::class)->name('register');
 

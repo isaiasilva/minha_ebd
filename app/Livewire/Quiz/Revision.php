@@ -17,4 +17,21 @@ class Revision extends Component
 
         return view('livewire.quiz.revision', compact('questions'));
     }
+
+    public function answer($question, $item)
+    {
+        session()->put("quiz.{$this->quiz->id}.{$question}", $item);
+    }
+
+    public function answered($question, $item): bool
+    {
+        return session()->has("quiz.{$this->quiz->id}.{$question}") && session()->get("quiz.{$this->quiz->id}.{$question}") == $item;
+    }
+
+    public function countQuestions()
+    {
+        $session = session()->has("quiz.{$this->quiz->id}") ? count(session()->get("quiz.{$this->quiz->id}")) : 0;
+
+        return $this->quiz->questions()->count() == $session;
+    }
 }
