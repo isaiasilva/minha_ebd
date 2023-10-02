@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    @error('countQustions')
+    @error('countQuestions')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     @foreach ($questions as $i => $question)
@@ -29,7 +29,7 @@
                 <div class="d-flex justify-content-between">
                     <h3>Questão </h3>
                     @if ($questions->toArray()['last_page'] == $questions->toArray()['current_page'])
-                        <a href="#" wire:click.prevent="result" class="btn btn-primary">Resultado</a>
+                        <a href="{{ route('quiz.response', $quiz) }}" class="btn btn-primary">Resultado</a>
                     @endif
                 </div>
                 {!! $question->body !!}
