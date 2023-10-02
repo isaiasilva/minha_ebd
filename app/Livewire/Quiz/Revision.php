@@ -27,4 +27,11 @@ class Revision extends Component
     {
         return session()->has("quiz.{$this->quiz->id}.{$question}") && session()->get("quiz.{$this->quiz->id}.{$question}") == $item;
     }
+
+    public function countQuestions()
+    {
+        $session = session()->has("quiz.{$this->quiz->id}") ? count(session()->get("quiz.{$this->quiz->id}")) : 0;
+
+        return $this->quiz->questions()->count() == $session;
+    }
 }

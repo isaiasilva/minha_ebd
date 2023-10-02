@@ -27,10 +27,9 @@ class Response extends Component
     public function result()
     {
 
-        if (isset($this->template) && count($this->template) < $this->quiz->questions->count()) {
-            $this->addError('countQuestions', 'Você precisa responder todas as questões para ver o resultado.');
+        if (!$this->template) {
 
-            return;
+            return redirect()->route('quiz.show', ['quiz' => $this->quiz->id]);
         }
 
         foreach ($this->template as $question => $item) {

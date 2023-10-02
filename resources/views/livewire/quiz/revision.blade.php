@@ -29,7 +29,11 @@
                 <div class="d-flex justify-content-between">
                     <h3>Questão </h3>
                     @if ($questions->toArray()['last_page'] == $questions->toArray()['current_page'])
-                        <a href="{{ route('quiz.response', $quiz) }}" class="btn btn-primary">Resultado</a>
+                        @if ($this->countQuestions())
+                            <a href="{{ route('quiz.response', $quiz) }}" class="btn btn-primary">Resultado</a>
+                        @else
+                            <p>Existem quesões a serem respondidas</p>
+                        @endif
                     @endif
                 </div>
                 {!! $question->body !!}
