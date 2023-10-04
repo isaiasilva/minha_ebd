@@ -26,13 +26,13 @@
     @foreach ($questions as $i => $question)
         <div class="card" wire:key="{{ $question->id }}">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    <h3>Questão </h3>
+                <div class="d-sm-flex justify-content-between">
+                    <h3>Questão {{ $questions->toArray()['current_page'] }}</h3>
                     @if ($questions->toArray()['last_page'] == $questions->toArray()['current_page'])
                         @if ($this->countQuestions())
                             <a href="{{ route('quiz.response', $quiz) }}" class="btn btn-primary">Resultado</a>
                         @else
-                            <p>Existem quesões a serem respondidas</p>
+                            <p class="error">Existem questões a serem respondidas</p>
                         @endif
                     @endif
                 </div>
@@ -57,7 +57,13 @@
             </div>
         </div>
     @endforeach
-    <div class="d-flex justify-content-center">
-        {{ $questions->links() }}
+    <div class="d-sm-none d-flex justify-content-center">
+        {{ $questions->links('vendor.livewire.simple-bootstrap') }}
     </div>
+    <div class="d-none d-sm-block">
+        <div class="d-flex justify-content-center">
+            {{ $questions->links() }}
+        </div>
+    </div>
+
 </div>
