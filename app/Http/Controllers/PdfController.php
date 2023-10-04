@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{AlunoPorTurma, Turma};
+use App\Models\{AlunoPorTurma, Quiz, Turma};
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -20,6 +20,18 @@ class PdfController extends Controller
             [
                 'turma'  => $this->turma->find($request->turma),
                 'alunos' => $this->alunos->where('turma_id', $request->turma)->orderBy('name')->get(),
+            ]
+        );
+
+        return $pdf->stream();
+    }
+
+    public function quiz(Quiz $quiz)
+    {
+        $pdf = Pdf::loadView(
+            'relatorios.quiz',
+            [
+                'quiz' => $quiz,
             ]
         );
 

@@ -74,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/alunos-por-turma/', Relatorios::class)->name('alunos.relatorio');
     Route::post('/alunos/pdf/', [PdfController::class, 'alunosPorTurma'])->name('alunos-por-turma');
+    Route::get('/user/quiz/{quiz}/pdf', [PdfController::class, 'quiz'])->name('quiz.pdf');
 
     Route::get('/registrar-usuario', Register::class)->name('registrar.index');
     Route::get('/igrejas', Index::class)->name('igrejas.index');
