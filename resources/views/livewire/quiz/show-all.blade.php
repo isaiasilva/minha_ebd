@@ -26,7 +26,8 @@
 
     <section class="d-flex justify-content-between align-items-center mb-2">
         <h2>Questões</h2>
-        <a href="" class="btn btn-primary"><i class="far fa-file-pdf"></i></a>
+        <a target="_blank" href="{{ route('quiz.pdf', $quiz) }}" class="btn btn-primary"><i
+                class="far fa-file-pdf"></i></a>
     </section>
     @forelse ($quiz->questions as $key => $question)
         <div class="card">
