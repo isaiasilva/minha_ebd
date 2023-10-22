@@ -13,7 +13,7 @@
                         </li>
                         <li class="breadcrumb-item"><a href="{{ route('quiz.show', $quiz) }}">{{ $quiz->title }}</a>
                         </li>
-                        <li class="breadcrumb-item active"> <a href="#">Novo Quiz</a>
+                        <li class="breadcrumb-item active"> <a href="#">Novo Agendamento</a>
                         </li>
                     </ol>
                 </div>

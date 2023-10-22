@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class=" col-md-6 col-12 mb-2">
+        <div class="mb-2 col-md-6 col-12">
             <div class="d-flex justify-content-between align-items-center">
                 @section('cabecalho')
                     Quizzes
@@ -25,12 +25,12 @@
         </div>
     </div>
     <section class="row d-md-flex justify-content-between align-items-center">
-        <div class="col-12 col-sm-6 mt-2 mt-md-0">
+        <div class="mt-2 col-12 col-sm-6 mt-md-0">
             <input class="form-control" type="text" placeholder="Filtre" wire:model.live='search'>
         </div>
-        <div class="col-12 col-md-6 text-right">
+        <div class="text-right col-12 col-md-6">
             <label for='perpage' class="ps-3">Registros por página</label>
-            <select id='perpage' wire:model.live="perpage" class="form-select my-3">
+            <select id='perpage' wire:model.live="perpage" class="my-3 form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
@@ -53,9 +53,12 @@
                         <i class="la la-ellipsis-v tamanho-pontos"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        @can('actionsQuiz', $quiz)
-                            <li><a class="dropdown-item" href="{{ route('quiz.scheduling.create', $quiz) }}">Agendamento</a></li>
-                        @endcan
+                        @if ($quiz->type == 'Avaliação')
+                            @can('actionsQuiz', $quiz)
+                                <li><a class="dropdown-item"
+                                        href="{{ route('quiz.scheduling.show', $quiz) }}">Agendamentos</a></li>
+                            @endcan
+                        @endif
                         <li>
                             <a class="dropdown-item" href="{{ route('quiz.show.all', $quiz) }}">Ver todo o Quiz</a>
                         </li>
