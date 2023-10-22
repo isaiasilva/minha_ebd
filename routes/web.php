@@ -98,6 +98,15 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete/{quiz}', DeleteQuizController::class)->name('delete');
     });
 
+    Route::prefix('user/quiz/scheduling')->name('quiz.scheduling.')->group(function () {
+        //Route::get('/', Index::class)->name('index');
+        Route::get('create/{quiz}', App\Livewire\Quiz\Scheduling\Create::class)->name('create');
+        //        Route::get('show/{quiz}', QuizShow::class)->name('show');
+        //        Route::get('show/{quiz}/all', ShowAll::class)->name('show.all');
+        //        Route::get('edit/{quiz}', QuizEdit::class)->name('edit');
+        //        Route::delete('delete/{quiz}', DeleteQuizController::class)->name('delete');
+    });
+
     Route::get('/user/quiz/{quiz}/question/{question}/show', QuestionShow::class)->name('question.show')->lazy();
     Route::get('/user/quiz/{quiz}/question/create', QuestionCreate::class)->name('question.create')->lazy();
     Route::post('/user/quiz/{quiz}/question/create', CreateController::class)->name('question.store');

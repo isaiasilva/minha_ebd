@@ -54,7 +54,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         @can('actionsQuiz', $quiz)
-                            <li><a class="dropdown-item" href="{{ route('quiz.edit', $quiz) }}">Agendamento</a></li>
+                            <li><a class="dropdown-item" href="{{ route('quiz.scheduling.create', $quiz) }}">Agendamento</a></li>
                         @endcan
                         <li>
                             <a class="dropdown-item" href="{{ route('quiz.show.all', $quiz) }}">Ver todo o Quiz</a>
