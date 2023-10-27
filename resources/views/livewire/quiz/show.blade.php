@@ -65,7 +65,9 @@
             @error('is_draft')
                 <p class="error">{{ $message }}</p>
             @enderror
-            <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder agora!</a>
+            @if ($quiz->count() > 0 && !$quiz->is_draft && $quiz->type == "Revisão")
+                <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder agora!</a>
+            @endif
         </div>
     </div>
     @can('actionsQuiz', $quiz)

@@ -15,9 +15,9 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('principal') }}">Home</a>
                         </li>
-                        <li class="breadcrumb-item "><a href="{{ route('quiz.scheduling.index') }}">Agendamentos</a>
+                        <li class="breadcrumb-item "><a href="{{ route('quiz.index') }}">Quizzes</a>
                         </li>
-                        <li class="breadcrumb-item active"><a href="#">{{ $quiz->title }}</a>
+                        <li class="breadcrumb-item active"><a href="{{route('quiz.show', $quiz)}}">{{ $quiz->title }}</a>
                         </li>
                     </ol>
                 </div>
@@ -38,11 +38,6 @@
                 @else
                     <span class="badge badge-success">Ativo</span>
                 @endif
-                @can('actionsQuiz', $quiz)
-                    <span class="pointer" wire:click="changeStatus">
-                        <i class="ml-1 fas fa-exchange-alt"></i>
-                    </span>
-                @endcan
             </p>
 
         </div>
@@ -50,16 +45,27 @@
     @can('actionsQuiz', $quiz)
         <section class="mb-2 d-flex justify-content-between">
             <h2>Agendamento(s)</h2>
-            <a href="{{ route('question.create', $quiz) }}" class="btn btn-primary"><i class="fas fa-plus"></i> </a>
+            @if(!$quiz->is_draft)
+                <a href="{{ route('quiz.scheduling.create', $quiz) }}" class="btn btn-primary"><i class="fas fa-plus"></i> </a>
+            @endif
+
         </section>
         @forelse ($quiz->schedulings as $key => $scheduling)
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-content-center">
-                    Agendamento
+                    <div>
+                        <p>Agendamento - {{$scheduling->quiz->title}} - {{$scheduling->turma->nome_turma}}</p>
+                        <p><strong>Hora Inicial:</strong> {{date('d/m/Y H:i', strtotime($scheduling->start_date))}}</p>
+                        <p><strong>Hora Final:</strong> {{date('d/m/Y H:i', strtotime($scheduling->end_date))}}</p>
+                    </div>
+                    <div>
+                        <a href="" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
+                        <button class="btn btn-danger" onclick="return confirm('Você tem certeza?') || event.stopImmediatePropagation()" wire:click="delete({{ $scheduling->id }})"><i class="fas fa-trash"></i> </button>
+                    </div>
                 </div>
             </div>
         @empty
-            <p>Não existem questões cadastradas.</p>
+            <p>Não existem agendamentos cadastrados.</p>
         @endforelse
     @endcan
 </div>
