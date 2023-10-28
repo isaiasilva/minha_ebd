@@ -30,7 +30,12 @@
                     <h3>Questão {{ $questions->toArray()['current_page'] }}</h3>
                     @if ($questions->toArray()['last_page'] == $questions->toArray()['current_page'])
                         @if ($this->countQuestions())
-                            <a href="{{ route('quiz.response', $quiz) }}" class="btn btn-primary">Resultado</a>
+                            @if($quiz->type == "Avaliação")
+                                <a href="{{ route('quiz.response.evaluation', $quiz) }}" class="btn btn-primary">Finalizar</a>
+                            @else
+                                <a href="{{ route('quiz.response', $quiz) }}" class="btn btn-primary">Resultado</a>
+                            @endif
+
                         @else
                             <p class="error">Existem questões a serem respondidas</p>
                         @endif

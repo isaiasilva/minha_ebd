@@ -64,6 +64,6 @@ class Create extends Component
             'end_date'   => $this->end_date,
         ]);
 
-        return redirect()->route('quiz.scheduling.create', $this->quiz->id)->with('success', 'Agendamento criado com sucesso');
+        return redirect()->route('quiz.scheduling.index', $this->quiz->id)->with('success', 'Agendamento criado com sucesso');
     }
 }

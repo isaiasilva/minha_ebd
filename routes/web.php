@@ -3,7 +3,16 @@
 use App\Http\Controllers\Item\{CreateController as ItemCreateController, DeleteItemController, UpdateItemController};
 use App\Http\Controllers\Question\{CreateController, DeleteQuestionController, UpdateQuestionController};
 use App\Http\Controllers\Quiz\DeleteQuizController;
-use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
+use App\Http\Controllers\{AlterarSenhaController,
+    AlunosPorTurmaController,
+    EvaluationResponseController,
+    PdfController,
+    PerfilController,
+    PrincipalController,
+    ProfessorPorTurmaController,
+    TurmaController,
+    UsuariosController,
+    VisualizarChamadasController};
 use App\Livewire\Administrator\User\Register as UserRegister;
 use App\Livewire\Church\{Create, Edit, Index, Show};
 use App\Livewire\Class\Index as ClassIndex;
@@ -123,6 +132,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/quiz/{quiz}/revision', Revision::class)->name('quiz.revision');
     Route::get('/user/quiz/{quiz}/response', Response::class)->name('quiz.response');
+    Route::get('/user/quiz/{quiz}/response/evaluation', EvaluationResponseController::class)->name('quiz.response.evaluation');
 
     Route::get('/register', UserRegister::class)->name('register');
 

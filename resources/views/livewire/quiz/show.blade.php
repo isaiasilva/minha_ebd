@@ -65,9 +65,16 @@
             @error('is_draft')
                 <p class="error">{{ $message }}</p>
             @enderror
-            @if ($quiz->count() > 0 && !$quiz->is_draft && $quiz->type == "Revisão")
+            @if ($quiz->questions->count() > 0 && !$quiz->is_draft && $quiz->type == "Revisão")
                 <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder agora!</a>
             @endif
+            @if(isPresent(auth()->user()) > 0 && is_null(responseQuiz(auth()->user(), $quiz)))
+                @if ($quiz->questions->count() > 0 && !$quiz->is_draft && $quiz->type == "Avaliação")
+                    <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder prova!</a>
+                @endif
+            @endif
+
+
         </div>
     </div>
     @can('actionsQuiz', $quiz)

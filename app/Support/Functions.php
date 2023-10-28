@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\{Igreja, UsuariosPorIgreja};
+use App\Models\{Chamada, Igreja, Quiz, ResponseQuiz, User, UsuariosPorIgreja};
 use Illuminate\Support\Facades\Auth;
 
 function calculateAge(string $birthDate): string
@@ -33,4 +33,21 @@ function alternatives(int $key): string
     $alternatives = ["A)", "B)", "C)", "D)", "E)", "F)", "G)", "H)", "I)", "J)", ];
 
     return $alternatives[$key];
+}
+
+function isPresent(User $user): int
+{
+    return Chamada::where('aluno_id', $user->id)
+        ->where('data', date('Y-m-d'))
+        ->where('igreja_id', getChurch()->id)
+        ->where('falta_justificada', false)
+        ->count();
+
+}
+
+function responseQuiz(User $user, Quiz $quiz): null|ResponseQuiz
+{
+    return ResponseQuiz::where('user_id', $user->id)
+        ->where('quiz_id', $quiz->id)
+        ->first();
 }
