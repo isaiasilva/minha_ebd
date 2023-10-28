@@ -5,7 +5,7 @@
         }
     </style>
     <div class="content-header row">
-        <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
+        <div class="mb-2 content-header-left col-md-6 col-12 breadcrumb-new">
             @section('cabecalho')
                 {{ $quiz->title }}
             @endsection
@@ -33,6 +33,8 @@
                         aria-expanded="false">
                     </button>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('quiz.scheduling.create', ['quiz' => $quiz]) }}">Novo
+                            Agendamento</a>
                         <a class="dropdown-item" href="{{ route('quiz.edit', ['quiz' => $quiz]) }}">Editar</a>
                         <form action="{{ route('quiz.delete', $quiz) }}" method="POST"
                             onsubmit="return confirm('Você tem certeza? Essa ação não poderá ser desfeita')">
@@ -56,18 +58,27 @@
                 @endif
                 @can('actionsQuiz', $quiz)
                     <span class="pointer" wire:click="changeStatus">
-                        <i class="fas fa-exchange-alt ml-1"></i>
+                        <i class="ml-1 fas fa-exchange-alt"></i>
                     </span>
                 @endcan
             </p>
             @error('is_draft')
                 <p class="error">{{ $message }}</p>
             @enderror
-            <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder agora!</a>
+            @if ($quiz->questions->count() > 0 && !$quiz->is_draft && $quiz->type == "Revisão")
+                <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder agora!</a>
+            @endif
+            @if(isPresent(auth()->user()) > 0 && is_null(responseQuiz(auth()->user(), $quiz)))
+                @if ($quiz->questions->count() > 0 && !$quiz->is_draft && $quiz->type == "Avaliação")
+                    <a href="{{ route('quiz.revision', $quiz) }}" class="btn btn-primary">Responder prova!</a>
+                @endif
+            @endif
+
+
         </div>
     </div>
     @can('actionsQuiz', $quiz)
-        <section class="d-flex justify-content-between mb-2">
+        <section class="mb-2 d-flex justify-content-between">
             <h2>Questões</h2>
             <a href="{{ route('question.create', $quiz) }}" class="btn btn-primary"><i class="fas fa-plus"></i> </a>
         </section>

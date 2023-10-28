@@ -15,4 +15,9 @@ class Quiz extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function schedulings()
+    {
+        return $this->hasMany(Scheduling::class);
+    }
 }

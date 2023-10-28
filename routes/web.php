@@ -3,13 +3,23 @@
 use App\Http\Controllers\Item\{CreateController as ItemCreateController, DeleteItemController, UpdateItemController};
 use App\Http\Controllers\Question\{CreateController, DeleteQuestionController, UpdateQuestionController};
 use App\Http\Controllers\Quiz\DeleteQuizController;
-use App\Http\Controllers\{AlterarSenhaController, AlunosPorTurmaController, PdfController, PerfilController, PrincipalController, ProfessorPorTurmaController, TurmaController, UsuariosController, VisualizarChamadasController};
+use App\Http\Controllers\{AlterarSenhaController,
+    AlunosPorTurmaController,
+    EvaluationResponseController,
+    PdfController,
+    PerfilController,
+    PrincipalController,
+    ProfessorPorTurmaController,
+    TurmaController,
+    UsuariosController,
+    VisualizarChamadasController};
 use App\Livewire\Administrator\User\Register as UserRegister;
 use App\Livewire\Church\{Create, Edit, Index, Show};
 use App\Livewire\Class\Index as ClassIndex;
 use App\Livewire\Material\{Create as MaterialCreate, Edit as MaterialEdit, Index as MaterialIndex, Show as MaterialShow};
 use App\Livewire\Quiz\Item\{Create as ItemCreate, Edit as ItemEdit};
 use App\Livewire\Quiz\Question\{Create as QuestionCreate, Edit as QuestionEdit, Show as QuestionShow};
+use App\Livewire\Quiz\Scheduling\{Index as SchedulingIndex, Show as SchedulingShow};
 use App\Livewire\Quiz\{Create as QuizCreate, Edit as QuizEdit, Index as QuizIndex, Response, Revision, Show as QuizShow, ShowAll};
 use App\Livewire\Student\{Create as StudentCreate, Index as StudentIndex};
 use App\Livewire\User\{Edit as UserEdit, Index as UserIndex, Profile, Register};
@@ -98,6 +108,15 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete/{quiz}', DeleteQuizController::class)->name('delete');
     });
 
+    Route::prefix('user/quiz/scheduling')->name('quiz.scheduling.')->group(function () {
+        Route::get('/', SchedulingIndex::class)->name('index');
+        Route::get('create/{quiz}', App\Livewire\Quiz\Scheduling\Create::class)->name('create');
+        Route::get('show/{quiz}', SchedulingShow::class)->name('show');
+        //        Route::get('show/{quiz}/all', ShowAll::class)->name('show.all');
+        //        Route::get('edit/{quiz}', QuizEdit::class)->name('edit');
+        //        Route::delete('delete/{quiz}', DeleteQuizController::class)->name('delete');
+    });
+
     Route::get('/user/quiz/{quiz}/question/{question}/show', QuestionShow::class)->name('question.show')->lazy();
     Route::get('/user/quiz/{quiz}/question/create', QuestionCreate::class)->name('question.create')->lazy();
     Route::post('/user/quiz/{quiz}/question/create', CreateController::class)->name('question.store');
@@ -113,6 +132,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/quiz/{quiz}/revision', Revision::class)->name('quiz.revision');
     Route::get('/user/quiz/{quiz}/response', Response::class)->name('quiz.response');
+    Route::get('/user/quiz/{quiz}/response/evaluation', EvaluationResponseController::class)->name('quiz.response.evaluation');
 
     Route::get('/register', UserRegister::class)->name('register');
 
